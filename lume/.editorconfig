@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0658: Non è una posizione di attributo riconosciuta
+dotnet_diagnostic.CS0658.severity = silent

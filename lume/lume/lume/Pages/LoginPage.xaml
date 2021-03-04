@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:lume"
+             x:Class="lume.LoginPage">
+
+    <AbsoluteLayout x:Name="Absolute">
+
+        <!--BackGround Style-->
+
+        <Ellipse Aspect="Fill"
+                 StrokeThickness="40"
+                 AbsoluteLayout.LayoutBounds="1,-180,300,300"
+                 AbsoluteLayout.LayoutFlags="XProportional"
+                 TranslationX="105"
+                 Rotation="60">
+
+            <!--Gradiente-->
+            <Ellipse.Stroke>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="{x:StaticResource VerdeChiaroLume}" Offset="0.4"/>
+                    <GradientStop Color="{x:StaticResource VerdeLume}" Offset="0.8"/>
+                </LinearGradientBrush>
+            </Ellipse.Stroke>
+
+        </Ellipse>
+
+        <!--Posizione seconda ellisse sulla base della prima-->
+        <!--x: (1 in relativo (-> fondo pagina)) -158 (= -300(diametro ellisse1) + 105(->spostamento ellisse1) + 37(->diametro ellisse2))-->
+        <!--y: (83 in assoluto (= 300(->diametro ellisse1) -180(->spostamento ellisse1) -37(->diametro ellisse2)) )-->
+        <Ellipse Aspect="Fill"
+                 Fill="#40a491"
+                 StrokeThickness="0"
+                 AbsoluteLayout.LayoutBounds="1,83,37,37"
+                 AbsoluteLayout.LayoutFlags="XProportional"
+                 TranslationX="-158"/>
+
+        <!--******************-->
+
+        <RelativeLayout Margin="{x:StaticResource PageMargin}"
+                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        AbsoluteLayout.LayoutFlags="SizeProportional">
+
+            <StackLayout Spacing="35"
+                         RelativeLayout.YConstraint="{OnPlatform iOS= 90, Android=85}">
+
+                <Label x:Name="Lume"
+                       Text="lume"
+                       FontSize="30"
+                       FontFamily="Montserrat-SB"/>
+                
+                <Label Text="La nuova piattaforma per chi dà una mano a cambiare il mondo. Comincia ora a fare la differenza!"/>
+
+            </StackLayout>
+
+            <StackLayout x:Name="StackL3"
+                         Spacing="14"
+                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                         RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.43}">
+
+                <Label Text="Credenziali login"/>
+
+                <StackLayout Spacing="20">
+                    <BoxView x:Name="Line"
+                             Margin="{x:StaticResource LineMargin}"
+                             HeightRequest="2"
+                             BackgroundColor="{x:StaticResource NeroLume}"
+                             CornerRadius="5"/>
+
+                    <StackLayout Spacing="14">
+                        <local:LumEntry x:Name="Username"
+                                        Placeholder="Username"/>
+
+                        <local:LumEntry x:Name="Password"
+                                        Placeholder="Password"
+                                        IsPassword="True"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+                <Label Text="password dimenticata?"
+                       FontSize="10"
+                       Margin="{x:StaticResource SmallMargin}"/>
+                
+
+            </StackLayout>
+
+            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                         RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.85}"
+                         Spacing="10">
+                <Button x:Name="LoginButton"
+                        Text="Login"
+                        FontSize="16"
+                        BackgroundColor="{x:StaticResource VerdeLume}"
+                        Clicked="OnClikedButton"/>
+
+                <Label Text="Sei nuovo? Registrati qui"
+                       FontSize="10"
+                       Margin="{x:StaticResource SmallMargin}"/>
+                
+
+            </StackLayout>
+
+        </RelativeLayout>
+
+    </AbsoluteLayout>
+
+</ContentPage>
