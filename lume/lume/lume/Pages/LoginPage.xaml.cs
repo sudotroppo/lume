@@ -9,6 +9,7 @@ namespace lume
         public LoginPage()
         {
             InitializeComponent();
+
         }
 
         public async void OnClikedButton(object o, EventArgs e)
