@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Page1 : ContentPage
+    public partial class FillRequestPage : ContentPage
     {
-        public Page1()
+        public FillRequestPage()
         {
             InitializeComponent();
         }
