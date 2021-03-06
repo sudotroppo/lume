@@ -10,6 +10,7 @@ namespace lume.Pages
         public HomePage()
         {
             InitializeComponent();
+
         }
     }
 }

@@ -1,20 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:System="clr-namespace:System;assembly=mscorlib"
              xmlns:local="clr-namespace:lume"
              x:Class="lume.App">
     <Application.Resources>
 
-        <System:Int16 x:Key="Height">48</System:Int16>
-        <System:Int16 x:Key="MaxEntryLen">30</System:Int16>
+        <x:Double x:Key="Height">48.0</x:Double>
+        <x:Double x:Key="MaxEntryLen">30.0</x:Double>
 
-        <System:Int16 x:Key="LabelStandardFontSize">14</System:Int16>
-        <System:Int16 x:Key="LabelTitleFontSize">30</System:Int16>
-        <System:Int16 x:Key="ButtonStandardFontSize">14</System:Int16>
-        <System:Int16 x:Key="EntryStandardFontSize">18</System:Int16>
+        <OnPlatform x:Key="LumeRadius"
+                    x:TypeArguments="x:Int32">
+            <On Platform="iOS" Value="25"/>
+            <On Platform="Android" Value="35"/>
+        </OnPlatform>
 
-        <!---->
+        <OnPlatform x:Key="LumeStrokeWidth"
+                    x:TypeArguments="x:Int32">
+            <On Platform="iOS" Value="1"/>
+            <On Platform="Android" Value="2"/>
+        </OnPlatform>
+
+        <x:Double x:Key="LabelStandardFontSize">14</x:Double>
+        <x:Double x:Key="LabelTitleFontSize">30</x:Double>
+        <x:Double x:Key="LabelSmallFontSize">10</x:Double>
+        <x:Double x:Key="ButtonStandardFontSize">14</x:Double>
+        <x:Double x:Key="EntryStandardFontSize">18</x:Double>
+
+        <!--Fonts-->
         <Font x:Key="LabelStandardFont">OpenSans-R</Font>
         <Font x:Key="ButtonStandardFont">OpenSans-R</Font>
         <Font x:Key="LumeFont">Montserrat-SB</Font>
@@ -22,9 +34,7 @@
         <Thickness x:Key="PageMargin">10,0,10,0</Thickness>
         <Thickness x:Key="TextMargin">20,0,20,0</Thickness>
         <Thickness x:Key="LineMargin">17,0,17,0</Thickness>
-        <Thickness x:Key="SmallMargin">30,0,0,0</Thickness>
-        
-
+        <Thickness x:Key="SmallTextMargin">30,0,0,0</Thickness>
 
         <!--Colori App-->
         <Color x:Key="VerdeLume">#40a491</Color>
@@ -45,6 +55,12 @@
                     Value="{x:StaticResource BiancoLume}"/>
         </Style>
 
+        <!--TabbedPage-->
+        <Style TargetType="{x:Type TabbedPage}">
+            <Setter Property="BackgroundColor"
+                    Value="{x:StaticResource BiancoLume}"/>
+        </Style>
+
         <!--Label-->
         <Style TargetType="{x:Type Label}">
 
@@ -61,6 +77,7 @@
                     Value="{x:StaticResource LabelStandardFont}"/>
 
         </Style>
+
 
         <!--Entry-->
         <Style TargetType="{x:Type local:LumEntry}">
@@ -86,17 +103,14 @@
             <Setter Property="Margin"
                     Value="{x:StaticResource TextMargin}"/>
 
-            <Setter Property="HighlightColor"
-                    Value="{x:StaticResource VerdeChiaroLume}"/>
-
-            <Setter Property="HandleColor"
-                    Value="{x:StaticResource VerdeLume}"/>
+            <Setter Property="CurveIsEnabled"
+                    Value="True"/>
 
             <Setter Property="CornerRadius"
-                    Value="{OnPlatform Android=35, iOS=25}"/>
+                    Value="{x:StaticResource LumeRadius}"/>
 
             <Setter Property="BorderWidth"
-                    Value="{OnPlatform Android=2, iOS=1}"/>
+                    Value="{x:StaticResource LumeStrokeWidth}"/>
 
             <Setter Property="BorderColor"
                     Value="{x:StaticResource Nero}"/>
@@ -128,7 +142,7 @@
                     Value="None"/>
 
             <Setter Property="CornerRadius"
-                    Value="{OnPlatform Android=35, iOS=25}"/>
+                    Value="{x:StaticResource LumeRadius}"/>
 
         </Style>
 

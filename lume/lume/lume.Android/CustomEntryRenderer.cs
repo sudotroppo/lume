@@ -17,7 +17,7 @@ namespace lume.Droid.Renderers
             base.OnElementChanged(e);
 
             if (Control == null || e.NewElement == null) return;
-            
+
             if (e.NewElement is LumEntry customEntry) borderSet(customEntry);
         }
 
@@ -26,9 +26,9 @@ namespace lume.Droid.Renderers
             var gradientDrawable = new GradientDrawable();
 
             gradientDrawable.SetCornerRadius(customEntry.CornerRadius * 2);
-            gradientDrawable.SetStroke((int)customEntry.BorderWidth, color: customEntry.BorderColor.ToAndroid());
+            gradientDrawable.SetStroke(customEntry.BorderWidth, customEntry.BorderColor.ToAndroid());
 
-            
+
             Control.SetBackground(gradientDrawable);
             Control.SetPadding(50, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
         }

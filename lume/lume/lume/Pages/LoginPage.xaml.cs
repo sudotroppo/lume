@@ -1,6 +1,7 @@
 ﻿using System;
 using lume.Pages;
 using Xamarin.Forms;
+using System.Collections.Generic;
 
 namespace lume
 {
@@ -9,13 +10,11 @@ namespace lume
         public LoginPage()
         {
             InitializeComponent();
-
         }
 
-        public async void OnClikedButton(object o, EventArgs e)
+        public async void OnClikedButton(object sender, EventArgs e)
         {
-            Button b = (Button)o;
-            await Navigation.PushModalAsync(new HomePage());
+            await Navigation.PushModalAsync(new TPage(), false);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace lume.iOS.Renderers
             LumEntry customEntry = (LumEntry)e.NewElement;
             if (customEntry != null)
             {
-                TintCustomization(Control, customEntry);
+                //TintCustomization(Control, customEntry);
                 BorderSet(Control, customEntry);
             }
         }
@@ -30,8 +30,8 @@ namespace lume.iOS.Renderers
             Control.Layer.BorderWidth = customEntry.BorderWidth;
             Control.Layer.BorderColor = customEntry.BorderColor.ToCGColor();
 
-            Control.LeftView = new UIKit.UIView(new CGRect(0, 0, 10, 0));
-            Control.LeftViewMode = UIKit.UITextFieldViewMode.Always;
+            Control.LeftView = new UIView(new CGRect(0, 0, 10, 0));
+            Control.LeftViewMode = UITextFieldViewMode.Always;
 
         }
 
@@ -39,7 +39,6 @@ namespace lume.iOS.Renderers
         {
             UITextField textField = Control;
             textField.BorderStyle = UITextBorderStyle.None;
-            textField.TintColor = customEntry.HandleColor.ToUIColor();
         }
     }
 }
