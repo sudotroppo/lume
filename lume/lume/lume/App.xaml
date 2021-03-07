@@ -56,9 +56,20 @@
         </Style>
 
         <!--TabbedPage-->
-        <Style TargetType="{x:Type TabbedPage}">
+        <Style TargetType="{x:Type TabbedPage}"
+               ApplyToDerivedTypes="True">
+
             <Setter Property="BackgroundColor"
                     Value="{x:StaticResource BiancoLume}"/>
+
+            <Setter Property="BarBackgroundColor"
+                    Value="{x:StaticResource VerdeLume}"/>
+
+            <Setter Property="SelectedTabColor"
+                    Value="{x:StaticResource BiancoLume}"/>
+
+            <Setter Property="UnselectedTabColor"
+                    Value="{x:StaticResource NeroLume}"/>
         </Style>
 
         <!--Label-->

@@ -4,7 +4,7 @@
              x:Class="lume.Pages.HomePage">
     <ContentPage.Content>
         <StackLayout>
-
+            <Label Text="HomePage"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
