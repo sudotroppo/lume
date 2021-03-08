@@ -13,7 +13,8 @@ namespace lume
             Device.SetFlags(new[] { "Shapes_Experimental", "Brush_Experimental" });
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            MainPage = new FillRequestPage();
+
         }
 
         protected override void OnStart()
