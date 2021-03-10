@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:custom="clr-namespace:lume.CustomObj"
-			 x:Class="lume.Pages.LoginPage">
+			 xmlns:local="clr-namespace:lume"
+			 x:Class="lume.LoginPage">
 
     <AbsoluteLayout x:Name="Absolute">
 
@@ -74,10 +74,10 @@
                     <!-- *************** -->
 
                     <StackLayout Spacing="14">
-                        <custom:LumEntry x:Name="Username"
+                        <local:LumEntry x:Name="Username"
 										Placeholder="Username"/>
 
-                        <custom:LumEntry x:Name="Password"
+                        <local:LumEntry x:Name="Password"
 										Placeholder="Password"
 										IsPassword="True"/>
 
@@ -118,12 +118,13 @@
                        Margin="{x:StaticResource SmallTextMargin}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="sei nuovo? registrati premendo "/>
-                            <custom:PageHyperlinkSpan Text="qui"
-                                                      TextColor="{x:StaticResource VerdeLume}"
-                                                      PageName="RegistrationPage"
-                                                      Navigation="{x:Binding Navigation}"/>
-                            
+                            <Span Text="sei nuovo? registrati premendo "/> 
+                            <Span Text="qui"
+                                  TextColor="{x:StaticResource VerdeLume}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

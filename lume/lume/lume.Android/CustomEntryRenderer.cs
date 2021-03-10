@@ -2,11 +2,10 @@
 using Xamarin.Forms.Platform.Android;
 using Android.Graphics.Drawables;
 using Android.Content;
-using lume.CustomObj;
 using lume.Droid.Renderers;
 using System;
 
-[assembly: ExportRenderer(typeof(LumEntry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(lume.LumEntry), typeof(CustomEntryRenderer))]
 namespace lume.Droid.Renderers
 {
     class CustomEntryRenderer : EntryRenderer

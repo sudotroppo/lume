@@ -24,10 +24,5 @@ namespace lume.Pages
             Children.Add(fillreq);
             Children.Add(notif);
         }
-
-        protected override bool OnBackButtonPressed()
-        {
-            return false;
-        }
     }
 }
