@@ -1,4 +1,5 @@
 ﻿using System;
+using lume.Models;
 using lume.Pages;
 using Xamarin.Forms;
 
@@ -12,10 +13,19 @@ namespace lume
 
         }
 
-        public async void OnClikedButton(object o, EventArgs e)
+        async void OnClikedButton(object o, EventArgs e)
         {
-            Button b = (Button)o;
-            await Navigation.PushModalAsync(new HomePage());
+            User user = new User(Username.Text, Password.Text);
+            
+            if (user.CheckInformation())
+            {
+                await DisplayAlert("Benvenuto", "Login effettuato.", "Ok");
+                await Navigation.PushModalAsync(new HomePage());
+            }
+            else
+            {
+                await DisplayAlert("Attenzione", "Username o password vuoti", "Ok");
+            }
         }
     }
 }

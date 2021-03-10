@@ -70,12 +70,11 @@
 					<StackLayout Spacing="14">
 						<local:LumEntry x:Name="Username"
 										Placeholder="Username"/>
-
-						<local:LumEntry x:Name="Password"
+                        
+                        <local:LumEntry x:Name="Password"
 										Placeholder="Password"
 										IsPassword="True"/>
-
-					</StackLayout>
+                    </StackLayout>
 
 				</StackLayout>
 
