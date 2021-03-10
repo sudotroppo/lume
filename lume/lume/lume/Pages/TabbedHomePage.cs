@@ -12,9 +12,9 @@ namespace lume.Pages
             _ = On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             _ = On<Android>().SetIsSwipePagingEnabled(false);
 
-            var home = new NavigationPage(new HomePage());
-            var notif = new NavigationPage(new NotificationsPage());
-            var fillreq = new NavigationPage(new FillRequestPage());
+            var home = new HomePage();
+            var notif = new NotificationsPage();
+            var fillreq = new FillRequestPage();
 
             home.IconImageSource = "home.png";
             fillreq.IconImageSource = "plus.png";
