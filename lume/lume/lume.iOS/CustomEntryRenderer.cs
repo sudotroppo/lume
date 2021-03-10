@@ -2,7 +2,6 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using lume;
-using System.ComponentModel;
 using lume.iOS.Renderers;
 using CoreGraphics;
 

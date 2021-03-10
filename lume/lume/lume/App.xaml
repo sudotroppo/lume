@@ -27,9 +27,10 @@
         <x:Double x:Key="EntryStandardFontSize">18</x:Double>
 
         <!--Fonts-->
-        <Font x:Key="LabelStandardFont">OpenSans-R</Font>
-        <Font x:Key="ButtonStandardFont">OpenSans-R</Font>
-        <Font x:Key="LumeFont">Montserrat-SB</Font>
+        <x:String x:Key="LabelStandardFont">OpenSans-R</x:String>
+        <x:String x:Key="EntryStandardFont">OpenSans-R</x:String>
+        <x:String x:Key="ButtonStandardFont">OpenSans-R</x:String>
+        <x:String x:Key="LumeFont">Montserrat-SB</x:String>
 
         <Thickness x:Key="PageMargin">10,0,10,0</Thickness>
         <Thickness x:Key="TextMargin">20,0,20,0</Thickness>
@@ -70,6 +71,8 @@
 
             <Setter Property="UnselectedTabColor"
                     Value="{x:StaticResource NeroLume}"/>
+
+            
         </Style>
 
         <!--Label-->
@@ -106,7 +109,7 @@
                     Value="{x:StaticResource EntryStandardFontSize}"/>
 
             <Setter Property="FontFamily"
-                    Value="OpenSans-R"/>
+                    Value="{x:StaticResource EntryStandardFont}"/>
 
             <Setter Property="MaxLength"
                     Value="{x:StaticResource MaxEntryLen}"/>
