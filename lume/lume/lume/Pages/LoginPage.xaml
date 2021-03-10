@@ -85,9 +85,20 @@
 
                 </StackLayout>
 
-                <Label Text="password dimenticata?"
-                       FontSize="{x:StaticResource LabelSmallFontSize}"
-                       Margin="{x:StaticResource SmallTextMargin}"/>
+                <Label FontSize="{x:StaticResource LabelSmallFontSize}"
+                       Margin="{x:StaticResource SmallTextMargin}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="password dimenticata?"
+                                  TextColor="{x:StaticResource VerdeLume}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SendRequest}"
+                                                          CommandParameter="url"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
 
             </StackLayout>
@@ -102,9 +113,21 @@
 						BackgroundColor="{x:StaticResource VerdeLume}"
 						Clicked="OnClikedButton"/>
 
-                <Label Text="Sei nuovo? Registrati qui"
+                <Label x:Name="Registration"
                        FontSize="{x:StaticResource LabelSmallFontSize}"
-                       Margin="{x:StaticResource SmallTextMargin}"/>
+                       Margin="{x:StaticResource SmallTextMargin}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="sei nuovo? registrati premendo "/> 
+                            <Span Text="qui"
+                                  TextColor="{x:StaticResource VerdeLume}">
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding TapCommand}"/>
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
 
             </StackLayout>
