@@ -50,9 +50,9 @@
                 <Label x:Name="Lume"
 					   Text="lume"
                        FontSize="{x:StaticResource LabelTitleFontSize}"
-					   FontFamily="Montserrat-SB"/>
+					   FontFamily="{x:StaticResource LumeFont}"/>
 
-                <Label Text="La nuova piattaforma per chi dà una mano a cambiare il mondo. Comincia ora a fare la differenza!"/>
+                <Label Text="La nuova piattaforma per chi da una mano a cambiare il mondo. Comincia ora a fare la differenza!"/>
 
             </StackLayout>
 

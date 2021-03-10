@@ -14,7 +14,7 @@ namespace lume
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new TPage(), false);
+            await Navigation.PushModalAsync(new TabbedHomePage(), false);
         }
     }
 }
