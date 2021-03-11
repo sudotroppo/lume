@@ -1,7 +1,7 @@
 ﻿using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using lume;
+using lume.CustomObj;
 using lume.iOS.Renderers;
 using CoreGraphics;
 

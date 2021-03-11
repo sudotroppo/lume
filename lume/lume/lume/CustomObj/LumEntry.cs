@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 
 
-namespace lume
+namespace lume.CustomObj
 {
     public class LumEntry : Entry
     {
