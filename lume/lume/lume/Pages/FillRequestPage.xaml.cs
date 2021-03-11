@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -15,6 +16,13 @@ namespace lume.Pages
         public FillRequestPage()
         {
             InitializeComponent();
+
+            var images = new List<string>
+            {
+                "https://www.hydromania.it/images/acquapark-roma/calcetto.jpg"
+            };
+
+            MainCarouselView.ItemsSource = images;
         }
     }
 }

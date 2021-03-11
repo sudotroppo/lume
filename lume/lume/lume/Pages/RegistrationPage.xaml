@@ -1,12 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:custom="clr-namespace:lume.CustomObj"
              x:Class="lume.Pages.RegistrationPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
+    <AbsoluteLayout x:Name="Absolute">
+
+        <!--BackGround Style-->
+
+        <Ellipse Aspect="Fill"
+				 StrokeThickness="40"
+				 AbsoluteLayout.LayoutBounds="1,-180,300,300"
+				 AbsoluteLayout.LayoutFlags="XProportional"
+				 TranslationX="105"
+				 Rotation="60">
+
+            <!--Gradiente-->
+            <Ellipse.Stroke>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="{x:StaticResource VerdeChiaroLume}" Offset="0.4"/>
+                    <GradientStop Color="{x:StaticResource VerdeLume}" Offset="0.8"/>
+                </LinearGradientBrush>
+            </Ellipse.Stroke>
+
+        </Ellipse>
+
+        <!--Posizione seconda ellisse sulla base della prima-->
+        <!--x: (1 in relativo (-> fondo pagina)) -158 (= -300(diametro ellisse1) + 105(->spostamento ellisse1) + 37(->diametro ellisse2))-->
+        <!--y: (83 in assoluto (= 300(->diametro ellisse1) -180(->spostamento ellisse1) -37(->diametro ellisse2)) )-->
+        <Ellipse Aspect="Fill"
+				 StrokeThickness="0"
+				 AbsoluteLayout.LayoutBounds="1,83,37,37"
+				 AbsoluteLayout.LayoutFlags="XProportional"
+				 TranslationX="-158">
+            <Ellipse.Fill>
+                <SolidColorBrush Color="{x:StaticResource VerdeLume}"/>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <!--******************-->
+
+
+        <RelativeLayout Margin="{x:StaticResource PageMargin}"
+						AbsoluteLayout.LayoutBounds="0,0,1,1"
+						AbsoluteLayout.LayoutFlags="SizeProportional">
+
+            <StackLayout Spacing="35"
+						 RelativeLayout.YConstraint="135">
+
+                <Label x:Name="Registrazione"
+					   Text="Registrazione"
+                       FontSize="{x:StaticResource LabelSmallTitleFontSize}"
+					   FontFamily="{x:StaticResource LumeFont}"/>
+            </StackLayout>
+
+            <StackLayout x:Name="StackL3"
+						 Spacing="8"
+						 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.26}">
+                
+                <StackLayout Spacing="20">
+
+                    <!--Linea Orizzontale-->
+                    <BoxView x:Name="Line"
+							 Margin="{x:StaticResource LineMargin}"
+							 HeightRequest="2"
+							 BackgroundColor="{x:StaticResource NeroLume}"
+							 CornerRadius="5"/>
+                    <!-- *************** -->
+
+                    <StackLayout Spacing="23">
+
+                        <custom:LumEntry x:Name="Nome_reg"
+										Placeholder="Nome"/>
+
+                        <custom:LumEntry x:Name="Cognome_reg"
+										Placeholder="Cognome"/>
+                        
+                        <custom:LumEntry x:Name="Username_reg"
+										Placeholder="Username"/>
+
+                        <custom:LumEntry x:Name="Password_reg"
+										Placeholder="Password"
+										IsPassword="True"/>
+
+                        <custom:LumEntry x:Name="Email_reg"
+										Placeholder="Email"/>
+
+                        <custom:LumEntry x:Name="CodiceFiscale"
+										Placeholder="Codice Fiscale"/>
+
+
+                    </StackLayout>
+                    
+                </StackLayout>
+                
+            </StackLayout>
+
+            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.90}"
+						 Spacing="10">
+
+                <Button x:Name="RegistrationButton"
+						Text="Registrami"
+						FontSize="16"
+						BackgroundColor="{x:StaticResource VerdeLume}"
+						Clicked="OnClikedButton"/>
+
+
+            </StackLayout>
+            
+        </RelativeLayout>
+            
+    </AbsoluteLayout>
+        
 </ContentPage>
