@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Reflection;
-using lume.Pages;
 using Xamarin.Forms;
 using System.Windows.Input;
 using lume.Models;
 
-namespace lume
+namespace lume.Pages
 {
     public partial class LoginPage : ContentPage
     {
-        public ICommand TapCommand => new Command(() => Navigation.PushModalAsync(new RegistrationPage(), true));
+        public ICommand SendRequest => new Command<string>(async (url) => await DisplayAlert(url, "Va ancora configurato", "Ok"));
 
         public LoginPage()
         {
@@ -26,7 +24,7 @@ namespace lume
             if (user.CheckInformation())
             {
                 await DisplayAlert("Benvenuto", "Login effettuato.", "Ok");
-                await Navigation.PushModalAsync(new HomePage());
+                await Navigation.PushModalAsync(new TabbedHomePage());
             }
             else
             {
