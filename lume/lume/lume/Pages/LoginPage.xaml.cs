@@ -21,6 +21,9 @@ namespace lume.Pages
         {
             User user = new User(Username.Text, Password.Text);
 
+            // Sezione commentata per evitare il popup in fase di sviluppo
+
+            /*
             if (user.CheckInformation())
             {
                 await DisplayAlert("Benvenuto", "Login effettuato.", "Ok");
@@ -30,6 +33,10 @@ namespace lume.Pages
             {
                 await DisplayAlert("Attenzione", "Username o password vuoti", "Ok");
             }
+            */
+
+            // Da eliminare quando la sezione superiore sarà completata
+            await Navigation.PushModalAsync(new TabbedHomePage());
         }
     }
 }

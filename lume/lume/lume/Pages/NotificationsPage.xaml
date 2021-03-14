@@ -2,50 +2,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="lume.Pages.NotificationsPage">
-	
-	<ContentPage.Content>
 
-		<Grid RowDefinitions="15, 45, 15"
+    <ContentPage.Content>
+
+        <!-- Sezione per passare alla pagina profilo -->
+
+        <Grid RowDefinitions="10, 45, 8"
 			  ColumnDefinitions="10, 45, *, 90">
 
-			<!--Sfondo-->
-			<BoxView BackgroundColor="LightGray"
+            <!--Sfondo-->
+            <BoxView BackgroundColor="LightGray"
 					 Grid.Column="0"
 					 Grid.ColumnSpan="4"
 					 Grid.Row="0"
 					 Grid.RowSpan="3">
-			</BoxView>
+            </BoxView>
 
-			<RelativeLayout
+            <StackLayout
 				Grid.Column="1"
 				Grid.ColumnSpan="2"
-				Grid.Row="1">
+				Grid.Row="1"
+                Orientation="Horizontal">
 
-				<!-- Placeholder per immagine utente-->
-				<Ellipse x:Name="UserImage"
-						 Fill="Black"
-						 Aspect="Uniform"
-						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
-						 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=X, Constant=10}"/>
+                <!-- Immagine e info utente -->
+                <Ellipse Fill="Gray"
+						 WidthRequest="45"
+                         HeightRequest="45"
+                         Aspect="UniformToFill"/>
 
-				<Label Text="Username"
-					   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"
-					   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=UserImage, Property=X, Constant=55 }"/>
+                <Label Text="Username"
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"/>
 
-			</RelativeLayout>
+            </StackLayout>
 
-
-
-			<Button Grid.Row="1"
+            <Button Grid.Row="1"
 					Grid.Column="3"
 					Text=">"
 					Clicked="OnProfileClicked"
 					BackgroundColor="{x:StaticResource VerdeLume}"/>
 
-		</Grid>
-		
-		 <!--Area notifiche-->
+        </Grid>
 
-	</ContentPage.Content>
+        <!--Area notifiche-->
+
+    </ContentPage.Content>
 
 </ContentPage>

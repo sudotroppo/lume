@@ -3,5 +3,8 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="lume.Pages.ProfilePage"
              Title="Profilo">
-    
+    <NavigationPage.BackButtonTitle>
+        Back
+    </NavigationPage.BackButtonTitle>
+
 </ContentPage>
