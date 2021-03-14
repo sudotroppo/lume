@@ -25,7 +25,7 @@
         <x:Double x:Key="LabelSmallFontSize">10</x:Double>
         <x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
         <x:Double x:Key="ButtonStandardFontSize">14</x:Double>
-        <x:Double x:Key="EntryStandardFontSize">18</x:Double>
+        <x:Double x:Key="EntryStandardFontSize">15</x:Double>
 
         <!--Fonts-->
         <x:String x:Key="LabelStandardFont">OpenSans-R</x:String>
