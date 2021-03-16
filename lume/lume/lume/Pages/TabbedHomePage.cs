@@ -9,6 +9,12 @@ namespace lume.Pages
     {
         public TabbedHomePage()
         {
+
+            var existingPages = Navigation.NavigationStack;
+            foreach (var page in existingPages)
+            {
+                Navigation.RemovePage(page);
+            }
             _ = On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             _ = On<Android>().SetIsSwipePagingEnabled(false);
 
@@ -23,12 +29,7 @@ namespace lume.Pages
             Children.Add(home);
             Children.Add(fillreq);
             Children.Add(notif);
-        }
 
-        protected override bool OnBackButtonPressed()
-        {
-            return false;
         }
-
     }
 }

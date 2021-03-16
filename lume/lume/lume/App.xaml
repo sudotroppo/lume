@@ -14,6 +14,12 @@
             <On Platform="Android" Value="35"/>
         </OnPlatform>
 
+         <OnPlatform x:Key="LumeCornerRadius"
+                    x:TypeArguments="CornerRadius">
+            <On Platform="iOS" Value="25"/>
+            <On Platform="Android" Value="35"/>
+        </OnPlatform>
+
         <OnPlatform x:Key="LumeStrokeWidth"
                     x:TypeArguments="x:Int32">
             <On Platform="iOS" Value="1"/>
@@ -21,10 +27,12 @@
         </OnPlatform>
 
         <x:Double x:Key="LabelStandardFontSize">14</x:Double>
+        <x:Double x:Key="LabelMediumFontSize">16</x:Double>
         <x:Double x:Key="LabelTitleFontSize">30</x:Double>
         <x:Double x:Key="LabelSmallFontSize">10</x:Double>
         <x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
         <x:Double x:Key="ButtonStandardFontSize">14</x:Double>
+        <x:Double x:Key="ButtonMediumFontSize">16</x:Double>
         <x:Double x:Key="EntryStandardFontSize">18</x:Double>
 
         <!--Fonts-->
@@ -37,11 +45,13 @@
         <Thickness x:Key="TextMargin">20,0,20,0</Thickness>
         <Thickness x:Key="LineMargin">17,0,17,0</Thickness>
         <Thickness x:Key="SmallTextMargin">30,0,0,0</Thickness>
+        <Thickness x:Key="PostMargin">0,0,0,0</Thickness>
 
         <!--Colori App-->
         <Color x:Key="VerdeLume">#40a491</Color>
         <Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
         <Color x:Key="BiancoLume">#ffffff</Color>
+        <Color x:Key="GrigioLume">#E4E4E4</Color>
         <Color x:Key="NeroLume">#4b4b4b</Color>
         <Color x:Key="Nero">#000000</Color>
 

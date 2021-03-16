@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using lume.Models;
 using Xamarin.Forms;
 
 namespace lume.Pages
@@ -10,7 +11,14 @@ namespace lume.Pages
         public HomePage()
         {
             InitializeComponent();
+            BindingContext = this;
+        }
 
+        public async void OnRefresh(object sender, EventArgs e)
+        {
+            RefreshView r = (RefreshView) sender;
+            await Task.Delay(1000);
+            r.IsRefreshing = false;
         }
     }
 }
