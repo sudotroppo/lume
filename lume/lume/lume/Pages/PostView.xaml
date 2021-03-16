@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="lume.Pages.PostView">
+    <ContentView.Content>
+
+        <Frame HasShadow="False"
+               CornerRadius="20"
+               IsClippedToBounds="True"
+               BackgroundColor="{x:StaticResource GrigioLume}">
+
+            <StackLayout Spacing="10"
+                         Margin="-10">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="10"
+                             Margin="{x:StaticResource PostMargin}">
+
+                    <Frame Margin="{x:StaticResource PostMargin}"
+                           WidthRequest="10"
+                           HeightRequest="10"
+                           CornerRadius="50"
+                           IsClippedToBounds="True">
+
+                        <Image Source="https://aka.ms/campus.jpg"
+                               Margin="-20"
+                               Aspect="AspectFill"/>
+                    </Frame>
+
+                    <Label x:Name="UserNameSurname"
+                           VerticalOptions="Center"
+                           Text="Prova"
+                           Margin="{x:StaticResource PostMargin}"/>
+
+                </StackLayout>
+
+                <Label Text=""/>
+                <Button Text="Proponiti"
+                        Margin="{x:StaticResource PostMargin}"
+                        BackgroundColor="{x:StaticResource VerdeLume}"
+                        FontSize="{x:StaticResource ButtonStandardFontSize}"/>
+            </StackLayout>
+        </Frame>
+
+    </ContentView.Content>
+</ContentView>

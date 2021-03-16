@@ -110,7 +110,7 @@
 
                 <Button x:Name="LoginButton"
 						Text="Login"
-						FontSize="16"
+						FontSize="{x:StaticResource ButtonMediumFontSize}"
 						BackgroundColor="{x:StaticResource VerdeLume}"
 						Clicked="OnClikedButton"/>
 

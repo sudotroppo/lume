@@ -56,8 +56,8 @@
             <StackLayout x:Name="StackL3"
 						 Spacing="8"
 						 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.26}">
-                
+						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.3}">
+
                 <StackLayout Spacing="20">
 
                     <!--Linea Orizzontale-->
@@ -68,32 +68,34 @@
 							 CornerRadius="5"/>
                     <!-- *************** -->
 
-                    <StackLayout Spacing="23">
+                    <ScrollView RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, Property=Height, Factor=0.1}">
+                        <StackLayout Spacing="10">
 
-                        <custom:LumEntry x:Name="Nome_reg"
+                            <custom:LumEntry x:Name="Nome_reg"
 										Placeholder="Nome"/>
 
-                        <custom:LumEntry x:Name="Cognome_reg"
+                            <custom:LumEntry x:Name="Cognome_reg"
 										Placeholder="Cognome"/>
-                        
-                        <custom:LumEntry x:Name="Username_reg"
+
+                            <custom:LumEntry x:Name="Username_reg"
 										Placeholder="Username"/>
 
-                        <custom:LumEntry x:Name="Password_reg"
+                            <custom:LumEntry x:Name="Password_reg"
 										Placeholder="Password"
 										IsPassword="True"/>
 
-                        <custom:LumEntry x:Name="Email_reg"
+                            <custom:LumEntry x:Name="Email_reg"
 										Placeholder="Email"/>
 
-                        <custom:LumEntry x:Name="CodiceFiscale"
+                            <custom:LumEntry x:Name="CodiceFiscale"
 										Placeholder="Codice Fiscale"/>
 
 
-                    </StackLayout>
-                    
+                        </StackLayout>
+                    </ScrollView>
+
                 </StackLayout>
-                
+
             </StackLayout>
 
             <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
@@ -108,9 +110,9 @@
 
 
             </StackLayout>
-            
+
         </RelativeLayout>
-            
+
     </AbsoluteLayout>
-        
+
 </ContentPage>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace lume.Models
 {
@@ -9,22 +10,27 @@ namespace lume.Models
     {
         [PrimaryKey]
         public int Id { get; set; }
-        public String Username { get; set; }
-        public String Password { get; set; }
 
-        public User() { }
-        public User(string Username, string Password) 
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Address { get; set; }
+        public string Password { get; set; }
+        public Image Image { set; get; }
+
+        public User() : this("None", "None", "None", "None", new Image()) { }
+
+        public User(string Name, string Surname, string Address, string Password, Image Image) 
         {
-            this.Username = Username ?? "";
-            this.Password = Password ?? "";
+            this.Name = Name;
+            this.Surname = Surname;
+            this.Password = Password;
+            this.Address = Address;
+            this.Image = Image;
         }
 
-        public bool CheckInformation() 
+        public override string ToString()
         {
-            if (!Username.Equals("") && !Password.Equals(""))
-                return true;
-            else
-                return false;
+            return Name + " " + Surname;
         }
 
     }

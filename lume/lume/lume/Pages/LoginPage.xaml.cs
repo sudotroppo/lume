@@ -19,6 +19,7 @@ namespace lume.Pages
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             User user = new User(Username.Text, Password.Text);
 
             // Sezione commentata per evitare il popup in fase di sviluppo
@@ -37,6 +38,10 @@ namespace lume.Pages
 
             // Da eliminare quando la sezione superiore sarà completata
             await Navigation.PushModalAsync(new TabbedHomePage());
+=======
+            await Navigation.PushModalAsync(new TabbedHomePage());
+           
+>>>>>>> davide
         }
     }
 }
