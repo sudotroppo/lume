@@ -13,7 +13,8 @@ namespace lume.Pages
             var existingPages = Navigation.NavigationStack;
             foreach (var page in existingPages)
             {
-                Navigation.RemovePage(page);
+                if(page is LoginPage)
+                    Navigation.RemovePage(page);
             }
             _ = On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             _ = On<Android>().SetIsSwipePagingEnabled(false);
@@ -30,6 +31,10 @@ namespace lume.Pages
             Children.Add(fillreq);
             Children.Add(notif);
 
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }
