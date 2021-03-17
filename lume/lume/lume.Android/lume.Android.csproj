@@ -74,7 +74,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\SQLite_Android.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,7 +140,9 @@
       </Generator>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\lume\lume.csproj">
       <Project>{D1D0F931-21B4-4591-8F75-DB178B3FFE9F}</Project>
