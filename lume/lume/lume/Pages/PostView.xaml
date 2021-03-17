@@ -1,46 +1,79 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="lume.Pages.PostView">
-    <ContentView.Content>
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="lume.Pages.PostView">
 
-        <Frame HasShadow="False"
-               CornerRadius="20"
-               IsClippedToBounds="True"
-               BackgroundColor="{x:StaticResource GrigioLume}">
+	<ContentView.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Frame" CanCascade="True">
+				<Setter Property="Margin"
+						Value="{x:StaticResource PostMargin}"/>
+			</Style>
+			<Style TargetType="Label">
+				<Setter Property="Margin"
+						Value="4,0,4,0"/>
+                
+                <Setter Property="VerticalOptions"
+                        Value="Center"/>
+            </Style>
+		</ResourceDictionary>
+	</ContentView.Resources>
+	
+	<ContentView.Content>
 
-            <StackLayout Spacing="10"
-                         Margin="-10">
-                <StackLayout Orientation="Horizontal"
-                             Spacing="10"
-                             Margin="{x:StaticResource PostMargin}">
+		<Frame HasShadow="False"
+			   CornerRadius="20"
+			   IsClippedToBounds="True"
+			   BackgroundColor="{x:StaticResource GrigioLume}">
 
-                    <Frame Margin="{x:StaticResource PostMargin}"
-                           WidthRequest="10"
-                           HeightRequest="10"
-                           CornerRadius="50"
-                           IsClippedToBounds="True">
+			<StackLayout Spacing="10"
+						 Margin="-10">
+				<StackLayout Orientation="Horizontal"
+							 Spacing="10">
 
-                        <Image Source="https://aka.ms/campus.jpg"
-                               Margin="-20"
-                               Aspect="AspectFill"/>
-                    </Frame>
+					<Frame WidthRequest="10"
+						   HeightRequest="10"
+						   CornerRadius="50"
+						   IsClippedToBounds="True">
 
-                    <Label x:Name="UserNameSurname"
-                           VerticalOptions="Center"
-                           Text="Prova"
-                           Margin="{x:StaticResource PostMargin}"/>
+						<Image Source=""
+							   Margin="-20"
+							   Aspect="AspectFill"/>
+                        
+                        
+					</Frame>
 
+					<Label x:Name="UserNameSurname"
+						   Margin="0"
+						   Text="Prova"/>
+
+                    <Label TextColor="{x:StaticResource NeroLume}" 
+                           HorizontalOptions="EndAndExpand">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="&#xf500;&#x09;&#x09;"
+                                      FontFamily="{x:StaticResource IconSolid}"/>
+
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+				</StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    
                 </StackLayout>
 
-                <Label Text=""/>
-                <Button Text="Proponiti"
-                        Margin="{x:StaticResource PostMargin}"
-                        BackgroundColor="{x:StaticResource VerdeLume}"
-                        FontSize="{x:StaticResource ButtonStandardFontSize}"/>
-            </StackLayout>
-        </Frame>
+				<Label Text="Provaaaaaa!"/>
+				<Button Text="Proponiti"
+						CornerRadius="0"
+						Margin="-20,0,-20,-10"
+						HeightRequest="40"
+						BackgroundColor="{x:StaticResource VerdeLume}"
+						FontSize="{x:StaticResource ButtonStandardFontSize}"/>
+			</StackLayout>
+		</Frame>
 
-    </ContentView.Content>
+	</ContentView.Content>
 </ContentView>

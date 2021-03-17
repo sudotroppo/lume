@@ -1,187 +1,191 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:custom="clr-namespace:lume.CustomObj"
-             x:Class="lume.App">
-    <Application.Resources>
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:custom="clr-namespace:lume.CustomObj"
+			 x:Class="lume.App">
+	<Application.Resources>
 
-        <x:Double x:Key="Height">48.0</x:Double>
-        <x:Double x:Key="MaxEntryLen">30.0</x:Double>
+		<x:Double x:Key="Height">48.0</x:Double>
+		<x:Double x:Key="MaxEntryLen">30.0</x:Double>
 
-        <OnPlatform x:Key="LumeRadius"
-                    x:TypeArguments="x:Int32">
-            <On Platform="iOS" Value="25"/>
-            <On Platform="Android" Value="35"/>
-        </OnPlatform>
+		<OnPlatform x:Key="LumeRadius"
+					x:TypeArguments="x:Int32">
+			<On Platform="iOS" Value="25"/>
+			<On Platform="Android" Value="35"/>
+		</OnPlatform>
 
-         <OnPlatform x:Key="LumeCornerRadius"
-                    x:TypeArguments="CornerRadius">
-            <On Platform="iOS" Value="25"/>
-            <On Platform="Android" Value="35"/>
-        </OnPlatform>
+		 <OnPlatform x:Key="LumeCornerRadius"
+					x:TypeArguments="CornerRadius">
+			<On Platform="iOS" Value="25"/>
+			<On Platform="Android" Value="35"/>
+		</OnPlatform>
 
-        <OnPlatform x:Key="LumeStrokeWidth"
-                    x:TypeArguments="x:Int32">
-            <On Platform="iOS" Value="1"/>
-            <On Platform="Android" Value="2"/>
-        </OnPlatform>
+		<OnPlatform x:Key="LumeStrokeWidth"
+					x:TypeArguments="x:Int32">
+			<On Platform="iOS" Value="1"/>
+			<On Platform="Android" Value="2"/>
+		</OnPlatform>
+		
+		<x:Double x:Key="LabelStandardFontSize">14</x:Double>
+		<x:Double x:Key="LabelMediumFontSize">16</x:Double>
+		<x:Double x:Key="LabelTitleFontSize">30</x:Double>
+		<x:Double x:Key="LabelSmallFontSize">10</x:Double>
+		<x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
+		<x:Double x:Key="ButtonStandardFontSize">14</x:Double>
+		<x:Double x:Key="EntryStandardFontSize">15</x:Double>
+		<x:Double x:Key="ButtonMediumFontSize">16</x:Double>
 
-        <x:Double x:Key="LabelStandardFontSize">14</x:Double>
-        <x:Double x:Key="LabelMediumFontSize">16</x:Double>
-        <x:Double x:Key="LabelTitleFontSize">30</x:Double>
-        <x:Double x:Key="LabelSmallFontSize">10</x:Double>
-        <x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
-        <x:Double x:Key="ButtonStandardFontSize">14</x:Double>
-        <x:Double x:Key="EntryStandardFontSize">15</x:Double>
-        <x:Double x:Key="ButtonMediumFontSize">16</x:Double>
-
-        <!--Fonts-->
-        <x:String x:Key="LabelStandardFont">OpenSans-R</x:String>
-        <x:String x:Key="EntryStandardFont">OpenSans-R</x:String>
-        <x:String x:Key="ButtonStandardFont">OpenSans-R</x:String>
-        <x:String x:Key="LumeFont">Montserrat-SB</x:String>
-
+		<!--Fonts-->
+		<x:String x:Key="LabelStandardFont">OpenSans-R</x:String>
+		<x:String x:Key="EntryStandardFont">OpenSans-R</x:String>
+		<x:String x:Key="ButtonStandardFont">OpenSans-R</x:String>
+		<x:String x:Key="LumeFont">Montserrat-SB</x:String>
+        <x:String x:Key="IconSolid">FotAwsome-S</x:String>
+        <x:String x:Key="IconRegular">FotAwsome-R</x:String>
+        <x:String x:Key="Brands">FotAwsomeBrands-R</x:String>
+        
+        <!--Margini-->
         <Thickness x:Key="PageMargin">10,0,10,0</Thickness>
-        <Thickness x:Key="TextMargin">20,0,20,0</Thickness>
-        <Thickness x:Key="LineMargin">17,0,17,0</Thickness>
-        <Thickness x:Key="SmallTextMargin">30,0,0,0</Thickness>
-        <Thickness x:Key="PostMargin">0,0,0,0</Thickness>
+		<Thickness x:Key="TextMargin">20,0,20,0</Thickness>
+		<Thickness x:Key="LineMargin">17,0,17,0</Thickness>
+		<Thickness x:Key="SmallTextMargin">30,0,0,0</Thickness>
+		<Thickness x:Key="PostMargin">0,0,0,0</Thickness>
 
-        <!--Colori App-->
-        <Color x:Key="VerdeLume">#40a491</Color>
-        <Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
-        <Color x:Key="BiancoLume">#ffffff</Color>
-        <Color x:Key="GrigioLume">#E4E4E4</Color>
-        <Color x:Key="NeroLume">#4b4b4b</Color>
-        <Color x:Key="Nero">#000000</Color>
+		<!--Colori App-->
+		<Color x:Key="VerdeLume">#40a491</Color>
+		<Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
+		<Color x:Key="BiancoLume">#ffffff</Color>
+		<Color x:Key="GrigioLume">#E4E4E4</Color>
+		<Color x:Key="NeroLume">#4b4b4b</Color>
+		<Color x:Key="Nero">#000000</Color>
 
-        <!--**********-->
+		<!--**********-->
 
-        <!--Stili impliciti App-->
+		<!--Stili impliciti App-->
 
-        <!--ContentPage-->
-        <Style TargetType="{x:Type ContentPage}"
-               ApplyToDerivedTypes="True">
+		<!--ContentPage-->
+		<Style TargetType="{x:Type ContentPage}"
+			   ApplyToDerivedTypes="True">
 
-            <Setter Property="BackgroundColor"
-                    Value="{x:StaticResource BiancoLume}"/>
-        </Style>
+			<Setter Property="BackgroundColor"
+					Value="{x:StaticResource BiancoLume}"/>
+		</Style>
 
-        <!--TabbedPage-->
-        <Style TargetType="{x:Type TabbedPage}"
-               ApplyToDerivedTypes="True">
+		<!--TabbedPage-->
+		<Style TargetType="{x:Type TabbedPage}"
+			   ApplyToDerivedTypes="True">
 
-            <Setter Property="BackgroundColor"
-                    Value="{x:StaticResource BiancoLume}"/>
+			<Setter Property="BackgroundColor"
+					Value="{x:StaticResource BiancoLume}"/>
 
-            <Setter Property="BarBackgroundColor"
-                    Value="{x:StaticResource VerdeLume}"/>
+			<Setter Property="BarBackgroundColor"
+					Value="{x:StaticResource VerdeLume}"/>
 
-            <Setter Property="SelectedTabColor"
-                    Value="{x:StaticResource BiancoLume}"/>
+			<Setter Property="SelectedTabColor"
+					Value="{x:StaticResource BiancoLume}"/>
 
-            <Setter Property="UnselectedTabColor"
-                    Value="{x:StaticResource NeroLume}"/>
+			<Setter Property="UnselectedTabColor"
+					Value="{x:StaticResource NeroLume}"/>
 
-            
-        </Style>
+			
+		</Style>
 
-        <!--Label-->
-        <Style TargetType="{x:Type Label}">
+		<!--Label-->
+		<Style TargetType="{x:Type Label}">
 
-            <Setter Property="Margin"
-                    Value="{x:StaticResource TextMargin}"/>
+			<Setter Property="Margin"
+					Value="{x:StaticResource TextMargin}"/>
 
-            <Setter Property="TextColor"
-                    Value="{x:StaticResource Nero}"/>
+			<Setter Property="TextColor"
+					Value="{x:StaticResource Nero}"/>
 
-            <Setter Property="FontSize"
-                    Value="{x:StaticResource LabelStandardFontSize}"/>
+			<Setter Property="FontSize"
+					Value="{x:StaticResource LabelStandardFontSize}"/>
 
-            <Setter Property="FontFamily"
-                    Value="{x:StaticResource LabelStandardFont}"/>
+			<Setter Property="FontFamily"
+					Value="{x:StaticResource LabelStandardFont}"/>
 
-        </Style>
+		</Style>
 
 
-        <!--Entry-->
-        <Style TargetType="{x:Type custom:LumEntry}">
+		<!--Entry-->
+		<Style TargetType="{x:Type custom:LumEntry}">
 
-            <Setter Property="HeightRequest"
-                    Value="{x:StaticResource Height}"/>
+			<Setter Property="HeightRequest"
+					Value="{x:StaticResource Height}"/>
 
-            <Setter Property="TextColor"
-                    Value="{x:StaticResource Nero}"/>
+			<Setter Property="TextColor"
+					Value="{x:StaticResource Nero}"/>
 
-            <Setter Property="PlaceholderColor"
-                    Value="{x:StaticResource Nero}"/>
+			<Setter Property="PlaceholderColor"
+					Value="{x:StaticResource Nero}"/>
 
-            <Setter Property="FontSize"
-                    Value="{x:StaticResource EntryStandardFontSize}"/>
+			<Setter Property="FontSize"
+					Value="{x:StaticResource EntryStandardFontSize}"/>
 
-            <Setter Property="FontFamily"
-                    Value="{x:StaticResource EntryStandardFont}"/>
+			<Setter Property="FontFamily"
+					Value="{x:StaticResource EntryStandardFont}"/>
 
-            <Setter Property="MaxLength"
-                    Value="{x:StaticResource MaxEntryLen}"/>
+			<Setter Property="MaxLength"
+					Value="{x:StaticResource MaxEntryLen}"/>
 
-            <Setter Property="Margin"
-                    Value="{x:StaticResource TextMargin}"/>
+			<Setter Property="Margin"
+					Value="{x:StaticResource TextMargin}"/>
 
-            <Setter Property="CurveIsEnabled"
-                    Value="True"/>
+			<Setter Property="CurveIsEnabled"
+					Value="True"/>
 
-            <Setter Property="CornerRadius"
-                    Value="{x:StaticResource LumeRadius}"/>
+			<Setter Property="CornerRadius"
+					Value="{x:StaticResource LumeRadius}"/>
 
-            <Setter Property="BorderWidth"
-                    Value="{x:StaticResource LumeStrokeWidth}"/>
+			<Setter Property="BorderWidth"
+					Value="{x:StaticResource LumeStrokeWidth}"/>
 
-            <Setter Property="BorderColor"
-                    Value="{x:StaticResource Nero}"/>
+			<Setter Property="BorderColor"
+					Value="{x:StaticResource Nero}"/>
 
-        </Style>
+		</Style>
 
-        <!--*****-->
+		<!--*****-->
 
-        <!--Button-->
+		<!--Button-->
 
-        <Style TargetType="{x:Type Button}">
+		<Style TargetType="{x:Type Button}">
 
-            <Setter Property="HeightRequest"
-                    Value="{x:StaticResource Height}"/>
+			<Setter Property="HeightRequest"
+					Value="{x:StaticResource Height}"/>
 
-            <Setter Property="TextColor"
-                    Value="{x:StaticResource BiancoLume}"/>
+			<Setter Property="TextColor"
+					Value="{x:StaticResource BiancoLume}"/>
 
-            <Setter Property="Margin"
-                    Value="{x:StaticResource TextMargin}"/>
+			<Setter Property="Margin"
+					Value="{x:StaticResource TextMargin}"/>
 
-            <Setter Property="FontSize"
-                    Value="{x:StaticResource ButtonStandardFontSize}"/>
+			<Setter Property="FontSize"
+					Value="{x:StaticResource ButtonStandardFontSize}"/>
 
-            <Setter Property="FontFamily"
-                    Value="OpenSans-R"/>
+			<Setter Property="FontFamily"
+					Value="OpenSans-R"/>
 
-            <Setter Property="TextTransform"
-                    Value="None"/>
+			<Setter Property="TextTransform"
+					Value="None"/>
 
-            <Setter Property="CornerRadius"
-                    Value="{x:StaticResource LumeRadius}"/>
+			<Setter Property="CornerRadius"
+					Value="{x:StaticResource LumeRadius}"/>
 
-        </Style>
+		</Style>
 
-        <!--******-->
+		<!--******-->
 
-        <!--StackLayout-->
-        <Style TargetType="{x:Type StackLayout}">
+		<!--StackLayout-->
+		<Style TargetType="{x:Type StackLayout}">
 
-            <Setter Property="Spacing"
-                    Value="0"/>
+			<Setter Property="Spacing"
+					Value="0"/>
 
-        </Style>
+		</Style>
 
-        <!--***********-->
-    </Application.Resources>
+		<!--***********-->
+	</Application.Resources>
 
 </Application>

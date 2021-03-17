@@ -32,6 +32,7 @@ namespace lume.Pages
             Children.Add(notif);
 
         }
+
         protected override bool OnBackButtonPressed()
         {
             return true;
