@@ -16,7 +16,7 @@ namespace lume.Pages
 
 		public async void OnProfileClicked (object sender, EventArgs e)
 		{
-			await Navigation.PushModalAsync(new NavigationPage(new ProfilePage()));
+			await Navigation.PushAsync(new ProfilePage());
 		}
 	}
 }
