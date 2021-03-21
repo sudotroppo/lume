@@ -26,7 +26,6 @@ namespace lume.Pages
             if (EditMode == false)
             {
                 button.Text = "Fatto";
-                button.BackgroundColor();
                 EditMode = true;
             }
 
