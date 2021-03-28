@@ -1,20 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:forms="http://xamarin.com/schemas/2014/forms"
-             x:Class="lume.Pages.FillRequestPage">
-    <StackLayout>
-        
-                    <ImageButton x:Name="selectedImage"
-                        BackgroundColor="{x:StaticResource VerdeChiaroLume}"
-                        
-                        HeightRequest="250"
-                        WidthRequest="400"
-                        Source="upload.png"
-                        VerticalOptions="Start"
-                        Clicked="Handle_Clicked"
-                    />
-        
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:forms="http://xamarin.com/schemas/2014/forms" 
+             xmlns:custom="clr-namespace:lume.CustomObj"
+			 x:Class="lume.Pages.FillRequestPage">
+	<ScrollView>
+		<StackLayout Spacing="30">
+			<StackLayout>
+				<ImageButton x:Name="selectedImage"
+						BackgroundColor="{x:StaticResource VerdeChiaroLume}"
+						HorizontalOptions="Center"
+						HeightRequest="220"
+						WidthRequest="370"
+						Source="upload.png"
+						VerticalOptions="FillAndExpand"
+						Clicked="Handle_Clicked"
+						Padding="50"
+					/>
+						
+			</StackLayout>
 
-    </StackLayout>
+			<StackLayout Spacing="20" >
+				<Entry x:Name="Titolo"
+								 Placeholder="Titolo"
+								 Margin="100,0"
+								 
+								 HorizontalOptions="FillAndExpand"
+								 TranslationX="-90"
+								 
+										 />
+				<custom:LumEntry
+					x:Name="Descrizione"
+					Placeholder="Descrizione"
+					Margin="10,0"
+					
+					/>
+
+
+			</StackLayout>
+		</StackLayout>
+	</ScrollView>
 </ContentPage>
