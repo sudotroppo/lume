@@ -1,9 +1,9 @@
-﻿using UIKit;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.iOS;
+﻿using CoreGraphics;
 using lume.CustomObj;
 using lume.iOS.Renderers;
-using CoreGraphics;
+using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(LumEntry), typeof(CustomEntryRenderer))]
 namespace lume.iOS.Renderers

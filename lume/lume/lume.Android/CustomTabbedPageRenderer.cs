@@ -1,6 +1,6 @@
-﻿using System;
-using Android.Content;
+﻿using Android.Content;
 using lume.Droid.Renderes;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android.AppCompat;
 
