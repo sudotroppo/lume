@@ -5,8 +5,6 @@
 			 x:Class="lume.App">
 	<Application.Resources>
 
-		<x:Double x:Key="Height">48.0</x:Double>
-		<x:Double x:Key="MaxEntryLen">30.0</x:Double>
 
 		<OnPlatform x:Key="LumeRadius"
 					x:TypeArguments="x:Int32">
@@ -26,6 +24,8 @@
 			<On Platform="Android" Value="2"/>
 		</OnPlatform>
 		
+		<x:Int32 x:Key="MaxEntryLen">30</x:Int32>
+        
 		<x:Double x:Key="LabelStandardFontSize">14</x:Double>
 		<x:Double x:Key="LabelMediumFontSize">16</x:Double>
 		<x:Double x:Key="LabelTitleFontSize">30</x:Double>
@@ -112,7 +112,7 @@
 		<Style TargetType="{x:Type custom:LumEntry}">
 
 			<Setter Property="HeightRequest"
-					Value="{x:StaticResource Height}"/>
+					Value="48"/>
 
 			<Setter Property="TextColor"
 					Value="{x:StaticResource Nero}"/>
@@ -146,14 +146,16 @@
 
 		</Style>
 
-		<!--*****-->
+        
+
+        <!--*****-->
 
 		<!--Button-->
 
 		<Style TargetType="{x:Type Button}">
 
 			<Setter Property="HeightRequest"
-					Value="{x:StaticResource Height}"/>
+					Value="48"/>
 
 			<Setter Property="TextColor"
 					Value="{x:StaticResource BiancoLume}"/>

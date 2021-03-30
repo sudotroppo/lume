@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
 
-  <style name="MainTheme" parent="MainTheme.Base">
+	<style name="MyTheme.Splash"
+		   parent="android:Theme">
+		<item name="android:windowBackground">@drawable/splashscreen</item>
+		<item name="android:windowNoTitle">true</item>
+
+
+	</style>
+  
+	  <style name="MainTheme" parent="MainTheme.Base">
     <!-- As of Xamarin.Forms 4.6 the theme has moved into the Forms binary -->
     <!-- If you want to override anything you can do that here. -->
     <!-- Underneath are a couple of entries to get you started. -->
@@ -16,7 +24,8 @@
     <item name="colorAccent">@color/verdeLume</item>
   </style>
 
-  <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
+	<!--
+	<style name="MyTheme.Base" parent="Theme.AppCompat.Light">
   </style>
 
   <style name="MyTheme" parent="MyTheme.Base">
@@ -27,7 +36,9 @@
             <item name="android:windowFullscreen">true</item>  
             <item name="android:windowContentOverlay">@null</item>  
             <item name="android:windowActionBar">false</item>
-	        <item name="android:windowBackground">@drawable/splashscreen</item>
+        
   </style>
-
+	-->
+	
+	
 </resources>

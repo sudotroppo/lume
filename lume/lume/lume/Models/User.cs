@@ -1,7 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace lume.Models
@@ -19,7 +16,7 @@ namespace lume.Models
 
         public User() : this("None", "None", "None", "None", new Image()) { }
 
-        public User(string Name, string Surname, string Address, string Password, Image Image) 
+        public User(string Name, string Surname, string Address, string Password, Image Image)
         {
             this.Name = Name;
             this.Surname = Surname;

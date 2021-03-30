@@ -11,12 +11,9 @@
                          AbsoluteLayout.LayoutFlags="All">
                 <ScrollView>
                     <StackLayout Spacing="10" Margin="8,0,8,0" x:Name="home">
-                        <pages:PostView/>
-                        <pages:PostView/>
-                        <pages:PostView/>
-                        <pages:PostView/>
-                        <pages:PostView/>
-                        <pages:PostView/>
+                        <pages:PostTemplate/>
+                        <pages:PostTemplate/>
+                        <pages:PostTemplate/>
                     </StackLayout>
                 </ScrollView>
             </RefreshView>

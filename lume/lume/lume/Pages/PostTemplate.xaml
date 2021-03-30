@@ -2,7 +2,7 @@
 <ContentView
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="lume.Pages.PostView">
+	x:Class="lume.Pages.PostTemplate">
 
 	<ContentView.Resources>
 		<ResourceDictionary>
@@ -32,21 +32,24 @@
 				<StackLayout Orientation="Horizontal"
 							 Spacing="10">
 
-					<Frame WidthRequest="10"
-						   HeightRequest="10"
-						   CornerRadius="50"
-						   IsClippedToBounds="True">
-
-						<Image Source=""
+                    <Frame IsClippedToBounds="True"
+                           HasShadow="False"
+                           HeightRequest="10"
+                           WidthRequest="10">
+                        <Frame.Clip>
+                            <EllipseGeometry RadiusX="22.5"
+                                             RadiusY="22.5"
+                                             Center="22.5,22.5"/>
+                        </Frame.Clip>
+                        <Image Source="{Binding ProfileImage}"
 							   Margin="-20"
 							   Aspect="AspectFill"/>
                         
                         
 					</Frame>
 
-					<Label x:Name="UserNameSurname"
-						   Margin="0"
-						   Text="Prova"/>
+					<Label Margin="0"
+						   Text="{Binding UserFullName}"/>
 
                     <Label TextColor="{x:StaticResource NeroLume}" 
                            HorizontalOptions="EndAndExpand">
@@ -54,6 +57,7 @@
                             <FormattedString>
                                 <Span Text="&#xf500;&#x09;&#x09;"
                                       FontFamily="{x:StaticResource IconSolid}"/>
+                                <Span Text="{Binding Number}"/>
 
                             </FormattedString>
                         </Label.FormattedText>
@@ -65,7 +69,7 @@
                     
                 </StackLayout>
 
-				<Label Text="Provaaaaaa!"/>
+				<Label Text="{Binding PostDescription}"/>
 				<Button Text="Proponiti"
 						CornerRadius="0"
 						Margin="-20,0,-20,-10"

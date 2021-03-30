@@ -1,6 +1,6 @@
-﻿using System;
-using CoreGraphics;
+﻿using CoreGraphics;
 using lume.iOS;
+using System;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;

@@ -1,7 +1,8 @@
 ﻿using System;
-using Xamarin.Forms;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Windows.Input;
-using lume.Models;
+using Xamarin.Forms;
 
 namespace lume.Pages
 {
@@ -12,16 +13,14 @@ namespace lume.Pages
         public LoginPage()
         {
             InitializeComponent();
-
             BindingContext = this;
         }
 
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-
             await Navigation.PushModalAsync(new TabbedHomePage());
-           
+
         }
     }
 }

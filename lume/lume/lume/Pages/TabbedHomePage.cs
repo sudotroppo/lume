@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.PlatformConfiguration;
+﻿using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace lume.Pages
@@ -13,7 +11,7 @@ namespace lume.Pages
             var existingPages = Navigation.NavigationStack;
             foreach (var page in existingPages)
             {
-                if(page is LoginPage)
+                if (page is LoginPage)
                     Navigation.RemovePage(page);
             }
             _ = On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
