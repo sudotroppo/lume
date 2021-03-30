@@ -23,19 +23,27 @@
             <!-- Bottone modifica profilo -->
             <Button HorizontalOptions="FillAndExpand"
                     Text="Modifica profilo"
-                    BorderWidth="1"
-                    BorderColor="Gray"
                     CornerRadius="5"
                     HeightRequest="40"
-                    BackgroundColor="White"
+                    BackgroundColor = "{x:StaticResource GrigioLume}"
                     TextColor="Black"
                     FontAttributes="Bold"
                     Clicked="OnModifyProfileClicked"/>
 
-            <pages:InfoView/>
-            <pages:InfoView/>
-            <pages:InfoView/>
+            <StackLayout x:Name="InfoStack">
+               
+                <pages:InfoView 
+                FieldName = "Nome"
+                FieldValue = "Domenico"/>
+                <pages:InfoView 
+                FieldName = "Congome"
+                FieldValue ="Bini"/>
+                <pages:InfoView 
+                FieldName = "Email"
+                FieldValue ="domenicobini@pazzo.sgravato.it"/>
 
+            </StackLayout>
+            
         </StackLayout>
 
     </ScrollView>

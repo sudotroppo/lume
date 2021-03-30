@@ -7,33 +7,71 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using lume;
+
+
+
 namespace lume.Pages
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : ContentPage
-    {
-        public ProfilePage()
-        {
-            InitializeComponent();
-        }
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class ProfilePage : ContentPage
+	{
 
-        public Boolean EditMode = false;
+		private bool EditMode = false;
+		private IList<View> InfoList;
 
-        public void OnModifyProfileClicked(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-            
-            if (EditMode == false)
-            {
-                button.Text = "Fatto";
-                EditMode = true;
-            }
+		public ProfilePage()
+		{
+		   InitializeComponent();
+		   InfoList = InfoStack.Children;
+		}
 
-            else if (EditMode == true)
-            {
-                button.Text = "Modifica Profilo";
-                EditMode = false;
-            }
-        }
-    }
+
+		private void SwitchButtonState(string status, Button button)
+		{
+
+			var verdeLume = (Color)Application.Current.Resources["VerdeLume"];
+			var nero = (Color)Application.Current.Resources["Nero"];
+			var grigioChiaro = (Color)Application.Current.Resources["GrigioLume"];
+			var bianco = (Color)Application.Current.Resources["BiancoLume"];
+
+			// Quando l'utente si trova in stato di modifica
+			if (status == "edit")
+			{
+				button.Text = "Fatto";
+				button.TextColor = bianco;
+				button.BackgroundColor = verdeLume;
+			}
+
+			// Stato di default
+			else
+			{
+				button.Text = "Modifica profilo";
+				button.TextColor = nero;
+				button.BackgroundColor = grigioChiaro;
+			}
+
+		}
+
+		public void OnModifyProfileClicked(object sender, EventArgs e)
+		{
+			Button button = (Button)sender;
+
+			EditMode = !EditMode;
+
+			if (EditMode)
+				SwitchButtonState("edit", button);
+			else
+				SwitchButtonState("default", button);
+
+			foreach (var child in InfoList)
+			{
+				if (child is InfoView info)
+				{
+					info.IsEditable = EditMode;
+				}
+			}
+
+		}
+	}
 }
