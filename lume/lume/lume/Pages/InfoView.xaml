@@ -5,14 +5,15 @@
 			 x:Class="lume.Pages.InfoView">
  
     <ContentView.Content>
-		<StackLayout Margin="2, 0, 0, -10">
-			<Label Text="Nome info"
-					   FontAttributes="Bold"
-					   Margin="20, 20, 0, 0"/>
-			<custom:LumEntry Placeholder="Valore info"
-								 IsEnabled="False"
-								 BorderWidth="0"
-								 Margin="2, -6, 0, 0"/>
+		<StackLayout Margin="2, 5, 0, -20">
+			<Label Text="{Binding FieldName}"
+				   FontAttributes="Bold"
+                   TextColor="Black"
+				   Margin="20, 20, 0, 0"/>
+            <custom:LumEntry Text= "{Binding FieldValue}"
+							 IsEnabled="{Binding IsEditable}"
+							 BorderWidth="0"
+							 Margin="2, -6, 0, 0"/>
 		</StackLayout>
   </ContentView.Content>
     
