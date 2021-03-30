@@ -8,8 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using lume;
-
-
+using lume.Templates;
 
 namespace lume.Pages
 {

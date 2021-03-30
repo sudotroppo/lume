@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace lume.Pages
+namespace lume.Templates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class InfoView : ContentView
