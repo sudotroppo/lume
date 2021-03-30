@@ -18,7 +18,7 @@ namespace lume.Pages
             _ = On<Android>().SetIsSwipePagingEnabled(false);
 
             var home = new HomePage();
-            var notif = new NotificationsPage();
+            var notif = new NavigationPage(new NotificationsPage());
             var fillreq = new FillRequestPage();
 
             home.IconImageSource = "home.png";
