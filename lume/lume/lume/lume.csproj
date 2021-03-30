@@ -43,6 +43,9 @@
     <Compile Update="Pages\FillRequestPage.xaml.cs">
       <DependentUpon>FillRequestPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Pages\PostTemplate.xaml.cs">
+      <DependentUpon>PostTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>

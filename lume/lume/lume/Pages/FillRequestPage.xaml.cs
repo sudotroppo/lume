@@ -26,7 +26,7 @@ namespace lume.Pages
             }
             var mediaOptions = new PickMediaOptions()
             {
-                PhotoSize = PhotoSize.MaxWidthHeight
+                PhotoSize = PhotoSize.Full,
             };
             var selectedImageFile = await CrossMedia.Current.PickPhotoAsync(mediaOptions);
             if (selectedImage == null)

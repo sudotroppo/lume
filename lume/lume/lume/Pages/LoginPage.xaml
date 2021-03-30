@@ -46,8 +46,7 @@
 						AbsoluteLayout.LayoutFlags="SizeProportional">
 
             <StackLayout Spacing="35"
-						 RelativeLayout.YConstraint="{OnPlatform Android=85,iOS=90}">
-
+						 RelativeLayout.YConstraint="85">
                 <Label x:Name="Lume"
 					   Text="lume"
                        FontSize="{x:StaticResource LabelTitleFontSize}"

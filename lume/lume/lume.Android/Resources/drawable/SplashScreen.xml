@@ -6,20 +6,8 @@
 
     <item>
         <bitmap
-            android:src="@drawable/splash_lume3"
+            android:src="@drawable/splash_lume"
             android:tileMode="disabled"
-            android:gravity="center"
-			
-			
-		    />
+            android:gravity="center"/>
     </item>
-
-	<!--
-	<item>
-        <bitmap
-            android:src="@drawable/splash_appname"
-            android:tileMode="disabled"
-            android:gravity="bottom"/>
-    </item>
-    -->
 </layer-list>

@@ -8,7 +8,7 @@
 		<StackLayout Spacing="30">
 			<StackLayout>
 				<ImageButton x:Name="selectedImage"
-						BackgroundColor="{x:StaticResource VerdeChiaroLume}"
+						BackgroundColor="{x:StaticResource GrigioLume}"
 						HorizontalOptions="Center"
 						HeightRequest="220"
 						WidthRequest="370"

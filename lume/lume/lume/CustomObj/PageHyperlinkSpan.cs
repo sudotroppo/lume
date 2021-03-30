@@ -21,6 +21,7 @@ namespace lume.CustomObj
             set => SetValue(NavigationProperty, value);
             get => (INavigation)GetValue(NavigationProperty);
         }
+
         public PageHyperlinkSpan()
         {
             GestureRecognizers.Add(new TapGestureRecognizer

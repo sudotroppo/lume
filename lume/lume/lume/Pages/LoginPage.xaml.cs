@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -11,6 +13,7 @@ namespace lume.Pages
         public LoginPage()
         {
             InitializeComponent();
+            BindingContext = this;
         }
 
 
