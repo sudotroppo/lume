@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:custom="clr-namespace:lume.CustomObj"
+			 xmlns:pages="clr-namespace:lume.Pages"
              x:Class="lume.Pages.ProfilePage"
              Title="Profilo">
+    
     <ScrollView>
+       
         <StackLayout>
             
             <!-- Sezione immagine profilo e nome utente-->
@@ -27,22 +29,15 @@
                     HeightRequest="40"
                     BackgroundColor="White"
                     TextColor="Black"
-                    FontAttributes="Bold"/>
+                    FontAttributes="Bold"
+                    Clicked="OnModifyProfileClicked"/>
 
-            <Line/>
-
-            <!-- Sezione info -->
-            <StackLayout Spacing="4">
-                <Label Text="Nome info"
-                       FontAttributes="Bold"
-                       Margin="20, 20, 0, 0"/>
-                <custom:LumEntry Placeholder="Valore info"
-                                 IsEnabled="False"
-                                 BorderWidth="0"
-                                 />
-            </StackLayout>
+            <pages:InfoView/>
+            <pages:InfoView/>
+            <pages:InfoView/>
 
         </StackLayout>
+
     </ScrollView>
 
 </ContentPage>
