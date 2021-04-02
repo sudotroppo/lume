@@ -32,5 +32,7 @@
 	<string>lume</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Picture Picker uses photo library</string>
 </dict>
 </plist>

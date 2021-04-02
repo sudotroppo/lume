@@ -1,6 +1,8 @@
-﻿using Plugin.Media;
+﻿using lume.CustomObj;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
-
+using System;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,7 +20,7 @@ namespace lume.Pages
 
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
-            await CrossMedia.Current.Initialize();
+            /*await CrossMedia.Current.Initialize();
             if (!CrossMedia.Current.IsPickPhotoSupported)
             {
                 await DisplayAlert("Non supportato", "Il dispositivo non supporta questa funzione", "ok");
@@ -35,8 +37,34 @@ namespace lume.Pages
                 return;
             }
 
-            selectedImage.Source = ImageSource.FromStream(() => selectedImageFile.GetStream());
+            selectedImage.Source = ImageSource.FromStream(() => selectedImageFile.GetStream());*/
+
+            Stream stream = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+
+            if (stream != null)
+            {
+                selectedImage.Source = ImageSource.FromStream(() => stream);
+            }
+
+            
         }
+
+
+        public async void OnClickedButtonAnnulla(object sender, EventArgs e)
+        {
+            await Navigation.PopModalAsync();
+
+        }
+
+        public async void OnClickedButtonInvia(object sender, EventArgs e)
+        {
+            await DisplayAlert("Ottimo", "Richiesta inviata con successo!", "Ok");
+            await Navigation.PopModalAsync();
+            await Navigation.PushModalAsync(new TabbedHomePage());
+            
+        }
+
+       
 
     }
 }

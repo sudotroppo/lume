@@ -18,10 +18,10 @@ namespace lume.Droid.Renderers
 
             if (Control == null || e.NewElement == null) return;
 
-            if (e.NewElement is LumEntry customEntry) borderSet(customEntry);
+            if (e.NewElement is LumEntry customEntry) BorderSet(customEntry);
         }
 
-        private void borderSet(LumEntry customEntry)
+        private void BorderSet(LumEntry customEntry)
         {
             var gradientDrawable = new GradientDrawable();
 

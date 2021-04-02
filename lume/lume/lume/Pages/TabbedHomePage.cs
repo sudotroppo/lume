@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.PlatformConfiguration;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace lume.Pages

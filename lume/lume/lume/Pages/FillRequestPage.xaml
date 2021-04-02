@@ -6,38 +6,57 @@
 			 x:Class="lume.Pages.FillRequestPage">
 	<ScrollView>
 		<StackLayout Spacing="30">
-			<StackLayout>
+			<StackLayout >
 				<ImageButton x:Name="selectedImage"
-						BackgroundColor="{x:StaticResource GrigioLume}"
+						BackgroundColor="{x:StaticResource VerdeChiaroLume}"
 						HorizontalOptions="Center"
-						HeightRequest="220"
+						HeightRequest="240"
 						WidthRequest="370"
-						Source="upload.png"
+						Source="uploadImage.png"
 						VerticalOptions="FillAndExpand"
 						Clicked="Handle_Clicked"
-						Padding="50"
+                       
 					/>
 						
 			</StackLayout>
 
-			<StackLayout Spacing="20" >
-				<Entry x:Name="Titolo"
+			<StackLayout Spacing="25" >
+				<custom:LumEntry x:Name="Titolo"
 								 Placeholder="Titolo"
 								 Margin="100,0"
-								 
 								 HorizontalOptions="FillAndExpand"
-								 TranslationX="-90"
-								 
-										 />
-				<custom:LumEntry
-					x:Name="Descrizione"
-					Placeholder="Descrizione"
-					Margin="10,0"
-					
-					/>
+								 TranslationX="-85"
+								  />
+                <custom:LumEditor x:Name="Descrizione"
+                                  Placeholder="Inserisci una descrizione.."
+                                  TranslationX="-7"
+								  HeightRequest="200"
+                                  AutoSize="TextChanges"
+                    />
+            </StackLayout>
 
+            <StackLayout  Orientation="Horizontal" VerticalOptions="End">
 
-			</StackLayout>
+                <Button 
+                    x:Name="AnnullaButton"
+						Text="Annulla"
+						FontSize="{x:StaticResource ButtonMediumFontSize}"
+						BackgroundColor="{x:StaticResource GrigioLume}"
+						Clicked="OnClickedButtonAnnulla"
+						WidthRequest="170"
+						Margin="8,0"
+                />
+
+                <Button
+                    x:Name="InviaButton"
+						Text="Invia"
+						FontSize="{x:StaticResource ButtonMediumFontSize}"
+						BackgroundColor="{x:StaticResource VerdeLume}"
+						Clicked="OnClickedButtonInvia"
+						WidthRequest="170"
+						Margin="0,0"
+                />
+            </StackLayout>
 		</StackLayout>
 	</ScrollView>
 </ContentPage>
