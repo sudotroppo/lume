@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms.PlatformConfiguration;
+﻿using lume.Assets;
+using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
 namespace lume.Pages
@@ -7,13 +9,6 @@ namespace lume.Pages
     {
         public TabbedHomePage()
         {
-
-            var existingPages = Navigation.NavigationStack;
-            foreach (var page in existingPages)
-            {
-                if (page is LoginPage)
-                    Navigation.RemovePage(page);
-            }
             _ = On<Android>().SetToolbarPlacement(ToolbarPlacement.Bottom);
             _ = On<Android>().SetIsSwipePagingEnabled(false);
 
@@ -30,7 +25,7 @@ namespace lume.Pages
             Children.Add(notif);
 
         }
-
+        
         protected override bool OnBackButtonPressed()
         {
             return true;

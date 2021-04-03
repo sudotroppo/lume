@@ -3,8 +3,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using lume;
-
-
+using System.Collections.Generic;
+using System;
 
 namespace lume.Pages
 {
@@ -13,7 +13,7 @@ namespace lume.Pages
 	{
 
 		private bool EditMode = false;
-		private IList<View> InfoList;
+		private readonly IList<View> InfoList;
 
 		public ProfilePage()
 		{

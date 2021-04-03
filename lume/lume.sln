@@ -7,12 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lume.Android", "lume\lume.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lume.iOS", "lume\lume.iOS\lume.iOS.csproj", "{751DD371-0EC3-4300-8CCE-36C8FE06518C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lume", "lume\lume\lume.csproj", "{D1D0F931-21B4-4591-8F75-DB178B3FFE9F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementi della soluzione", "Elementi della soluzione", "{BDB749D4-212C-406B-85D1-5EA119171327}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-	EndProjectSection
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "lume", "lume\lume\lume.csproj", "{D1D0F931-21B4-4591-8F75-DB178B3FFE9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
