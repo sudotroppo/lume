@@ -4,8 +4,6 @@
 			 xmlns:custom="clr-namespace:lume.CustomObj"
 			 x:Class="lume.App">
 	<Application.Resources>
-
-
 		<OnPlatform x:Key="LumeRadius"
 					x:TypeArguments="x:Int32">
 			<On Platform="iOS" Value="25"/>
@@ -146,7 +144,39 @@
 
 		</Style>
 
-        
+        <Style TargetType="{x:Type custom:LumEditor}">
+
+
+            <Setter Property="TextColor"
+					Value="{x:StaticResource Nero}"/>
+
+            <Setter Property="PlaceholderColor"
+					Value="{x:StaticResource Nero}"/>
+
+            <Setter Property="FontSize"
+					Value="{x:StaticResource EntryStandardFontSize}"/>
+
+            <Setter Property="FontFamily"
+					Value="{x:StaticResource EntryStandardFont}"/>
+
+            
+
+            <Setter Property="Margin"
+					Value="{x:StaticResource TextMargin}"/>
+
+            <Setter Property="CurveIsEnabled"
+					Value="True"/>
+
+            <Setter Property="CornerRadius"
+					Value="{x:StaticResource LumeRadius}"/>
+
+            <Setter Property="BorderWidth"
+					Value="{x:StaticResource LumeStrokeWidth}"/>
+
+            <Setter Property="BorderColor"
+					Value="{x:StaticResource Nero}"/>
+
+        </Style>
 
         <!--*****-->
 

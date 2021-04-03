@@ -34,7 +34,7 @@ namespace lume.iOS.Renderers
 
         }
 
-        private void TintCustomization(UITextField Control, LumEntry customEntry)
+        private void TintCustomization(UITextField Control)
         {
             UITextField textField = Control;
             textField.BorderStyle = UITextBorderStyle.None;

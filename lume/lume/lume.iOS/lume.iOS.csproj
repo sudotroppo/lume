@@ -66,8 +66,10 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CustomEditorRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Service\PhotoPickerService.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -149,6 +151,6 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\upload.png" />
+    <BundleResource Include="Resources\uploadImage.png" />
   </ItemGroup>
 </Project>

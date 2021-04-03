@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using lume;
+using lume.Templates;
 using System.Collections.Generic;
 using System;
 
