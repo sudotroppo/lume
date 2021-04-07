@@ -3,49 +3,125 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:template="clr-namespace:lume.Templates"
              x:Class="lume.Pages.ProfilePage"
-             Title="Profilo">
-    
-    <ScrollView>
-       
-        <StackLayout>
-            
+             xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             st:SharedTransitionNavigationPage.BackgroundAnimation="None"
+             
+             NavigationPage.HasNavigationBar="False">
+    <AbsoluteLayout>
+
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="45, 45, *"
+              ColumnDefinitions="45, *,90,*, 45"
+              Margin="10,10,10,0"
+              ColumnSpacing="0"
+              RowSpacing="0"
+              Padding="0">
+
+
+
             <!-- Sezione immagine profilo e nome utente-->
-            <StackLayout Orientation="Horizontal"
-                         Padding="20">
-                <Ellipse Fill="Gray"
-						 WidthRequest="45"
-                         HeightRequest="45"
-                         Aspect="UniformToFill"/>
-                <Label Text="Nome Cognome"
-                       VerticalOptions="Center"/>
-            </StackLayout>
+            <Button x:Name="ToTheLeft" 
+                    Text="&#xf053;"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    TextColor="{x:StaticResource Nero}"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    Clicked="OnBackButtonCliked"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0"/>
 
-            <!-- Bottone modifica profilo -->
-            <Button HorizontalOptions="FillAndExpand"
-                    Text="Modifica profilo"
-                    CornerRadius="5"
-                    HeightRequest="40"
-                    BackgroundColor = "{x:StaticResource GrigioLume}"
-                    TextColor="Black"
-                    FontAttributes="Bold"
-                    Clicked="OnModifyProfileClicked"/>
+            <AbsoluteLayout Grid.Column="2"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            Margin="0">
+                
+                <Frame x:Name="ProfileImage"
+                       AbsoluteLayout.LayoutBounds="0,0,1,1"
+                       AbsoluteLayout.LayoutFlags="All"
+                       AnchorY="0"
+                       AnchorX="0.5"
+                       WidthRequest="90"
+                       HeightRequest="90"
+                       BackgroundColor="{x:StaticResource NeroLume}">
 
-            <StackLayout x:Name="InfoStack">
-               
-                <template:InfoView 
-                FieldName = "Nome"
-                FieldValue = "Domenico"/>
-                <template:InfoView 
-                FieldName = "Congome"
-                FieldValue ="Bini"/>
-                <template:InfoView 
-                FieldName = "Email"
-                FieldValue ="domenicobini@pazzo.sgravato.it"/>
+                    <Frame.Clip>
+                        <EllipseGeometry RadiusX="45"
+                                     RadiusY="45"
+                                     Center="45,45"/>
+                    </Frame.Clip>
 
-            </StackLayout>
+                    <!--https://i.ebayimg.com/images/g/LEkAAOSw40pbtyrF/s-l1600.jpg-->
+                    <Image Source=""
+                       Margin="-20"
+                       Aspect="AspectFill"/>
+
+
+                </Frame>
+
+                <Frame BackgroundColor="{x:StaticResource GrigioLume}"
+                       AbsoluteLayout.LayoutBounds="60,65,30,30">
+                    <Frame.Clip>
+                        <EllipseGeometry RadiusX="15"
+                                         RadiusY="15"
+                                         Center="15,15"/>
+                    </Frame.Clip>
+                </Frame>
+            </AbsoluteLayout>
+
+
+            <Button x:Name="ToTheRight" 
+                    Grid.Row="0"
+				    Grid.Column="4"
+				    Text="&#xf054;"
+                    TextColor="{x:StaticResource Nero}"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    BackgroundColor="Transparent"
+                    Margin="0"
+                    TranslationX="50"/>
+
+            <ScrollView Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="5"
+                        Margin="-10,20,-10,0">
+
+
+                <StackLayout x:Name="ProfileInfoList">
+
+                    
+                    <!-- Bottone modifica profilo -->
+                    <Button HorizontalOptions="FillAndExpand"
+                            Text="Modifica profilo"
+                            CornerRadius="5"
+                            HeightRequest="40"
+                            BackgroundColor = "{x:StaticResource GrigioLume}"
+                            TextColor="Black"
+                            FontAttributes="Bold"
+                            Clicked="OnModifyProfileClicked"/>
+
+                    <StackLayout x:Name="InfoStack">
+
+                        <template:InfoView FieldName = "Nome"
+                                           FieldValue = "Domenico"/>
+                        <template:InfoView 
+                            FieldName = "Congome"
+                            FieldValue ="Bini"/>
+                        <template:InfoView 
+                            FieldName = "Email"
+                            FieldValue ="domenicobini@pazzo.sgravato.it"/>
+
+                    </StackLayout>
+
+                </StackLayout>
+
+            </ScrollView>
+
+        </Grid>
+
             
-        </StackLayout>
+    </AbsoluteLayout>
 
-    </ScrollView>
+    
 
 </ContentPage>

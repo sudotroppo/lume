@@ -14,11 +14,10 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1821" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Plugin.SharedTransitions" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\" />
     <Folder Include="Assets\Fonts\" />
   </ItemGroup>
   <ItemGroup>
@@ -44,7 +43,7 @@
     <Compile Update="Pages\FillRequestPage.xaml.cs">
       <DependentUpon>FillRequestPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Pages\PostTemplate.xaml.cs">
+    <Compile Update="Templates\PostTemplate.xaml.cs">
       <DependentUpon>PostTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Pages\RegistrationPage.xaml.cs">

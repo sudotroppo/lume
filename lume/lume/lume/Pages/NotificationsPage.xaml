@@ -2,53 +2,102 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="lume.Pages.NotificationsPage"
-             Title="Notifiche">
+             xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             st:SharedTransitionNavigationPage.BackgroundAnimation="None"
+             
+             NavigationPage.HasNavigationBar="False"
+             >
 
     <ContentPage.Content>
-
+        
         <!-- Sezione per passare alla pagina profilo -->
+        <AbsoluteLayout x:Name="NotifPage">
 
-        <Grid RowDefinitions="10, 45, 8"
-			  ColumnDefinitions="10, 45, *, 90">
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  AbsoluteLayout.LayoutFlags="All"
+                  RowDefinitions="45, *"
+			      ColumnDefinitions="45, auto,*, 45"
+                  Margin="10,10,10,0"
+                  ColumnSpacing="0"
+                  RowSpacing="0">
 
-            <!--Sfondo-->
-            <BoxView BackgroundColor="LightGray"
+                <!--Sfondo-->
+                <BoxView x:Name="BackgroundLine" 
+                     BackgroundColor="{StaticResource GrigioLume}"
 					 Grid.Column="0"
 					 Grid.ColumnSpan="4"
 					 Grid.Row="0"
-					 Grid.RowSpan="3">
-            </BoxView>
+					 Grid.RowSpan="1"
+                     Margin="10,0,10,-10"
+                     HeightRequest="2"
+                     CornerRadius="3"
+                     VerticalOptions="EndAndExpand"/>
 
-            <StackLayout
-				Grid.Column="1"
-				Grid.ColumnSpan="2"
-				Grid.Row="1"
-                Orientation="Horizontal">
+                <AbsoluteLayout Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Grid.Row="0"
+                                Margin="0">
+                    
+                    <Label x:Name="ProfileName"
+                           
+                           Text="Nome Cognome"
+                           AbsoluteLayout.LayoutBounds="45,0.5"
+                           AbsoluteLayout.LayoutFlags="YProportional"
+                           FontAttributes="Bold"/>
+                    
+                    <!-- Immagine e info utente -->
+                    <Frame x:Name="ProfileImage" 
+                           IsClippedToBounds="True"
+                           WidthRequest="45"
+                           HeightRequest="45"
+                           AnchorX="0.5"
+                           AnchorY="0"
+                           AbsoluteLayout.LayoutBounds="0,0"
+                           BackgroundColor="{x:StaticResource NeroLume}">
+                        <Frame.Clip>
+                            <EllipseGeometry RadiusX="22.5"
+                                             RadiusY="22.5"
+                                             Center="22.5,22.5"/>
+                        </Frame.Clip>
 
-                <!-- Immagine e info utente -->
-                <Ellipse Fill="Gray"
-						 WidthRequest="45"
-                         HeightRequest="45"
-                         Aspect="UniformToFill"/>
+                        <Image Source=""
+							   Margin="-20"
+							   Aspect="AspectFill"/>
 
-                <Label Text="Nome Cognome"
-                       VerticalOptions="Center"
-                       FontAttributes="Bold"/>
 
-            </StackLayout>
+                    </Frame>
 
-            <Button Grid.Row="1"
-					Grid.Column="3"
-                    FontFamily="{x:StaticResource IconSolid}"
-					Text="&#xf054;"
-                    TextColor="Black"
-					Clicked="OnProfileClicked"
-                    BackgroundColor="Transparent"
-					/>
+                    
 
-        </Grid>
+
+                </AbsoluteLayout>
+
+                <Button x:Name="ToTheLeft" 
+                        Text="&#xf053;"
+                        FontFamily="{x:StaticResource IconSolid}"
+                        TextColor="{x:StaticResource Nero}"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Start"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0"
+                        TranslationX="-50"/>
+
+                <Button x:Name="ToTheRight" 
+                        Grid.Row="0"
+					    Grid.Column="3"
+					    Text="&#xf054;"
+                        TextColor="{x:StaticResource Nero}"
+                        FontFamily="{x:StaticResource IconSolid}"
+					    Clicked="OnProfileClicked"
+                        BackgroundColor="Transparent"
+                        Margin="0"/>
+                
+            </Grid>
 
         <!--Area notifiche-->
+        </AbsoluteLayout>
+        
 
     </ContentPage.Content>
 

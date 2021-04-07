@@ -6,6 +6,8 @@ using lume;
 using lume.Templates;
 using System.Collections.Generic;
 using System;
+using lume.Assets;
+using System.Threading.Tasks;
 
 namespace lume.Pages
 {
@@ -15,13 +17,22 @@ namespace lume.Pages
 
 		private bool EditMode = false;
 		private readonly IList<View> InfoList;
+		private static Animation ToNotificationPage;
 
 		public ProfilePage()
 		{
-		   InitializeComponent();
-		   InfoList = InfoStack.Children;
-		}
+			InitializeComponent();
+			InfoList = InfoStack.Children;
 
+			double dx = (Application.Current.MainPage.Width / 2) - (ProfileImage.WidthRequest/2 - 10);
+			ToNotificationPage = new Animation  // animazione di cambio pagina
+            {
+				{0, 1, AnimationFactory.SlideOfX(ProfileImage, -dx, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.ScaleTo(ProfileImage, 0.5, 0.5,Easing.CubicInOut) },
+				{0, 0.5, AnimationFactory.SlideOfX(ToTheRight, -50, Easing.SpringOut) },
+				{0, 1, AnimationFactory.SlideOfX(ToTheLeft, -50, Easing.SpringOut) }
+			};
+		}
 
 		private void SwitchButtonState(string status, Button button)
 		{
@@ -29,13 +40,12 @@ namespace lume.Pages
 			var verdeLume = (Color)Application.Current.Resources["VerdeLume"];
 			var nero = (Color)Application.Current.Resources["Nero"];
 			var grigioChiaro = (Color)Application.Current.Resources["GrigioLume"];
-			var bianco = (Color)Application.Current.Resources["BiancoLume"];
 
 			// Quando l'utente si trova in stato di modifica
 			if (status == "edit")
 			{
 				button.Text = "Fatto";
-				button.TextColor = bianco;
+				button.TextColor = grigioChiaro;
 				button.BackgroundColor = verdeLume;
 			}
 
@@ -67,6 +77,36 @@ namespace lume.Pages
 					info.IsEditable = EditMode;
 				}
 			}
+
+            
+		}
+
+        protected  override void OnAppearing()
+        {
+            base.OnAppearing();
+			Task.Run(() =>
+			{
+				AnimationFactory.CascadeToTheChildren(ProfileInfoList, (v) => 
+				{
+					v.ScaleX = 0;
+					v.ScaleY = 0;
+					return AnimationFactory.ScaleTo(v,1,1,Easing.SpringOut);
+				}).Commit(this, "OnAppearing",1, 1400);
+			});
+
+        }
+
+        public async void OnBackButtonCliked (object sender, EventArgs e)
+		{
+			Button b = (sender as Button);
+			b.IsEnabled = false;
+			Navigation.InsertPageBefore(new NotificationsPage(),this);
+
+			await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) => 
+			{
+				await Navigation.PopAsync();
+				b.IsEnabled = true;
+			}));
 
 		}
 	}
