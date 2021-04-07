@@ -23,14 +23,17 @@ namespace lume.Pages
 		{
 			InitializeComponent();
 			InfoList = InfoStack.Children;
+			double ProfileImageStartX = (Application.Current.MainPage.Width / 2);
+			double ProfileImageEndX = 10 + (ProfileImage.WidthRequest / 4f);
+			double dx = ProfileImageEndX - ProfileImageStartX;
 
-			double dx = (Application.Current.MainPage.Width / 2) - (ProfileImage.WidthRequest/2 - 10);
 			ToNotificationPage = new Animation  // animazione di cambio pagina
             {
-				{0, 1, AnimationFactory.SlideOfX(ProfileImage, -dx, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
 				{0, 1, AnimationFactory.ScaleTo(ProfileImage, 0.5, 0.5,Easing.CubicInOut) },
-				{0, 0.5, AnimationFactory.SlideOfX(ToTheRight, -50, Easing.SpringOut) },
-				{0, 1, AnimationFactory.SlideOfX(ToTheLeft, -50, Easing.SpringOut) }
+				{0, 1, AnimationFactory.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) }
 			};
 		}
 
@@ -104,7 +107,7 @@ namespace lume.Pages
 
 			await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) => 
 			{
-				await Navigation.PopAsync();
+				await Navigation.PopAsync(false);
 				b.IsEnabled = true;
 			}));
 

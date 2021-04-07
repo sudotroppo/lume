@@ -15,13 +15,17 @@ namespace lume.Pages
         public NotificationsPage()
         {
             InitializeComponent();
-            double dx = (Application.Current.MainPage.Width / 2) - (ProfileImage.WidthRequest/2 - 10); // 10 = margine sinistro della pagina
+            double ProfileImageEndX = (Application.Current.MainPage.Width / 2);
+            double ProfileImageStartX = ProfileImage.WidthRequest/2 - 10;
+            double dx = ProfileImageEndX - ProfileImageStartX;
             ToProfilepage = new Animation  // animazione di cambio pagina
             {
-                {0,0.5, AnimationFactory.SlideOf(ToTheRight, 50, 0, Easing.SpringOut) },
-                {0,1, AnimationFactory.SlideOf(ToTheLeft, 50, 0, Easing.SpringOut) },
+                {0,1, AnimationFactory.SlideOf(ToTheRight, 50, 0, Easing.CubicInOut) },
+                {0,1, AnimationFactory.SlideOf(ToTheLeft, 50, 0, Easing.CubicInOut) },
                 {0,1, AnimationFactory.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
-                {0,1, AnimationFactory.ScaleTo(ProfileImage, 2, 2, Easing.CubicInOut) }
+                {0,1, AnimationFactory.ScaleTo(ProfileImage, 2, 2, Easing.CubicInOut) },
+                {0,1, AnimationFactory.ScaleTo(BackgroundLine, 1, 0, Easing.CubicInOut) },
+                {0,1, AnimationFactory.ScaleTo(BackgroundBoxView, 1,1, Easing.CubicInOut) }
             };
         }
 
@@ -40,7 +44,7 @@ namespace lume.Pages
 
             await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.SinIn,async (c, v) =>
             {
-                await Navigation.PopAsync();
+                await Navigation.PopAsync(false);
                 b.IsEnabled = true;
             }));
         }

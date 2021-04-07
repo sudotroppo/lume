@@ -11,7 +11,9 @@
     <ContentPage.Content>
         
         <!-- Sezione per passare alla pagina profilo -->
-        <AbsoluteLayout x:Name="NotifPage">
+        <AbsoluteLayout x:Name="NotifPage" 
+                        Margin="0"
+                        Padding="0">
 
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                   AbsoluteLayout.LayoutFlags="All"
@@ -39,11 +41,17 @@
                                 Margin="0">
                     
                     <Label x:Name="ProfileName"
-                           
                            Text="Nome Cognome"
                            AbsoluteLayout.LayoutBounds="45,0.5"
                            AbsoluteLayout.LayoutFlags="YProportional"
-                           FontAttributes="Bold"/>
+                           />
+                    
+                    <Label x:Name="BackgroundBoxView"
+                           AbsoluteLayout.LayoutBounds="0,0.5,1,0.6"
+                           AbsoluteLayout.LayoutFlags="YProportional,SizeProportional"
+                           AnchorX="0"
+                           ScaleX="0"
+                           BackgroundColor="{x:StaticResource BiancoLume}"/>
                     
                     <!-- Immagine e info utente -->
                     <Frame x:Name="ProfileImage" 
