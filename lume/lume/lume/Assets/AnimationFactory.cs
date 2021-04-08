@@ -12,7 +12,7 @@ namespace lume.Assets
             double dxi = v.TranslationX;
             double dyi = v.TranslationY;
 
-            return new Animation(c => 
+            return new Animation(c =>
             {
                 v.TranslationX = dxi + c * dx;
                 v.TranslationY = dyi + c * dy;
@@ -46,7 +46,7 @@ namespace lume.Assets
 
             double dy = scaleY - yi;
             double dx = scaleX - xi;
-            
+
             return new Animation(c =>
             {
                 v.ScaleY = yi + c * dy;
@@ -71,7 +71,7 @@ namespace lume.Assets
             0, 1, easing ?? Easing.Linear);
         }
 
-        public static Animation ChangeColor(View v, Color colorTarghet, Easing easing) 
+        public static Animation ChangeColor(View v, Color colorTarghet, Easing easing)
         {
             return new Animation(c =>
             {
@@ -95,23 +95,23 @@ namespace lume.Assets
 
             return prev;
         }
-        public static Animation CascadeToTheChildren(Layout<View> layout, Func<View,Animation> func)
+        public static Animation CascadeToTheChildren(Layout<View> layout, Func<View, Animation> func)
         {
-            return CascadeToTheChildrenCall(layout, func, 0, 1f/CountChildren(layout, 0));
+            return CascadeToTheChildrenCall(layout, func, 0, 1f / CountChildren(layout, 0));
         }
 
         private static Animation CascadeToTheChildrenCall(Layout<View> layout, Func<View, Animation> func, int index, double slot)
         {
             Animation a = new Animation();
-            foreach(View child in layout.Children)
+            foreach (View child in layout.Children)
             {
-                if(child is Layout<View> cl)
+                if (child is Layout<View> cl)
                 {
                     a.Add(slot * index, slot * (index + 1), CascadeToTheChildrenCall(cl, func, index, slot));
                 }
                 else
                 {
-                    a.Add(slot*index, slot*(index + 1), func.Invoke(child));
+                    a.Add(slot * index, slot * (index + 1), func.Invoke(child));
                 }
                 index++;
             }
@@ -128,13 +128,24 @@ namespace lume.Assets
             });
         }
 
+        public static Animation RelativeRotation(View v, double degrees, Easing easing)
+        {
+            double initialDegrees = v.Rotation;
+
+            return new Animation((c) =>
+            {
+                v.Rotation = initialDegrees + c * degrees;
+            }, 0, 1, easing ?? Easing.Linear);
+        }
+
         public static double getAbsoluteYPosition(View v)
         {
             var y = v.Y;
             var parent = v.Parent as View;
-            while (parent != null) { 
-                y += parent.Y + parent.TranslationY; 
-                parent = parent.Parent as View; 
+            while (parent != null)
+            {
+                y += parent.Y + parent.TranslationY;
+                parent = parent.Parent as View;
             }
             return y;
         }
@@ -145,7 +156,7 @@ namespace lume.Assets
             var parent = v.Parent as View;
             while (parent != null)
             {
-                x += parent.X + parent.TranslationX; 
+                x += parent.X + parent.TranslationX;
                 parent = parent.Parent as View;
             }
             return x;

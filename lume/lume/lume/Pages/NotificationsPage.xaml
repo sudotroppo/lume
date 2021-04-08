@@ -2,14 +2,41 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="lume.Pages.NotificationsPage"
+             xmlns:custom="clr-namespace:lume.CustomObj"
              xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
              st:SharedTransitionNavigationPage.BackgroundAnimation="None"
-             
              NavigationPage.HasNavigationBar="False"
              >
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--Convertitori-->
+            <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
+
+            <Style TargetType="Button">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding IsEnabled, Converter={StaticResource inverseBoolConverter}}"/>
+                                </VisualState.StateTriggers>
+
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                        Value="{x:StaticResource Nero}"/>
+                                </VisualState.Setters>
+
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        
+
         <!-- Sezione per passare alla pagina profilo -->
         <AbsoluteLayout x:Name="NotifPage" 
                         Margin="0"
@@ -39,20 +66,20 @@
                                 Grid.ColumnSpan="2"
                                 Grid.Row="0"
                                 Margin="0">
-                    
+
                     <Label x:Name="ProfileName"
                            Text="Nome Cognome"
                            AbsoluteLayout.LayoutBounds="45,0.5"
                            AbsoluteLayout.LayoutFlags="YProportional"
                            />
-                    
+
                     <Label x:Name="BackgroundBoxView"
                            AbsoluteLayout.LayoutBounds="0,0.5,1.5,0.6"
                            AbsoluteLayout.LayoutFlags="YProportional,SizeProportional"
                            AnchorX="0"
                            ScaleX="0"
                            BackgroundColor="{x:StaticResource BiancoLume}"/>
-                    
+
                     <!-- Immagine e info utente -->
                     <Frame x:Name="ProfileImage" 
                            IsClippedToBounds="True"
@@ -75,7 +102,7 @@
 
                     </Frame>
 
-                    
+
 
 
                 </AbsoluteLayout>
@@ -100,12 +127,12 @@
 					    Clicked="OnProfileClicked"
                         BackgroundColor="Transparent"
                         Margin="0"/>
-                
+
             </Grid>
 
-        <!--Area notifiche-->
+            <!--Area notifiche-->
         </AbsoluteLayout>
-        
+
 
     </ContentPage.Content>
 

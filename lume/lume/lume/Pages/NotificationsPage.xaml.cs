@@ -20,6 +20,7 @@ namespace lume.Pages
         {
             base.OnAppearing();
             BackgroundLine.ScaleX = 0;
+            
             Task.Run(() => AnimationFactory.ScaleTo(BackgroundLine, 1, 1, Easing.CubicInOut).Commit(this, "OnAppearing", 1, 500, Easing.Linear));
         }
 
@@ -41,11 +42,11 @@ namespace lume.Pages
                 {0,1, AnimationFactory.ScaleTo(BackgroundBoxView, 1,1, Easing.CubicInOut) }
             };
 
-            await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.SinIn,async (c, v) =>
-            {
-                await Navigation.PopAsync(false);
-                b.IsEnabled = true;
-            }));
+            await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
+             {
+                 await Navigation.PopAsync(false);
+                 b.IsEnabled = true;
+             }));
         }
 
         

@@ -4,10 +4,12 @@
              xmlns:forms="http://xamarin.com/schemas/2014/forms" 
              xmlns:custom="clr-namespace:lume.CustomObj"
 			 x:Class="lume.Pages.FillRequestPage">
-	<ScrollView>
-		<StackLayout Spacing="30">
-			<StackLayout >
-				<ImageButton x:Name="selectedImage"
+
+
+    <ScrollView>
+        <StackLayout Spacing="30">
+            <StackLayout >
+                <ImageButton x:Name="selectedImage"
 						BackgroundColor="{x:StaticResource VerdeChiaroLume}"
 						HorizontalOptions="Center"
 						HeightRequest="240"
@@ -17,11 +19,11 @@
 						Clicked="Handle_Clicked"
                        
 					/>
-						
-			</StackLayout>
 
-			<StackLayout Spacing="25" >
-				<custom:LumEntry x:Name="Titolo"
+            </StackLayout>
+
+            <StackLayout Spacing="25" >
+                <custom:LumEntry x:Name="Titolo"
 								 Placeholder="Titolo"
 								 Margin="100,0"
 								 HorizontalOptions="FillAndExpand"
@@ -57,6 +59,6 @@
 						Margin="0,0"
                 />
             </StackLayout>
-		</StackLayout>
-	</ScrollView>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
