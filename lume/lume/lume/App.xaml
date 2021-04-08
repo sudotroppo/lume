@@ -58,8 +58,12 @@
 		<Color x:Key="Nero">#000000</Color>
 
 		<!--**********-->
+        
+        
 
-		<!--Stili impliciti App-->
+        <!--************-->
+
+        <!--Stili impliciti App-->
 
 		<!--ContentPage-->
 		<Style TargetType="{x:Type ContentPage}"
@@ -211,10 +215,10 @@
 			<Setter Property="TextTransform"
 					Value="None"/>
 
-			<Setter Property="CornerRadius"
+            <Setter Property="CornerRadius"
 					Value="{x:StaticResource LumeRadius}"/>
 
-		</Style>
+        </Style>
 
 		<!--******-->
 

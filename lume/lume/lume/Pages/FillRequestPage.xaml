@@ -19,11 +19,11 @@
 						Clicked="Handle_Clicked"
                        
 					/>
-						
-			</StackLayout>
 
-			<StackLayout Spacing="25" >
-				<custom:LumEntry x:Name="Titolo"
+            </StackLayout>
+
+            <StackLayout Spacing="25" >
+                <custom:LumEntry x:Name="Titolo"
 								 Placeholder="Titolo"
 								 Margin="100,0"
 								 HorizontalOptions="FillAndExpand"

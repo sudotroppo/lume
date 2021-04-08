@@ -4,7 +4,37 @@
 			 xmlns:templates="clr-namespace:lume.Templates"
              x:Class="lume.Pages.ProfilePage"
              xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+             xmlns:custom="clr-namespace:lume.CustomObj"
              st:SharedTransitionNavigationPage.BackgroundAnimation="None"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--Convertitori-->
+            <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
+
+            <Style TargetType="Button">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.StateTriggers>
+                                    <StateTrigger IsActive="{Binding IsEnabled, Converter={StaticResource inverseBoolConverter}}"/>
+                                </VisualState.StateTriggers>
+
+                                <VisualState.Setters>
+                                    <Setter Property="TextColor"
+                                        Value="{x:StaticResource Nero}"/>
+                                </VisualState.Setters>
+
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
              NavigationPage.HasNavigationBar="False"
              ControlTemplate="{StaticResource MainPageTemplate}">
 
@@ -84,7 +114,7 @@
 
 
             <!-- Sezione immagine profilo e nome utente-->
-            <Button x:Name="ToTheLeft" 
+            <Button x:Name="ToTheLeft"
                     Text="&#xf053;"
                     FontFamily="{x:StaticResource IconSolid}"
                     TextColor="{x:StaticResource Nero}"
@@ -104,6 +134,17 @@
                     BackgroundColor="Transparent"
                     Margin="0"
                     TranslationX="50"/>
+
+            <Button x:Name="Settings" 
+                    Grid.Row="0"
+			        Grid.Column="4"
+					Text="&#xf013;"
+                    TextColor="{x:StaticResource Nero}"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    FontSize="18"
+					Clicked="OnSettingsClicked"
+                    BackgroundColor="Transparent"
+                    Margin="0"/>
 
             <ScrollView Grid.Row="2"
                         Grid.Column="0"
