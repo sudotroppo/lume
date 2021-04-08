@@ -19,7 +19,7 @@ namespace lume.Templates
         }
         public async void OnProfileClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ProfilePage(), false);
+            await Navigation.PushAsync(new NotificationsPage(), false);
         }
 
         public async void OnNewRequestClicked(object sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using lume.CustomObj;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Windows.Input;
@@ -19,7 +20,7 @@ namespace lume.Pages
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new HomePage());
+            await Navigation.PushModalAsync(new CustomNavigationPage(new HomePage()), false);
 
         }
     }

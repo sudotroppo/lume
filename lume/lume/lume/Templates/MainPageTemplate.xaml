@@ -10,7 +10,7 @@
                 <BoxView BackgroundColor="LightGray" 
                          HeightRequest="35"/>
                 <ContentPresenter VerticalOptions="FillAndExpand"/>
-                <Grid HeightRequest="40"
+                <Grid HeightRequest="50"
                       BackgroundColor="LightGray"
                       ColumnDefinitions="*, *, *">
                     <Button Text="Profile"
