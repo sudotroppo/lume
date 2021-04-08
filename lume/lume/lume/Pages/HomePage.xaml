@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<template:MainPageTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+<templates:MainPageTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:lume.Pages"
              x:Class="lume.Pages.HomePage"
-             xmlns:template="clr-namespace:lume.Templates"
+             xmlns:templates="clr-namespace:lume.Templates"
              ControlTemplate="{StaticResource MainPageTemplate}">
 
     <AbsoluteLayout>
@@ -13,12 +13,12 @@
                          AbsoluteLayout.LayoutFlags="All">
             <ScrollView>
                 <StackLayout Spacing="10" Margin="8,0,8,0" x:Name="home">
-                    <pages:PostTemplate/>
-                    <pages:PostTemplate/>
-                    <pages:PostTemplate/>
+                    <templates:PostTemplate/>
+                    <templates:PostTemplate/>
+                    <templates:PostTemplate/>
                 </StackLayout>
             </ScrollView>
         </RefreshView>
     </AbsoluteLayout>
     
-</template:MainPageTemplate>
+</templates:MainPageTemplate>

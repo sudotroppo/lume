@@ -105,8 +105,17 @@
 
 		</Style>
 
+        <!--****-->
+        
+        <!--Frame-->
+        <Style TargetType="{x:Type Frame}">
 
-		<!--Entry-->
+            <Setter Property="HasShadow"
+                    Value="False"/>
+        </Style>
+        <!--*****-->
+
+        <!--Entry-->
 		<Style TargetType="{x:Type custom:LumEntry}">
 
 			<Setter Property="HeightRequest"

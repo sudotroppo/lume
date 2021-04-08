@@ -76,6 +76,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomNavigationPageRenderer.cs" />
     <Compile Include="CustomEditorRenderer.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
@@ -83,7 +84,6 @@
     <Compile Include="Service\PhotoPickerService.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="CustomEntryRenderer.cs" />
-    <Compile Include="CustomTabbedPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

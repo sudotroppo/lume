@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace lume.Pages
+namespace lume.Templates
 {
     public partial class PostTemplate : ContentView
     {
