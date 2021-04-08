@@ -1,4 +1,5 @@
 ﻿using lume.CustomObj;
+using lume.Templates;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -10,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FillRequestPage : ContentPage
+    public partial class FillRequestPage : MainPageTemplate
     {
         public FillRequestPage()
         {

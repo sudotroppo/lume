@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lume.Templates.MainPageTemplate"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.Resources>
+        <ControlTemplate x:Key="MainPageTemplate">
+            <StackLayout>
+                <BoxView BackgroundColor="LightGray" 
+                         HeightRequest="35"/>
+                <ContentPresenter VerticalOptions="FillAndExpand"/>
+                <Grid HeightRequest="40"
+                      BackgroundColor="LightGray"
+                      ColumnDefinitions="*, *, *">
+                    <Button Text="Profile"
+                            Grid.Column="2"
+                            Clicked="OnProfileClicked"/>
+                    <Button Text="+"
+                            Grid.Column="1"
+                            Clicked="OnNewRequestClicked"/>
+                    <Button Text="Home"
+                            Grid.Column="0"
+                            Clicked="OnHomeClicked"/>
+                </Grid>
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.Resources>
+</ContentPage>

@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<template:MainPageTemplate xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:forms="http://xamarin.com/schemas/2014/forms" 
              xmlns:custom="clr-namespace:lume.CustomObj"
-			 x:Class="lume.Pages.FillRequestPage">
+			 x:Class="lume.Pages.FillRequestPage"
+             xmlns:template="clr-namespace:lume.Templates"
+             ControlTemplate="{StaticResource MainPageTemplate}">
+    
 	<ScrollView>
 		<StackLayout Spacing="30">
 			<StackLayout >
@@ -59,4 +62,4 @@
             </StackLayout>
 		</StackLayout>
 	</ScrollView>
-</ContentPage>
+</template:MainPageTemplate>

@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<template:MainPageTemplate xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 x:Class="lume.Pages.NotificationsPage"
-             Title="Notifiche">
+             Title="Notifiche"
+             xmlns:template="clr-namespace:lume.Templates"
+             ControlTemplate="{StaticResource MainPageTemplate}">
 
-    <ContentPage.Content>
-
-        <!-- Sezione per passare alla pagina profilo -->
+    <!-- Sezione per passare alla pagina profilo -->
 
         <Grid RowDefinitions="10, 45, 8"
 			  ColumnDefinitions="10, 45, *, 90">
@@ -48,8 +48,4 @@
 
         </Grid>
 
-        <!--Area notifiche-->
-
-    </ContentPage.Content>
-
-</ContentPage>
+</template:MainPageTemplate>

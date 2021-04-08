@@ -1,4 +1,5 @@
 ﻿
+using lume.Templates;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -6,7 +7,7 @@ using Xamarin.Forms.Xaml;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NotificationsPage : ContentPage
+    public partial class NotificationsPage : MainPageTemplate
     {
         public NotificationsPage()
         {
