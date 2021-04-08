@@ -17,24 +17,12 @@ namespace lume.Pages
 
 		private bool EditMode = false;
 		private readonly IList<View> InfoList;
-		private static Animation ToNotificationPage;
 
 		public ProfilePage()
 		{
 			InitializeComponent();
 			InfoList = InfoStack.Children;
-			double ProfileImageStartX = (Application.Current.MainPage.Width / 2);
-			double ProfileImageEndX = 10 + (ProfileImage.WidthRequest / 4f);
-			double dx = ProfileImageEndX - ProfileImageStartX;
-
-			ToNotificationPage = new Animation  // animazione di cambio pagina
-            {
-				{0, 1, AnimationFactory.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
-				{0, 1, AnimationFactory.ScaleTo(ProfileImage, 0.5, 0.5,Easing.CubicInOut) },
-				{0, 1, AnimationFactory.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
-				{0, 1, AnimationFactory.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
-				{0, 1, AnimationFactory.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) }
-			};
+			
 		}
 
 		private void SwitchButtonState(string status, Button button)
@@ -93,7 +81,7 @@ namespace lume.Pages
 				{
 					v.ScaleX = 0;
 					v.ScaleY = 0;
-					return AnimationFactory.ScaleTo(v,1,1,Easing.SpringOut);
+					return AnimationFactory.ScaleTo(v,1,1,Easing.CubicInOut);
 				}).Commit(this, "OnAppearing",1, 1400);
 			});
 
@@ -103,7 +91,19 @@ namespace lume.Pages
 		{
 			Button b = (sender as Button);
 			b.IsEnabled = false;
-			Navigation.InsertPageBefore(new NotificationsPage(),this);
+			Navigation.InsertPageBefore(new NotificationsPage(),this); 
+			double ProfileImageStartX = (Application.Current.MainPage.Width / 2);
+			double ProfileImageEndX = 10 + (ProfileImage.WidthRequest / 4f);
+			double dx = ProfileImageEndX - ProfileImageStartX;
+
+			Animation ToNotificationPage = new Animation  // animazione di cambio pagina
+            {
+				{0, 1, AnimationFactory.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.ScaleTo(ProfileImage, 0.5, 0.5,Easing.CubicInOut) },
+				{0, 1, AnimationFactory.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
+				{0, 1, AnimationFactory.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) }
+			};
 
 			await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) => 
 			{

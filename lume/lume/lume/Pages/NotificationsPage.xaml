@@ -47,7 +47,7 @@
                            />
                     
                     <Label x:Name="BackgroundBoxView"
-                           AbsoluteLayout.LayoutBounds="0,0.5,1,0.6"
+                           AbsoluteLayout.LayoutBounds="0,0.5,1.5,0.6"
                            AbsoluteLayout.LayoutFlags="YProportional,SizeProportional"
                            AnchorX="0"
                            ScaleX="0"
