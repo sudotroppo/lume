@@ -1,24 +1,25 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<templates:MainPageTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:lume.Pages"
              x:Class="lume.Pages.HomePage"
-             xmlns:templates="clr-namespace:lume.Templates"
-             ControlTemplate="{StaticResource MainPageTemplate}">
+             xmlns:templates="clr-namespace:lume.Templates">
 
-    <AbsoluteLayout>
-        <RefreshView RefreshColor="{x:StaticResource VerdeLume}"
+    <templates:MainPageTemplate>
+        <templates:MainPageTemplate.TemplateContent>
+            <RefreshView RefreshColor="{x:StaticResource VerdeLume}"
                          Refreshing="OnRefresh"
                          AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-            <ScrollView>
-                <StackLayout Spacing="10" Margin="8,0,8,0" x:Name="home">
-                    <templates:PostTemplate/>
-                    <templates:PostTemplate/>
-                    <templates:PostTemplate/>
-                </StackLayout>
-            </ScrollView>
-        </RefreshView>
-    </AbsoluteLayout>
-    
-</templates:MainPageTemplate>
+                <ScrollView>
+                    <StackLayout Spacing="10" Margin="8,0,8,0" x:Name="home">
+                        <templates:PostTemplate/>
+                        <templates:PostTemplate/>
+                        <templates:PostTemplate/>
+                    </StackLayout>
+                </ScrollView>
+            </RefreshView>
+        </templates:MainPageTemplate.TemplateContent>
+    </templates:MainPageTemplate>
+
+</ContentPage>

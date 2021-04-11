@@ -71,6 +71,9 @@
 
 			<Setter Property="BackgroundColor"
 					Value="{x:StaticResource BiancoLume}"/>
+
+			<Setter Property="NavigationPage.HasNavigationBar"
+					Value="False"/>
 		</Style>
 
 		<!--TabbedPage-->

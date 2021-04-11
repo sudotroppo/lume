@@ -11,7 +11,7 @@ using Xamarin.Forms.Xaml;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FillRequestPage : MainPageTemplate
+    public partial class FillRequestPage : ContentPage
     {
         public FillRequestPage()
         {
@@ -61,7 +61,7 @@ namespace lume.Pages
         {
             await DisplayAlert("Ottimo", "Richiesta inviata con successo!", "Ok");
             await Navigation.PopModalAsync();
-            await Navigation.PushModalAsync(new TabbedHomePage());
+            await Navigation.PushModalAsync(new CustomNavigationPage( new HomePage()));
             
         }
 

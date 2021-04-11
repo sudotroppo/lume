@@ -1,29 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="lume.Templates.MainPageTemplate"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.HasBackButton="False">
-    <ContentPage.Resources>
-        <ControlTemplate x:Key="MainPageTemplate">
-            <StackLayout>
-                <BoxView BackgroundColor="LightGray" 
-                         HeightRequest="35"/>
-                <ContentPresenter VerticalOptions="FillAndExpand"/>
-                <Grid HeightRequest="50"
-                      BackgroundColor="LightGray"
-                      ColumnDefinitions="*, *, *">
-                    <Button Text="Profile"
-                            Grid.Column="2"
-                            Clicked="OnProfileClicked"/>
-                    <Button Text="+"
-                            Grid.Column="1"
-                            Clicked="OnNewRequestClicked"/>
-                    <Button Text="Home"
-                            Grid.Column="0"
-                            Clicked="OnHomeClicked"/>
-                </Grid>
-            </StackLayout>
-        </ControlTemplate>
-    </ContentPage.Resources>
-</ContentPage>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="lume.Templates.MainPageTemplate">
+
+    <Grid  ColumnDefinitions="*,*,*"
+           RowDefinitions="50,*,60"
+           ColumnSpacing="0"
+           RowSpacing="0">
+
+        <OnPlatform x:TypeArguments="BoxView">
+            <On Platform="iOS">
+                <BoxView Grid.Column="0"
+                         Grid.Row="0"
+                         Grid.ColumnSpan="3"
+                         BackgroundColor="{x:StaticResource VerdeLume}"/>
+            </On>
+        </OnPlatform>
+
+
+        <OnPlatform x:TypeArguments="ContentView">
+            <On Platform="iOS">
+                <ContentView Grid.Column="0"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="3"
+                             Content="{Binding TemplateContent}"/>
+            </On>
+            <On Platform="Android">
+                <ContentView Grid.Column="0"
+                             Grid.Row="0"
+                             Grid.ColumnSpan="3"
+                             Content="{Binding TemplateContent}"/>
+            </On>
+        </OnPlatform>
+
+        <Grid Grid.Column="0"
+              Grid.Row="2"
+              Grid.ColumnSpan="3"
+              ColumnSpacing="0"
+              RowSpacing="0"
+              BackgroundColor="{x:StaticResource VerdeLume}">
+
+            <Button Text="Profile"
+                    Grid.Column="2"
+                    Clicked="OnProfileClicked"/>
+            <Button Text="+"
+                    Grid.Column="1"
+                    Clicked="OnNewRequestClicked"/>
+            <Button Text="Home"
+                    Grid.Column="0"
+                    Clicked="OnHomeClicked"/>
+
+        </Grid>
+    </Grid>
+
+</ContentView>

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace lume.Pages
 {
-    public partial class HomePage : MainPageTemplate
+    public partial class HomePage : ContentPage
     {
         public HomePage()
         {

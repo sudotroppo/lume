@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace lume.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfilePage : MainPageTemplate
+	public partial class ProfilePage : ContentPage
 	{
 
         private bool EditMode = false;

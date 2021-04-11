@@ -11,12 +11,23 @@ using Xamarin.Forms.Xaml;
 namespace lume.Templates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageTemplate : ContentPage
+    public partial class MainPageTemplate : ContentView
     {
+        public static readonly BindableProperty TemplateContentProperty =
+            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate));
+
+        public View TemplateContent
+        {
+            set => SetValue(TemplateContentProperty, value);
+            get => (View)GetValue(TemplateContentProperty);
+        }
+
         public MainPageTemplate()
         {
             InitializeComponent();
+            BindingContext = this;
         }
+
         public async void OnProfileClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new NotificationsPage(), false);
