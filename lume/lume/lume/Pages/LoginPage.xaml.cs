@@ -20,7 +20,7 @@ namespace lume.Pages
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new CustomNavigationPage(new HomePage()), false);
+            await Navigation.PushAsync(new HomePage(), false);
 
         }
     }

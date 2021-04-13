@@ -7,61 +7,37 @@
 
     <templates:MainPageTemplate>
         <templates:MainPageTemplate.TemplateContent>
-            <ScrollView>
-                <StackLayout Spacing="30">
-                    <StackLayout >
+            <AbsoluteLayout>
+                <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            Margin="10,0,10,10">
+
+                    <StackLayout Spacing="10"
+                                 Margin="-10,0,-10,0"
+                                 IsClippedToBounds="True">
                         <ImageButton x:Name="selectedImage"
-						BackgroundColor="{x:StaticResource VerdeChiaroLume}"
-						HorizontalOptions="Center"
-						HeightRequest="240"
-						WidthRequest="370"
-						Source="uploadImage.png"
-						VerticalOptions="FillAndExpand"
-						Clicked="Handle_Clicked"
-                       
-					/>
+                                     BackgroundColor="{x:StaticResource GrigioLume}"
+                                     HeightRequest="240"
+                                     Margin="-10,0,-10,0"
+                                     HorizontalOptions="FillAndExpand"
+                                     Source="uploadImage.png"
+                                     Clicked="Handle_Clicked"/>
 
+                        <StackLayout Spacing="25" >
+
+                            <custom:LumEntry x:Name="Titolo"
+                                         Placeholder="Titolo"
+                                         BorderWidth="0"
+                                         HorizontalOptions="FillAndExpand"/>
+
+                            <custom:LumEditor x:Name="Descrizione"
+                                          Placeholder="Inserisci una descrizione.."
+                                          AutoSize="TextChanges"
+                                          BorderWidth="0"/>
+                        </StackLayout>
                     </StackLayout>
-
-                    <StackLayout Spacing="25" >
-                        <custom:LumEntry x:Name="Titolo"
-								 Placeholder="Titolo"
-								 Margin="100,0"
-								 HorizontalOptions="FillAndExpand"
-								 TranslationX="-85"
-								  />
-                        <custom:LumEditor x:Name="Descrizione"
-                                  Placeholder="Inserisci una descrizione.."
-                                  TranslationX="-7"
-								  HeightRequest="200"
-                                  AutoSize="TextChanges"
-                    />
-                    </StackLayout>
-
-                    <StackLayout  Orientation="Horizontal" VerticalOptions="End">
-
-                        <Button 
-                    x:Name="AnnullaButton"
-						Text="Annulla"
-						FontSize="{x:StaticResource ButtonMediumFontSize}"
-						BackgroundColor="{x:StaticResource GrigioLume}"
-						Clicked="OnClickedButtonAnnulla"
-						WidthRequest="170"
-						Margin="8,0"
-                />
-
-                        <Button
-                    x:Name="InviaButton"
-						Text="Invia"
-						FontSize="{x:StaticResource ButtonMediumFontSize}"
-						BackgroundColor="{x:StaticResource VerdeLume}"
-						Clicked="OnClickedButtonInvia"
-						WidthRequest="170"
-						Margin="0,0"
-                />
-                    </StackLayout>
-                </StackLayout>
-            </ScrollView>
+                </ScrollView>
+            </AbsoluteLayout>
         </templates:MainPageTemplate.TemplateContent>
     </templates:MainPageTemplate>
 </ContentPage>

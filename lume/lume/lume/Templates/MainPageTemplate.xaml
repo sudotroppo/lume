@@ -4,34 +4,39 @@
       x:Class="lume.Templates.MainPageTemplate">
 
     <Grid  ColumnDefinitions="*,*,*"
-           RowDefinitions="50,*,60"
            ColumnSpacing="0"
            RowSpacing="0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition>
+                <RowDefinition.Height>
+                    <OnPlatform x:TypeArguments="GridLength">
+                        <On Platform="iOS" Value="50.0"/>
+                        <On Platform="Android" Value="0.0"/>
+                    </OnPlatform>
+                </RowDefinition.Height>
+            </RowDefinition>
+            
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
 
-        <OnPlatform x:TypeArguments="BoxView">
-            <On Platform="iOS">
-                <BoxView Grid.Column="0"
+
+        <BoxView Grid.Column="0"
                          Grid.Row="0"
-                         Grid.ColumnSpan="3"
-                         BackgroundColor="{x:StaticResource VerdeLume}"/>
-            </On>
-        </OnPlatform>
-
-
-        <OnPlatform x:TypeArguments="ContentView">
-            <On Platform="iOS">
-                <ContentView Grid.Column="0"
-                             Grid.Row="1"
-                             Grid.ColumnSpan="3"
-                             Content="{Binding TemplateContent}"/>
-            </On>
-            <On Platform="Android">
-                <ContentView Grid.Column="0"
-                             Grid.Row="0"
-                             Grid.ColumnSpan="3"
-                             Content="{Binding TemplateContent}"/>
-            </On>
-        </OnPlatform>
+                         Grid.ColumnSpan="3">
+            <BoxView.BackgroundColor>
+                <OnPlatform x:TypeArguments="Color">
+                    <On Platform="iOS" Value="{x:StaticResource VerdeLume}"/>
+                    <On Platform="Android" Value="Transparent"/>
+                </OnPlatform>
+            </BoxView.BackgroundColor>
+        </BoxView>
+        
+        <ContentView Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     Grid.Row="1"
+                     Content="{Binding TemplateContent}"/>
 
         <Grid Grid.Column="0"
               Grid.Row="2"
@@ -40,15 +45,24 @@
               RowSpacing="0"
               BackgroundColor="{x:StaticResource VerdeLume}">
 
-            <Button Text="Profile"
+            <Button Text="&#xf007;"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    FontSize="{x:StaticResource ButtonMediumFontSize}"
                     Grid.Column="2"
-                    Clicked="OnProfileClicked"/>
-            <Button Text="+"
+                    Clicked="OnProfileClicked"
+                    BackgroundColor="Transparent"/>
+            <Button Text="&#xf055;"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    FontSize="25"
                     Grid.Column="1"
-                    Clicked="OnNewRequestClicked"/>
-            <Button Text="Home"
+                    Clicked="OnNewRequestClicked"
+                    BackgroundColor="Transparent"/>
+            <Button Text="&#xf015;"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    FontSize="{x:StaticResource ButtonMediumFontSize}"
                     Grid.Column="0"
-                    Clicked="OnHomeClicked"/>
+                    Clicked="OnHomeClicked"
+                    BackgroundColor="Transparent"/>
 
         </Grid>
     </Grid>

@@ -49,23 +49,6 @@ namespace lume.Pages
 
             
         }
-
-
-        public async void OnClickedButtonAnnulla(object sender, EventArgs e)
-        {
-            await Navigation.PopModalAsync();
-
-        }
-
-        public async void OnClickedButtonInvia(object sender, EventArgs e)
-        {
-            await DisplayAlert("Ottimo", "Richiesta inviata con successo!", "Ok");
-            await Navigation.PopModalAsync();
-            await Navigation.PushModalAsync(new CustomNavigationPage( new HomePage()));
-            
-        }
-
-       
-
+        
     }
 }
