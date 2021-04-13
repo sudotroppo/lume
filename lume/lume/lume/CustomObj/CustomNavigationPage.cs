@@ -12,7 +12,6 @@ namespace lume.CustomObj
     {
         public CustomNavigationPage(Xamarin.Forms.Page root) : base(root)
         {
-            //Code to make the NavigationPage translucent, if you don't want that you can remove it
             On<iOS>().SetIsNavigationBarTranslucent(true);
             BarBackgroundColor = Color.Transparent;
             BarTextColor = Color.Black;
