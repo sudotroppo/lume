@@ -23,30 +23,6 @@ namespace lume.Templates
             get => (View)GetValue(TemplateContentProperty);
         }
 
-        public async void ButtonClicked(Page nextPage)
-        {
-            var stack = Navigation.NavigationStack;
-            Page currentPage = Parent as Page;
-            Type currentPageType = currentPage.GetType();
-            Type nextPageType = nextPage.GetType();
-
-            if (currentPageType.Equals(nextPageType))
-                return;
-
-            Page resultPage = stack.ToList().Find(p => nextPageType.Equals(p.GetType()));
-
-            if (resultPage is null)
-            {
-                resultPage = nextPage;
-            }
-            else
-            {
-                Navigation.RemovePage(resultPage);
-            }
-            
-            await Navigation.PushAsync(resultPage, false);
-        }
-
         public MainPageTemplate()
         {
             InitializeComponent();
@@ -55,16 +31,16 @@ namespace lume.Templates
 
         public async void OnProfileClicked(object sender, EventArgs e)
         {
-            ButtonClicked(new NotificationsPage());
+            await Navigator.PushAsync(Navigation, new NotificationsPage(), Parent as Page, false);
         }
 
         public async void OnNewRequestClicked(object sender, EventArgs e)
         {
-            ButtonClicked(new FillRequestPage());
+            await Navigator.PushAsync(Navigation, new FillRequestPage(), Parent as Page, false);
         }
         public async void OnHomeClicked(object sender, EventArgs e)
         {
-            ButtonClicked(new HomePage());
+            await Navigator.PushAsync(Navigation, new HomePage(), Parent as Page, false);
         }
     }
 }
