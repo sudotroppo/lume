@@ -7,33 +7,6 @@
              xmlns:templates="clr-namespace:lume.Templates"
              NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!--Convertitori-->
-            <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
-
-            <Style TargetType="Button">
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup>
-                            <VisualState x:Name="Disabled">
-                                <VisualState.StateTriggers>
-                                    <StateTrigger IsActive="{Binding IsEnabled, Converter={StaticResource inverseBoolConverter}}"/>
-                                </VisualState.StateTriggers>
-
-                                <VisualState.Setters>
-                                    <Setter Property="TextColor"
-                                        Value="{x:StaticResource Nero}"/>
-                                </VisualState.Setters>
-
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
 
     <templates:MainPageTemplate>
         <templates:MainPageTemplate.TemplateContent>
@@ -89,10 +62,11 @@
                            AnchorY="0"
                            AbsoluteLayout.LayoutBounds="0,0"
                            BackgroundColor="{x:StaticResource NeroLume}">
+                            
                             <Frame.Clip>
                                 <EllipseGeometry RadiusX="22.5"
-                                             RadiusY="22.5"
-                                             Center="22.5,22.5"/>
+                                                 RadiusY="22.5"
+                                                 Center="22.5,22.5"/>
                             </Frame.Clip>
 
                             <Image Source=""
@@ -108,25 +82,27 @@
                     </AbsoluteLayout>
 
                     <Button x:Name="ToTheLeft" 
-                        Text="&#xf053;"
-                        FontFamily="{x:StaticResource IconSolid}"
-                        TextColor="{x:StaticResource Nero}"
-                        BackgroundColor="Transparent"
-                        HorizontalOptions="Start"
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        Margin="0"
-                        TranslationX="-50"/>
+                            Text="&#xf053;"
+                            FontFamily="{x:StaticResource IconSolid}"
+                            TextColor="{x:StaticResource Nero}"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="Start"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0"
+                            TranslationX="-50"
+                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
                     <Button x:Name="ToTheRight" 
-                        Grid.Row="0"
-					    Grid.Column="3"
-					    Text="&#xf054;"
-                        TextColor="{x:StaticResource Nero}"
-                        FontFamily="{x:StaticResource IconSolid}"
-					    Clicked="OnProfileClicked"
-                        BackgroundColor="Transparent"
-                        Margin="0"/>
+                            Grid.Row="0"
+                            Grid.Column="3"
+                            Text="&#xf054;"
+                            TextColor="{x:StaticResource Nero}"
+                            FontFamily="{x:StaticResource IconSolid}"
+                            Clicked="OnProfileClicked"
+                            BackgroundColor="Transparent"
+                            Margin="0"
+                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
                 </Grid>
 

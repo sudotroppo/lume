@@ -31,16 +31,22 @@ namespace lume.Templates
 
         public async void OnProfileClicked(object sender, EventArgs e)
         {
+            (sender as Button).IsEnabled = false;
             await Navigator.PushAsync(Navigation, new NotificationsPage(), Parent as Page, false);
+            (sender as Button).IsEnabled = true;
         }
 
         public async void OnNewRequestClicked(object sender, EventArgs e)
         {
+            (sender as Button).IsEnabled = false;
             await Navigator.PushAsync(Navigation, new FillRequestPage(), Parent as Page, false);
+            (sender as Button).IsEnabled = true;
         }
         public async void OnHomeClicked(object sender, EventArgs e)
         {
+            (sender as Button).IsEnabled = false;
             await Navigator.PushAsync(Navigation, new HomePage(), Parent as Page, false);
+            (sender as Button).IsEnabled = true;
         }
     }
 }

@@ -5,19 +5,21 @@
              x:Class="lume.Pages.HomePage"
              xmlns:templates="clr-namespace:lume.Templates">
 
+
     <templates:MainPageTemplate>
         <templates:MainPageTemplate.TemplateContent>
             <RefreshView RefreshColor="{x:StaticResource VerdeLume}"
                          Refreshing="OnRefresh"
                          AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <ScrollView>
-                    <StackLayout Spacing="10" Margin="8,0,8,0" x:Name="home">
-                        <templates:PostTemplate/>
-                        <templates:PostTemplate/>
-                        <templates:PostTemplate/>
-                    </StackLayout>
-                </ScrollView>
+                <CollectionView x:Name="homePostViewer"
+                                    Margin="8,0,8,0"
+                                    VerticalScrollBarVisibility="Never"
+                                    ItemsSource="{Binding Posts}"
+                                    ItemTemplate="{x:StaticResource PostSimpleTemplate}">
+
+
+                </CollectionView>
             </RefreshView>
         </templates:MainPageTemplate.TemplateContent>
     </templates:MainPageTemplate>

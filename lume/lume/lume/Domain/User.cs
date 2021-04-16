@@ -1,7 +1,7 @@
 ﻿using SQLite;
 using Xamarin.Forms;
 
-namespace lume.Models
+namespace lume.Domain
 {
     public class User
     {

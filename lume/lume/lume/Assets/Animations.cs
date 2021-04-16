@@ -5,8 +5,9 @@ using Xamarin.Forms;
 
 namespace lume.Assets
 {
-    public static class AnimationFactory
+    public static class Animations
     {
+        //funzione che restituisce una animazione che trasla un elemento View v lungo gli assi x ed y di dx e dy
         public static Animation SlideOf(View v, double dx, double dy, Easing easing)
         {
             double dxi = v.TranslationX;
@@ -19,6 +20,8 @@ namespace lume.Assets
             },
             0, 1, easing ?? Easing.Linear);
         }
+
+        //funzione che restituisce una animazione che trasla un elemento View v lungo l'asse x di dx 
         public static Animation SlideOfX(View v, double dx, Easing easing)
         {
             double dxi = v.TranslationX;
@@ -29,6 +32,8 @@ namespace lume.Assets
             },
             0, 1, easing ?? Easing.Linear);
         }
+
+        //funzione che restituisce una animazione che trasla un elemento View v lungo l'asse y di dy
         public static Animation SlideOfY(View v, double dy, Easing easing)
         {
             double dyi = v.TranslationY;
@@ -39,6 +44,8 @@ namespace lume.Assets
             },
             0, 1, easing ?? Easing.Linear);
         }
+
+        //funzione che restituisce una animazione che scala un elemento View a scaleX e scaleY
         public static Animation ScaleTo(View v, double scaleY, double scaleX, Easing easing)
         {
             double yi = v.ScaleY;
@@ -55,22 +62,7 @@ namespace lume.Assets
             0, 1, easing ?? Easing.Linear);
         }
 
-        public static Animation Resize(View v, double width, double heigth, Easing easing)
-        {
-            double wi = v.Width;
-            double hi = v.Height;
-
-            double dw = width - wi;
-            double dh = heigth - hi;
-
-            return new Animation(c =>
-            {
-                v.WidthRequest = wi + c * dw;
-                v.HeightRequest = hi + c * dh;
-            },
-            0, 1, easing ?? Easing.Linear);
-        }
-
+        //funzione che restituisce una animazione che sfuma il colore della view v al colorTarghet
         public static Animation ChangeColor(View v, Color colorTarghet, Easing easing)
         {
             return new Animation(c =>
@@ -79,6 +71,8 @@ namespace lume.Assets
             },
             0, 1, easing ?? Easing.Linear);
         }
+
+        //funzione che conta tutti i figli di un layout
         private static int CountChildren(Layout<View> layout, int prev)
         {
             foreach (View child in layout.Children)
@@ -95,6 +89,8 @@ namespace lume.Assets
 
             return prev;
         }
+
+        //funzione che restituisce una animazione che viene applicata a tutti i figli di un layout
         public static Animation CascadeToTheChildren(Layout<View> layout, Func<View, Animation> func)
         {
             return CascadeToTheChildrenCall(layout, func, 0, 1f / CountChildren(layout, 0));
@@ -118,6 +114,7 @@ namespace lume.Assets
             return a;
         }
 
+        //funzione che restituisce una animazione
         public static Animation FadeTo(View v, double opacity, Easing easing)
         {
             double initialOpacity = v.Opacity;
@@ -128,6 +125,7 @@ namespace lume.Assets
             });
         }
 
+        //funzione che restituisce una animazione che effettua una rotazione relativa dell'elemento View v
         public static Animation RelativeRotation(View v, double degrees, Easing easing)
         {
             double initialDegrees = v.Rotation;
@@ -138,6 +136,20 @@ namespace lume.Assets
             }, 0, 1, easing ?? Easing.Linear);
         }
 
+        //funzione che restituisce una animazione che effettua una rotazione di un elemento View attorno ad un punto p
+        public static Animation RotateAround(View v, Point p, double degrees, Easing easing)
+        {
+            double xi = v.X;
+            double yi = v.Y;
+
+            return new Animation((c) =>
+            {
+                v.TranslationX = p.X + Math.Sin(c * degrees);
+                v.TranslationY = p.Y + Math.Cos((c - 1) * degrees);
+            }, 0, 1, easing ?? Easing.Linear);
+        }
+
+        //funzione che calacola la posizione X assoluta di un elemento nella pagina
         public static double getAbsoluteYPosition(View v)
         {
             var y = v.Y;
@@ -150,6 +162,7 @@ namespace lume.Assets
             return y;
         }
 
+        //funzione che calacola la posizione Y assoluta di un elemento nella pagina
         public static double getAbsoluteXPosition(View v)
         {
             var x = v.X;
@@ -161,5 +174,7 @@ namespace lume.Assets
             }
             return x;
         }
+
+        
     }
 }

@@ -3,68 +3,77 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       x:Class="lume.Templates.MainPageTemplate">
 
-    <Grid  ColumnDefinitions="*,*,*"
+    <AbsoluteLayout>
+        <Frame x:Name="PopUpFrame" 
+               AbsoluteLayout.LayoutBounds="1,0,1,1"
+               AbsoluteLayout.LayoutFlags="All">
+            
+        </Frame>
+        <Grid  AbsoluteLayout.LayoutBounds="0,0,1,1"
+               AbsoluteLayout.LayoutFlags="All"
+           ColumnDefinitions="*,*,*"
            ColumnSpacing="0"
            RowSpacing="0">
-        
-        <Grid.RowDefinitions>
-            <RowDefinition>
-                <RowDefinition.Height>
-                    <OnPlatform x:TypeArguments="GridLength">
-                        <On Platform="iOS" Value="50.0"/>
-                        <On Platform="Android" Value="0.0"/>
-                    </OnPlatform>
-                </RowDefinition.Height>
-            </RowDefinition>
-            
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition>
+                    <RowDefinition.Height>
+                        <OnPlatform x:TypeArguments="GridLength">
+                            <On Platform="iOS" Value="50.0"/>
+                            <On Platform="Android" Value="0.0"/>
+                        </OnPlatform>
+                    </RowDefinition.Height>
+                </RowDefinition>
+
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
 
 
-        <BoxView Grid.Column="0"
+            <BoxView Grid.Column="0"
                          Grid.Row="0"
                          Grid.ColumnSpan="3">
-            <BoxView.BackgroundColor>
-                <OnPlatform x:TypeArguments="Color">
-                    <On Platform="iOS" Value="{x:StaticResource VerdeLume}"/>
-                    <On Platform="Android" Value="Transparent"/>
-                </OnPlatform>
-            </BoxView.BackgroundColor>
-        </BoxView>
-        
-        <ContentView Grid.Column="0"
+                <BoxView.BackgroundColor>
+                    <OnPlatform x:TypeArguments="Color">
+                        <On Platform="iOS" Value="{x:StaticResource VerdeLume}"/>
+                        <On Platform="Android" Value="Transparent"/>
+                    </OnPlatform>
+                </BoxView.BackgroundColor>
+            </BoxView>
+
+            <ContentView Grid.Column="0"
                      Grid.ColumnSpan="3"
                      Grid.Row="1"
                      Content="{Binding TemplateContent}"/>
 
-        <Grid Grid.Column="0"
+            <Grid Grid.Column="0"
               Grid.Row="2"
               Grid.ColumnSpan="3"
               ColumnSpacing="0"
               RowSpacing="0"
               BackgroundColor="{x:StaticResource VerdeLume}">
 
-            <Button Text="&#xf007;"
+                <Button Text="&#xf007;"
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="{x:StaticResource ButtonMediumFontSize}"
                     Grid.Column="2"
                     Clicked="OnProfileClicked"
                     BackgroundColor="Transparent"/>
-            <Button Text="&#xf055;"
+                <Button Text="&#xf055;"
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="25"
                     Grid.Column="1"
                     Clicked="OnNewRequestClicked"
                     BackgroundColor="Transparent"/>
-            <Button Text="&#xf015;"
+                <Button Text="&#xf015;"
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="{x:StaticResource ButtonMediumFontSize}"
                     Grid.Column="0"
                     Clicked="OnHomeClicked"
                     BackgroundColor="Transparent"/>
 
+            </Grid>
         </Grid>
-    </Grid>
 
+    </AbsoluteLayout>
 </ContentView>

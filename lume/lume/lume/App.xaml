@@ -58,14 +58,111 @@
 		<Color x:Key="Nero">#000000</Color>
 
 		<!--**********-->
-        
-        
+
+        <DataTemplate x:Key="PostSimpleTemplate">
+            <AbsoluteLayout Padding="0,5,0,5">
+                <Frame AbsoluteLayout.LayoutBounds="0,0,1,1"
+                       AbsoluteLayout.LayoutFlags="All"
+                       HasShadow="False"
+                       CornerRadius="20"
+                       IsClippedToBounds="True"
+                       Margin="{x:StaticResource PostMargin}"
+                       BackgroundColor="{x:StaticResource GrigioLume}">
+
+                    <StackLayout Spacing="10"
+						 Margin="-10">
+                        <StackLayout Orientation="Horizontal"
+							 Spacing="10">
+
+                            <Frame IsClippedToBounds="True"
+                                   Padding="0"
+                                   VerticalOptions="Center"
+                                   HeightRequest="45"
+                                   WidthRequest="45">
+                                <Frame.Clip>
+                                    <EllipseGeometry RadiusX="22.5"
+                                                     RadiusY="22.5"
+                                                     Center="22.5,22.5"/>
+                                </Frame.Clip>
+
+                                <Image AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                                           AbsoluteLayout.LayoutFlags="All"
+                                           Source="{Binding ImageUrl}"
+                                           Aspect="AspectFit"/>
+
+
+                            </Frame>
+
+                            <Label Margin="0"
+                                   VerticalOptions="Center"
+                                   Text="{Binding UserFullName}"/>
+
+                            <Label TextColor="{x:StaticResource NeroLume}" 
+                                   Margin="4,0,4,0"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="EndAndExpand">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="&#xf500;&#x09;&#x09;"
+                                      FontFamily="{x:StaticResource IconSolid}"/>
+                                        <Span Text="{Binding Number}"/>
+
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+
+                        </StackLayout>
+
+                        <Label Text="{Binding Description}"
+                           VerticalOptions="Center"
+                           HeightRequest="40"
+                           Margin="4,0,4,0"/>
+                        <Button Text="Proponiti"
+						CornerRadius="0"
+						Margin="-20,0,-20,-10"
+						HeightRequest="40"
+						BackgroundColor="{x:StaticResource VerdeLume}"
+						FontSize="{x:StaticResource ButtonStandardFontSize}"/>
+                    </StackLayout>
+                </Frame>
+            </AbsoluteLayout>
+        </DataTemplate>
 
         <!--************-->
+        
+        <!--Convertitori-->
+        <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
+        <!--************-->
+        
+        <!--Stili Espliciti App-->
+        <Style x:Key="ButtonPressedColorBlack" TargetType="Button">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup>
+                        <VisualState x:Name="Disabled">
+                            <VisualState.StateTriggers>
+                                <StateTrigger IsActive="{Binding IsEnabled, Converter={StaticResource inverseBoolConverter}}"/>
+                            </VisualState.StateTriggers>
 
+                            <VisualState.Setters>
+                                <Setter Property="TextColor"
+                                        Value="{x:StaticResource Nero}"/>
+                            </VisualState.Setters>
+
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+        
+        
         <!--Stili impliciti App-->
-
-		<!--ContentPage-->
+        
+        <!--ContentPage-->
 		<Style TargetType="{x:Type ContentPage}"
 			   ApplyToDerivedTypes="True">
 

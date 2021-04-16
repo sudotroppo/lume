@@ -2,36 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:templates="clr-namespace:lume.Templates"
-             x:Class="lume.Pages.ProfilePage"
-             xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
-             xmlns:custom="clr-namespace:lume.CustomObj">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!--Convertitori-->
-            <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
-
-            <Style TargetType="Button">
-                <Setter Property="VisualStateManager.VisualStateGroups">
-                    <VisualStateGroupList>
-                        <VisualStateGroup>
-                            <VisualState x:Name="Disabled">
-                                <VisualState.StateTriggers>
-                                    <StateTrigger IsActive="{Binding IsEnabled, Converter={StaticResource inverseBoolConverter}}"/>
-                                </VisualState.StateTriggers>
-
-                                <VisualState.Setters>
-                                    <Setter Property="TextColor"
-                                        Value="{x:StaticResource Nero}"/>
-                                </VisualState.Setters>
-
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             x:Class="lume.Pages.ProfilePage">
 
     <templates:MainPageTemplate>
         <templates:MainPageTemplate.TemplateContent>
@@ -42,10 +13,10 @@
                       AbsoluteLayout.LayoutFlags="All"
                       RowDefinitions="45, 45, *"
                       ColumnDefinitions="45, *,90,*, 45"
-              Margin="10,10,10,0"
-              Padding="0"
-              ColumnSpacing="-1"
-              RowSpacing="0">
+                      Margin="10,10,10,0"
+                      Padding="0"
+                      ColumnSpacing="0"
+                      RowSpacing="0">
 
                     <AbsoluteLayout Grid.Column="0"
                             Grid.ColumnSpan="3"
@@ -112,41 +83,45 @@
 
                     <!-- Sezione immagine profilo e nome utente-->
                     <Button x:Name="ToTheLeft"
-                    Text="&#xf053;"
-                    FontFamily="{x:StaticResource IconSolid}"
-                    TextColor="{x:StaticResource Nero}"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="Start"
-                    Clicked="OnBackButtonCliked"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="0"/>
+                            Text="&#xf053;"
+                            FontFamily="{x:StaticResource IconSolid}"
+                            TextColor="{x:StaticResource Nero}"
+                            BackgroundColor="Transparent"
+                            HorizontalOptions="Start"
+                            Clicked="OnBackButtonCliked"
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0"
+                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
                     <Button x:Name="ToTheRight" 
-                    Grid.Row="0"
-				    Grid.Column="4"
-				    Text="&#xf054;"
-                    TextColor="{x:StaticResource Nero}"
-                    FontFamily="{x:StaticResource IconSolid}"
-                    BackgroundColor="Transparent"
-                    Margin="0"
-                    TranslationX="50"/>
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            Text="&#xf054;"
+                            TextColor="{x:StaticResource Nero}"
+                            FontFamily="{x:StaticResource IconSolid}"
+                            BackgroundColor="Transparent"
+                            Margin="0"
+                            TranslationX="50"
+                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
                     <Button x:Name="Settings" 
-                    Grid.Row="0"
-			        Grid.Column="4"
-					Text="&#xf013;"
-                    TextColor="{x:StaticResource Nero}"
-                    FontFamily="{x:StaticResource IconSolid}"
-                    FontSize="18"
-					Clicked="OnSettingsClicked"
-                    BackgroundColor="Transparent"
-                    Margin="0"/>
+                            Grid.Row="0"
+                            Grid.Column="4"
+                            Text="&#xf013;"
+                            TextColor="{x:StaticResource Nero}"
+                            FontFamily="{x:StaticResource IconSolid}"
+                            FontSize="18"
+                            Clicked="OnSettingsClicked"
+                            BackgroundColor="Transparent"
+                            Margin="0"
+                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
                     <ScrollView Grid.Row="2"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="5"
-                        Margin="-10,20,-10,0">
+                                Grid.Column="0"
+                                Grid.ColumnSpan="5"
+                                Margin="-10,20,-10,0"
+                                VerticalScrollBarVisibility="Never">
 
 
                         <StackLayout x:Name="ProfileInfoList">
@@ -154,13 +129,13 @@
 
                             <!-- Bottone modifica profilo -->
                             <Button HorizontalOptions="FillAndExpand"
-                            Text="Modifica profilo"
-                            CornerRadius="5"
-                            HeightRequest="40"
-                            BackgroundColor = "{x:StaticResource GrigioLume}"
-                            TextColor="Black"
-                            FontAttributes="Bold"
-                            Clicked="OnModifyProfileClicked"/>
+                                    Text="Modifica profilo"
+                                    CornerRadius="5"
+                                    HeightRequest="40"
+                                    BackgroundColor = "{x:StaticResource GrigioLume}"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
+                                    Clicked="OnModifyProfileClicked"/>
 
                             <StackLayout x:Name="InfoStack">
 

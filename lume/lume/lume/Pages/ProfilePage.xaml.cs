@@ -77,11 +77,11 @@ namespace lume.Pages
             base.OnAppearing();
             Task.Run(() =>
             {
-                AnimationFactory.CascadeToTheChildren(ProfileInfoList, (v) =>
+                Animations.CascadeToTheChildren(ProfileInfoList, (v) =>
                 {
                     v.ScaleX = 0;
                     v.ScaleY = 0;
-                    return AnimationFactory.ScaleTo(v, 1, 1, Easing.CubicInOut);
+                    return Animations.ScaleTo(v, 1, 1, Easing.CubicInOut);
                 }).Commit(this, "OnAppearing", 1, 1400);
             });
 
@@ -90,6 +90,7 @@ namespace lume.Pages
         public async void OnBackButtonCliked(object sender, EventArgs e)
         {
             Button b = (sender as Button);
+            b.TextColor = b.TextColor;
             b.IsEnabled = false;
             Navigation.InsertPageBefore(new NotificationsPage(), this);
             double ProfileImageStartX = (Application.Current.MainPage.Width / 2);
@@ -98,11 +99,12 @@ namespace lume.Pages
 
             Animation ToNotificationPage = new Animation  // animazione di cambio pagina
             {
-                {0, 1, AnimationFactory.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
-                {0, 1, AnimationFactory.ScaleTo(ProfileImage, 0.5, 0.5,Easing.CubicInOut) },
-                {0, 1, AnimationFactory.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
-                {0, 1, AnimationFactory.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
-                {0, 1, AnimationFactory.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) }
+                {0, 1, Animations.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
+                {0, 1, Animations.ScaleTo(ProfileImage, 0.5, 0.5,Easing.CubicInOut) },
+                {0, 1, Animations.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
+                {0, 1, Animations.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
+                {0, 1, Animations.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) },
+                {0,1, Animations.RotateAround(Settings, new Point(Settings.WidthRequest,0), Math.PI/2, Easing.CubicInOut) }
             };
 
             await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
@@ -122,9 +124,9 @@ namespace lume.Pages
             {
                 Animation ToProfileSettings = new Animation
                 {
-                    {0,1, AnimationFactory.RelativeRotation(b, 360, Easing.SpringOut) },
-                    {0,0.5, AnimationFactory.ScaleTo(b,1.4,1.4, Easing.Linear) },
-                    {0.5,1, AnimationFactory.ScaleTo(b, 1, 1, Easing.Linear) }
+                    {0,1, Animations.RelativeRotation(b, 360, Easing.SpringOut) },
+                    {0,0.5, Animations.ScaleTo(b,1.4,1.4, Easing.Linear) },
+                    {0.5,1, Animations.ScaleTo(b, 1, 1, Easing.Linear) }
                 };
                 ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
                 {
