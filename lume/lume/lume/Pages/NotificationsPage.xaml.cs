@@ -9,27 +9,19 @@ using Xamarin.Forms.Xaml;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NotificationsPage : ContentPage
+    public partial class NotificationsPage : ContentTemplatedView
     {
-        public NotificationsPage()
+        public NotificationsPage(MainPageTemplate Control) : base(Control)
         {
             InitializeComponent();
             
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            BackgroundLine.ScaleX = 0;
-            
-            Task.Run(() => Animations.ScaleTo(BackgroundLine, 1, 1, Easing.CubicInOut).Commit(this, "OnAppearing", 1, 500, Easing.Linear));
-        }
 
         public async void OnProfileClicked (object sender, EventArgs e)
 		{
             Button b = (sender as Button);
             b.IsEnabled = false;
-            Navigation.InsertPageBefore(new ProfilePage(), this);
             double ProfileImageEndX = (Application.Current.MainPage.Width / 2);
             double ProfileImageStartX = ProfileImage.WidthRequest/2 - 10;
             double dx = ProfileImageEndX - ProfileImageStartX;
@@ -44,10 +36,10 @@ namespace lume.Pages
             };
 
             await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
-             {
-                 await Navigation.PopAsync(false);
-                 b.IsEnabled = true;
-             }));
+            {
+                Control.TemplateContent = new ProfilePage(Control).Content;
+                b.IsEnabled = true;
+            }));
         }
 
         

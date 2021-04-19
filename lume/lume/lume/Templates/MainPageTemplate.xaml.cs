@@ -1,10 +1,5 @@
 ﻿using lume.Pages;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,10 +7,10 @@ using Xamarin.Forms.Xaml;
 namespace lume.Templates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageTemplate : ContentView
+    public partial class MainPageTemplate : ContentPage
     {
         public static readonly BindableProperty TemplateContentProperty =
-            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate));
+            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate), new HomePage().Content);
 
         public View TemplateContent
         {
@@ -32,20 +27,20 @@ namespace lume.Templates
         public async void OnProfileClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            await Navigator.PushAsync(Navigation, new NotificationsPage(), Parent as Page, false);
+            SetValue(TemplateContentProperty, new NotificationsPage(this).Content);
             (sender as Button).IsEnabled = true;
         }
 
         public async void OnNewRequestClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            await Navigator.PushAsync(Navigation, new FillRequestPage(), Parent as Page, false);
+            SetValue(TemplateContentProperty, new FillRequestPage(this).Content);
             (sender as Button).IsEnabled = true;
         }
         public async void OnHomeClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            await Navigator.PushAsync(Navigation, new HomePage(), Parent as Page, false);
+            SetValue(TemplateContentProperty, new HomePage(this).Content);
             (sender as Button).IsEnabled = true;
         }
     }

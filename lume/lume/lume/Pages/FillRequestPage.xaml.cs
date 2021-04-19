@@ -6,14 +6,14 @@ using System;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using ContentTemplatedView = lume.Templates.ContentTemplatedView;
 
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FillRequestPage : ContentPage
+    public partial class FillRequestPage : ContentTemplatedView
     {
-        public FillRequestPage()
+        public FillRequestPage(MainPageTemplate Control) : base(Control)
         {
             InitializeComponent();
 

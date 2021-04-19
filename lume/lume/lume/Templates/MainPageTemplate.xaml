@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      x:Class="lume.Templates.MainPageTemplate">
+      x:Class="lume.Templates.MainPageTemplate"
+             xmlns:templates="clr-namespace:lume.Templates"
+             x:DataType="{x:Type templates:MainPageTemplate}">
 
     <AbsoluteLayout>
         <Frame x:Name="PopUpFrame" 
@@ -11,9 +13,10 @@
         </Frame>
         <Grid  AbsoluteLayout.LayoutBounds="0,0,1,1"
                AbsoluteLayout.LayoutFlags="All"
-           ColumnDefinitions="*,*,*"
-           ColumnSpacing="0"
-           RowSpacing="0">
+               ColumnDefinitions="*,*,*"
+               ColumnSpacing="0"
+           RowSpacing="0"
+               BackgroundColor="{x:StaticResource VerdeLume}">
 
             <Grid.RowDefinitions>
                 <RowDefinition>
@@ -30,28 +33,17 @@
             </Grid.RowDefinitions>
 
 
-            <BoxView Grid.Column="0"
-                         Grid.Row="0"
-                         Grid.ColumnSpan="3">
-                <BoxView.BackgroundColor>
-                    <OnPlatform x:TypeArguments="Color">
-                        <On Platform="iOS" Value="{x:StaticResource VerdeLume}"/>
-                        <On Platform="Android" Value="Transparent"/>
-                    </OnPlatform>
-                </BoxView.BackgroundColor>
-            </BoxView>
-
             <ContentView Grid.Column="0"
                      Grid.ColumnSpan="3"
                      Grid.Row="1"
-                     Content="{Binding TemplateContent}"/>
+                     Content="{Binding TemplateContent}"
+                         BackgroundColor="{x:StaticResource BiancoLume}"/>
 
             <Grid Grid.Column="0"
               Grid.Row="2"
               Grid.ColumnSpan="3"
               ColumnSpacing="0"
-              RowSpacing="0"
-              BackgroundColor="{x:StaticResource VerdeLume}">
+              RowSpacing="0">
 
                 <Button Text="&#xf007;"
                     FontFamily="{x:StaticResource IconSolid}"
@@ -76,4 +68,4 @@
         </Grid>
 
     </AbsoluteLayout>
-</ContentView>
+</ContentPage>

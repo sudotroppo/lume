@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<templates:ContentTemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:custom="clr-namespace:lume.CustomObj"
 			 x:Class="lume.Pages.FillRequestPage"
              xmlns:templates="clr-namespace:lume.Templates">
 
-    <templates:MainPageTemplate>
-        <templates:MainPageTemplate.TemplateContent>
-            <AbsoluteLayout>
-                <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+    <AbsoluteLayout>
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
                             AbsoluteLayout.LayoutFlags="All"
                             Margin="10,0,10,10">
 
-                    <StackLayout Spacing="10"
+            <StackLayout Spacing="10"
                                  Margin="-10,0,-10,0"
                                  IsClippedToBounds="True">
-                        <ImageButton x:Name="selectedImage"
+                <ImageButton x:Name="selectedImage"
                                      BackgroundColor="{x:StaticResource GrigioLume}"
                                      HeightRequest="240"
                                      Margin="-10,0,-10,0"
@@ -23,21 +21,19 @@
                                      Source="uploadImage.png"
                                      Clicked="Handle_Clicked"/>
 
-                        <StackLayout Spacing="25" >
+                <StackLayout Spacing="25" >
 
-                            <custom:LumEntry x:Name="Titolo"
+                    <custom:LumEntry x:Name="Titolo"
                                          Placeholder="Titolo"
                                          BorderWidth="0"
                                          HorizontalOptions="FillAndExpand"/>
 
-                            <custom:LumEditor x:Name="Descrizione"
+                    <custom:LumEditor x:Name="Descrizione"
                                           Placeholder="Inserisci una descrizione.."
                                           AutoSize="TextChanges"
                                           BorderWidth="0"/>
-                        </StackLayout>
-                    </StackLayout>
-                </ScrollView>
-            </AbsoluteLayout>
-        </templates:MainPageTemplate.TemplateContent>
-    </templates:MainPageTemplate>
-</ContentPage>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
+</templates:ContentTemplatedView>

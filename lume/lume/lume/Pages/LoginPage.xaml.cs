@@ -1,4 +1,5 @@
 ﻿using lume.CustomObj;
+using lume.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -20,7 +21,8 @@ namespace lume.Pages
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new HomePage(), false);
+
+            await Navigation.PushAsync(new MainPageTemplate(), false);
 
         }
     }

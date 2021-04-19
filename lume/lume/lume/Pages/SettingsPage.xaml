@@ -1,13 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<templates:ContentTemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="lume.Pages.SettingsPage"
              xmlns:templates="clr-namespace:lume.Templates">
-    <ContentPage.Content>
-        <templates:MainPageTemplate>
-            <templates:MainPageTemplate.TemplateContent>
-                <StackLayout/>
-            </templates:MainPageTemplate.TemplateContent>
-        </templates:MainPageTemplate>
-    </ContentPage.Content>
-</ContentPage>
+    <StackLayout/>
+</templates:ContentTemplatedView>

@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 namespace lume.Pages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ProfilePage : ContentPage
+	public partial class ProfilePage : ContentTemplatedView
 	{
 
         private bool EditMode = false;
         private readonly IList<View> InfoList;
 
-        public ProfilePage()
+        public ProfilePage(MainPageTemplate Control) : base(Control)
         {
             InitializeComponent();
             InfoList = InfoStack.Children;
@@ -72,27 +72,12 @@ namespace lume.Pages
 
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            Task.Run(() =>
-            {
-                Animations.CascadeToTheChildren(ProfileInfoList, (v) =>
-                {
-                    v.ScaleX = 0;
-                    v.ScaleY = 0;
-                    return Animations.ScaleTo(v, 1, 1, Easing.CubicInOut);
-                }).Commit(this, "OnAppearing", 1, 1400);
-            });
-
-        }
-
         public async void OnBackButtonCliked(object sender, EventArgs e)
         {
             Button b = (sender as Button);
             b.TextColor = b.TextColor;
             b.IsEnabled = false;
-            Navigation.InsertPageBefore(new NotificationsPage(), this);
+
             double ProfileImageStartX = (Application.Current.MainPage.Width / 2);
             double ProfileImageEndX = 10 + (ProfileImage.WidthRequest / 4f);
             double dx = ProfileImageEndX - ProfileImageStartX;
@@ -109,7 +94,7 @@ namespace lume.Pages
 
             await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
             {
-                await Navigation.PopAsync(false);
+                Control.SetValue(MainPageTemplate.TemplateContentProperty, new NotificationsPage(Control).Content);
                 b.IsEnabled = true;
             }));
 
@@ -119,7 +104,7 @@ namespace lume.Pages
         {
             Button b = sender as Button;
             b.IsEnabled = false;
-            Navigation.InsertPageBefore(new SettingsPage(), this);
+
             await Task.Run(() =>
             {
                 Animation ToProfileSettings = new Animation
@@ -130,7 +115,7 @@ namespace lume.Pages
                 };
                 ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
                 {
-                    Navigation.PopAsync(false);
+                    Control.SetValue(MainPageTemplate.TemplateContentProperty, new SettingsPage(Control).Content);
                     b.IsEnabled = true;
                 });
             });
