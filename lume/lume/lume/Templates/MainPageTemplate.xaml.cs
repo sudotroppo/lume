@@ -24,20 +24,20 @@ namespace lume.Templates
             BindingContext = this;
         }
 
-        public async void OnProfileClicked(object sender, EventArgs e)
+        public void OnProfileClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
             SetValue(TemplateContentProperty, new NotificationsPage(this).Content);
             (sender as Button).IsEnabled = true;
         }
 
-        public async void OnNewRequestClicked(object sender, EventArgs e)
+        public void OnNewRequestClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
             SetValue(TemplateContentProperty, new FillRequestPage(this).Content);
             (sender as Button).IsEnabled = true;
         }
-        public async void OnHomeClicked(object sender, EventArgs e)
+        public void OnHomeClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
             SetValue(TemplateContentProperty, new HomePage(this).Content);

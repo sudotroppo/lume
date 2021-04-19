@@ -29,6 +29,11 @@ namespace lume.iOS.Renderers
             Control.Layer.BorderWidth = customEntry.BorderWidth;
             Control.Layer.BorderColor = customEntry.BorderColor.ToCGColor();
 
+            if (!customEntry.CurveIsEnabled)
+            {
+                Control.BorderStyle = UITextBorderStyle.None;
+            }
+
             Control.LeftView = new UIView(new CGRect(0, 0, 10, 0));
             Control.LeftViewMode = UITextFieldViewMode.Always;
 

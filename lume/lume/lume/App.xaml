@@ -2,6 +2,7 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:custom="clr-namespace:lume.CustomObj"
+			 xmlns:viewModels="clr-namespace:lume.ViewModels"
 			 x:Class="lume.App">
 	<Application.Resources>
 		<OnPlatform x:Key="LumeRadius"
@@ -85,12 +86,8 @@
                                                      Center="22.5,22.5"/>
                                 </Frame.Clip>
 
-                                <Image AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
-                                           AbsoluteLayout.LayoutFlags="All"
-                                           Source="{Binding ImageUrl}"
-                                           Aspect="AspectFit"/>
-
-
+                                <Image Source="{Binding ImageUrl}"
+                                       Aspect="AspectFit"/>
                             </Frame>
 
                             <Label Margin="0"
@@ -158,8 +155,10 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
-        
-        
+
+		<!--BindingContext vari-->
+        <viewModels:MainViewModel x:Key="mainVM"/>
+
         <!--Stili impliciti App-->
         
         <!--ContentPage-->

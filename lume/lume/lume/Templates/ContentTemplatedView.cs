@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace lume.Templates
 {
-    public class ContentTemplatedView : ContentView
+    public class ContentTemplatedView : ContentPage
     {
         public MainPageTemplate Control;
 

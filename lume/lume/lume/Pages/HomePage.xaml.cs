@@ -15,13 +15,12 @@ namespace lume.Pages
         public HomePage() : base()
         {
             InitializeComponent();
-            homePostViewer.BindingContext = new MainViewModel();
         }
 
         public HomePage(MainPageTemplate Control) : base(Control)
         {
             InitializeComponent();
-            homePostViewer.BindingContext = new MainViewModel();
+            BindingContext = new MainViewModel();
         }
 
         public async void OnRefresh(object sender, EventArgs e)

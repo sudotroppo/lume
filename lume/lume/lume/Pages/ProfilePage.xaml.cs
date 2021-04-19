@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using lume.Assets;
 using System.Threading.Tasks;
+using lume.ViewModels;
 
 namespace lume.Pages
 {
@@ -89,7 +90,7 @@ namespace lume.Pages
                 {0, 1, Animations.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
                 {0, 1, Animations.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
                 {0, 1, Animations.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) },
-                {0,1, Animations.RotateAround(Settings, new Point(Settings.WidthRequest,0), Math.PI/2, Easing.CubicInOut) }
+                {0,1, Animations.SlideOf(Settings, 45, 45, Easing.CubicInOut) }
             };
 
             await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>

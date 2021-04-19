@@ -1,25 +1,24 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<templates:ContentTemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
-                                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                                xmlns:pages="clr-namespace:lume.Pages"
-                                xmlns:vm="clr-namespace:lume.ViewModels"
-                                x:Class="lume.Pages.HomePage"
-                                xmlns:templates="clr-namespace:lume.Templates"
-                                x:DataType="{x:Type vm:MainViewModel}">
+<templates:ContentTemplatedView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:lume.Pages"
+    x:Class="lume.Pages.HomePage"
+    xmlns:templates="clr-namespace:lume.Templates">
 
 
-            <RefreshView RefreshColor="{x:StaticResource VerdeLume}"
+    <RefreshView RefreshColor="{x:StaticResource VerdeLume}"
                          Refreshing="OnRefresh"
                          AbsoluteLayout.LayoutBounds="0,0,1,1"
                          AbsoluteLayout.LayoutFlags="All">
-                <CollectionView x:Name="homePostViewer"
+        <CollectionView x:Name="homePostViewer"
                                     Margin="8,0,8,0"
                                     VerticalScrollBarVisibility="Never"
-                                    ItemsSource="{Binding Posts}"
+                                    ItemsSource="{Binding Posts, Source={x:StaticResource mainVM}}"
                                     ItemTemplate="{x:StaticResource PostSimpleTemplate}">
 
 
-                </CollectionView>
-            </RefreshView>
+        </CollectionView>
+    </RefreshView>
 
 </templates:ContentTemplatedView>
