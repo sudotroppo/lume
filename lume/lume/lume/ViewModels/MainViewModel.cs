@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using lume.Domain;
+using Xamarin.Forms;
 
 namespace lume.ViewModels
 {
@@ -40,53 +41,41 @@ namespace lume.ViewModels
                 Address = "domenicobini@pazzo.sgravato.it",
                 Name = "Domenico",
                 Surname = "Bini",
-                Image = "https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg",
+                UriImageSources = new UriImageSource
+                {
+                    Uri = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
+                    CachingEnabled = true,
+                    CacheValidity = new TimeSpan(24,0,0),
+                }
             };
 
             _Posts = new List<Post>
             {
-                new Post
-                {
-                    Description = "Prova 1234",
-                    UserFullName = "Domenico Bini",
-                    ImageUrl = "https://media-exp1.licdn.com/dms/image/C4D0BAQHfpyHqcRq4pw/company-logo_200_200/0/1519952614888?e=2159024400&v=beta&t=XAgsNTbzezRZ_Wsbt9M73iX5qWibWFXtaKfkur61w5A",
-                    Number = 3,
-                },
-                new Post
-                {
-                    Description = "Prova 1234",
-                    UserFullName = "Domenico Bini",
-                    ImageUrl = "https://media-exp1.licdn.com/dms/image/C4D0BAQHfpyHqcRq4pw/company-logo_200_200/0/1519952614888?e=2159024400&v=beta&t=XAgsNTbzezRZ_Wsbt9M73iX5qWibWFXtaKfkur61w5A",
-                    Number = 3,
-                },
-                new Post
-                {
-                    Description = "Prova 1234",
-                    UserFullName = "Domenico Bini",
-                    ImageUrl = "https://media-exp1.licdn.com/dms/image/C4D0BAQHfpyHqcRq4pw/company-logo_200_200/0/1519952614888?e=2159024400&v=beta&t=XAgsNTbzezRZ_Wsbt9M73iX5qWibWFXtaKfkur61w5A",
-                    Number = 3,
-                },
-                new Post
-                {
-                    Description = "Prova 1234",
-                    UserFullName = "Domenico Bini",
-                    ImageUrl = "https://media-exp1.licdn.com/dms/image/C4D0BAQHfpyHqcRq4pw/company-logo_200_200/0/1519952614888?e=2159024400&v=beta&t=XAgsNTbzezRZ_Wsbt9M73iX5qWibWFXtaKfkur61w5A",
-                    Number = 3,
-                },
-                new Post
-                {
-                    Description = "Prova 1234",
-                    UserFullName = "Domenico Bini",
-                    ImageUrl = "https://media-exp1.licdn.com/dms/image/C4D0BAQHfpyHqcRq4pw/company-logo_200_200/0/1519952614888?e=2159024400&v=beta&t=XAgsNTbzezRZ_Wsbt9M73iX5qWibWFXtaKfkur61w5A",
-                    Number = 3,
-                },
-                new Post
-                {
-                    Description = "Prova 1234",
-                    UserFullName = "Domenico Bini",
-                    ImageUrl = "https://media-exp1.licdn.com/dms/image/C4D0BAQHfpyHqcRq4pw/company-logo_200_200/0/1519952614888?e=2159024400&v=beta&t=XAgsNTbzezRZ_Wsbt9M73iX5qWibWFXtaKfkur61w5A",
-                    Number = 3,
-                }
+               new Post
+               {
+                   Owner = CurrentUser,
+                   Description = "Aiutatemi a pulire il culetto!!1!11!",
+                   Number = 1
+               },
+               new Post
+               {
+                   Owner = CurrentUser,
+                   Description = "Il Vulcanoooooo",
+                   Number = 0
+               },
+               new Post
+               {
+                   Owner = CurrentUser,
+                   Description = "Ha eruttatoooo",
+                   Number = 100
+               },
+               new Post
+               {
+                   Owner = CurrentUser,
+                   Description = "Ueeeeee",
+                   Number = 10
+               }
+
             };
         }
     }

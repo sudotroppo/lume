@@ -71,7 +71,7 @@
                     </Frame.Clip>
 
                     <!--https://i.ebayimg.com/images/g/LEkAAOSw40pbtyrF/s-l1600.jpg-->
-                    <Image Source="{Binding CurrentUser.Image}"
+                    <Image Source="{Binding CurrentUser.UriImageSources}"
                                    BindingContext="{x:StaticResource mainVM}"
                                    Aspect="AspectFill"/>
 

@@ -77,6 +77,7 @@
 
                             <Frame IsClippedToBounds="True"
                                    Padding="0"
+								   Margin="0"
                                    VerticalOptions="Center"
                                    HeightRequest="45"
                                    WidthRequest="45">
@@ -86,13 +87,15 @@
                                                      Center="22.5,22.5"/>
                                 </Frame.Clip>
 
-                                <Image Source="{Binding ImageUrl}"
-                                       Aspect="AspectFit"/>
+                                <Image Source="{Binding Owner.UriImageSources}"
+									   WidthRequest="45"
+									   HeightRequest="45"
+                                       Aspect="AspectFill"/>
                             </Frame>
 
                             <Label Margin="0"
                                    VerticalOptions="Center"
-                                   Text="{Binding UserFullName}"/>
+                                   Text="{Binding Owner}"/>
 
                             <Label TextColor="{x:StaticResource NeroLume}" 
                                    Margin="4,0,4,0"
@@ -100,9 +103,9 @@
                                    HorizontalOptions="EndAndExpand">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="&#xf500;&#x09;&#x09;"
+                                        <Span Text="&#xf500;"
                                       FontFamily="{x:StaticResource IconSolid}"/>
-                                        <Span Text="{Binding Number}"/>
+                                        <Span Text="{Binding Number, StringFormat='  {0}'}"/>
 
                                     </FormattedString>
                                 </Label.FormattedText>

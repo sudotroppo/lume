@@ -69,7 +69,7 @@
                                          Center="22.5,22.5"/>
                     </Frame.Clip>
 
-                    <Image Source="{Binding CurrentUser.Image}"
+                    <Image Source="{Binding CurrentUser.UriImageSources}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 

@@ -6,9 +6,7 @@ namespace lume.Domain
 {
     public class Post
     {
-        public string UserFullName { set; get; }
-        
-        public string ImageUrl { get; set; }
+        public User Owner { get; set; }
 
         public int Number { get; set; }
 
