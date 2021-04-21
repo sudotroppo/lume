@@ -1,47 +1,43 @@
 const express = require('express');
 const router = express.Router();
 
+const db = require("../services/database");
+
+
+	
+	/*const getUserIdByEmail = async (req, res, next) => {
+	req.data = await db.user.findUnique({
+		where: {
+		 email: req.body.email,
+		},
+	 });
+	next();
+	};
+
 	router.get('/', (req, res, next) => {
-		res.status(200).json({
-			message: 'Handling GET requests to /user'
-		});
+		res.json();
 	});
+	*/
 
 	router.post('/', (req, res, next) => {
 		const user = {
+			email: req.body.email,
 			nome: req.body.nome,
 			cognome: req.body.cognome
 		};
+
+		db.user.create({ data: user })
+                    .catch((err) => {
+                        return res.status(500).json({
+                            error: err
+                        });
+
+                    });
 		res.status(201).json({
-			message: 'Handling POST requests to /user',
-			createdUser: user
+			message: "Post di user",
+			Utente:user
 		});
-	});
 
-	router.get('/:userId', (req, res, next) => {
-		const id = req.params.userId;
-		if(id === 'special'){
-			res.status(200).json({
-				message: 'Hai trovato l ID',
-				id: id
-			});
-		}else{
-			res.status(200).json({
-				message: 'Hai mandato un ID'
-			});
-		}
 	});
-
-		router.patch('/:userId', (req, res, next) => {
-			res.status(200).json({
-				message: 'Updated user',
-			});
-		});
-		
-		router.delete('/:userId', (req, res, next) => {
-			res.status(200).json({
-				message: 'Deleted user',
-			});
-		});
 
 module.exports = router;
