@@ -41,6 +41,7 @@ namespace lume.Templates
             (sender as Button).IsEnabled = false;
             await Navigator.PushAsync(Navigation, new FillRequestPage(), Parent as Page, false);
             (sender as Button).IsEnabled = true;
+            
         }
         public async void OnHomeClicked(object sender, EventArgs e)
         {

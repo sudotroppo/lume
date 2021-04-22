@@ -22,14 +22,14 @@
 	
 	<ContentView.Content>
 
-		<Frame HasShadow="False"
+        <Frame HasShadow="False"
 			   CornerRadius="20"
 			   IsClippedToBounds="True"
 			   BackgroundColor="{x:StaticResource GrigioLume}">
 
-			<StackLayout Spacing="10"
+            <StackLayout Spacing="10"
 						 Margin="-10">
-				<StackLayout Orientation="Horizontal"
+                <StackLayout Orientation="Horizontal"
 							 Spacing="10">
 
                     <Frame IsClippedToBounds="True"
@@ -44,11 +44,11 @@
                         <Image Source="{Binding ProfileImage}"
 							   Margin="-20"
 							   Aspect="AspectFill"/>
-                        
-                        
-					</Frame>
 
-					<Label Margin="0"
+
+                    </Frame>
+
+                    <Label Margin="0"
 						   Text="{Binding UserFullName}"/>
 
                     <Label TextColor="{x:StaticResource NeroLume}" 
@@ -63,21 +63,21 @@
                         </Label.FormattedText>
                     </Label>
 
-				</StackLayout>
-
-                <StackLayout Orientation="Horizontal">
-                    
                 </StackLayout>
 
-				<Label Text="{Binding PostDescription}"/>
-				<Button Text="Proponiti"
+                <StackLayout Orientation="Horizontal">
+
+                </StackLayout>
+
+                <Label Text="{Binding PostDescription}"/>
+                <Button Text="Proponiti"
 						CornerRadius="0"
 						Margin="-20,0,-20,-10"
 						HeightRequest="40"
 						BackgroundColor="{x:StaticResource VerdeLume}"
 						FontSize="{x:StaticResource ButtonStandardFontSize}"/>
-			</StackLayout>
-		</Frame>
+            </StackLayout>
+        </Frame>
 
-	</ContentView.Content>
+    </ContentView.Content>
 </ContentView>
