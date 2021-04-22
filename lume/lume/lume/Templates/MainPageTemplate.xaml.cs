@@ -78,6 +78,7 @@ namespace lume.Templates
             (sender as Button).IsEnabled = false;
 
             (sender as Button).IsEnabled = true;
+            
         }
         public async void OnHomeClicked(object sender, EventArgs e)
         {

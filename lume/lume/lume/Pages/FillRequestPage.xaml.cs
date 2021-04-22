@@ -16,6 +16,8 @@ namespace lume.Pages
         public FillRequestPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
+            BindingContext = this;
+            StepperLabel.BindingContext = this;
 
         }
 
@@ -47,8 +49,36 @@ namespace lume.Pages
                 selectedImage.Source = ImageSource.FromStream(() => stream);
             }
 
-            
         }
-        
+
+        // Funzioni relative allo stepper
+
+        private readonly int MAX_REQUESTED_PEOPLE = 10;
+        public static readonly BindableProperty RequestedPeopleValue = 
+            BindableProperty.Create(nameof(RequestedPeople), typeof(int), typeof(FillRequestPage), 1);
+
+        public int RequestedPeople
+        {
+            set => SetValue(RequestedPeopleValue, value);
+            get => (int)GetValue(RequestedPeopleValue);
+        }
+
+        void OnStepperIncrease(object sender, EventArgs e)
+        {
+            if (RequestedPeople < MAX_REQUESTED_PEOPLE)
+            {
+                RequestedPeople++;
+            }
+
+        }
+
+        void OnStepperDecrease(object sender, EventArgs e)
+        {
+            if (RequestedPeople > 1) 
+            {
+                RequestedPeople--;
+            }
+        }
+
     }
 }
