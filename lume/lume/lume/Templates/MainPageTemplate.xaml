@@ -54,6 +54,7 @@
                     BackgroundColor="Transparent"/>
                 <Button x:Name="fillrequestButton"
                         Text="&#xf055;"
+                        TextColor="{x:StaticResource UnselectedTabsColor}"
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="25"
                     Grid.Column="1"

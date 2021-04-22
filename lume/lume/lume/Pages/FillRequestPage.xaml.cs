@@ -11,9 +11,9 @@ using ContentTemplatedView = lume.Templates.ContentTemplatedView;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FillRequestPage : ContentTemplatedView
+    public partial class FillRequestPage : ContentPage
     {
-        public FillRequestPage(Navigator navigator) : base(navigator)
+        public FillRequestPage()
         {
             InitializeComponent();
             BindingContext = this;

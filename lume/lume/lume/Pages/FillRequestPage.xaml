@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<templates:ContentTemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:custom="clr-namespace:lume.CustomObj"
 			 x:Class="lume.Pages.FillRequestPage"
@@ -9,12 +9,11 @@
 
     <AbsoluteLayout>
         <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
-                            AbsoluteLayout.LayoutFlags="All"
-                            Margin="10,0,10,10">
+                            AbsoluteLayout.LayoutFlags="All">
 
-                    <StackLayout>
+            <StackLayout>
 
-                        <ImageButton x:Name="selectedImage"
+                <ImageButton x:Name="selectedImage"
                                      BackgroundColor="{x:StaticResource GrigioLume}"
                                      HeightRequest="240"
                                      HorizontalOptions="FillAndExpand"
@@ -22,7 +21,7 @@
                                      Clicked="Handle_Clicked"
                                      Margin="0, 0, 0, 20"/>
 
-                        <!--
+                <!--
                         
                         <custom:LumEntry x:Name="Titolo"
                                          Placeholder="Titolo"
@@ -35,39 +34,39 @@
                                           BorderWidth="1"/>
                         
                         -->
-                        
-                        <!-- TODO: da rimpiazzare -->
 
-                        <Entry Margin="20, 0, 20, 10"
+                <!-- TODO: da rimpiazzare -->
+
+                <Entry Margin="20, 0, 20, 10"
                                Placeholder="Titolo"
                                FontSize="15"/>
 
-                        <Editor Margin="20, 0, 20, 0"
+                <Editor Margin="20, 0, 20, 0"
                                 Placeholder="Descrizione"
                                 FontSize="15"
                                 AutoSize="TextChanges"/>
-                        
-                        <!-- stepper -->
 
-                        <Label Text="Persone richieste"
+                <!-- stepper -->
+
+                <Label Text="Persone richieste"
                                Margin="20, 20, 0, 10"
                                FontAttributes="Bold"/>
 
-                        <Frame BackgroundColor="LightBlue"
+                <Frame BackgroundColor="LightBlue"
                                Margin="20, 0, 20, 0"
                                Padding="0"
                                CornerRadius="10"
                                IsClippedToBounds="True">
 
-                            <!-- usare il margin dello StackLayout per spostare i bottoni -->
-                            <StackLayout Orientation="Horizontal"
+                    <!-- usare il margin dello StackLayout per spostare i bottoni -->
+                    <StackLayout Orientation="Horizontal"
                                   BackgroundColor="LightGray"
                                   Margin="-20, 0, -20, 0"
                                   HeightRequest="35">
 
-                                <!-- bottone per incrementare -->
-                                
-                                <Button Text="&#xf068;"
+                        <!-- bottone per incrementare -->
+
+                        <Button Text="&#xf068;"
                                        FontFamily="{x:StaticResource IconSolid}"
                                        BackgroundColor="Gray"
                                        CornerRadius="0"
@@ -75,14 +74,14 @@
                                        Padding="10"
                                        Clicked="OnStepperDecrease"/>
 
-                                <Label x:Name="StepperLabel"
+                        <Label x:Name="StepperLabel"
                                    HorizontalOptions="CenterAndExpand"
                                    VerticalOptions="Center"
                                    Text="{Binding RequestedPeople}"/>
 
-                                <!-- bottone per incrementare -->
+                        <!-- bottone per incrementare -->
 
-                                <Button BackgroundColor="Gray"
+                        <Button BackgroundColor="Gray"
                                        Text="&#xf067;"
                                        FontFamily="{x:StaticResource IconSolid}"
                                        Padding="10"
@@ -90,19 +89,9 @@
                                        WidthRequest="42"
                                        Clicked="OnStepperIncrease"/>
 
-                            </StackLayout>
-                        </Frame>
-                        
-
                     </StackLayout>
-                </ScrollView>
-            </AbsoluteLayout>
-        </templates:MainPageTemplate.TemplateContent>
-    </templates:MainPageTemplate>
-</ContentPage>
-                                          BorderWidth="0"/>
-                </StackLayout>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </AbsoluteLayout>
-</templates:ContentTemplatedView>
+</ContentPage>

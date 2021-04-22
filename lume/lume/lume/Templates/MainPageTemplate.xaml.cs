@@ -73,10 +73,10 @@ namespace lume.Templates
             (sender as Button).IsEnabled = true;
         }
 
-        public void OnNewRequestClicked(object sender, EventArgs e)
+        public async void OnNewRequestClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-
+            await Navigation.PushAsync(new FillRequestPage());
             (sender as Button).IsEnabled = true;
             
         }
