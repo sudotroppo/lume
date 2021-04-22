@@ -11,16 +11,9 @@ namespace lume.Pages
 {
     public partial class HomePage : ContentTemplatedView
     {
-
-        public HomePage() : base()
+        public HomePage()
         {
             InitializeComponent();
-        }
-
-        public HomePage(MainPageTemplate Control) : base(Control)
-        {
-            InitializeComponent();
-            BindingContext = new MainViewModel();
         }
 
         public async void OnRefresh(object sender, EventArgs e)

@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 			 xmlns:custom="clr-namespace:lume.CustomObj"
 			 xmlns:viewModels="clr-namespace:lume.ViewModels"
 			 x:Class="lume.App">
@@ -57,6 +58,8 @@
 		<Color x:Key="GrigioLume">#E4E4E4</Color>
 		<Color x:Key="NeroLume">#4b4b4b</Color>
 		<Color x:Key="Nero">#000000</Color>
+        <Color x:Key="SelectedTabColor">#000000</Color>
+        <Color x:Key="UnselectedTabsColor">#e4e4e4</Color>
 
 		<!--**********-->
 
@@ -87,7 +90,7 @@
                                                      Center="22.5,22.5"/>
                                 </Frame.Clip>
 
-                                <Image Source="{Binding Owner.UriImageSources}"
+                                <ffimage:CachedImage Source="{Binding Owner.Image}"
 									   WidthRequest="45"
 									   HeightRequest="45"
                                        Aspect="AspectFill"/>

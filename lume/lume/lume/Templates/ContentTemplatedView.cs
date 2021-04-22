@@ -8,10 +8,12 @@ namespace lume.Templates
     {
         public MainPageTemplate Control;
 
-        public ContentTemplatedView(MainPageTemplate Control)
+        public Navigator navigator;
+
+        public ContentTemplatedView(Navigator navigator)
         {
             
-            this.Control = Control;
+            this.navigator = navigator;
         }
 
         public ContentTemplatedView() : this(null)

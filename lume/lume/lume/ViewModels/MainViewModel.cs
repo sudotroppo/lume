@@ -41,7 +41,7 @@ namespace lume.ViewModels
                 Address = "domenicobini@pazzo.sgravato.it",
                 Name = "Domenico",
                 Surname = "Bini",
-                UriImageSources = new UriImageSource
+                Image = new UriImageSource
                 {
                     Uri = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
                     CachingEnabled = true,

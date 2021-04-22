@@ -6,6 +6,7 @@
     xmlns:custom="clr-namespace:lume.CustomObj"
     xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:templates="clr-namespace:lume.Templates"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:vm="clr-namespace:lume.ViewModels">
 
 
@@ -61,7 +62,7 @@
                        AnchorX="0.5"
                        AnchorY="0"
                        AbsoluteLayout.LayoutBounds="0,0"
-                       BackgroundColor="{x:StaticResource NeroLume}">
+                       BackgroundColor="Transparent">
 
                     <Frame.Clip>
                         <EllipseGeometry RadiusX="22.5"
@@ -69,7 +70,7 @@
                                          Center="22.5,22.5"/>
                     </Frame.Clip>
 
-                    <Image Source="{Binding CurrentUser.UriImageSources}"
+                    <ffimage:CachedImage Source="{Binding CurrentUser.Image}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 

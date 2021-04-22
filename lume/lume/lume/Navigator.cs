@@ -1,4 +1,6 @@
-﻿using System;
+﻿using lume.Templates;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -6,29 +8,50 @@ using Xamarin.Forms;
 namespace lume
 {
     //classe per la navigazione tra pagine all'interno di una NavigationPage
-    public static class Navigator
+    public class Navigator
     {
-        public static Task PushAsync(INavigation Navigation, Page nextPage, Page currentPage, bool animated)
+
+        private MainPageTemplate mainPageTemplate;
+        private LinkedList<ContentTemplatedView> stackList;
+
+        public Navigator(MainPageTemplate mainPageTemplate)
         {
-            var stack = Navigation.NavigationStack;
-            Type currentPageType = currentPage.GetType();
-            Type nextPageType = nextPage.GetType();
+            this.mainPageTemplate = mainPageTemplate;
+            stackList = new LinkedList<ContentTemplatedView>();
+        }
 
-            if (currentPageType.Equals(nextPageType))
-                return Task.CompletedTask;
+        private void SetValues()
+        {
+            mainPageTemplate.CurrentTab = stackList.First();
+        }
 
-            Page resultPage = stack.ToList().Find(p => nextPageType.Equals(p.GetType()));
-
-            if (resultPage is null)
+        public Task PushAsync(ContentTemplatedView cv)
+        {
+            if (!cv.GetType().Equals(mainPageTemplate.CurrentTab.GetType()))
             {
-                resultPage = nextPage;
+                if(stackList.Count > 2) 
+                {
+                    stackList.RemoveLast();
+                }
+                return Task.Run(() => 
+                {
+                    stackList.AddFirst(cv);
+                    SetValues();
+                });
             }
-            else
-            {
-                Navigation.RemovePage(resultPage);
-            }
+            return Task.CompletedTask;
+        }
 
-            return Navigation.PushAsync(resultPage, false);
+        public Task PopAsync()
+        {
+            if(stackList.Count > 1)
+            {
+                return Task.Run(() => 
+                {
+                    stackList.RemoveFirst();
+                });
+            }
+            return Task.CompletedTask;
         }
     }
 }

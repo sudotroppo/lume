@@ -13,7 +13,7 @@ namespace lume.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FillRequestPage : ContentTemplatedView
     {
-        public FillRequestPage(MainPageTemplate Control) : base(Control)
+        public FillRequestPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
 

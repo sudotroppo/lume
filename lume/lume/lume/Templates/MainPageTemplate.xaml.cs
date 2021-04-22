@@ -10,7 +10,41 @@ namespace lume.Templates
     public partial class MainPageTemplate : ContentPage
     {
         public static readonly BindableProperty TemplateContentProperty =
-            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate), new HomePage().Content);
+            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate));
+
+        public static readonly BindableProperty CurrentTabProperty =
+           BindableProperty.Create(nameof(CurrentTab), typeof(ContentTemplatedView), typeof(MainPageTemplate));
+
+        public Navigator navigator;
+
+        public ContentTemplatedView rootTab = new HomePage();
+
+        public Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
+
+        public Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
+
+        public ContentTemplatedView CurrentTab 
+        {
+            set => OnTabSetted(value);
+            get => (ContentTemplatedView)GetValue(CurrentTabProperty);
+        }
+
+        private void OnTabSetted(ContentTemplatedView value)
+        {
+            SetValue(CurrentTabProperty, value);
+
+            deselectAllButtons();
+            if (value.GetType().Equals(typeof(HomePage)))
+            {
+
+                homeButton.TextColor = SelectedTabColor;
+            }
+            else
+            {
+                notificationButton.TextColor = SelectedTabColor;
+            }
+            TemplateContent = value.Content;
+        }
 
         public View TemplateContent
         {
@@ -21,26 +55,35 @@ namespace lume.Templates
         public MainPageTemplate()
         {
             InitializeComponent();
+            navigator = new Navigator(this);
+            CurrentTab = rootTab;
             BindingContext = this;
         }
 
-        public void OnProfileClicked(object sender, EventArgs e)
+        private void deselectAllButtons()
+        {
+            notificationButton.TextColor = UnselectedTabColor;
+            homeButton.TextColor = UnselectedTabColor;
+        }
+
+        public async void OnProfileClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            SetValue(TemplateContentProperty, new NotificationsPage(this).Content);
+            await navigator.PushAsync(new NotificationsPage(navigator));
             (sender as Button).IsEnabled = true;
         }
 
         public void OnNewRequestClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            SetValue(TemplateContentProperty, new FillRequestPage(this).Content);
+
             (sender as Button).IsEnabled = true;
         }
-        public void OnHomeClicked(object sender, EventArgs e)
+        public async void OnHomeClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            SetValue(TemplateContentProperty, new HomePage(this).Content);
+            if (!CurrentTab.GetType().Equals(typeof(HomePage)))
+                await navigator.PushAsync(rootTab);
             (sender as Button).IsEnabled = true;
         }
     }

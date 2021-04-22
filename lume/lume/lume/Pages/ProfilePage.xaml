@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:templates="clr-namespace:lume.Templates"
     x:Class="lume.Pages.ProfilePage"
-    xmlns:vm="clr-namespace:lume.ViewModels">
+    xmlns:vm="clr-namespace:lume.ViewModels"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <AbsoluteLayout Margin="0"
                     Padding="0">
 
@@ -62,7 +63,7 @@
                        WidthRequest="90"
                        IsClippedToBounds="true"
                        HeightRequest="90"
-                       BackgroundColor="{x:StaticResource NeroLume}">
+                       BackgroundColor="Transparent">
 
                     <Frame.Clip>
                         <EllipseGeometry RadiusX="45"
@@ -71,9 +72,10 @@
                     </Frame.Clip>
 
                     <!--https://i.ebayimg.com/images/g/LEkAAOSw40pbtyrF/s-l1600.jpg-->
-                    <Image Source="{Binding CurrentUser.UriImageSources}"
-                                   BindingContext="{x:StaticResource mainVM}"
-                                   Aspect="AspectFill"/>
+                    <ffimage:CachedImage
+                           Source="{Binding CurrentUser.Image}"
+                           Aspect="AspectFill"
+                           BindingContext="{x:StaticResource mainVM}"/>
 
 
                 </Frame>

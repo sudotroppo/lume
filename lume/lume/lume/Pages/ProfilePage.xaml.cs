@@ -19,7 +19,7 @@ namespace lume.Pages
         private bool EditMode = false;
         private readonly IList<View> InfoList;
 
-        public ProfilePage(MainPageTemplate Control) : base(Control)
+        public ProfilePage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
             InfoList = InfoStack.Children;
@@ -95,7 +95,7 @@ namespace lume.Pages
 
             await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
             {
-                Control.SetValue(MainPageTemplate.TemplateContentProperty, new NotificationsPage(Control).Content);
+                await navigator.PushAsync(new NotificationsPage(navigator));
                 b.IsEnabled = true;
             }));
 
@@ -114,9 +114,9 @@ namespace lume.Pages
                     {0,0.5, Animations.ScaleTo(b,1.4,1.4, Easing.Linear) },
                     {0.5,1, Animations.ScaleTo(b, 1, 1, Easing.Linear) }
                 };
-                ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
+                ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, async (c, v) =>
                 {
-                    Control.SetValue(MainPageTemplate.TemplateContentProperty, new SettingsPage(Control).Content);
+                    await navigator.PushAsync(new SettingsPage(navigator));
                     b.IsEnabled = true;
                 });
             });

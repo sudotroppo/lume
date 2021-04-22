@@ -12,7 +12,7 @@ namespace lume.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NotificationsPage : ContentTemplatedView
     {
-        public NotificationsPage(MainPageTemplate Control) : base(Control)
+        public NotificationsPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
         }
@@ -38,7 +38,7 @@ namespace lume.Pages
 
             await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
             {
-                Control.TemplateContent = new ProfilePage(Control).Content;
+                await navigator.PushAsync(new ProfilePage(navigator));
                 b.IsEnabled = true;
             }));
         }
