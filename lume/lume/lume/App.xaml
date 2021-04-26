@@ -59,7 +59,7 @@
 		<Color x:Key="NeroLume">#4b4b4b</Color>
 		<Color x:Key="Nero">#000000</Color>
         <Color x:Key="SelectedTabColor">#000000</Color>
-        <Color x:Key="UnselectedTabsColor">#e4e4e4</Color>
+        <Color x:Key="UnselectedTabsColor">#ffffff</Color>
 
 		<!--**********-->
 

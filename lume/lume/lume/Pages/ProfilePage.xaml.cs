@@ -93,9 +93,9 @@ namespace lume.Pages
                 {0,1, Animations.SlideOf(Settings, 45, 45, Easing.CubicInOut) }
             };
 
-            await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
+            await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, (c, v) =>
             {
-                await navigator.PushAsync(new NotificationsPage(navigator));
+                navigator.PushAsync(new NotificationsPage(navigator));
                 b.IsEnabled = true;
             }));
 
@@ -114,9 +114,9 @@ namespace lume.Pages
                     {0,0.5, Animations.ScaleTo(b,1.4,1.4, Easing.Linear) },
                     {0.5,1, Animations.ScaleTo(b, 1, 1, Easing.Linear) }
                 };
-                ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, async (c, v) =>
+                ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
                 {
-                    await navigator.PushAsync(new SettingsPage(navigator));
+                    navigator.PushAsync(new SettingsPage(navigator));
                     b.IsEnabled = true;
                 });
             });

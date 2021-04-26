@@ -25,33 +25,27 @@ namespace lume
             mainPageTemplate.CurrentTab = stackList.First();
         }
 
-        public Task PushAsync(ContentTemplatedView cv)
+        public void PushAsync(ContentTemplatedView cv)
         {
             if (!cv.GetType().Equals(mainPageTemplate.CurrentTab.GetType()))
             {
-                if(stackList.Count > 2) 
+                if(stackList.Count > 3) 
                 {
                     stackList.RemoveLast();
                 }
-                return Task.Run(() => 
-                {
-                    stackList.AddFirst(cv);
-                    SetValues();
-                });
+                stackList.AddFirst(cv);
+                SetValues();
             }
-            return Task.CompletedTask;
         }
 
-        public Task PopAsync()
+        public bool PopAsync()
         {
             if(stackList.Count > 1)
             {
-                return Task.Run(() => 
-                {
-                    stackList.RemoveFirst();
-                });
+                stackList.RemoveFirst();
+                SetValues();
             }
-            return Task.CompletedTask;
+            return true;
         }
     }
 }

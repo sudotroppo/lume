@@ -11,9 +11,9 @@ using ContentTemplatedView = lume.Templates.ContentTemplatedView;
 namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FillRequestPage : ContentPage
+    public partial class FillRequestPage : ContentTemplatedView
     {
-        public FillRequestPage()
+        public FillRequestPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
             BindingContext = this;
@@ -21,7 +21,8 @@ namespace lume.Pages
 
         }
 
-        async void Handle_Clicked(object sender, System.EventArgs e)
+
+        private async void Handle_Clicked(object sender, System.EventArgs e)
         {
             /*await CrossMedia.Current.Initialize();
             if (!CrossMedia.Current.IsPickPhotoSupported)

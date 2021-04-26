@@ -63,11 +63,31 @@ namespace lume.Assets
         }
 
         //funzione che restituisce una animazione che sfuma il colore della view v al colorTarghet
-        public static Animation ChangeColor(View v, Color colorTarghet, Easing easing)
+        public static Animation ChangeColor(View v, BindableProperty colorProperty, Color targhetColor, Easing easing)
         {
+            Color initialColor = (Color)v.GetValue(colorProperty);
+
+            //valori iniziali
+            double ir = initialColor.R;
+            double ig = initialColor.G;
+            double ib = initialColor.B;
+            double ia = initialColor.A;
+
+            //valori finali
+            double er = targhetColor.R;
+            double eg = targhetColor.G;
+            double eb = targhetColor.B;
+            double ea = targhetColor.A;
+
+            //delta valori
+            double dr = er - ir;
+            double dg = eg - ig;
+            double db = eb - ib;
+            double da = ea - ia;
+
             return new Animation(c =>
             {
-
+                v.SetValue(colorProperty, Color.FromRgba(c * dr, c * dg, c * db, c * da));
             },
             0, 1, easing ?? Easing.Linear);
         }

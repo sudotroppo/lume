@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
-using System.Collections.Generic;
 namespace lume.Assets
 {
     public class AnimationSupport

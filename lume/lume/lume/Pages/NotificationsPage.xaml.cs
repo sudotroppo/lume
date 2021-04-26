@@ -15,16 +15,23 @@ namespace lume.Pages
         public NotificationsPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
+            this.onSettedTab = (s,e) =>
+            {
+                BackgroundLine.ScaleX = 0;
+                Animations.ScaleTo(BackgroundLine, 1, 1, Easing.CubicInOut).Commit(this, "NotificationTab", 1, 500, Easing.Linear);
+            };
         }
 
 
         public async void OnProfileClicked (object sender, EventArgs e)
 		{
-            Button b = (sender as Button);
+            Button b = sender as Button;
             b.IsEnabled = false;
+
             double ProfileImageEndX = (Application.Current.MainPage.Width / 2);
             double ProfileImageStartX = ProfileImage.WidthRequest/2 + 10;
             double dx = ProfileImageEndX - ProfileImageStartX;
+
             Animation ToProfilepage = new Animation  // animazione di cambio pagina
             {
                 {0,1, Animations.SlideOf(ToTheRight, 50, 0, Easing.CubicInOut) },
@@ -36,9 +43,9 @@ namespace lume.Pages
                 {0,1, Animations.SlideOf(Settings, -45,-45, Easing.CubicInOut) }
             };
 
-            await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.Linear, async (c, v) =>
+            await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.Linear, (c, v) =>
             {
-                await navigator.PushAsync(new ProfilePage(navigator));
+                navigator.PushAsync(new ProfilePage(navigator));
                 b.IsEnabled = true;
             }));
         }

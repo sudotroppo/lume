@@ -3,25 +3,21 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       x:Class="lume.Templates.MainPageTemplate"
              xmlns:templates="clr-namespace:lume.Templates"
+             xmlns:pages="clr-namespace:lume.Pages"
              x:DataType="{x:Type templates:MainPageTemplate}">
 
     <AbsoluteLayout>
-        <Frame x:Name="PopUpFrame" 
-               AbsoluteLayout.LayoutBounds="1,0,1,1"
-               AbsoluteLayout.LayoutFlags="All">
-            
-        </Frame>
         <Grid  AbsoluteLayout.LayoutBounds="0,0,1,1"
                AbsoluteLayout.LayoutFlags="All"
                ColumnDefinitions="*,*,*"
                ColumnSpacing="0"
-           RowSpacing="0"
+               RowSpacing="0"
                BackgroundColor="{x:StaticResource VerdeLume}">
 
             <Grid.RowDefinitions>
                 <RowDefinition>
                     <RowDefinition.Height>
-                        <OnPlatform x:TypeArguments="GridLength">
+                        <OnPlatform x:TypeArguments="GridLength" x:Name="navRow">
                             <On Platform="iOS" Value="50.0"/>
                             <On Platform="Android" Value="0.0"/>
                         </OnPlatform>
@@ -32,14 +28,16 @@
                 <RowDefinition Height="60"/>
             </Grid.RowDefinitions>
 
+            <ContentView x:Name="TabViewer"
+                             Grid.Column="0"
+                             Grid.ColumnSpan="3"
+                             Grid.Row="1"
+                             Content="{Binding TemplateContent, Mode=TwoWay}"
+                             BackgroundColor="{x:StaticResource BiancoLume}"/>
 
-            <ContentView Grid.Column="0"
-                     Grid.ColumnSpan="3"
-                     Grid.Row="1"
-                     Content="{Binding TemplateContent, Mode=TwoWay}"
-                         BackgroundColor="{x:StaticResource BiancoLume}"/>
 
-            <Grid Grid.Column="0"
+            <Grid x:Name="Buttons_grid"
+              Grid.Column="0"
               Grid.Row="2"
               Grid.ColumnSpan="3"
               ColumnSpacing="0"
@@ -50,7 +48,7 @@
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="{x:StaticResource ButtonMediumFontSize}"
                     Grid.Column="2"
-                    Clicked="OnProfileClicked"
+                    Clicked="OnNotificationClicked"
                     BackgroundColor="Transparent"/>
                 <Button x:Name="fillrequestButton"
                         Text="&#xf055;"
@@ -67,6 +65,15 @@
                     Grid.Column="0"
                     Clicked="OnHomeClicked"
                     BackgroundColor="Transparent"/>
+
+                
+                <BoxView x:Name="SelectedLine"
+                         HeightRequest="4"
+                         ScaleX="0.6"
+                         CornerRadius="2"
+                         Grid.Column="0"
+                         VerticalOptions="Start"
+                         BackgroundColor="{x:StaticResource SelectedTabColor}"/>
 
             </Grid>
         </Grid>

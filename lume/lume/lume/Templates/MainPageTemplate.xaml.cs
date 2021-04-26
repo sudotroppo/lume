@@ -1,13 +1,18 @@
-﻿using lume.Pages;
+﻿using lume.Assets;
+using lume.Pages;
 using System;
-
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace lume.Templates
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageTemplate : ContentPage
+    public partial class MainPageTemplate : ContentPage, INotifyPropertyChanged
     {
         public static readonly BindableProperty TemplateContentProperty =
             BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate));
@@ -15,35 +20,91 @@ namespace lume.Templates
         public static readonly BindableProperty CurrentTabProperty =
            BindableProperty.Create(nameof(CurrentTab), typeof(ContentTemplatedView), typeof(MainPageTemplate));
 
-        public Navigator navigator;
 
         public ContentTemplatedView rootTab = new HomePage();
 
-        public Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
+        private Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
 
-        public Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
+        private Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
 
-        public ContentTemplatedView CurrentTab 
+        public Navigator navigator;
+
+        private readonly Dictionary<Type, View> TabDictionary;
+
+        private static readonly ArrayList Tab = new ArrayList { typeof(HomePage), typeof(FillRequestPage), typeof(NotificationsPage) };
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            set => OnTabSetted(value);
-            get => (ContentTemplatedView)GetValue(CurrentTabProperty);
+            PropertyChanged?.Invoke(this, e);
         }
 
-        private void OnTabSetted(ContentTemplatedView value)
+        protected void OnPropertyChanged(string propertyName)
         {
-            SetValue(CurrentTabProperty, value);
+            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+        }
 
-            deselectAllButtons();
-            if (value.GetType().Equals(typeof(HomePage)))
-            {
 
-                homeButton.TextColor = SelectedTabColor;
-            }
-            else
+        private async void ChangeTab(object sender, EventArgs e)
+        {
+            Type currentTabType = CurrentTab.GetType();
+
+            TabDictionary.TryGetValue(currentTabType, out View selectedTab);
+
+            if (selectedTab != null)
             {
-                notificationButton.TextColor = SelectedTabColor;
+                (selectedTab as Button).TextColor = SelectedTabColor;
+
+                foreach (View v in TabDictionary.Values)
+                {
+                    if (!v.Equals(selectedTab))
+                    {
+                        (v as Button).TextColor = UnselectedTabColor;
+                    }
+                }
+
+                await Task.Run(() =>
+                {
+                    double columnWidth = Width / 3;
+                    double swithTranslation = SelectedLine.TranslationX;
+                    double initialScaleX = SelectedLine.ScaleX;
+
+                    int index = Tab.IndexOf(currentTabType);
+
+                    double dx = columnWidth * index - swithTranslation;
+
+                    new Animation()
+                    {
+                        { 0, 1, Animations.SlideOfX(SelectedLine, dx, Easing.CubicInOut) },
+                    }.Commit(this, "SwithTab", 1, 300, Easing.Linear,(s, b) =>
+                    {
+                        //da sistemare
+                        //CurrentTab.onSettedTab?.Invoke(sender, e);
+                    });
+                });
+
+
             }
-            TemplateContent = value.Content;
+
+        }
+
+        public ContentTemplatedView CurrentTab
+        {
+            set
+            {
+                if (value != CurrentTab)
+                {
+
+                    SetValue(CurrentTabProperty, value);
+                    TemplateContent = value.Content;
+                    PropertyChanged += ChangeTab;
+                    OnPropertyChanged("TemplateContent");
+                }
+            }
+
+
+            get => (ContentTemplatedView)GetValue(CurrentTabProperty);
         }
 
         public View TemplateContent
@@ -55,36 +116,44 @@ namespace lume.Templates
         public MainPageTemplate()
         {
             InitializeComponent();
+
+            TabDictionary = new Dictionary<Type, View>
+            {
+                { typeof(HomePage), homeButton },
+                { typeof(NotificationsPage), notificationButton },
+                { typeof(FillRequestPage), fillrequestButton}
+            };
+
             navigator = new Navigator(this);
+
             CurrentTab = rootTab;
+
             BindingContext = this;
         }
 
-        private void deselectAllButtons()
+        protected override bool OnBackButtonPressed()
         {
-            notificationButton.TextColor = UnselectedTabColor;
-            homeButton.TextColor = UnselectedTabColor;
+            return navigator.PopAsync();
         }
 
-        public async void OnProfileClicked(object sender, EventArgs e)
+        public void OnNotificationClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            await navigator.PushAsync(new NotificationsPage(navigator));
+            navigator.PushAsync(new NotificationsPage(navigator));
             (sender as Button).IsEnabled = true;
         }
 
-        public async void OnNewRequestClicked(object sender, EventArgs e)
+        public void OnNewRequestClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            await Navigation.PushAsync(new FillRequestPage());
+            navigator.PushAsync(new FillRequestPage(navigator));
             (sender as Button).IsEnabled = true;
-            
+
         }
-        public async void OnHomeClicked(object sender, EventArgs e)
+        public void OnHomeClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            if (!CurrentTab.GetType().Equals(typeof(HomePage)))
-                await navigator.PushAsync(rootTab);
+            navigator.PushAsync(rootTab);
             (sender as Button).IsEnabled = true;
         }
     }

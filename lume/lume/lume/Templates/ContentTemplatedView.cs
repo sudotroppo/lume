@@ -1,18 +1,23 @@
 ﻿using System;
+using lume.Assets;
 using lume.Templates;
 using Xamarin.Forms;
 
 namespace lume.Templates
 {
-    public class ContentTemplatedView : ContentPage
+    public abstract class ContentTemplatedView : ContentPage
     {
         public MainPageTemplate Control;
 
         public Navigator navigator;
 
+        private AnimationSupport animationSupport;
+
+        public EventHandler onSettedTab;
+
         public ContentTemplatedView(Navigator navigator)
         {
-            
+            animationSupport = new AnimationSupport();
             this.navigator = navigator;
         }
 
