@@ -29,7 +29,8 @@ namespace lume.Droid.Renderers
             gradientDrawable.SetStroke(customEntry.BorderWidth, customEntry.BorderColor.ToAndroid());
 
 
-            Control.SetBackground(gradientDrawable);
+            // Control.SetBackground(gradientDrawable);
+            Control.Background = this.Resources.GetDrawable(Resource.Drawable.customEntry);
             Control.SetPadding(50, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
         }
     }

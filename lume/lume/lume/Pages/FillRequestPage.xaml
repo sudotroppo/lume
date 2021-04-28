@@ -9,7 +9,8 @@
 
     <AbsoluteLayout>
         <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
-                            AbsoluteLayout.LayoutFlags="All">
+                            AbsoluteLayout.LayoutFlags="All"
+                    Padding="0, 0, 0, 20">
 
             <StackLayout>
 
@@ -19,23 +20,25 @@
                                      HorizontalOptions="FillAndExpand"
                                      Source="uploadImage.png"
                                      Clicked="Handle_Clicked"
-                                     Margin="0, 0, 0, 20"/>
+                                     Margin="0, 0, 0, 5"/>
 
-                <!--
-                        
+                                      
                         <custom:LumEntry x:Name="Titolo"
                                          Placeholder="Titolo"
-                                         BorderWidth="0"
-                                         HorizontalOptions="FillAndExpand"/>
+                                         HorizontalOptions="FillAndExpand"
+                                         HeightRequest="40"
+                                         Margin="20, 20, 20, 10"
+                                         />
 
                         <custom:LumEditor x:Name="Descrizione"
                                           Placeholder="Inserisci una descrizione.."
+                                          VerticalOptions="StartAndExpand"
                                           AutoSize="TextChanges"
-                                          BorderWidth="1"/>
-                        
-                        -->
-
-                <!-- TODO: da rimpiazzare -->
+                                          HeightRequest="200"
+                                          MaxLength="500"
+                                          />
+  
+                <!--
 
                 <Entry Margin="20, 0, 20, 10"
                                Placeholder="Titolo"
@@ -45,12 +48,15 @@
                                 Placeholder="Descrizione"
                                 FontSize="15"
                                 AutoSize="TextChanges"/>
+                
+                -->
 
                 <!-- stepper -->
 
                 <Label Text="Persone richieste"
                                Margin="20, 20, 0, 10"
-                               FontAttributes="Bold"/>
+                               FontAttributes="Bold"
+                               FontSize="14"/>
 
                 <Frame BackgroundColor="LightBlue"
                                Margin="20, 0, 20, 0"
@@ -60,7 +66,7 @@
 
                     <!-- usare il margin dello StackLayout per spostare i bottoni -->
                     <StackLayout Orientation="Horizontal"
-                                  BackgroundColor="LightGray"
+                                  BackgroundColor="#dddddd"
                                   Margin="-20, 0, -20, 0"
                                   HeightRequest="35">
 

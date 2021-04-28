@@ -8,8 +8,8 @@
 	<Application.Resources>
 		<OnPlatform x:Key="LumeRadius"
 					x:TypeArguments="x:Int32">
-			<On Platform="iOS" Value="25"/>
-			<On Platform="Android" Value="35"/>
+			<On Platform="iOS" Value="5"/>
+			<On Platform="Android" Value="10"/>
 		</OnPlatform>
 
 		 <OnPlatform x:Key="LumeCornerRadius"
@@ -18,7 +18,13 @@
 			<On Platform="Android" Value="35"/>
 		</OnPlatform>
 
-		<OnPlatform x:Key="LumeStrokeWidth"
+        <OnPlatform x:Key="EntriesRadius"
+					x:TypeArguments="CornerRadius">
+            <On Platform="iOS" Value="10"/>
+            <On Platform="Android" Value="20"/>
+        </OnPlatform>
+
+        <OnPlatform x:Key="LumeStrokeWidth"
 					x:TypeArguments="x:Int32">
 			<On Platform="iOS" Value="1"/>
 			<On Platform="Android" Value="2"/>
@@ -29,7 +35,7 @@
 		<x:Double x:Key="LabelStandardFontSize">14</x:Double>
 		<x:Double x:Key="LabelMediumFontSize">16</x:Double>
 		<x:Double x:Key="LabelTitleFontSize">30</x:Double>
-		<x:Double x:Key="LabelSmallFontSize">10</x:Double>
+		<x:Double x:Key="LabelSmallFontSize">13</x:Double>
 		<x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
 		<x:Double x:Key="ButtonStandardFontSize">14</x:Double>
 		<x:Double x:Key="EntryStandardFontSize">15</x:Double>
@@ -257,10 +263,10 @@
 			<Setter Property="BorderWidth"
 					Value="{x:StaticResource LumeStrokeWidth}"/>
 
-			<Setter Property="BorderColor"
+            <Setter Property="BorderColor"
 					Value="{x:StaticResource Nero}"/>
 
-		</Style>
+        </Style>
 
         <Style TargetType="{x:Type custom:LumEditor}">
 
@@ -276,8 +282,6 @@
 
             <Setter Property="FontFamily"
 					Value="{x:StaticResource EntryStandardFont}"/>
-
-            
 
             <Setter Property="Margin"
 					Value="{x:StaticResource TextMargin}"/>
