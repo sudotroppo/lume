@@ -33,6 +33,7 @@
                      Margin="10,0,10,-10"
                      HeightRequest="2"
                      CornerRadius="3"
+                     ScaleX="0"
                      VerticalOptions="EndAndExpand"/>
 
             <AbsoluteLayout Grid.Column="0"
@@ -70,7 +71,7 @@
                                          Center="22.5,22.5"/>
                     </Frame.Clip>
 
-                    <ffimage:CachedImage Source="{Binding CurrentUser.Image}"
+                    <ffimage:CachedImage Source="{Binding CurrentUser.Immagine}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 

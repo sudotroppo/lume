@@ -10,9 +10,9 @@ namespace lume.ViewModels
     
     class MainViewModel : BaseViewModel
     {
-        List<Post> _Posts;
+        List<Richiesta> _Posts;
 
-        public List<Post> Posts
+        public List<Richiesta> Posts
         {
             get { return _Posts; }
             set
@@ -22,9 +22,9 @@ namespace lume.ViewModels
             }
         }
 
-        User _CurrentUser;
+        Utente _CurrentUser;
 
-        public User CurrentUser
+        public Utente CurrentUser
         {
             get { return _CurrentUser; }
             set
@@ -36,12 +36,12 @@ namespace lume.ViewModels
 
         public MainViewModel()
         {
-            _CurrentUser = new User
+            _CurrentUser = new Utente
             {
-                Address = "domenicobini@pazzo.sgravato.it",
-                Name = "Domenico",
-                Surname = "Bini",
-                Image = new UriImageSource
+                Indirizzo = "domenicobini@pazzo.sgravato.it",
+                Nome = "Domenico",
+                Cognome = "Bini",
+                Immagine = new UriImageSource
                 {
                     Uri = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
                     CachingEnabled = true,
@@ -49,31 +49,43 @@ namespace lume.ViewModels
                 }
             };
 
-            _Posts = new List<Post>
+            _Posts = new List<Richiesta>
             {
-               new Post
+               new Richiesta()
                {
-                   Owner = CurrentUser,
-                   Description = "Aiutatemi a pulire il culetto!!1!11!",
-                   Number = 1
+                   Creatore = CurrentUser,
+                   Titolo = "Adjosbnow",
+                   Descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
+                   "wrg whbrg iebreir ve erg ereoriervierververbsaethdgfhj u tm t rtj ysrt hsr" +
+                   " rtsrtjrstj ajt rjr stj sr tjdtjysrjetrr tr rthgretgergdgrgegegege e",
+                   Partecipanti = 10,
+                   Immagini =
+                   {
+                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
+                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
+                   }
                },
-               new Post
+               new Richiesta()
                {
-                   Owner = CurrentUser,
-                   Description = "Il Vulcanoooooo",
-                   Number = 0
+                   Creatore = CurrentUser,
+                   Titolo = "Mskndvp",
+                   Descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
+                   "wrg whbrg iebreir ve erg ereoriervierververbsaethdgfhj u tm t rtj ysrt hsr" +
+                   " rtsrtjrstj ajt rjr stj sr tjdtjysrjetrr tr rthgretgergdgrgegegege e",
+                   Partecipanti = 1,
                },
-               new Post
+               new Richiesta()
                {
-                   Owner = CurrentUser,
-                   Description = "Ha eruttatoooo",
-                   Number = 100
-               },
-               new Post
-               {
-                   Owner = CurrentUser,
-                   Description = "Ueeeeee",
-                   Number = 10
+                   Creatore = CurrentUser,
+                   Titolo = "Mskndvp",
+                   Descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
+                   " rtsrtjrstj ajt rjr stj sr tjdtjysrjetrr tr rthgretgergdgrgegegege e",
+                   Partecipanti = 1,
+                   Immagini =
+                   {
+                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
+                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
+                   }
                }
 
             };

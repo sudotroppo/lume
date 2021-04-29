@@ -1,4 +1,5 @@
-﻿using lume.Templates;
+﻿using lume.Pages;
+using lume.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,16 @@ using Xamarin.Forms;
 
 namespace lume
 {
-    //classe per la navigazione tra pagine all'interno di una NavigationPage
+    //classe per la navigazione tra Tab di una MainPage
     public class Navigator
     {
 
-        private MainPageTemplate mainPageTemplate;
+        private MainPage mainPageTemplate;
         private LinkedList<ContentTemplatedView> stackList;
 
-        public Navigator(MainPageTemplate mainPageTemplate)
+        public Navigator(MainPage mainPage)
         {
-            this.mainPageTemplate = mainPageTemplate;
+            this.mainPageTemplate = mainPage;
             stackList = new LinkedList<ContentTemplatedView>();
         }
 

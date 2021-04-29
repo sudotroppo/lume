@@ -1,20 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Forms;
 
 namespace lume.Domain
 {
-    public class Post
+    public class Richiesta
     {
-        public User Owner { get; set; }
+        public Utente Creatore { get; set; }
 
-        public int Number { get; set; }
+        public int Partecipanti { get; set; }
 
-        public string Description { set; get; }
+        public string Titolo { set; get; }
 
-        public Post()
+        public string Descrizione
         {
-
+            set;
+            get;
         }
+
+        public string Anteprima;
+
+        public List<Uri> Immagini { set; get; }
+
+
+        public Richiesta()
+        {
+            Immagini = new List<Uri>();
+        }
+
     }
 }

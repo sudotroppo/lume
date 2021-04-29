@@ -33,9 +33,9 @@
                            >
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{x:Binding FieldValue,Source={x:Reference nameInfo}}"/>
+                            <Span Text="{x:Binding FieldValue,Source={x:Reference infoNome}}"/>
                             <Span Text=" "/>
-                            <Span Text="{x:Binding FieldValue,Source={x:Reference surnameInfo}}"/>
+                            <Span Text="{x:Binding FieldValue,Source={x:Reference infoCognome}}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -73,7 +73,7 @@
 
                     <!--https://i.ebayimg.com/images/g/LEkAAOSw40pbtyrF/s-l1600.jpg-->
                     <ffimage:CachedImage
-                           Source="{Binding CurrentUser.Image}"
+                           Source="{Binding CurrentUser.Immagine}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 
@@ -149,17 +149,17 @@
 
                     <StackLayout x:Name="InfoStack">
 
-                        <templates:InfoView x:Name="nameInfo"
+                        <templates:InfoView x:Name="infoNome"
                                             FieldName = "Nome"
-                                            FieldValue = "{Binding CurrentUser.Name,
+                                            FieldValue = "{Binding CurrentUser.Nome,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
-                        <templates:InfoView x:Name="surnameInfo"
+                        <templates:InfoView x:Name="infoCognome"
                                            FieldName = "Congome"
-                                           FieldValue ="{Binding CurrentUser.Surname,
+                                           FieldValue ="{Binding CurrentUser.Cognome,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
                         <templates:InfoView 
                                            FieldName = "Email"
-                                           FieldValue ="{Binding CurrentUser.Address,
+                                           FieldValue ="{Binding CurrentUser.Indirizzo,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
 
                     </StackLayout>

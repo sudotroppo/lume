@@ -2,19 +2,19 @@
 
 namespace lume.Domain
 {
-    public class User
+    public class Utente
     {
         public long Id { get; set; }
 
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
-        public string Surname { get; set; }
+        public string Cognome { get; set; }
 
-        public string Address { get; set; }
+        public string Indirizzo { get; set; }
 
         public string Password { get; set; }
 
-        public UriImageSource Image 
+        public UriImageSource Immagine 
         { 
             set; 
             get; 
@@ -23,7 +23,7 @@ namespace lume.Domain
 
         public override string ToString()
         {
-            return Name + " " + Surname;
+            return Nome + " " + Cognome;
         }
 
     }

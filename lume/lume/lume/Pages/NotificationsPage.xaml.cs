@@ -15,11 +15,7 @@ namespace lume.Pages
         public NotificationsPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
-            this.onSettedTab = (s,e) =>
-            {
-                BackgroundLine.ScaleX = 0;
-                Animations.ScaleTo(BackgroundLine, 1, 1, Easing.CubicInOut).Commit(this, "NotificationTab", 1, 500, Easing.Linear);
-            };
+            
         }
 
 

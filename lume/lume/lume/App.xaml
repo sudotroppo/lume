@@ -5,82 +5,80 @@
 			 xmlns:custom="clr-namespace:lume.CustomObj"
 			 xmlns:viewModels="clr-namespace:lume.ViewModels"
 			 x:Class="lume.App">
-	<Application.Resources>
-		<OnPlatform x:Key="LumeRadius"
+    <Application.Resources>
+        <OnPlatform x:Key="LumeRadius"
 					x:TypeArguments="x:Int32">
-			<On Platform="iOS" Value="25"/>
-			<On Platform="Android" Value="35"/>
-		</OnPlatform>
+            <On Platform="iOS" Value="25"/>
+            <On Platform="Android" Value="35"/>
+        </OnPlatform>
 
-		 <OnPlatform x:Key="LumeCornerRadius"
+        <OnPlatform x:Key="LumeCornerRadius"
 					x:TypeArguments="CornerRadius">
-			<On Platform="iOS" Value="25"/>
-			<On Platform="Android" Value="35"/>
-		</OnPlatform>
+            <On Platform="iOS" Value="25"/>
+            <On Platform="Android" Value="35"/>
+        </OnPlatform>
 
-		<OnPlatform x:Key="LumeStrokeWidth"
+        <OnPlatform x:Key="LumeStrokeWidth"
 					x:TypeArguments="x:Int32">
-			<On Platform="iOS" Value="1"/>
-			<On Platform="Android" Value="2"/>
-		</OnPlatform>
-		
-		<x:Int32 x:Key="MaxEntryLen">30</x:Int32>
-        
-		<x:Double x:Key="LabelStandardFontSize">14</x:Double>
-		<x:Double x:Key="LabelMediumFontSize">16</x:Double>
-		<x:Double x:Key="LabelTitleFontSize">30</x:Double>
-		<x:Double x:Key="LabelSmallFontSize">10</x:Double>
-		<x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
-		<x:Double x:Key="ButtonStandardFontSize">14</x:Double>
-		<x:Double x:Key="EntryStandardFontSize">15</x:Double>
-		<x:Double x:Key="ButtonMediumFontSize">16</x:Double>
+            <On Platform="iOS" Value="1"/>
+            <On Platform="Android" Value="2"/>
+        </OnPlatform>
 
-		<!--Fonts-->
-		<x:String x:Key="LabelStandardFont">OpenSans-R</x:String>
-		<x:String x:Key="EntryStandardFont">OpenSans-R</x:String>
-		<x:String x:Key="ButtonStandardFont">OpenSans-R</x:String>
-		<x:String x:Key="LumeFont">Montserrat-SB</x:String>
+        <x:Int32 x:Key="MaxEntryLen">30</x:Int32>
+
+        <x:Double x:Key="LabelStandardFontSize">14</x:Double>
+        <x:Double x:Key="LabelMediumFontSize">16</x:Double>
+        <x:Double x:Key="LabelTitleFontSize">30</x:Double>
+        <x:Double x:Key="LabelSmallFontSize">10</x:Double>
+        <x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
+        <x:Double x:Key="ButtonStandardFontSize">14</x:Double>
+        <x:Double x:Key="EntryStandardFontSize">15</x:Double>
+        <x:Double x:Key="ButtonMediumFontSize">16</x:Double>
+
+        <!--Fonts-->
+        <x:String x:Key="LabelStandardFont">OpenSans-R</x:String>
+        <x:String x:Key="EntryStandardFont">OpenSans-R</x:String>
+        <x:String x:Key="ButtonStandardFont">OpenSans-R</x:String>
+        <x:String x:Key="LumeFont">Montserrat-SB</x:String>
         <x:String x:Key="IconSolid">FotAwsome-S</x:String>
         <x:String x:Key="IconRegular">FotAwsome-R</x:String>
         <x:String x:Key="Brands">FotAwsomeBrands-R</x:String>
-        
+
         <!--Margini-->
         <Thickness x:Key="PageMargin">10,0,10,0</Thickness>
-		<Thickness x:Key="TextMargin">20,0,20,0</Thickness>
-		<Thickness x:Key="LineMargin">17,0,17,0</Thickness>
-		<Thickness x:Key="SmallTextMargin">30,0,0,0</Thickness>
-		<Thickness x:Key="PostMargin">0,0,0,0</Thickness>
+        <Thickness x:Key="TextMargin">20,0,20,0</Thickness>
+        <Thickness x:Key="LineMargin">17,0,17,0</Thickness>
+        <Thickness x:Key="SmallTextMargin">30,0,0,0</Thickness>
+        <Thickness x:Key="PostMargin">0,0,0,0</Thickness>
 
-		<!--Colori App-->
-		<Color x:Key="VerdeLume">#40a491</Color>
-		<Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
-		<Color x:Key="BiancoLume">#ffffff</Color>
-		<Color x:Key="GrigioLume">#E4E4E4</Color>
-		<Color x:Key="NeroLume">#4b4b4b</Color>
-		<Color x:Key="Nero">#000000</Color>
+        <!--Colori App-->
+        <Color x:Key="VerdeLume">#40a491</Color>
+        <Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
+        <Color x:Key="BiancoLume">#ffffff</Color>
+        <Color x:Key="GrigioLume">#E4E4E4</Color>
+        <Color x:Key="NeroLume">#4b4b4b</Color>
+        <Color x:Key="Nero">#000000</Color>
         <Color x:Key="SelectedTabColor">#000000</Color>
         <Color x:Key="UnselectedTabsColor">#ffffff</Color>
 
-		<!--**********-->
+        <!--**********-->
 
         <DataTemplate x:Key="PostSimpleTemplate">
-            <AbsoluteLayout Padding="0,5,0,5">
-                <Frame AbsoluteLayout.LayoutBounds="0,0,1,1"
-                       AbsoluteLayout.LayoutFlags="All"
-                       HasShadow="False"
+            <Grid Padding="0,10,0,10">
+                <Frame HasShadow="False"
                        CornerRadius="20"
                        IsClippedToBounds="True"
-                       Margin="{x:StaticResource PostMargin}"
                        BackgroundColor="{x:StaticResource GrigioLume}">
 
                     <StackLayout Spacing="10"
-						 Margin="-10">
+						         Margin="0">
                         <StackLayout Orientation="Horizontal"
-							 Spacing="10">
+								     Margin="-10,-10,-10,0"
+							         Spacing="10">
 
                             <Frame IsClippedToBounds="True"
                                    Padding="0"
-								   Margin="0"
+                                   Margin="0"
                                    VerticalOptions="Center"
                                    HeightRequest="45"
                                    WidthRequest="45">
@@ -90,25 +88,25 @@
                                                      Center="22.5,22.5"/>
                                 </Frame.Clip>
 
-                                <ffimage:CachedImage Source="{Binding Owner.Image}"
-									   WidthRequest="45"
-									   HeightRequest="45"
-                                       Aspect="AspectFill"/>
+                                <ffimage:CachedImage Source="{Binding Creatore.Immagine}"
+									                 WidthRequest="45"
+									                 HeightRequest="45"
+                                                     Aspect="AspectFill"/>
                             </Frame>
 
                             <Label Margin="0"
                                    VerticalOptions="Center"
-                                   Text="{Binding Owner}"/>
+                                   Text="{Binding Creatore}"/>
 
-                            <Label TextColor="{x:StaticResource NeroLume}" 
-                                   Margin="4,0,4,0"
+
+                            <Label TextColor="{x:StaticResource Nero}"
                                    VerticalOptions="Center"
                                    HorizontalOptions="EndAndExpand">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="&#xf500;"
-                                      FontFamily="{x:StaticResource IconSolid}"/>
-                                        <Span Text="{Binding Number, StringFormat='  {0}'}"/>
+                                              FontFamily="{x:StaticResource IconSolid}"/>
+                                        <Span Text="{Binding Partecipanti, StringFormat=' {0,3}'}"/>
 
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -116,31 +114,38 @@
 
                         </StackLayout>
 
-                        <StackLayout Orientation="Horizontal">
 
+                        <StackLayout Spacing="2">
+                            <Label Margin="0"
+                                   FontSize="18"
+                                   Text="{Binding Titolo}"/>
+
+                            <Label VerticalOptions="Center"
+                                   Margin="0">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Descrizione}"/>
+
+                                        <Span Text=" vedi info"
+                                              TextColor="{x:StaticResource VerdeLume}">
+                                        </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                            </Label>
                         </StackLayout>
 
-                        <Label Text="{Binding Description}"
-                           VerticalOptions="Center"
-                           HeightRequest="40"
-                           Margin="4,0,4,0"/>
-                        <Button Text="Proponiti"
-						CornerRadius="0"
-						Margin="-20,0,-20,-10"
-						HeightRequest="40"
-						BackgroundColor="{x:StaticResource VerdeLume}"
-						FontSize="{x:StaticResource ButtonStandardFontSize}"/>
                     </StackLayout>
                 </Frame>
-            </AbsoluteLayout>
+            </Grid>
         </DataTemplate>
 
         <!--************-->
-        
+
         <!--Convertitori-->
         <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
         <!--************-->
-        
+
         <!--Stili Espliciti App-->
         <Style x:Key="ButtonPressedColorBlack" TargetType="Button">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -162,60 +167,60 @@
             </Setter>
         </Style>
 
-		<!--BindingContext vari-->
+        <!--BindingContext vari-->
         <viewModels:MainViewModel x:Key="mainVM"/>
 
         <!--Stili impliciti App-->
-        
+
         <!--ContentPage-->
-		<Style TargetType="{x:Type ContentPage}"
+        <Style TargetType="{x:Type ContentPage}"
 			   ApplyToDerivedTypes="True">
 
-			<Setter Property="BackgroundColor"
+            <Setter Property="BackgroundColor"
 					Value="{x:StaticResource BiancoLume}"/>
 
-			<Setter Property="NavigationPage.HasNavigationBar"
+            <Setter Property="NavigationPage.HasNavigationBar"
 					Value="False"/>
-		</Style>
+        </Style>
 
-		<!--TabbedPage-->
-		<Style TargetType="{x:Type TabbedPage}"
+        <!--TabbedPage-->
+        <Style TargetType="{x:Type TabbedPage}"
 			   ApplyToDerivedTypes="True">
 
-			<Setter Property="BackgroundColor"
+            <Setter Property="BackgroundColor"
 					Value="{x:StaticResource BiancoLume}"/>
 
-			<Setter Property="BarBackgroundColor"
+            <Setter Property="BarBackgroundColor"
 					Value="{x:StaticResource VerdeLume}"/>
 
-			<Setter Property="SelectedTabColor"
+            <Setter Property="SelectedTabColor"
 					Value="{x:StaticResource BiancoLume}"/>
 
-			<Setter Property="UnselectedTabColor"
+            <Setter Property="UnselectedTabColor"
 					Value="{x:StaticResource NeroLume}"/>
 
-			
-		</Style>
 
-		<!--Label-->
-		<Style TargetType="{x:Type Label}">
+        </Style>
 
-			<Setter Property="Margin"
+        <!--Label-->
+        <Style TargetType="{x:Type Label}">
+
+            <Setter Property="Margin"
 					Value="{x:StaticResource TextMargin}"/>
 
-			<Setter Property="TextColor"
+            <Setter Property="TextColor"
 					Value="{x:StaticResource Nero}"/>
 
-			<Setter Property="FontSize"
+            <Setter Property="FontSize"
 					Value="{x:StaticResource LabelStandardFontSize}"/>
 
-			<Setter Property="FontFamily"
+            <Setter Property="FontFamily"
 					Value="{x:StaticResource LabelStandardFont}"/>
 
-		</Style>
+        </Style>
 
         <!--****-->
-        
+
         <!--Frame-->
         <Style TargetType="{x:Type Frame}">
 
@@ -225,42 +230,42 @@
         <!--*****-->
 
         <!--Entry-->
-		<Style TargetType="{x:Type custom:LumEntry}">
+        <Style TargetType="{x:Type custom:LumEntry}">
 
-			<Setter Property="HeightRequest"
+            <Setter Property="HeightRequest"
 					Value="48"/>
 
-			<Setter Property="TextColor"
+            <Setter Property="TextColor"
 					Value="{x:StaticResource Nero}"/>
 
-			<Setter Property="PlaceholderColor"
+            <Setter Property="PlaceholderColor"
 					Value="{x:StaticResource Nero}"/>
 
-			<Setter Property="FontSize"
+            <Setter Property="FontSize"
 					Value="{x:StaticResource EntryStandardFontSize}"/>
 
-			<Setter Property="FontFamily"
+            <Setter Property="FontFamily"
 					Value="{x:StaticResource EntryStandardFont}"/>
 
-			<Setter Property="MaxLength"
+            <Setter Property="MaxLength"
 					Value="{x:StaticResource MaxEntryLen}"/>
 
-			<Setter Property="Margin"
+            <Setter Property="Margin"
 					Value="{x:StaticResource TextMargin}"/>
 
-			<Setter Property="CurveIsEnabled"
+            <Setter Property="CurveIsEnabled"
 					Value="True"/>
 
-			<Setter Property="CornerRadius"
+            <Setter Property="CornerRadius"
 					Value="{x:StaticResource LumeRadius}"/>
 
-			<Setter Property="BorderWidth"
+            <Setter Property="BorderWidth"
 					Value="{x:StaticResource LumeStrokeWidth}"/>
 
-			<Setter Property="BorderColor"
+            <Setter Property="BorderColor"
 					Value="{x:StaticResource Nero}"/>
 
-		</Style>
+        </Style>
 
         <Style TargetType="{x:Type custom:LumEditor}">
 
@@ -277,7 +282,7 @@
             <Setter Property="FontFamily"
 					Value="{x:StaticResource EntryStandardFont}"/>
 
-            
+
 
             <Setter Property="Margin"
 					Value="{x:StaticResource TextMargin}"/>
@@ -298,26 +303,26 @@
 
         <!--*****-->
 
-		<!--Button-->
+        <!--Button-->
 
-		<Style TargetType="{x:Type Button}">
+        <Style TargetType="{x:Type Button}">
 
-			<Setter Property="HeightRequest"
+            <Setter Property="HeightRequest"
 					Value="48"/>
 
-			<Setter Property="TextColor"
+            <Setter Property="TextColor"
 					Value="{x:StaticResource BiancoLume}"/>
 
-			<Setter Property="Margin"
+            <Setter Property="Margin"
 					Value="{x:StaticResource TextMargin}"/>
 
-			<Setter Property="FontSize"
+            <Setter Property="FontSize"
 					Value="{x:StaticResource ButtonStandardFontSize}"/>
 
-			<Setter Property="FontFamily"
+            <Setter Property="FontFamily"
 					Value="OpenSans-R"/>
 
-			<Setter Property="TextTransform"
+            <Setter Property="TextTransform"
 					Value="None"/>
 
             <Setter Property="CornerRadius"
@@ -325,17 +330,17 @@
 
         </Style>
 
-		<!--******-->
+        <!--******-->
 
-		<!--StackLayout-->
-		<Style TargetType="{x:Type StackLayout}">
+        <!--StackLayout-->
+        <Style TargetType="{x:Type StackLayout}">
 
-			<Setter Property="Spacing"
+            <Setter Property="Spacing"
 					Value="0"/>
 
-		</Style>
+        </Style>
 
-		<!--***********-->
-	</Application.Resources>
+        <!--***********-->
+    </Application.Resources>
 
 </Application>

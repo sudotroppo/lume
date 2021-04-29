@@ -7,16 +7,15 @@
     xmlns:templates="clr-namespace:lume.Templates">
 
 
-    <RefreshView RefreshColor="{x:StaticResource VerdeLume}"
-                 x:Name="refrehView"
-                         Refreshing="OnRefresh"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1"
-                         AbsoluteLayout.LayoutFlags="All">
+    <RefreshView x:Name="refrehView"
+                 RefreshColor="{x:StaticResource VerdeLume}"
+                 Refreshing="OnRefresh">
+
         <CollectionView x:Name="homePostViewer"
-                                    Margin="8,0,8,0"
-                                    VerticalScrollBarVisibility="Never"
-                                    ItemsSource="{Binding Posts, Source={x:StaticResource mainVM}}"
-                                    ItemTemplate="{x:StaticResource PostSimpleTemplate}">
+                        Margin="8,0,8,0"
+                        VerticalScrollBarVisibility="Never"
+                        ItemsSource="{Binding Posts, Source={x:StaticResource mainVM}}"
+                        ItemTemplate="{x:StaticResource PostSimpleTemplate}">
 
 
         </CollectionView>

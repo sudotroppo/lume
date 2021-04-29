@@ -1,5 +1,6 @@
 ﻿using lume.Assets;
 using lume.Pages;
+using lume.Templates;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,38 +10,38 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace lume.Templates
+namespace lume.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageTemplate : ContentPage, INotifyPropertyChanged
+    public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
         public static readonly BindableProperty TemplateContentProperty =
-            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPageTemplate));
+            BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPage));
 
         public static readonly BindableProperty CurrentTabProperty =
-           BindableProperty.Create(nameof(CurrentTab), typeof(ContentTemplatedView), typeof(MainPageTemplate));
+           BindableProperty.Create(nameof(CurrentTab), typeof(ContentTemplatedView), typeof(MainPage));
 
 
         public ContentTemplatedView rootTab = new HomePage();
 
-        private Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
+        private static readonly Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
 
-        private Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
-
-        public Navigator navigator;
+        private static readonly Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
 
         private readonly Dictionary<Type, View> TabDictionary;
 
+        public Navigator navigator;
+
         private static readonly ArrayList Tab = new ArrayList { typeof(HomePage), typeof(FillRequestPage), typeof(NotificationsPage) };
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, e);
         }
 
-        protected void OnPropertyChanged(string propertyName)
+        protected new void OnPropertyChanged(string propertyName)
         {
             OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
         }
@@ -77,11 +78,7 @@ namespace lume.Templates
                     new Animation()
                     {
                         { 0, 1, Animations.SlideOfX(SelectedLine, dx, Easing.CubicInOut) },
-                    }.Commit(this, "SwithTab", 1, 300, Easing.Linear,(s, b) =>
-                    {
-                        //da sistemare
-                        //CurrentTab.onSettedTab?.Invoke(sender, e);
-                    });
+                    }.Commit(this, "SwithTab", 1, 300, Easing.Linear);
                 });
 
 
@@ -113,7 +110,7 @@ namespace lume.Templates
             get => (View)GetValue(TemplateContentProperty);
         }
 
-        public MainPageTemplate()
+        public MainPage()
         {
             InitializeComponent();
 
@@ -121,7 +118,7 @@ namespace lume.Templates
             {
                 { typeof(HomePage), homeButton },
                 { typeof(NotificationsPage), notificationButton },
-                { typeof(FillRequestPage), fillrequestButton}
+                { typeof(FillRequestPage), fillrequestButton }
             };
 
             navigator = new Navigator(this);

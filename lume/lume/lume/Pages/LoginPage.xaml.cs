@@ -22,7 +22,7 @@ namespace lume.Pages
         public async void OnClikedButton(object sender, EventArgs e)
         {
 
-            await Navigation.PushAsync(new MainPageTemplate(), false);
+            await Navigation.PushAsync(new MainPage(), false);
 
         }
     }

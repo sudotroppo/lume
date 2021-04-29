@@ -1,5 +1,6 @@
 ﻿using System;
 using lume.Assets;
+using lume.Pages;
 using lume.Templates;
 using Xamarin.Forms;
 
@@ -7,7 +8,7 @@ namespace lume.Templates
 {
     public abstract class ContentTemplatedView : ContentPage
     {
-        public MainPageTemplate Control;
+        public MainPage Control;
 
         public Navigator navigator;
 
