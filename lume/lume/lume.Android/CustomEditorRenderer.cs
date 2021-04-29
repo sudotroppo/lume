@@ -24,14 +24,15 @@ namespace lume.Droid.Renderers
 
         private void BorderSet(LumEditor customEditor)
         {
+
             var gradientDrawable = new GradientDrawable();
 
             gradientDrawable.SetCornerRadius(customEditor.CornerRadius * 2);
             gradientDrawable.SetStroke(customEditor.BorderWidth, customEditor.BorderColor.ToAndroid());
 
 
-            Control.SetBackground(gradientDrawable);
-            Control.SetPadding(50, Control.PaddingTop, Control.PaddingRight, Control.PaddingBottom);
+            Control.Background = this.Resources.GetDrawable(Resource.Drawable.customEntry);
+            Control.SetPadding(50, Control.PaddingTop, 35, Control.PaddingBottom);
         }
     }
 }

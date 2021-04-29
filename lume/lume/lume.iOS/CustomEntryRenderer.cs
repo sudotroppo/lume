@@ -25,6 +25,7 @@ namespace lume.iOS.Renderers
 
         private void BorderSet(UITextField Control, LumEntry customEntry)
         {
+            Control.Layer.MasksToBounds = true;
             Control.Layer.CornerRadius = customEntry.CornerRadius;
             Control.Layer.BorderWidth = customEntry.BorderWidth;
             Control.Layer.BorderColor = customEntry.BorderColor.ToCGColor();
