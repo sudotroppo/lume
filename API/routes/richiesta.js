@@ -8,28 +8,28 @@ const router = express.Router();
 	});
 
 	router.post('/', (req, res, next) => {
-		const request = {
+		const richiesta = {
 			userId: req.body.userId,
 			titolo: req.body.titolo,
 			descrizione: req.body.descrizione
 		};
 		res.status(201).json({
 			message: 'La richiesta è stata creata',
-			request: request
+			richiesta: richiesta
 		});
 	});
 
-	router.get('/:requestId', (req, res, next) => {
+	router.get('/:richiestaId', (req, res, next) => {
 		res.status(200).json({
 			message: 'Dettagli richiesta',
-			requestId: req.params.requestId
+			richiestaId: req.params.richiestaId
 		});
 	});
 
-	router.delete('/:requestId', (req, res, next) => {
+	router.delete('/:richiestaId', (req, res, next) => {
 		res.status(200).json({
 			message: 'Richiesta rimossa',
-			requestId: req.params.requestId
+			richiestaId: req.params.richiestaId
 		});
 	});
 

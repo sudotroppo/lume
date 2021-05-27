@@ -7,9 +7,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int       @default(autoincrement()) @id
+model utente {
+  id       Int       @default(autoincrement()) @id 
   email    String    @unique
   nome     String
-  cognome  String 
+  cognome  String
+  telefono String 
+  notifiche notifica[] 
+  richieste richiesta[]
+  partecipazioni utenteOnRichiesta[]
+}
+
+model richiesta {
+	id				Int		@default(autoincrement()) @id
+	titolo			String
+	descrizione		String
+	nPersone		Int		
+	utente			utente		@relation(fields: [utente_id], references: [id])
+	utente_id       Int
+	notifiche		notifica[]
+	partecipanti	utenteOnRichiesta[]  
+}
+
+model  notifica {
+	id				Int				@default(autoincrement()) @id
+	titolo			String
+	descrizione		String	
+	utente			utente			@relation(fields: [utente_id], references: [id])
+	utente_id		Int
+	richiesta		richiesta		@relation(fields: [richiesta_id], references: [id])
+	richiesta_id    Int		
+}
+
+model utenteOnRichiesta {
+  richiesta			richiesta     @relation(fields: [richiesta_id], references: [id])
+  richiesta_id      Int      
+  utente			utente @relation(fields: [utente_id], references: [id])
+  utente_id			Int      
+  createdAt			DateTime @default(now())
+
+  @@id([richiesta_id, utente_id])
 }
