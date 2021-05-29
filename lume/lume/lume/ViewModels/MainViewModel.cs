@@ -12,12 +12,24 @@ namespace lume.ViewModels
     {
         List<Richiesta> _Posts;
 
+        List<Notifica> _notifiche;
+
         public List<Richiesta> Posts
         {
             get { return _Posts; }
             set
             {
                 _Posts = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Notifica> Notifiche
+        {
+            get { return _notifiche; }
+            set
+            {
+                _notifiche = value;
                 OnPropertyChanged();
             }
         }
@@ -38,54 +50,38 @@ namespace lume.ViewModels
         {
             _CurrentUser = new Utente
             {
-                Indirizzo = "domenicobini@pazzo.sgravato.it",
-                Nome = "Domenico",
-                Cognome = "Bini",
-                Immagine = new UriImageSource
+                email = "domenicobini@pazzo.sgravato.it",
+                nome = "Domenico",
+                cognome = "Bini",
+                telefono = "3337028903",
+                immagine = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
+            };
+
+            _notifiche = new List<Notifica>
+            {
+                new Notifica()
                 {
-                    Uri = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
-                    CachingEnabled = true,
-                    CacheValidity = new TimeSpan(24,0,0),
-                }
+                    descrizione = "jsdbcowbco dcknbedc eocne0cn",
+                    utente = CurrentUser,
+                    titolo = "nulla",
+                },
             };
 
             _Posts = new List<Richiesta>
             {
                new Richiesta()
                {
-                   Creatore = CurrentUser,
-                   Titolo = "Adjosbnow",
-                   Descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
+                   creatore = CurrentUser,
+                   titolo = "Adjosbnow",
+                   descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
                    "wrg whbrg iebreir ve erg ereoriervierververbsaethdgfhj u tm t rtj ysrt hsr" +
                    " rtsrtjrstj ajt rjr stj sr tjdtjysrjetrr tr rthgretgergdgrgegegege e",
-                   Partecipanti = 10,
-                   Immagini =
-                   {
-                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
-                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
-                   }
-               },
-               new Richiesta()
-               {
-                   Creatore = CurrentUser,
-                   Titolo = "Mskndvp",
-                   Descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
-                   "wrg whbrg iebreir ve erg ereoriervierververbsaethdgfhj u tm t rtj ysrt hsr" +
-                   " rtsrtjrstj ajt rjr stj sr tjdtjysrjetrr tr rthgretgergdgrgegegege e",
-                   Partecipanti = 1,
-               },
-               new Richiesta()
-               {
-                   Creatore = CurrentUser,
-                   Titolo = "Mskndvp",
-                   Descrizione = "dkjcbwivbiwirbviwer webf iwrb guerig iuer " +
-                   " rtsrtjrstj ajt rjr stj sr tjdtjysrjetrr tr rthgretgergdgrgegegege e",
-                   Partecipanti = 1,
-                   Immagini =
-                   {
-                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
-                       new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
-                   }
+                   numeroPartecipanti = 10,
+                   //Immagini =
+                   //{
+                   //    new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
+                   //    new Uri( "https://www.ilgiardinodilori.it/images/articoli/fiori-recisi.jpg"),
+                   //}
                }
 
             };

@@ -3,32 +3,12 @@ namespace lume.Domain
 {
     public class PortaleLume
     {
-        private Utente utenteCorrente;
+        public Utente utenteCorrente { set; get; }
 
-        private Lume lume;
+        public Lume lume { set; get; }
 
         public PortaleLume()
         {
-        }
-
-        public Utente GetUtenteCorrente()
-        {
-            return utenteCorrente;
-        }
-
-        public void SetUtenteCorrente(Utente utente)
-        {
-            utenteCorrente = utente;
-        }
-
-        public Lume GetLume()
-        {
-            return lume;
-        }
-
-        public void SetLume(Lume lume)
-        {
-            this.lume = lume;
         }
     }
 }

@@ -71,7 +71,7 @@
                                          Center="22.5,22.5"/>
                     </Frame.Clip>
 
-                    <ffimage:CachedImage Source="{Binding CurrentUser.Immagine}"
+                    <ffimage:CachedImage Source="{Binding CurrentUser.immagine}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 
@@ -118,6 +118,16 @@
                             Margin="0"
                             Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
+            <CollectionView x:Name="notificationsViewer"
+                            Grid.ColumnSpan="4"
+                            Grid.Column="0"
+                            Grid.Row="1"
+                            Margin="8,0,8,0"
+                            VerticalScrollBarVisibility="Never"
+                            ItemsSource="{Binding Notifiche, Source={x:StaticResource mainVM}}"
+                            ItemTemplate="{x:StaticResource NotificaSimpleTemplate}">
+
+            </CollectionView>
         </Grid>
 
         <!--Area notifiche-->

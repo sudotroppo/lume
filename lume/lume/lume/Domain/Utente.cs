@@ -5,9 +5,9 @@ namespace lume.Domain
 {
     public class Utente
     {
-        private long id { get; set; }
+        public long id { get; set; }
 
-        private string nome { get; set; }
+        public string nome { get; set; }
 
         public string cognome { get; set; }
 
@@ -15,11 +15,12 @@ namespace lume.Domain
 
         public string telefono { get; set; }
 
+        public Uri immagine { get; set; }
+
         public List<Notifica> notifiche { get; set; }
 
         public List<Richiesta> richieste { get; set; }
 
-        //public Uri immagine { get; set; }
 
         public override string ToString()
         {

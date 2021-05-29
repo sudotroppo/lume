@@ -88,7 +88,7 @@
                                                      Center="22.5,22.5"/>
                                 </Frame.Clip>
 
-                                <ffimage:CachedImage Source="{Binding Creatore.Immagine}"
+                                <ffimage:CachedImage Source="{Binding creatore.immagine}"
 									                 WidthRequest="45"
 									                 HeightRequest="45"
                                                      Aspect="AspectFill"/>
@@ -96,7 +96,7 @@
 
                             <Label Margin="0"
                                    VerticalOptions="Center"
-                                   Text="{Binding Creatore}"/>
+                                   Text="{Binding creatore}"/>
 
 
                             <Label TextColor="{x:StaticResource Nero}"
@@ -118,27 +118,58 @@
                         <StackLayout Spacing="2">
                             <Label Margin="0"
                                    FontSize="18"
-                                   Text="{Binding Titolo}"/>
+                                   Text="{Binding titolo}"/>
 
                             <Label VerticalOptions="Center"
-                                   Margin="0">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding Descrizione}"/>
-
-                                        <Span Text=" vedi info"
-                                              TextColor="{x:StaticResource VerdeLume}">
-                                        </Span>
-                                    </FormattedString>
-                                </Label.FormattedText>
-
-                            </Label>
+                                   Margin="0"
+                                   Text="{Binding descrizione}"/>
                         </StackLayout>
 
                     </StackLayout>
                 </Frame>
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="NotificaSimpleTemplate">
+            <Grid ColumnDefinitions="*"
+                  RowDefinitions="*"
+			      IsClippedToBounds="True">
+
+                    <StackLayout Spacing="10">
+                        <StackLayout Orientation="Horizontal"
+							         Spacing="10">
+
+                            <Frame IsClippedToBounds="True"
+                                   HasShadow="False"
+                                   HeightRequest="10"
+                                   WidthRequest="10">
+
+                                <Frame.Clip>
+                                    <EllipseGeometry RadiusX="22.5"
+                                                     RadiusY="22.5"
+                                                     Center="22.5,22.5"/>
+                                </Frame.Clip>
+                                <Image Source="{Binding utente.immagine}"
+							           Margin="-20"
+							           Aspect="AspectFill"/>
+                            </Frame>
+
+                            <StackLayout Spacing="10">
+                                <Label Text="{Binding titolo}"
+                                   FontSize="{x:StaticResource LabelMediumFontSize}"/>
+
+                                <Label Text="{Binding descrizione}" />
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <BoxView HeightRequest="2"
+                                 BackgroundColor="{x:StaticResource Nero}"
+                                 VerticalOptions="End"/>
+
+                    </StackLayout>
+            </Grid>
+		</DataTemplate>
 
         <!--************-->
 

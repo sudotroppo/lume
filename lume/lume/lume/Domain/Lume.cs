@@ -5,33 +5,14 @@ namespace lume.Domain
 
     public class Lume
     {
-        private List<Richiesta> richieste;
+        public List<Richiesta> richieste { set; get; }
 
-        private List<Utente> utenti;
+        public List<Utente> utenti { set; get; }
 
         public Lume()
         {
 
         }
 
-        public List<Richiesta> getRichieste()
-        {
-            return richieste;
-        }
-
-        public void SetRichieste(List<Richiesta> richieste)
-        {
-            this.richieste = richieste;
-        }
-
-        public List<Utente> GetUtenti()
-        {
-            return utenti;
-        }
-
-        public void SetUtenti(List<Utente> utenti)
-        {
-            this.utenti = utenti;
-        }
     }
 }

@@ -5,15 +5,15 @@ namespace lume.Domain
 {
     public class Notifica
     {
-        private long id { get; set; }
+        public long id { get; set; }
 
-        private string titolo { get; set; }
+        public string titolo { get; set; }
 
-        private string descrizione { get; set; }
+        public string descrizione { get; set; }
 
-        private Richiesta richiesta { get; set; }
+        public Richiesta richiesta { get; set; }
 
-        private Utente utente { get; set; }
+        public Utente utente { get; set; }
 
     }
 }
