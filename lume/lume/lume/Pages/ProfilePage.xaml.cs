@@ -9,6 +9,7 @@ using System;
 using lume.Assets;
 using System.Threading.Tasks;
 using lume.ViewModels;
+using System.Windows.Input;
 
 namespace lume.Pages
 {
@@ -19,9 +20,13 @@ namespace lume.Pages
         private bool EditMode = false;
         private readonly IList<View> InfoList;
 
+        public ICommand ChangeFoto => new Command(async () => await DisplayAlert("Da implementare!", "si dovrebbe aprire la galleria", "Ok"));
+
+
         public ProfilePage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
+            BindingContext = this;
             InfoList = InfoStack.Children;
 
         }
@@ -58,9 +63,18 @@ namespace lume.Pages
             EditMode = !EditMode;
 
             if (EditMode)
+            {
+                ToTheLeft.IsEnabled = false;
+                Settings.IsEnabled = false;
                 SwitchButtonState("edit", button);
+
+            }
             else
+            {
+                ToTheLeft.IsEnabled = true;
+                Settings.IsEnabled = true;
                 SwitchButtonState("default", button);
+            }
 
             foreach (var child in InfoList)
             {
@@ -69,8 +83,6 @@ namespace lume.Pages
                     info.IsEditable = EditMode;
                 }
             }
-
-
         }
 
         public async void OnBackButtonCliked(object sender, EventArgs e)
@@ -90,6 +102,9 @@ namespace lume.Pages
                 {0, 1, Animations.SlideOfX(ToTheRight, -50, Easing.CubicInOut) },
                 {0, 1, Animations.SlideOfX(ToTheLeft, -50, Easing.CubicInOut) },
                 {0, 1, Animations.ScaleTo(BackgroundBoxView, 1,0,Easing.CubicInOut) },
+                {0, 1, Animations.FadeTo(FotoEdit, 0, Easing.CubicInOut) },
+                {0, 1, Animations.FadeTo(UpdateButton, 0, Easing.CubicInOut) },
+                {0, 1, Animations.FadeTo(InfoStack, 0, Easing.CubicInOut) },
                 {0,1, Animations.SlideOf(Settings, 45, 45, Easing.CubicInOut) }
             };
 

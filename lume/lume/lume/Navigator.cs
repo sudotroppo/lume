@@ -13,7 +13,7 @@ namespace lume
     {
 
         private MainPage mainPageTemplate;
-        private LinkedList<ContentTemplatedView> stackList;
+        public LinkedList<ContentTemplatedView> stackList { get; }
 
         public Navigator(MainPage mainPage)
         {
