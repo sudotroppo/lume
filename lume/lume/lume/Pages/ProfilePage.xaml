@@ -140,14 +140,16 @@
                     <!-- Bottone modifica profilo -->
                     <Button HorizontalOptions="FillAndExpand"
                                     Text="Modifica profilo"
-                                    CornerRadius="5"
-                                    HeightRequest="40"
+                                    CornerRadius="10"
+                                    HeightRequest="45"
                                     BackgroundColor = "{x:StaticResource GrigioLume}"
                                     TextColor="Black"
                                     FontAttributes="Bold"
-                                    Clicked="OnModifyProfileClicked"/>
+                                    Clicked="OnModifyProfileClicked"
+                                    Margin="20, 10, 20, 0"/>
 
-                    <StackLayout x:Name="InfoStack">
+                    <StackLayout x:Name="InfoStack"
+                                 Margin="0, 20, 0, 0">
 
                         <templates:InfoView x:Name="infoNome"
                                             FieldName = "Nome"

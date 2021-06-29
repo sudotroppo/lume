@@ -16,7 +16,7 @@ namespace lume.Pages
 	public partial class ProfilePage : ContentTemplatedView
 	{
 
-        private bool EditMode = false;
+        private bool ReadOnly = true;
         private readonly IList<View> InfoList;
 
         public ProfilePage(Navigator navigator) : base(navigator)
@@ -32,12 +32,13 @@ namespace lume.Pages
             var verdeLume = (Color)Application.Current.Resources["VerdeLume"];
             var nero = (Color)Application.Current.Resources["Nero"];
             var grigioChiaro = (Color)Application.Current.Resources["GrigioLume"];
+            var bianco = (Color)Application.Current.Resources["BiancoLume"];
 
             // Quando l'utente si trova in stato di modifica
             if (status == "edit")
             {
                 button.Text = "Fatto";
-                button.TextColor = grigioChiaro;
+                button.TextColor = bianco;
                 button.BackgroundColor = verdeLume;
             }
 
@@ -55,9 +56,9 @@ namespace lume.Pages
         {
             Button button = (Button)sender;
 
-            EditMode = !EditMode;
+            ReadOnly = !ReadOnly;
 
-            if (EditMode)
+            if (!ReadOnly)
                 SwitchButtonState("edit", button);
             else
                 SwitchButtonState("default", button);
@@ -66,7 +67,7 @@ namespace lume.Pages
             {
                 if (child is InfoView info)
                 {
-                    info.IsEditable = EditMode;
+                    info.IsReadOnly = ReadOnly;
                 }
             }
 

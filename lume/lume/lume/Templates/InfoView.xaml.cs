@@ -14,7 +14,7 @@ namespace lume.Templates
     {
         public static readonly BindableProperty FieldNameProperty = BindableProperty.Create(nameof(FieldName), typeof(string), typeof(InfoView), null);
         public static readonly BindableProperty FieldValueProperty = BindableProperty.Create(nameof(FieldValue), typeof(string), typeof(InfoView), null);
-        public static readonly BindableProperty EditableProperty = BindableProperty.Create(nameof(IsEditable), typeof(bool), typeof(InfoView), false);
+        public static readonly BindableProperty ReadOnlyProperty = BindableProperty.Create(nameof(IsReadOnly), typeof(bool), typeof(InfoView), false);
 
         public string FieldName
         {
@@ -28,16 +28,17 @@ namespace lume.Templates
             get => (String)GetValue(FieldValueProperty);
         }
 
-        public bool IsEditable
+        public bool IsReadOnly
         {
-            set => SetValue(EditableProperty, value);
-            get => (bool)GetValue(EditableProperty);
+            set => SetValue(ReadOnlyProperty, value);
+            get => (bool)GetValue(ReadOnlyProperty);
         }
 
         public InfoView()
         {
             InitializeComponent();
             BindingContext = this;
+            this.IsReadOnly = true;
         }
     }
 }
