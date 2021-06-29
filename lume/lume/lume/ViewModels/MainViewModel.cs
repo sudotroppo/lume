@@ -28,18 +28,23 @@ namespace lume.ViewModels
 
         public MainViewModel()
         {
-            _CurrentUser = new Utente()
+            if(portaleLume.utenteCorrente == null)
             {
-                email = "domenicobini@pazzo.sgravato.it",
-                nome = "Domenico",
-                cognome = "Bini",
-                telefono = "3337028903",
-                immagine = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
-            };
+                _CurrentUser = new Utente()
+                {
+                    email = "domenicobini@pazzo.sgravato.it",
+                    nome = "Domenico",
+                    cognome = "Bini",
+                    telefono = "3337028903",
+                    immagine = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
+                };
+                portaleLume.utenteCorrente = CurrentUser;
+            }
+            else
+            {
+                CurrentUser = portaleLume.utenteCorrente;
+            }
 
-            portaleLume.utenteCorrente = CurrentUser;
-
-            
 
         }
     }
