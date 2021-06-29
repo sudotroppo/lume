@@ -95,8 +95,15 @@
                                        WidthRequest="42"
                                        Clicked="OnStepperIncrease"/>
 
+
                     </StackLayout>
                 </Frame>
+
+                <Button BackgroundColor="{x:StaticResource VerdeLume}"
+                        Margin="0,10,0,0"
+                        Text="Invia"
+                        Clicked="submitRequest"/>
+
             </StackLayout>
         </ScrollView>
     </AbsoluteLayout>

@@ -22,6 +22,17 @@ namespace lume.Domain
 
         public Richiesta()
         {
+            candidati = new List<Utente>();
+        }
+
+        public void addCandidato(Utente candidato)
+        {
+            candidati.Add(candidato);
+        }
+
+        public int getNumeroCandidati()
+        {
+            return candidati.ToArray().Length;
         }
     }
 }

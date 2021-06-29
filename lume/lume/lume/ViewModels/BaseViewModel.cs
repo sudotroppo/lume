@@ -14,5 +14,7 @@ namespace lume.ViewModels
         {
             PropertyChanged?.Invoke(this,new PropertyChangedEventArgs(propertyName));
         }
+
+
     }
 }

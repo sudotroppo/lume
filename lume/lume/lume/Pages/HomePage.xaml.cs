@@ -14,12 +14,17 @@ namespace lume.Pages
         public HomePage()
         {
             InitializeComponent();
+            homePostViewer.BindingContext = new HomeViewModel();
         }
 
         public async void OnRefresh(object sender, EventArgs e)
         {
             RefreshView r = (RefreshView)sender;
-            await Task.Delay(1000);
+            await Task.Run(() =>
+            {
+                homePostViewer.BindingContext = new HomeViewModel();
+            });
+
             r.IsRefreshing = false;
         }
     }

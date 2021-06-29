@@ -21,10 +21,21 @@ namespace lume.Domain
 
         public List<Richiesta> richieste { get; set; }
 
+        public Utente()
+        {
+            richieste = new List<Richiesta>();
+            notifiche = new List<Notifica>();
+        }
+
 
         public override string ToString()
         {
             return nome + " " + cognome;
+        }
+
+        public void addRisciesta(Richiesta richiesta)
+        {
+            this.richieste.Add(richiesta);
         }
     }
 }
