@@ -24,8 +24,8 @@ namespace lume.Pages
             Button b = sender as Button;
             b.IsEnabled = false;
 
-            double ProfileImageEndX = (Application.Current.MainPage.Width / 2);
-            double ProfileImageStartX = ProfileImage.WidthRequest/2 + 10;
+            double ProfileImageEndX = Application.Current.MainPage.Width / 2;
+            double ProfileImageStartX = ProfileImage.WidthRequest / 2 + 10;
             double dx = ProfileImageEndX - ProfileImageStartX;
 
             Animation ToProfilepage = new Animation  // animazione di cambio pagina
@@ -33,9 +33,11 @@ namespace lume.Pages
                 {0,1, Animations.SlideOf(ToTheRight, 50, 0, Easing.CubicInOut) },
                 {0,1, Animations.SlideOf(ToTheLeft, 50, 0, Easing.CubicInOut) },
                 {0,1, Animations.SlideOfX(ProfileImage, dx, Easing.CubicInOut) },
+                {0,1, Animations.SlideOfY(notificationsViewer, 45, Easing.CubicInOut) },
                 {0,1, Animations.ScaleTo(ProfileImage, 2, 2, Easing.CubicInOut) },
                 {0,1, Animations.ScaleTo(BackgroundLine, 1, 0, Easing.CubicInOut) },
                 {0,1, Animations.ScaleTo(BackgroundBoxView, 1,1, Easing.CubicInOut) },
+                {0,1, Animations.FadeTo(notificationsViewer, 0, Easing.CubicInOut) },
                 {0,1, Animations.SlideOf(Settings, -45,-45, Easing.CubicInOut) }
             };
 

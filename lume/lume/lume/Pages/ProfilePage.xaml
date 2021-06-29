@@ -80,13 +80,29 @@
 
                 </Frame>
 
-                <Frame BackgroundColor="{x:StaticResource GrigioLume}"
+                <Frame BackgroundColor="{x:StaticResource GrigioLume}" x:Name="FotoEdit"
                        AbsoluteLayout.LayoutBounds="60,65,30,30">
+
+
                     <Frame.Clip>
                         <EllipseGeometry RadiusX="15"
                                          RadiusY="15"
                                          Center="15,15"/>
                     </Frame.Clip>
+
+
+                    <StackLayout>
+                        <Label Text="&#xf304;"
+                           FontFamily="{x:StaticResource IconSolid}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{x:Binding ChangeFoto}"/>
+                            </Label.GestureRecognizers>
+
+
+                        </Label>
+                    </StackLayout>
                 </Frame>
             </AbsoluteLayout>
 
@@ -138,7 +154,7 @@
 
 
                     <!-- Bottone modifica profilo -->
-                    <Button HorizontalOptions="FillAndExpand"
+                    <Button HorizontalOptions="FillAndExpand" x:Name="UpdateButton"
                                     Text="Modifica profilo"
                                     CornerRadius="10"
                                     HeightRequest="45"

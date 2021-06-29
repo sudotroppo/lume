@@ -14,8 +14,8 @@
 
         <OnPlatform x:Key="LumeCornerRadius"
 					x:TypeArguments="CornerRadius">
-            <On Platform="iOS" Value="25"/>
-            <On Platform="Android" Value="35"/>
+            <On Platform="iOS" Value="10"/>
+            <On Platform="Android" Value="10"/>
         </OnPlatform>
 
         <OnPlatform x:Key="LumeStrokeWidth"
@@ -108,7 +108,7 @@
                                     <FormattedString>
                                         <Span Text="&#xf500;"
                                               FontFamily="{x:StaticResource IconSolid}"/>
-                                        <Span Text="{Binding Partecipanti, StringFormat=' {0,3}'}"/>
+                                        <Span Text="{Binding numeroPartecipanti, StringFormat=' {0,3}'}"/>
 
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -143,25 +143,23 @@
                         <StackLayout Orientation="Horizontal"
 							         Spacing="10">
 
-                            <Frame IsClippedToBounds="True"
-                                   HasShadow="False"
-                                   HeightRequest="10"
-                                   WidthRequest="10">
 
-                                <Frame.Clip>
-                                    <EllipseGeometry RadiusX="22.5"
-                                                     RadiusY="22.5"
-                                                     Center="22.5,22.5"/>
-                                </Frame.Clip>
-                                <Image Source="{Binding utente.immagine}"
-							           Margin="-20"
-							           Aspect="AspectFill"/>
-                            </Frame>
+                                <Frame IsClippedToBounds="True"
+                                       HasShadow="False"
+                                       HeightRequest="10"
+                                       WidthRequest="10">
+
+                                    <Frame.Clip>
+                                        <EllipseGeometry RadiusX="22.5"
+                                                         RadiusY="22.5"
+                                                         Center="22.5,22.5"/>
+                                    </Frame.Clip>
+                                    <Image Source="{Binding utente.immagine}"
+							               Margin="-20"
+                                           Aspect="AspectFill"/>
+                                </Frame>
 
                             <StackLayout Spacing="10">
-                                <Label Text="{Binding titolo}"
-                                   FontSize="{x:StaticResource LabelMediumFontSize}"/>
-
                                 <Label Text="{Binding descrizione}" />
                             </StackLayout>
 
@@ -169,7 +167,8 @@
 
                         <BoxView HeightRequest="2"
                                  BackgroundColor="{x:StaticResource Nero}"
-                                 VerticalOptions="End"/>
+                                 VerticalOptions="End"
+                                 Margin="0,0,0,10"/>
 
                     </StackLayout>
             </Grid>

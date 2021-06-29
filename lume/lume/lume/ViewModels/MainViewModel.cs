@@ -17,6 +17,7 @@ namespace lume.ViewModels
         public List<Richiesta> Posts
         {
             get { return _Posts; }
+
             set
             {
                 _Posts = value;
@@ -61,10 +62,50 @@ namespace lume.ViewModels
             {
                 new Notifica()
                 {
-                    descrizione = "jsdbcowbco dcknbedc eocne0cn",
+                    descrizione = "Prova notifica",
                     utente = CurrentUser,
-                    titolo = "nulla",
                 },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+                new Notifica()
+                {
+                    descrizione = "Prova notifica",
+                    utente = CurrentUser,
+                },
+
             };
 
             _Posts = new List<Richiesta>

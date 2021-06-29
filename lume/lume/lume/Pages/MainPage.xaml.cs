@@ -130,7 +130,7 @@ namespace lume.Pages
 
         protected override bool OnBackButtonPressed()
         {
-            return navigator.PopAsync();
+            return true;
         }
 
         public void OnNotificationClicked(object sender, EventArgs e)
