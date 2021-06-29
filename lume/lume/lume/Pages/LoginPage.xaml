@@ -61,17 +61,10 @@
 						 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
 						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.43}">
 
-                <Label Text="Credenziali login"/>
+                <Label Text="Credenziali login"
+                       Margin="22, 0, 0, 15"/>
 
                 <StackLayout Spacing="20">
-
-                    <!--Linea Orizzontale-->
-                    <BoxView x:Name="Line"
-							 Margin="{x:StaticResource LineMargin}"
-							 HeightRequest="2"
-							 BackgroundColor="{x:StaticResource NeroLume}"
-							 CornerRadius="5"/>
-                    <!-- *************** -->
 
                     <StackLayout Spacing="14">
                         <custom:LumEntry x:Name="Username"
@@ -86,7 +79,7 @@
                 </StackLayout>
 
                 <Label FontSize="{x:StaticResource LabelSmallFontSize}"
-                       Margin="{x:StaticResource SmallTextMargin}">
+                       Margin="22, 5, 0, 0">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="password dimenticata?"
@@ -115,7 +108,7 @@
 
                 <Label x:Name="Registration"
                        FontSize="{x:StaticResource LabelSmallFontSize}"
-                       Margin="{x:StaticResource SmallTextMargin}">
+                       Margin="22, 0, 0, 0">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="sei nuovo? registrati premendo "/> 

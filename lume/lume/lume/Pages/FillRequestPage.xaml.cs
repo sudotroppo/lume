@@ -91,7 +91,10 @@ namespace lume.Pages
                 Descrizione.Text,
                 int.Parse(StepperLabel.Text)
                 );
+
             OnPropertyChanged("post");
+
+            navigator.PushAsync(new HomePage());
         }
 
     }

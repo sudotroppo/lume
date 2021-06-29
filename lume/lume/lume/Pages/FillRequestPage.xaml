@@ -1,110 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <templates:ContentTemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:custom="clr-namespace:lume.CustomObj"
+			 xmlns:custom="clr-namespace:lume.CustomObj"
 			 x:Class="lume.Pages.FillRequestPage"
-             xmlns:templates="clr-namespace:lume.Templates"
-             xmlns:pages="clr-namespace:lume.Pages"
-             x:DataType="{x:Type pages:FillRequestPage}">
+			 xmlns:templates="clr-namespace:lume.Templates"
+			 xmlns:pages="clr-namespace:lume.Pages"
+			 x:DataType="{x:Type pages:FillRequestPage}">
 
-    <AbsoluteLayout>
-        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
-                            AbsoluteLayout.LayoutFlags="All"
-                    Padding="0, 0, 0, 20">
+	<AbsoluteLayout>
+		<ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+							AbsoluteLayout.LayoutFlags="All"
+					Padding="0, 0, 0, 20">
 
-            <StackLayout>
-
-                <ImageButton x:Name="selectedImage"
-                                     BackgroundColor="{x:StaticResource GrigioLume}"
-                                     HeightRequest="240"
-                                     HorizontalOptions="FillAndExpand"
-                                     Source="uploadImage.png"
-                                     Clicked="Handle_Clicked"
-                                     Margin="0, 0, 0, 5"/>
-
-                                      
-                        <custom:LumEntry x:Name="Titolo"
-                                         Placeholder="Titolo"
-                                         HorizontalOptions="FillAndExpand"
-                                         HeightRequest="40"
-                                         Margin="20, 20, 20, 10"
-                                         />
-
-                        <custom:LumEditor x:Name="Descrizione"
-                                          Placeholder="Inserisci una descrizione.."
-                                          VerticalOptions="StartAndExpand"
-                                          AutoSize="TextChanges"
-                                          HeightRequest="200"
-                                          MaxLength="500"
-                                          />
-  
-                <!--
-
-                <Entry Margin="20, 0, 20, 10"
-                               Placeholder="Titolo"
-                               FontSize="15"/>
-
-                <Editor Margin="20, 0, 20, 0"
-                                Placeholder="Descrizione"
-                                FontSize="15"
-                                AutoSize="TextChanges"/>
+			<StackLayout>
                 
-                -->
+                <!-- sezione per selezione immagine -->
 
-                <!-- stepper -->
+				<ImageButton x:Name="selectedImage"
+									 BackgroundColor="{x:StaticResource GrigioLume}"
+									 HeightRequest="240"
+									 HorizontalOptions="FillAndExpand"
+									 Source="uploadImage.png"
+									 Clicked="Handle_Clicked"
+									 Margin="0, 0, 0, 5"/>
 
-                <Label Text="Persone richieste"
-                               Margin="20, 20, 0, 10"
-                               FontAttributes="Bold"
-                               FontSize="14"/>
+				<!-- entry di testo per titolo e descrizione-->
+									  
+				<custom:LumEntry x:Name="Titolo"
+								 Placeholder="Titolo"
+								 HorizontalOptions="FillAndExpand"
+								 HeightRequest="40"
+								 Margin="20, 20, 20, 10"
+								 />
 
-                <Frame BackgroundColor="LightBlue"
-                               Margin="20, 0, 20, 0"
-                               Padding="0"
-                               CornerRadius="10"
-                               IsClippedToBounds="True">
+				<custom:LumEditor x:Name="Descrizione"
+										  Placeholder="Inserisci una descrizione.."
+										  VerticalOptions="StartAndExpand"
+										  AutoSize="TextChanges"
+										  HeightRequest="200"
+										  MaxLength="500"
+										  />
 
-                    <!-- usare il margin dello StackLayout per spostare i bottoni -->
-                    <StackLayout Orientation="Horizontal"
-                                  BackgroundColor="#dddddd"
-                                  Margin="-20, 0, -20, 0"
-                                  HeightRequest="35">
+				<!-- stepper -->
 
-                        <!-- bottone per incrementare -->
+				<Label Text="Persone richieste"
+							   Margin="20, 20, 0, 10"
+							   FontAttributes="Bold"
+							   FontSize="14"/>
 
-                        <Button Text="&#xf068;"
-                                       FontFamily="{x:StaticResource IconSolid}"
-                                       BackgroundColor="Gray"
-                                       CornerRadius="0"
-                                       WidthRequest="40"
-                                       Padding="10"
-                                       Clicked="OnStepperDecrease"/>
+				<Frame BackgroundColor="LightBlue"
+							   Margin="20, 0, 20, 0"
+							   Padding="0"
+							   CornerRadius="10"
+							   IsClippedToBounds="True">
 
-                        <Label x:Name="StepperLabel"
-                                   HorizontalOptions="CenterAndExpand"
-                                   VerticalOptions="Center"
-                                   Text="{Binding RequestedPeople}"/>
+					<!-- usare il margin dello StackLayout per spostare i bottoni -->
+					<StackLayout Orientation="Horizontal"
+								  BackgroundColor="#dddddd"
+								  Margin="-20, 0, -20, 0"
+								  HeightRequest="35">
 
-                        <!-- bottone per incrementare -->
+						<!-- bottone per incrementare -->
 
-                        <Button BackgroundColor="Gray"
-                                       Text="&#xf067;"
-                                       FontFamily="{x:StaticResource IconSolid}"
-                                       Padding="10"
-                                       CornerRadius="0"
-                                       WidthRequest="42"
-                                       Clicked="OnStepperIncrease"/>
+						<Button Text="&#xf068;"
+									   FontFamily="{x:StaticResource IconSolid}"
+									   BackgroundColor="Gray"
+									   CornerRadius="0"
+									   WidthRequest="40"
+									   Padding="10"
+									   Clicked="OnStepperDecrease"/>
 
+						<Label x:Name="StepperLabel"
+								   HorizontalOptions="CenterAndExpand"
+								   VerticalOptions="Center"
+								   Text="{Binding RequestedPeople}"/>
 
-                    </StackLayout>
-                </Frame>
+						<!-- bottone per incrementare -->
 
-                <Button BackgroundColor="{x:StaticResource VerdeLume}"
-                        Margin="0,10,0,0"
-                        Text="Invia"
-                        Clicked="submitRequest"/>
+						<Button BackgroundColor="Gray"
+									   Text="&#xf067;"
+									   FontFamily="{x:StaticResource IconSolid}"
+									   Padding="10"
+									   CornerRadius="0"
+									   WidthRequest="42"
+									   Clicked="OnStepperIncrease"/>
 
-            </StackLayout>
-        </ScrollView>
-    </AbsoluteLayout>
+					</StackLayout>
+				</Frame>
+			</StackLayout>
+		</ScrollView>
+
+        <!-- layout per bottone floating -->
+        <StackLayout AbsoluteLayout.LayoutBounds="0.98,0.03"
+                     AbsoluteLayout.LayoutFlags="PositionProportional">
+            <Frame WidthRequest="100"
+                   HeightRequest="60"
+                   Padding="0">
+                <Button Text="&#xf1d8;"
+                        FontFamily="{x:StaticResource IconSolid}"
+						Clicked="submitRequest"
+                        TextColor="black"
+                        BackgroundColor="White"/>
+
+                <Frame.Clip>
+                    <EllipseGeometry
+                        RadiusX="25"
+                        RadiusY="25"
+                        Center="50,30"/>
+                </Frame.Clip>
+            </Frame>
+        </StackLayout>
+        
+	</AbsoluteLayout>
 </templates:ContentTemplatedView>

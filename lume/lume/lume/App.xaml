@@ -8,7 +8,7 @@
     <Application.Resources>
         <OnPlatform x:Key="LumeRadius"
 					x:TypeArguments="x:Int32">
-            <On Platform="iOS" Value="10"/>
+            <On Platform="iOS" Value="5"/>
             <On Platform="Android" Value="10"/>
         </OnPlatform>
 
@@ -26,10 +26,10 @@
 
         <x:Int32 x:Key="MaxEntryLen">30</x:Int32>
 
-        <x:Double x:Key="LabelStandardFontSize">14</x:Double>
-        <x:Double x:Key="LabelMediumFontSize">16</x:Double>
+        <x:Double x:Key="LabelStandardFontSize">15</x:Double>
+        <x:Double x:Key="LabelMediumFontSize">15</x:Double>
         <x:Double x:Key="LabelTitleFontSize">30</x:Double>
-        <x:Double x:Key="LabelSmallFontSize">10</x:Double>
+        <x:Double x:Key="LabelSmallFontSize">13</x:Double>
         <x:Double x:Key="LabelSmallTitleFontSize">25</x:Double>
         <x:Double x:Key="ButtonStandardFontSize">14</x:Double>
         <x:Double x:Key="EntryStandardFontSize">15</x:Double>
@@ -62,6 +62,8 @@
         <Color x:Key="UnselectedTabsColor">#ffffff</Color>
 
         <!--**********-->
+        
+        <!-- template per post -->
 
         <DataTemplate x:Key="PostSimpleTemplate">
             <Grid Padding="0,10,0,10">
@@ -129,6 +131,8 @@
                 </Frame>
             </Grid>
         </DataTemplate>
+        
+        <!-- template per notifica -->
 
         <DataTemplate x:Key="NotificaSimpleTemplate">
             <Grid ColumnDefinitions="*"
@@ -297,6 +301,8 @@
 
         </Style>
 
+        <!-- editor -->
+        
         <Style TargetType="{x:Type custom:LumEditor}">
 
 

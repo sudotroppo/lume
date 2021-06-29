@@ -60,14 +60,6 @@
 
                 <StackLayout Spacing="20">
 
-                    <!--Linea Orizzontale-->
-                    <BoxView x:Name="Line"
-							 Margin="{x:StaticResource LineMargin}"
-							 HeightRequest="2"
-							 BackgroundColor="{x:StaticResource NeroLume}"
-							 CornerRadius="5"/>
-                    <!-- *************** -->
-
                     <ScrollView RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, Property=Height, Factor=0.1}">
                         <StackLayout Spacing="10">
 
@@ -77,18 +69,15 @@
                             <custom:LumEntry x:Name="Cognome_reg"
 										Placeholder="Cognome"/>
 
-                            <custom:LumEntry x:Name="Username_reg"
-										Placeholder="Username"/>
-
-                            <custom:LumEntry x:Name="Password_reg"
-										Placeholder="Password"
-										IsPassword="True"/>
-
                             <custom:LumEntry x:Name="Email_reg"
 										Placeholder="Email"/>
 
                             <custom:LumEntry x:Name="CodiceFiscale"
 										Placeholder="Codice Fiscale"/>
+
+                            <custom:LumEntry x:Name="Password_reg"
+										Placeholder="Password"
+										IsPassword="True"/>
 
 
                         </StackLayout>
