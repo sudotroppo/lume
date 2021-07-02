@@ -17,7 +17,7 @@ namespace lume.Pages
 	public partial class ProfilePage : ContentTemplatedView
 	{
 
-        private bool EditMode = false;
+        private bool ReadOnly = true;
         private readonly IList<View> InfoList;
 
         public ICommand ChangeFoto => new Command(async () => await DisplayAlert("Da implementare!", "si dovrebbe aprire la galleria", "Ok"));
@@ -37,12 +37,13 @@ namespace lume.Pages
             var verdeLume = (Color)Application.Current.Resources["VerdeLume"];
             var nero = (Color)Application.Current.Resources["Nero"];
             var grigioChiaro = (Color)Application.Current.Resources["GrigioLume"];
+            var bianco = (Color)Application.Current.Resources["BiancoLume"];
 
             // Quando l'utente si trova in stato di modifica
             if (status == "edit")
             {
                 button.Text = "Fatto";
-                button.TextColor = grigioChiaro;
+                button.TextColor = bianco;
                 button.BackgroundColor = verdeLume;
             }
 
@@ -60,9 +61,9 @@ namespace lume.Pages
         {
             Button button = (Button)sender;
 
-            EditMode = !EditMode;
+            ReadOnly = !ReadOnly;
 
-            if (EditMode)
+            if (!ReadOnly)
             {
                 ToTheLeft.IsEnabled = false;
                 Settings.IsEnabled = false;
@@ -80,7 +81,7 @@ namespace lume.Pages
             {
                 if (child is InfoView info)
                 {
-                    info.IsEditable = EditMode;
+                    info.IsReadOnly = ReadOnly;
                 }
             }
         }

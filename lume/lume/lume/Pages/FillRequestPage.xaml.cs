@@ -1,5 +1,7 @@
 ﻿using lume.CustomObj;
+using lume.Domain;
 using lume.Templates;
+using lume.ViewModels;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -16,7 +18,7 @@ namespace lume.Pages
         public FillRequestPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
-            BindingContext = this;
+            BindingContext = new MainViewModel();
             StepperLabel.BindingContext = this;
 
         }
@@ -79,6 +81,21 @@ namespace lume.Pages
             {
                 RequestedPeople--;
             }
+        }
+
+        void submitRequest(object sender, EventArgs e)
+        {
+            PortaleLume portale = PortaleLume.getIstance();
+
+            portale.nuovaRichiesta(
+                Titolo.Text,
+                Descrizione.Text,
+                int.Parse(StepperLabel.Text)
+                );
+
+            OnPropertyChanged("post");
+
+            navigator.PushAsync(new HomePage());
         }
 
     }

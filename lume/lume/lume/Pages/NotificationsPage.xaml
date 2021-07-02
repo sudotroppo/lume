@@ -124,7 +124,7 @@
                             Grid.Row="1"
                             Margin="0,10,0,0"
                             VerticalScrollBarVisibility="Never"
-                            ItemsSource="{Binding Notifiche, Source={x:StaticResource mainVM}}"
+                            ItemsSource="{Binding Notifiche}"
                             ItemTemplate="{x:StaticResource NotificaSimpleTemplate}">
 
             </CollectionView>

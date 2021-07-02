@@ -80,29 +80,30 @@
 
                 </Frame>
 
-                <Frame BackgroundColor="{x:StaticResource GrigioLume}" x:Name="FotoEdit"
-                       AbsoluteLayout.LayoutBounds="60,65,30,30">
-
+                <Frame x:Name="FotoEdit"
+                       AbsoluteLayout.LayoutBounds="60,65,30,30"
+                       Padding="0"
+                       Margin="0"
+                       HeightRequest="30"
+                       WidthRequest="30"
+                       IsClippedToBounds="True"
+                       BackgroundColor="{x:StaticResource NeroLume}">
 
                     <Frame.Clip>
                         <EllipseGeometry RadiusX="15"
-                                         RadiusY="15"
-                                         Center="15,15"/>
+                                            RadiusY="15"
+                                            Center="15,15"/>
                     </Frame.Clip>
 
+                    <Button Text="&#xf304;"
+                            FontSize="{x:StaticResource LabelSmallFontSize}"
+                            FontFamily="{x:StaticResource IconSolid}"
+                            BackgroundColor="LightGray"
+                            TextColor="{x:StaticResource Nero}"/>
 
-                    <StackLayout>
-                        <Label Text="&#xf304;"
-                           FontFamily="{x:StaticResource IconSolid}"
-                           HorizontalOptions="Center"
-                           VerticalOptions="Center">
-                            <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{x:Binding ChangeFoto}"/>
-                            </Label.GestureRecognizers>
+                    
 
 
-                        </Label>
-                    </StackLayout>
                 </Frame>
             </AbsoluteLayout>
 

@@ -21,7 +21,7 @@ namespace lume
             Device.SetFlags(new[] { "Shapes_Experimental", "Brush_Experimental" });
 
             InitializeComponent();
-            BindingContext = new MainViewModel();
+
             MainPage = new CustomNavigationPage(new LoginPage());
 
             /*_ = GetUser();
