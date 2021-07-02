@@ -18,7 +18,7 @@ namespace lume.Pages
         public HomePage()
         {
             InitializeComponent();
-            BindingContext = this;
+            BindingContext = (MainViewModel)Application.Current.Resources["mainVM"];
             homePostViewer.BindingContext = new HomeViewModel();
         }
 

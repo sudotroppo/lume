@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using lume.Domain;
+using lume.Utility;
 
 namespace lume.ViewModels
 {
@@ -8,8 +9,6 @@ namespace lume.ViewModels
     {
 
         List<Notifica> _notifiche;
-
-        protected PortaleLume portaleLume = PortaleLume.getIstance();
 
         public List<Notifica> Notifiche
         {
@@ -21,63 +20,13 @@ namespace lume.ViewModels
             }
         }
 
-        public NotificationViewModel()
+        public NotificationViewModel(long utente_id)
         {
-
-            _notifiche = new List<Notifica>
+            if(Notifiche == null || Notifiche.Count == 0)
             {
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
-                new Notifica()
-                {
-                    descrizione = "Prova notifica",
-                    utente = portaleLume.utenteCorrente,
-                },
+                Notifiche = DataAccess.GetNotificheByUtente(utente_id);
 
-            };
+            }
         }
     }
 }

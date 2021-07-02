@@ -15,7 +15,8 @@ namespace lume.Pages
         public NotificationsPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
-            notificationsViewer.BindingContext = new NotificationViewModel();
+            BindingContext = (MainViewModel)Application.Current.Resources["mainVM"];
+            notificationsViewer.BindingContext = new NotificationViewModel((BindingContext as MainViewModel).CurrentUser.id);
         }
 
 

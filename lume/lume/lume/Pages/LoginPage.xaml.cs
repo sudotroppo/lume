@@ -1,8 +1,10 @@
 ﻿using lume.CustomObj;
 using lume.Templates;
+using lume.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text.Json;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,19 +12,24 @@ namespace lume.Pages
 {
     public partial class LoginPage : ContentPage
     {
-        public ICommand SendRequest => new Command<string>(async (url) => await DisplayAlert(url, "Va ancora configurato", "Ok"));
-
         public LoginPage()
         {
             InitializeComponent();
-            BindingContext = this;
+            BindingContext = (MainViewModel)Application.Current.Resources["mainVM"];
         }
 
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-
-            await Navigation.PushAsync(new MainPage(), false);
+            try
+            {
+                (BindingContext as MainViewModel).SetUtente(Username.Text);
+                await Navigation.PushAsync(new MainPage(), false);
+            }
+            catch (JsonException)
+            {
+                Username.TextColor = Color.Firebrick;
+            }
 
         }
     }

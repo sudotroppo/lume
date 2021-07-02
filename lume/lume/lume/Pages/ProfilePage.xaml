@@ -174,9 +174,14 @@
                                            FieldName = "Congome"
                                            FieldValue ="{Binding CurrentUser.cognome,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
-                        <templates:InfoView 
+                        <templates:InfoView x:Name="infoEmail"
                                            FieldName = "Email"
                                            FieldValue ="{Binding CurrentUser.email,
+                                               Source={StaticResource mainVM}, Mode=TwoWay}"/>
+                        
+                        <templates:InfoView x:Name="infoTelefono"
+                                           FieldName = "Telefono"
+                                           FieldValue ="{Binding CurrentUser.telefono,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
 
                     </StackLayout>

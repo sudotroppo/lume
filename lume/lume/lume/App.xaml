@@ -90,10 +90,10 @@
                                                      Center="22.5,22.5"/>
                                 </Frame.Clip>
 
-                                <ffimage:CachedImage Source="{Binding creatore.immagine}"
-									                 WidthRequest="45"
-									                 HeightRequest="45"
-                                                     Aspect="AspectFill"/>
+                                <Image WidthRequest="45"
+                                       HeightRequest="45"
+                                       Aspect="AspectFill"
+                                       Source="{Binding creatore.immagine}"/>
                             </Frame>
 
                             <Label Margin="0"
@@ -125,6 +125,13 @@
                             <Label VerticalOptions="Center"
                                    Margin="0"
                                    Text="{Binding descrizione}"/>
+
+                            <Label VerticalOptions="Center"
+                                   HorizontalOptions="End"
+                                   Margin="0,10,0,0"
+                                   FontSize="{x:StaticResource LabelSmallFontSize}"
+                                   Text="{Binding data}"/>
+
                         </StackLayout>
 
                     </StackLayout>

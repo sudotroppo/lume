@@ -58,13 +58,27 @@ namespace lume.Utility
         public static void NewUtente(Utente utente)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest(
-                "/utente?nome={nome}&cognome={cognome}&email={email}&telefono={telefono}", Method.POST);
+            var request = new RestRequest("/utente", Method.POST);
 
             request.AddQueryParameter("nome", utente.nome);
             request.AddQueryParameter("cognome", utente.cognome);
             request.AddQueryParameter("email", utente.email);
             request.AddQueryParameter("telefono", utente.telefono);
+
+            IRestResponse response = client.Execute(request);
+        }
+
+        public static void UpdateUtente(Utente utente)
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/utente", Method.PUT);
+
+            request.AddQueryParameter("id", utente.id.ToString());
+            request.AddQueryParameter("nome", utente.nome);
+            request.AddQueryParameter("cognome", utente.cognome);
+            request.AddQueryParameter("email", utente.email);
+            request.AddQueryParameter("telefono", utente.telefono);
+            request.AddQueryParameter("immagine", utente.immagine);
 
             IRestResponse response = client.Execute(request);
         }
@@ -109,5 +123,17 @@ namespace lume.Utility
 
         }
 
+        internal static List<Notifica> GetNotificheByUtente(long utente_id)
+        {
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/notifica/utente/{utente_id}", Method.GET);
+
+            IRestResponse response = client.Execute(request);
+
+            List<Notifica> notifiche = JsonSerializer.Deserialize<List<Notifica>>(response.Content);
+
+            return notifiche;
+        }
     }
 }

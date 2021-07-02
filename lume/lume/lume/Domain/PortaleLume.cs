@@ -31,23 +31,5 @@ namespace lume.Domain
         }
 
 
-        public void nuovaRichiesta(string titolo ,string descrizione, int numeroPartecipanti)
-        {
-            Richiesta r = new Richiesta()
-            {
-                creatore = utenteCorrente,
-                titolo = titolo,
-                descrizione = descrizione,
-                numeroPartecipanti = numeroPartecipanti,
-
-            };
-
-            DataAccess.NewRichiesta(r);
-        }
-
-        public List<Richiesta> getAllRichieste()
-        {
-            return DataAccess.GetAllRichieste();
-        }
     }
 }

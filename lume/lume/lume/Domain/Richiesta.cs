@@ -33,6 +33,35 @@ namespace lume.Domain
         public List<Notifica> notifiche { set; get; }
 
 
+        public String data
+        {
+            get
+            {
+                var diff = DateTime.Now.ToUniversalTime().Subtract(dataCreazione.ToUniversalTime());
+
+
+                if (diff.TotalSeconds < 60)
+                {
+                    return diff.Seconds.ToString() + "s fa";
+                }
+                else if(diff.TotalMinutes < 60)
+                {
+                    return diff.Minutes.ToString() + "m fa";
+                }
+                else if (diff.TotalHours < 24)
+                {
+                    return diff.Hours.ToString() + "h fa";
+                }
+                else if (diff.TotalDays < 31)
+                {
+                    return dataCreazione.ToString("ddd dd MMM yyyy");
+                }
+
+                return dataCreazione.ToString("dd/MM/yyyy");
+            }
+        }
+
+
         public Richiesta()
         {
             candidati = new List<Utente>();
