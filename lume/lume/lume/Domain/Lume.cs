@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using lume.Utility;
 
 namespace lume.Domain
 {
 
     public class Lume
     {
-        public Dictionary<long, Richiesta> richiesteMap { set; get; }
 
-        public List<Richiesta> richiesteList { set; get; }
+
+        public List<Richiesta> richieste
+        {
+            set { }
+            get { return DataAccess.GetAllRichieste(); }
+        }
 
         public List<Utente> utenti { set; get; }
 
@@ -16,8 +26,7 @@ namespace lume.Domain
 
         private Lume()
         {
-            richiesteList = new List<Richiesta>();
-            richiesteMap = new Dictionary<long, Richiesta>();
+            richieste = new List<Richiesta>();
         }
 
         public static Lume getIstance()
@@ -28,17 +37,6 @@ namespace lume.Domain
             }
 
             return lume;
-        }
-
-
-        public Richiesta getRichiestaById(long richiestaId)
-        {
-            return richiesteMap[richiestaId];
-        }
-
-        public void addRichiesta(Richiesta r)
-        {
-            richiesteList.Add(r);
         }
     }
 }

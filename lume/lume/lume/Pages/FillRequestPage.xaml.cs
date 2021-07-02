@@ -86,6 +86,7 @@ namespace lume.Pages
         void submitRequest(object sender, EventArgs e)
         {
             PortaleLume portale = PortaleLume.getIstance();
+
             portale.nuovaRichiesta(
                 Titolo.Text,
                 Descrizione.Text,

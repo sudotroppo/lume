@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
+using lume.Utility;
 
 namespace lume.Domain
 {
     public class PortaleLume
     {
+
         public Utente utenteCorrente { set; get; }
 
         public Lume lume { set; get; }
@@ -33,26 +38,16 @@ namespace lume.Domain
                 creatore = utenteCorrente,
                 titolo = titolo,
                 descrizione = descrizione,
-                numeroPartecipanti = numeroPartecipanti
+                numeroPartecipanti = numeroPartecipanti,
+
             };
 
-            utenteCorrente.addRisciesta(r);
-            lume.addRichiesta(r);
+            DataAccess.NewRichiesta(r);
         }
 
-        public void partecipaARichiesta(long richiestaId)
+        public List<Richiesta> getAllRichieste()
         {
-            Richiesta r = lume.getRichiestaById(richiestaId);
-
-            if(r.numeroPartecipanti <= r.getNumeroCandidati())
-            {
-                r.addCandidato(utenteCorrente);
-            }
-        }
-
-        internal List<Richiesta> getAllRichieste()
-        {
-            return lume.richiesteList;
+            return DataAccess.GetAllRichieste();
         }
     }
 }

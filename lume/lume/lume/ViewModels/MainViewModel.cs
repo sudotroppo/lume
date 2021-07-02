@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using lume.Domain;
 using Xamarin.Forms;
+using lume.Utility;
 
 namespace lume.ViewModels
 {
@@ -30,14 +31,7 @@ namespace lume.ViewModels
         {
             if(portaleLume.utenteCorrente == null)
             {
-                _CurrentUser = new Utente()
-                {
-                    email = "domenicobini@pazzo.sgravato.it",
-                    nome = "Domenico",
-                    cognome = "Bini",
-                    telefono = "3337028903",
-                    immagine = new Uri("https://www.bellacanzone.it/wp-content/uploads/2019/12/Domenico-Bini-840x420.jpg"),
-                };
+                _CurrentUser = DataAccess.GetUtenteByEmail("dav.galletti@stud.uniroma3.it");
                 portaleLume.utenteCorrente = CurrentUser;
             }
             else

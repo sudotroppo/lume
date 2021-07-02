@@ -5,27 +5,28 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace lume.Pages
 {
     public partial class HomePage : ContentTemplatedView
     {
+
+        public ICommand RefreshPage;
+
         public HomePage()
         {
             InitializeComponent();
+            BindingContext = this;
             homePostViewer.BindingContext = new HomeViewModel();
         }
 
         public async void OnRefresh(object sender, EventArgs e)
         {
-            RefreshView r = (RefreshView)sender;
-            await Task.Run(() =>
-            {
-                homePostViewer.BindingContext = new HomeViewModel();
-            });
-
-            r.IsRefreshing = false;
+            refrehView.IsRefreshing = true;
+            await Task.Run(() => ((HomeViewModel)homePostViewer.GetValue(BindingContextProperty)).Refresh());
+            refrehView.IsRefreshing = false;
         }
     }
 }
