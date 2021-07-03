@@ -71,7 +71,7 @@
                                          Center="22.5,22.5"/>
                     </Frame.Clip>
 
-                    <ffimage:CachedImage Source="{Binding CurrentUser.immagine}"
+                    <ffimage:CachedImage Source="{Binding CurrentUser.uriImmagine}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 

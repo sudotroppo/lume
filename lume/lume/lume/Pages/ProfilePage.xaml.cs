@@ -10,6 +10,7 @@ using lume.Assets;
 using System.Threading.Tasks;
 using lume.ViewModels;
 using System.Windows.Input;
+using lume.Utility;
 
 namespace lume.Pages
 {
@@ -75,6 +76,8 @@ namespace lume.Pages
                 ToTheLeft.IsEnabled = true;
                 Settings.IsEnabled = true;
                 SwitchButtonState("default", button);
+
+                DataAccess.UpdateUtente((Application.Current.Resources["mainVM"] as MainViewModel).CurrentUser);
             }
 
             foreach (var child in InfoList)

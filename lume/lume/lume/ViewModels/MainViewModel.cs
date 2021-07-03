@@ -5,6 +5,7 @@ using System.Text;
 using lume.Domain;
 using Xamarin.Forms;
 using lume.Utility;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace lume.ViewModels
@@ -14,24 +15,7 @@ namespace lume.ViewModels
     {
         Utente _CurrentUser;
 
-
         public ICommand SendRequest => new Command<string>((url) => Console.WriteLine(url));
-
-
-        public bool Load
-        {
-            set
-            {
-                Load = value;
-                OnPropertyChanged();
-            }
-
-        }
-
-        public void SetLoad(bool load)
-        {
-            Load = load;
-        }
 
         public Utente CurrentUser
         {
@@ -45,12 +29,13 @@ namespace lume.ViewModels
 
         public void SetUtente(string email)
         {
-            CurrentUser = DataAccess.GetUtenteByEmail(email);
+            _CurrentUser = DataAccess.GetUtenteByEmail(email);
         }
 
 
         public MainViewModel()
         {
+
 
         }
     }

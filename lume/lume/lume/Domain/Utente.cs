@@ -21,7 +21,13 @@ namespace lume.Domain
         [JsonPropertyName("telefono")]
         public string telefono { get; set; }
 
+        [JsonPropertyName("immagine")]
         public string immagine { get; set; }
+
+        public Uri uriImmagine
+        {
+            get { return new Uri(immagine); }
+        }
 
         [JsonPropertyName("notifiche")]
         public List<Notifica> notifiche { get; set; }

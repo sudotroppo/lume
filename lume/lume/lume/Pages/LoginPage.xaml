@@ -6,9 +6,6 @@
 
 
     <AbsoluteLayout x:Name="Absolute">
-        <ActivityIndicator AbsoluteLayout.LayoutBounds="0,0,1,1"
-                           AbsoluteLayout.LayoutFlags="All"
-                           IsRunning="{Binding Load}"/>
 
         <!--BackGround Style-->
 
@@ -127,6 +124,11 @@
             </StackLayout>
 
         </RelativeLayout>
+
+        
+        <ActivityIndicator x:Name="activity"
+                           AbsoluteLayout.LayoutBounds="0,0,1,1"
+                           AbsoluteLayout.LayoutFlags="All"/>
 
     </AbsoluteLayout>
 

@@ -124,5 +124,17 @@ namespace lume.Utility
 
         }
 
+        internal static List<Notifica> GetNotificheByUtente(long utente_id)
+        {
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/notifica/utente/{utente_id}", Method.GET);
+
+            IRestResponse response = client.Execute(request);
+
+            List<Notifica> notifiche = JsonSerializer.Deserialize<List<Notifica>>(response.Content);
+
+            return notifiche;
+        }
     }
 }

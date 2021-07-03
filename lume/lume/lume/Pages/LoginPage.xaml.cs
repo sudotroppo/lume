@@ -4,6 +4,7 @@ using lume.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -15,6 +16,7 @@ namespace lume.Pages
         public LoginPage()
         {
             InitializeComponent();
+
             BindingContext = Application.Current.Resources["mainVM"];
         }
 
@@ -22,22 +24,28 @@ namespace lume.Pages
         {
             var vm = BindingContext as MainViewModel;
 
-
-            await Task.Run(() =>
+            try
             {
-                Device.BeginInvokeOnMainThread(() =>
+                await Task.Run(() =>
                 {
-                    vm.SetLoad(true);
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        activity.IsRunning = true;
+                    });
+
+                    vm.SetUtente(Username.Text?.Trim());
+
+
                 });
 
-                vm.SetUtente(Username.Text.Trim());
-
-
-            });
-
-            vm.SetLoad(false);
-            await Navigation.PushAsync(new MainPage(), false);
-
+                activity.IsRunning = false;
+                await Navigation.PushAsync(new MainPage(), false);
+            }
+            catch (JsonException)
+            {
+                activity.IsRunning = false;
+                Username.TextColor = Color.Firebrick;
+            }
 
 
         }

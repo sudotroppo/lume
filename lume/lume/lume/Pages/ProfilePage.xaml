@@ -73,7 +73,7 @@
 
                     <!--https://i.ebayimg.com/images/g/LEkAAOSw40pbtyrF/s-l1600.jpg-->
                     <ffimage:CachedImage
-                           Source="{Binding CurrentUser.immagine}"
+                           Source="{Binding CurrentUser.uriImmagine}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 
@@ -174,9 +174,14 @@
                                            FieldName = "Congome"
                                            FieldValue ="{Binding CurrentUser.cognome,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
-                        <templates:InfoView 
+                        <templates:InfoView x:Name="infoEmail"
                                            FieldName = "Email"
                                            FieldValue ="{Binding CurrentUser.email,
+                                               Source={StaticResource mainVM}, Mode=TwoWay}"/>
+                        
+                        <templates:InfoView x:Name="infoTelefono"
+                                           FieldName = "Telefono"
+                                           FieldValue ="{Binding CurrentUser.telefono,
                                                Source={StaticResource mainVM}, Mode=TwoWay}"/>
 
                     </StackLayout>
