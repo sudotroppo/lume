@@ -21,12 +21,12 @@ namespace lume.Pages
         {
             InitializeComponent();
 
-            BindingContext = Application.Current.Resources["mainVM"];
+            BindingContext = this;
         }
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            var vm = BindingContext as MainViewModel;
+            var vm = Application.Current.Resources["mainVM"] as MainViewModel;
 
             try
             {
