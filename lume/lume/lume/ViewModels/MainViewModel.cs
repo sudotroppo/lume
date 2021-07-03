@@ -5,16 +5,33 @@ using System.Text;
 using lume.Domain;
 using Xamarin.Forms;
 using lume.Utility;
+using System.Windows.Input;
 
 namespace lume.ViewModels
 {
     
     public class MainViewModel : BaseViewModel
     {
-
-        protected PortaleLume portaleLume = PortaleLume.getIstance();
-
         Utente _CurrentUser;
+
+
+        public ICommand SendRequest => new Command<string>((url) => Console.WriteLine(url));
+
+
+        public bool Load
+        {
+            set
+            {
+                Load = value;
+                OnPropertyChanged();
+            }
+
+        }
+
+        public void SetLoad(bool load)
+        {
+            Load = load;
+        }
 
         public Utente CurrentUser
         {
@@ -26,19 +43,14 @@ namespace lume.ViewModels
             }
         }
 
+        public void SetUtente(string email)
+        {
+            CurrentUser = DataAccess.GetUtenteByEmail(email);
+        }
+
 
         public MainViewModel()
         {
-            if(portaleLume.utenteCorrente == null)
-            {
-                _CurrentUser = DataAccess.GetUtenteByEmail("dav.galletti@stud.uniroma3.it");
-                portaleLume.utenteCorrente = CurrentUser;
-            }
-            else
-            {
-                CurrentUser = portaleLume.utenteCorrente;
-            }
-
 
         }
     }
