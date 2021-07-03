@@ -85,7 +85,7 @@
                             <Span Text="password dimenticata?"
                                   TextColor="{x:StaticResource VerdeLume}">
                                 <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SendRequest}"
+                                    <TapGestureRecognizer Command="{Binding SendRequest, Source={x:StaticResource mainVM}}"
                                                           CommandParameter="url"/>
                                 </Span.GestureRecognizers>
                             </Span>

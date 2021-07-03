@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using lume.Domain;
 using lume.Utility;
 
@@ -22,11 +23,15 @@ namespace lume.ViewModels
 
         public NotificationViewModel(long utente_id)
         {
-            if(Notifiche == null || Notifiche.Count == 0)
+            Task.Run(() =>
             {
-                Notifiche = DataAccess.GetNotificheByUtente(utente_id);
+                if (Notifiche == null || Notifiche.Count == 0)
+                {
+                    Notifiche = DataAccess.GetNotificheByUtente(utente_id);
 
-            }
+                }
+            });
+            
         }
     }
 }
