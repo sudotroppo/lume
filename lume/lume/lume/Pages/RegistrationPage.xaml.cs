@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using lume.Utility;
 using Amazon.CognitoIdentityProvider;
+using Amazon;
 
 namespace lume.Pages
 {

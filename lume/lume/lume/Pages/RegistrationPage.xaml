@@ -88,9 +88,10 @@
             </StackLayout>
 
             <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.90}"
+						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.83}"
 						 Spacing="10">
-
+                
+                
                 <Button x:Name="RegistrationButton"
 						Text="Registrami"
 						FontSize="16"
