@@ -97,7 +97,8 @@
 						BackgroundColor="{x:StaticResource VerdeLume}"
 						Clicked="OnClikedButton"/>
 
-
+                <Button x:Name="ConfirmButton" Clicked="ConfirmButton_Click" Text="Confirm Email" />
+                
             </StackLayout>
 
         </RelativeLayout>

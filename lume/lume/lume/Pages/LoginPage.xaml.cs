@@ -1,4 +1,5 @@
-﻿using lume.CustomObj;
+﻿using Amazon.CognitoIdentityProvider;
+using lume.CustomObj;
 using lume.Templates;
 using lume.ViewModels;
 using System;
@@ -8,11 +9,14 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using lume.Utility;
 
 namespace lume.Pages
 {
     public partial class LoginPage : ContentPage
     {
+        
+      
         public LoginPage()
         {
             InitializeComponent();
