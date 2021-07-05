@@ -71,7 +71,6 @@
                                          Center="45,45"/>
                     </Frame.Clip>
 
-                    <!--https://i.ebayimg.com/images/g/LEkAAOSw40pbtyrF/s-l1600.jpg-->
                     <ffimage:CachedImage
                            Source="{Binding CurrentUser.uriImmagine}"
                            Aspect="AspectFill"

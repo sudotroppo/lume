@@ -21,13 +21,11 @@ namespace lume.Domain
         [JsonPropertyName("telefono")]
         public string telefono { get; set; }
 
+        [JsonPropertyName("password")]
+        public string password { get; set; }
+
         [JsonPropertyName("immagine")]
         public string immagine { get; set; }
-
-        public Uri uriImmagine
-        {
-            get { return new Uri(immagine); }
-        }
 
         [JsonPropertyName("notifiche")]
         public List<Notifica> notifiche { get; set; }
@@ -42,6 +40,11 @@ namespace lume.Domain
         {
             richieste = new List<Richiesta>();
             notifiche = new List<Notifica>();
+        }
+
+        public Uri uriImmagine
+        {
+            get { return new Uri(immagine); }
         }
 
         public override string ToString()

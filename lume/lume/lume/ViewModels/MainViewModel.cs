@@ -13,7 +13,7 @@ namespace lume.ViewModels
     
     public class MainViewModel : BaseViewModel
     {
-        Utente _CurrentUser;
+        Utente _CurrentUser = App.utenteCorrente;
 
         public ICommand SendRequest => new Command<string>((url) => Console.WriteLine(url));
 
@@ -27,15 +27,13 @@ namespace lume.ViewModels
             }
         }
 
-        public void SetUtente(string email)
+        public void SetUtente(Utente utente)
         {
-            _CurrentUser = DataAccess.GetUtenteByEmail(email);
+            CurrentUser = utente;
         }
-
 
         public MainViewModel()
         {
-
 
         }
     }

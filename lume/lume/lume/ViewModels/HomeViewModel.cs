@@ -25,17 +25,28 @@ namespace lume.ViewModels
             }
         }
 
+
         public void Refresh()
         {
             Posts = DataAccess.GetAllRichieste();
         }
 
+        //public void IncrementPosts(long offset, long row_count)
+        //{
+        //    Posts.AddRange(DataAccess.GetRichiesteInRowRange(offset, row_count));
+
+        //    OnPropertyChanged();
+        //}
+
         public HomeViewModel()
         {
-            if(Posts == null || Posts.Count == 0)
+            Task.Run(() =>
             {
-                Posts = DataAccess.GetAllRichieste();
-            }
+                if (Posts == null || Posts.Count == 0)
+                {
+                    Posts = DataAccess.GetAllRichieste();
+                }
+            });
         }
     }
 }

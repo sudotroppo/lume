@@ -14,6 +14,7 @@
         <CollectionView x:Name="homePostViewer"
                         Margin="8,0,8,0"
                         VerticalScrollBarVisibility="Never"
+                        Scrolled="OnScrolled"
                         ItemsSource="{Binding Posts}"
                         ItemTemplate="{x:StaticResource PostSimpleTemplate}">
 

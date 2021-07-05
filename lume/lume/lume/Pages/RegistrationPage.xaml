@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom="clr-namespace:lume.CustomObj"
-             x:Class="lume.Pages.RegistrationPage">
+             x:Class="lume.Pages.RegistrationPage"
+             x:DataType="{x:StaticResource mainVM}">
+
     <AbsoluteLayout x:Name="Absolute">
 
         <!--BackGround Style-->
@@ -96,9 +98,11 @@
 						Text="Registrami"
 						FontSize="16"
 						BackgroundColor="{x:StaticResource VerdeLume}"
-						Clicked="OnClikedButton"/>
+						Clicked="SignUp"/>
 
-                <Button x:Name="ConfirmButton" Clicked="ConfirmButton_Click" Text="Confirm Email" />
+                <Button x:Name="Back"
+                        Clicked="GoBack"
+                        Text="Torna Indietro" />
                 
             </StackLayout>
 

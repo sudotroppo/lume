@@ -6,47 +6,46 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Reflection;
 using System.Linq;
+using RestSharp.Authenticators;
+using System.Diagnostics;
 
 namespace lume.Utility
 {
     public class DataAccess
     {
 
-        //public string GetQueryString(object obj)
-        //{
-        //    var properties = from p in obj.GetType().GetProperties()
-        //                     where p.GetValue(obj, null) != null
-        //                     select p.Name + "={" + p.Name + "}";
+        public static TokenResponse GetToken(string email, string password)
+        {
+            Debug.WriteLine($"--------email = {email}, password = {password}--------");
 
-        //    return String.Join("&", properties.ToArray());
-        //}
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/public/login", Method.POST);
 
-        //private static void SetParameter(object obj, string suffisso, RestRequest request)
-        //{
-        //    foreach (PropertyInfo p in obj.GetType().GetProperties())
-        //    {
-        //        var value = p.GetValue(obj, null);
+            request.AddJsonBody(
+                new {
+                        email = email,
+                        password = password
+                    });
 
-        //        if (value != null)
-        //        {
-        //            if (value.GetType().Namespace.Contains("lume."))
-        //            {
-        //                SetParameter(value, suffisso + value.GetType().Name.ToLower() + ".", request);
-        //            }
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+            IRestResponse response = client.Execute(request);
+            Debug.WriteLine($"--------{response.Content}--------");
 
-        //            request.AddParameter(suffisso + p.Name.ToLower(), value.ToString(), ParameterType.UrlSegment); 
-        //        }
-        //    }
-        //}
+            TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
+
+            return token;
+        }
 
         public static Utente GetUtenteByEmail(string email)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/utente",Method.GET);
+            var request = new RestRequest("/protected/utente",Method.GET);
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
             request.AddParameter("email", email);
 
-            Console.WriteLine($"--------{client.BuildUri(request)}--------");
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
             IRestResponse response = client.Execute(request);
 
@@ -58,7 +57,7 @@ namespace lume.Utility
         public static void NewUtente(Utente utente)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/utente", Method.POST);
+            var request = new RestRequest("/public/regist", Method.POST);
 
             request.AddQueryParameter("nome", utente.nome);
             request.AddQueryParameter("cognome", utente.cognome);
@@ -72,7 +71,9 @@ namespace lume.Utility
         public static void UpdateUtente(Utente utente)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/utente", Method.PUT);
+            var request = new RestRequest("/protected/utente", Method.PUT);
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
             request.AddQueryParameter("id", utente.id.ToString());
             request.AddQueryParameter("nome", utente.nome);
@@ -87,7 +88,7 @@ namespace lume.Utility
         public static Richiesta GetRichiestaById(long richiestaId)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest($"/richiesta/{richiestaId}", Method.GET);
+            var request = new RestRequest($"/public/richiesta/{richiestaId}", Method.GET);
 
             IRestResponse response = client.Execute(request);
 
@@ -99,7 +100,7 @@ namespace lume.Utility
         public static List<Richiesta> GetAllRichieste()
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/richiesta", Method.GET);
+            var request = new RestRequest("/public/richiesta", Method.GET);
 
             IRestResponse response = client.Execute(request);
 
@@ -111,7 +112,9 @@ namespace lume.Utility
         public static void NewRichiesta(Richiesta richiesta)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/richiesta", Method.POST);
+            var request = new RestRequest("/protected/richiesta", Method.POST);
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
             request.AddQueryParameter("titolo", richiesta.titolo);
             request.AddQueryParameter("descrizione", richiesta.descrizione);
@@ -128,13 +131,30 @@ namespace lume.Utility
         {
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest($"/notifica/utente/{utente_id}", Method.GET);
+            var request = new RestRequest($"/protected/notifica/utente/{utente_id}", Method.GET);
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
             IRestResponse response = client.Execute(request);
 
             List<Notifica> notifiche = JsonSerializer.Deserialize<List<Notifica>>(response.Content);
 
             return notifiche;
+        }
+
+        public static List<Richiesta> GetRichiesteInRowRange(long offset, long row_count)
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/protected/richiesta/{offset}/{row_count}", Method.GET);
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+
+            IRestResponse response = client.Execute(request);
+
+            List<Richiesta> richieste = JsonSerializer.Deserialize<List<Richiesta>>(response.Content);
+
+            return richieste;
         }
     }
 }

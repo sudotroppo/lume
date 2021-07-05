@@ -1,6 +1,8 @@
 ﻿
 using lume.CustomObj;
+using lume.Domain;
 using lume.Pages;
+using lume.Utility;
 using lume.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,18 +17,20 @@ namespace lume
     {
 
         public static string token;
-        private string _user;
+
+        public static string email;
+
+        public static Utente utenteCorrente { set; get; }
+
         public App()
         {
             Device.SetFlags(new[] { "Shapes_Experimental", "Brush_Experimental" });
 
             InitializeComponent();
 
-            MainPage = new CustomNavigationPage(new LoginPage());
+            _ = GetUser();
 
-            /*_ = GetUser();
-            MainPage = _user != null ? new NavigationPage(new MainPage()) : new NavigationPage(new LoginPage());*/
-
+            MainPage = email != null ? new CustomNavigationPage(new MainPage()) : new CustomNavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
@@ -45,8 +49,10 @@ namespace lume
         {
             try
             {
-                _user = await SecureStorage.GetAsync("username");
+                email = await SecureStorage.GetAsync("email");
                 token = await SecureStorage.GetAsync("token");
+
+                utenteCorrente = DataAccess.GetUtenteByEmail(email);
             }
             catch (Exception e)
             {

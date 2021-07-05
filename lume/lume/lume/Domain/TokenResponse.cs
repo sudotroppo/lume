@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace lume.Domain
 {
-    class TokenResponse
+    public class TokenResponse
     {
-        public bool Success { get; set; }
-        public Utente Utente { get; set; }
-        public string Token { get; set; }
+        [JsonPropertyName("email")]
+        public string email { set; get; }
+
+        [JsonPropertyName("authorities")]
+        public List<Authority> autorita { set; get; }
+
+        [JsonPropertyName("token")]
+        public string token { set; get; }
+
 
         public override string ToString()
         {
-            return Token;
+            return token;
         }
     }
 }

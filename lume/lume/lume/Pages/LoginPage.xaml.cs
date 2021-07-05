@@ -10,13 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using lume.Utility;
+using lume.Assets;
+using lume.Domain;
+using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace lume.Pages
 {
     public partial class LoginPage : ContentPage
     {
-        
-      
+
         public LoginPage()
         {
             InitializeComponent();
@@ -26,31 +29,63 @@ namespace lume.Pages
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            var vm = Application.Current.Resources["mainVM"] as MainViewModel;
+            string email = Username.Text;
+            string password = Password.Text;
 
-            try
+
+            bool condUName = "".Equals(Username.Text) || Username.Text == null;
+            bool condPwd = "".Equals(Password.Text) || Password.Text == null;
+
+            Username.IsEnabled = false;
+            Password.IsEnabled = false;
+
+            if (condUName || condPwd)
             {
-                await Task.Run(() =>
+                _ = condUName ? Animations.ShakeAnimate(Username) : null;
+                _ = condPwd   ? Animations.ShakeAnimate(Password) : null;
+            }
+            else
+            {
+                try
                 {
-                    Device.BeginInvokeOnMainThread(() =>
+                    await Task.Run(async () =>
                     {
-                        activity.IsRunning = true;
+                        Device.BeginInvokeOnMainThread(() =>
+                        {
+                            activity.IsRunning = true;
+                        });
+
+                        Debug.WriteLine("A");
+                        TokenResponse token = DataAccess.GetToken(email, password);
+                        Debug.WriteLine("B");
+
+                        
+                        Debug.WriteLine($"email = {token.email}, token = {token.token}");
+
+                        await SecureStorage.SetAsync("email", token.email);
+                        await SecureStorage.SetAsync("token", token.token);
+
+                        App.utenteCorrente = DataAccess.GetUtenteByEmail(token.email);
+
+                        Debug.WriteLine("C");
+
                     });
 
-                    vm.SetUtente(Username.Text?.Trim());
+                    activity.IsRunning = false;
+                    await Navigation.PushAsync(new MainPage(), false);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
 
+                    activity.IsRunning = false;
+                    _ = Animations.ShakeAnimate(Username);
+                    _ = Animations.ShakeAnimate(Password);
+                }
 
-                });
-
-                activity.IsRunning = false;
-                await Navigation.PushAsync(new MainPage(), false);
             }
-            catch (JsonException)
-            {
-                activity.IsRunning = false;
-                Username.TextColor = Color.Firebrick;
-            }
-
+            Username.IsEnabled = true;
+            Password.IsEnabled = true;
 
         }
     }

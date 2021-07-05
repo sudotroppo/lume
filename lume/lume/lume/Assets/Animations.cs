@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace lume.Assets
@@ -195,6 +196,27 @@ namespace lume.Assets
             return x;
         }
 
+        public static Task ShakeAnimate(View v)
+        {
+            return Task.Run(async () =>
+            {
+                uint timeout = 50;
+
+                await v.TranslateTo(-15, 0, timeout);
+
+                await v.TranslateTo(15, 0, timeout);
+
+                await v.TranslateTo(-10, 0, timeout);
+
+                await v.TranslateTo(10, 0, timeout);
+
+                await v.TranslateTo(-5, 0, timeout);
+
+                await v.TranslateTo(5, 0, timeout);
+
+                v.TranslationX = 0;
+            });
+        }
         
     }
 }

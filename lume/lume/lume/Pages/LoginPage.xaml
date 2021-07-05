@@ -60,13 +60,24 @@
 						 Spacing="14"
 						 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
 						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.43}">
+                <StackLayout Orientation="Horizontal" Margin="0,0,0,15" Padding="0">
+                    <Label Text="Credenziali login"
+                           Margin="22, 0, 10, 0"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center"/>
 
-                <Label Text="Credenziali login"
-                       Margin="22, 0, 0, 15"/>
+                    <!-- caricamento richiesta -->
+                    <ActivityIndicator x:Name="activity"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"
+                                       HeightRequest="20"
+                                       WidthRequest="20"/>
+
+                </StackLayout>
 
                 <StackLayout Spacing="20">
 
-                    <StackLayout Spacing="14">
+                    <StackLayout Spacing="14" x:Name="Entrys">
                         <custom:LumEntry x:Name="Username"
 										Placeholder="Username"/>
 
@@ -124,11 +135,6 @@
             </StackLayout>
 
         </RelativeLayout>
-
-        
-        <ActivityIndicator x:Name="activity"
-                           AbsoluteLayout.LayoutBounds="0,0,1,1"
-                           AbsoluteLayout.LayoutFlags="All"/>
 
     </AbsoluteLayout>
 

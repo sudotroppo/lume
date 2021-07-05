@@ -7,10 +7,12 @@
     xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:templates="clr-namespace:lume.Templates"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:vm="clr-namespace:lume.ViewModels">
+    xmlns:vm="clr-namespace:lume.ViewModels"
+    x:DataType="{x:Type vm:NotificationViewModel}">
 
 
     <!-- Sezione per passare alla pagina profilo -->
+    <templates:ContentTemplatedView.Content>
     <AbsoluteLayout x:Name="NotifPage" 
                         Margin="0"
                         Padding="0">
@@ -71,7 +73,7 @@
                                          Center="22.5,22.5"/>
                     </Frame.Clip>
 
-                    <ffimage:CachedImage Source="{Binding CurrentUser.uriImmagine}"
+                    <ffimage:CachedImage Source="{Binding CurrentUser.uriImmagine, Source={x:StaticResource mainVM}}"
                            Aspect="AspectFill"
                            BindingContext="{x:StaticResource mainVM}"/>
 
@@ -92,6 +94,7 @@
                             Grid.Column="0"
                             Margin="0"
                             TranslationX="-50"
+                            BindingContext="{Binding .}"
                             Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
             <Button x:Name="ToTheRight" 
@@ -103,6 +106,7 @@
                             Clicked="OnProfileClicked"
                             BackgroundColor="Transparent"
                             Margin="0"
+                            BindingContext="{Binding .}"
                             Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
             <Button x:Name="Settings" 
@@ -116,6 +120,7 @@
                             TranslationY="45"
                             BackgroundColor="Transparent"
                             Margin="0"
+                            BindingContext="{Binding .}"
                             Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
             <CollectionView x:Name="notificationsViewer"
@@ -132,5 +137,6 @@
 
         <!--Area notifiche-->
     </AbsoluteLayout>
-
+        
+    </templates:ContentTemplatedView.Content>
 </templates:ContentTemplatedView>

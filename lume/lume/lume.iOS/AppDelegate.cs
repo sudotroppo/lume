@@ -1,5 +1,6 @@
 ﻿
 using Foundation;
+using PCLAppConfig;
 using UIKit;
 
 namespace lume.iOS
@@ -21,6 +22,8 @@ namespace lume.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

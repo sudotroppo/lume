@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using PCLAppConfig;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms.Platform.Android;
@@ -26,6 +27,9 @@ namespace lume.Droid
             Instance = this;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
+
             LoadApplication(new App());
             
         }
