@@ -8,16 +8,33 @@ using System.Reflection;
 using System.Linq;
 using RestSharp.Authenticators;
 using System.Diagnostics;
+using Xamarin.Essentials;
 
 namespace lume.Utility
 {
     public class DataAccess
     {
 
+        public static void RefreshToken()
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/protected/refresh-token", Method.GET);
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+            if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                throw new UnauthorizedAccessException("request unuthorized");
+            }
+
+        }
+
         public static TokenResponse GetToken(string email, string password)
         {
-            Debug.WriteLine($"--------email = {email}, password = {password}--------");
-
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/public/login", Method.POST);
 
@@ -38,6 +55,8 @@ namespace lume.Utility
 
         public static Utente GetUtenteByEmail(string email)
         {
+            DataAccess.RefreshToken();
+
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/protected/utente",Method.GET);
 
@@ -50,6 +69,8 @@ namespace lume.Utility
             IRestResponse response = client.Execute(request);
 
             Utente utente = JsonSerializer.Deserialize<Utente>(response.Content);
+
+            Debug.WriteLine($"--------id = {utente.id}, nome = {utente.nome}--------");
 
             return utente;
         }
@@ -70,6 +91,8 @@ namespace lume.Utility
 
         public static void UpdateUtente(Utente utente)
         {
+            DataAccess.RefreshToken();
+
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/protected/utente", Method.PUT);
 
@@ -111,6 +134,8 @@ namespace lume.Utility
 
         public static void NewRichiesta(Richiesta richiesta)
         {
+            DataAccess.RefreshToken();
+
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/protected/richiesta", Method.POST);
 
@@ -129,6 +154,7 @@ namespace lume.Utility
 
         internal static List<Notifica> GetNotificheByUtente(long utente_id)
         {
+            DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest($"/protected/notifica/utente/{utente_id}", Method.GET);
@@ -144,6 +170,8 @@ namespace lume.Utility
 
         public static List<Richiesta> GetRichiesteInRowRange(long offset, long row_count)
         {
+            DataAccess.RefreshToken();
+
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest($"/protected/richiesta/{offset}/{row_count}", Method.GET);
 

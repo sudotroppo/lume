@@ -5,7 +5,6 @@ using lume.Pages;
 using lume.Utility;
 using lume.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -20,7 +19,8 @@ namespace lume
 
         public static string email;
 
-        public static Utente utenteCorrente { set; get; }
+        public static MainViewModel mainVM;
+
 
         public App()
         {
@@ -28,9 +28,24 @@ namespace lume
 
             InitializeComponent();
 
-            _ = GetUser();
+            Page initalPage;
 
-            MainPage = email != null ? new CustomNavigationPage(new MainPage()) : new CustomNavigationPage(new LoginPage());
+            mainVM = new MainViewModel();
+            _ = GetUtente();
+
+            try
+            {
+                DataAccess.RefreshToken();
+                initalPage = new CustomNavigationPage(new MainPage());
+            }
+            catch (UnauthorizedAccessException)
+            {
+                initalPage = new CustomNavigationPage(new LoginPage(email));
+                
+            }
+
+            MainPage = initalPage;
+
         }
 
         protected override void OnStart()
@@ -45,14 +60,30 @@ namespace lume
         {
         }
 
-        private async Task GetUser()
+        public static async Task GetUtente()
         {
             try
             {
                 email = await SecureStorage.GetAsync("email");
                 token = await SecureStorage.GetAsync("token");
 
-                utenteCorrente = DataAccess.GetUtenteByEmail(email);
+                mainVM.PullUtente(email);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+        }
+
+        public static async Task SetToken(string email, string password)
+        {
+            try
+            {
+                TokenResponse tokenResp = DataAccess.GetToken(email, password);
+
+                await SecureStorage.SetAsync("email", tokenResp.email);
+                await SecureStorage.SetAsync("token", tokenResp.token);
+
             }
             catch (Exception e)
             {

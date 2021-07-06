@@ -3,9 +3,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:lume.Pages"
+    xmlns:vm="clr-namespace:lume.ViewModels"
     x:Class="lume.Pages.HomePage"
     xmlns:templates="clr-namespace:lume.Templates">
-
 
     <RefreshView x:Name="refrehView"
                  RefreshColor="{x:StaticResource VerdeLume}"
@@ -15,6 +15,7 @@
                         Margin="8,0,8,0"
                         VerticalScrollBarVisibility="Never"
                         Scrolled="OnScrolled"
+                        x:DataType="{x:Type vm:HomeViewModel}"
                         ItemsSource="{Binding Posts}"
                         ItemTemplate="{x:StaticResource PostSimpleTemplate}">
 

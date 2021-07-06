@@ -78,8 +78,9 @@
                 <StackLayout Spacing="20">
 
                     <StackLayout Spacing="14" x:Name="Entrys">
-                        <custom:LumEntry x:Name="Username"
-										Placeholder="Username"/>
+                        <custom:LumEntry x:Name="Email"
+										Placeholder="Email"
+                                         Text="{Binding _Email}"/>
 
                         <custom:LumEntry x:Name="Password"
 										Placeholder="Password"
@@ -96,7 +97,7 @@
                             <Span Text="password dimenticata?"
                                   TextColor="{x:StaticResource VerdeLume}">
                                 <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SendRequest, Source={x:StaticResource mainVM}}"
+                                    <TapGestureRecognizer Command="{Binding SendRequest}"
                                                           CommandParameter="url"/>
                                 </Span.GestureRecognizers>
                             </Span>

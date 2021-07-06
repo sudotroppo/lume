@@ -19,29 +19,34 @@ namespace lume.Pages
 {
     public partial class LoginPage : ContentPage
     {
+        public string _Email { set;  get; }
 
-        public LoginPage()
+        public LoginPage() : this(null) { }
+
+        public LoginPage(string email)
         {
             InitializeComponent();
+
+            _Email = email;
 
             BindingContext = this;
         }
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
-            string email = Username.Text;
+            string email = Email.Text?.Trim();
             string password = Password.Text;
 
 
-            bool condUName = "".Equals(Username.Text) || Username.Text == null;
+            bool condUName = "".Equals(Email.Text) || Email.Text == null;
             bool condPwd = "".Equals(Password.Text) || Password.Text == null;
 
-            Username.IsEnabled = false;
+            Email.IsEnabled = false;
             Password.IsEnabled = false;
 
             if (condUName || condPwd)
             {
-                _ = condUName ? Animations.ShakeAnimate(Username) : null;
+                _ = condUName ? Animations.ShakeAnimate(Email) : null;
                 _ = condPwd   ? Animations.ShakeAnimate(Password) : null;
             }
             else
@@ -55,23 +60,12 @@ namespace lume.Pages
                             activity.IsRunning = true;
                         });
 
-                        Debug.WriteLine("A");
-                        TokenResponse token = DataAccess.GetToken(email, password);
-                        Debug.WriteLine("B");
-
-                        
-                        Debug.WriteLine($"email = {token.email}, token = {token.token}");
-
-                        await SecureStorage.SetAsync("email", token.email);
-                        await SecureStorage.SetAsync("token", token.token);
-
-                        App.utenteCorrente = DataAccess.GetUtenteByEmail(token.email);
-
-                        Debug.WriteLine("C");
+                        await App.SetToken(email, password);
 
                     });
 
                     activity.IsRunning = false;
+
                     await Navigation.PushAsync(new MainPage(), false);
                 }
                 catch (Exception ex)
@@ -79,12 +73,13 @@ namespace lume.Pages
                     Debug.WriteLine(ex.Message);
 
                     activity.IsRunning = false;
-                    _ = Animations.ShakeAnimate(Username);
+
+                    _ = Animations.ShakeAnimate(Email);
                     _ = Animations.ShakeAnimate(Password);
                 }
 
             }
-            Username.IsEnabled = true;
+            Email.IsEnabled = true;
             Password.IsEnabled = true;
 
         }

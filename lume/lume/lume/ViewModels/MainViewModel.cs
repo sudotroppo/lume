@@ -13,7 +13,12 @@ namespace lume.ViewModels
     
     public class MainViewModel : BaseViewModel
     {
-        Utente _CurrentUser = App.utenteCorrente;
+        Utente _CurrentUser;
+
+        public void PullUtente(string email)
+        {
+            CurrentUser = DataAccess.GetUtenteByEmail(email);
+        }
 
         public ICommand SendRequest => new Command<string>((url) => Console.WriteLine(url));
 
@@ -25,11 +30,6 @@ namespace lume.ViewModels
                 _CurrentUser = value;
                 OnPropertyChanged();
             }
-        }
-
-        public void SetUtente(Utente utente)
-        {
-            CurrentUser = utente;
         }
 
         public MainViewModel()

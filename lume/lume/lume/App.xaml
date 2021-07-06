@@ -207,10 +207,6 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
-
-        <!--BindingContext vari-->
-        <viewModels:MainViewModel x:Key="mainVM"/>
-
         <!--Stili impliciti App-->
 
         <!--ContentPage-->

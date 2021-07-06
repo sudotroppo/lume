@@ -28,7 +28,7 @@ namespace lume.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
+            //ConfigurationManager.Initialise(PCLAppConfig.FileSystemStream.PortableStream.Current);
 
             LoadApplication(new App());
             

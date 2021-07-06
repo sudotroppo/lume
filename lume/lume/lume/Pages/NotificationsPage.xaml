@@ -7,136 +7,136 @@
     xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:templates="clr-namespace:lume.Templates"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:vm="clr-namespace:lume.ViewModels"
-    x:DataType="{x:Type vm:NotificationViewModel}">
-
+    xmlns:vm="clr-namespace:lume.ViewModels">
 
     <!-- Sezione per passare alla pagina profilo -->
     <templates:ContentTemplatedView.Content>
-    <AbsoluteLayout x:Name="NotifPage" 
-                        Margin="0"
-                        Padding="0">
+        <AbsoluteLayout x:Name="NotifPage" 
+                            Margin="0"
+                            Padding="0">
 
-        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  AbsoluteLayout.LayoutFlags="All"
-                  RowDefinitions="45, *"
-			      ColumnDefinitions="45, auto,*, 45"
-                  Margin="10,10,10,0"
-                  ColumnSpacing="0"
-                  RowSpacing="0">
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                      AbsoluteLayout.LayoutFlags="All"
+                      RowDefinitions="45, *"
+			          ColumnDefinitions="45, auto,*, 45"
+                      Margin="10,10,10,0"
+                      ColumnSpacing="0"
+                      RowSpacing="0">
 
-            <!--Sfondo-->
-            <BoxView x:Name="BackgroundLine" 
-                     BackgroundColor="{StaticResource GrigioLume}"
-					 Grid.Column="0"
-					 Grid.ColumnSpan="4"
-					 Grid.Row="0"
-					 Grid.RowSpan="1"
-                     Margin="10,0,10,-10"
-                     HeightRequest="2"
-                     CornerRadius="3"
-                     ScaleX="0"
-                     VerticalOptions="EndAndExpand"/>
+                <!--Sfondo-->
+                <BoxView x:Name="BackgroundLine" 
+                         BackgroundColor="{StaticResource GrigioLume}"
+					     Grid.Column="0"
+					     Grid.ColumnSpan="4"
+					     Grid.Row="0"
+					     Grid.RowSpan="1"
+                         Margin="10,0,10,-10"
+                         HeightRequest="2"
+                         CornerRadius="3"
+                         ScaleX="0"
+                         VerticalOptions="EndAndExpand"/>
 
-            <AbsoluteLayout Grid.Column="0"
-                                Grid.ColumnSpan="2"
+                <AbsoluteLayout Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Grid.Row="0"
+                                    Margin="0">
+
+                    <Label x:Name="ProfileName"
+                           Text="{Binding CurrentUser}"
+                           AbsoluteLayout.LayoutBounds="45,0.5"
+                           AbsoluteLayout.LayoutFlags="YProportional"
+                           MaxLines="1"/>
+
+                    <Label x:Name="BackgroundBoxView"
+                               AbsoluteLayout.LayoutBounds="0,0.5,1.5,1"
+                               AbsoluteLayout.LayoutFlags="YProportional,SizeProportional"
+                               AnchorX="0"
+                               ScaleX="0"
+                               BackgroundColor="{x:StaticResource BiancoLume}"/>
+
+                    <!-- Immagine e info utente -->
+                    <Frame x:Name="ProfileImage"
+                           IsClippedToBounds="True"
+                           WidthRequest="45"
+                           HeightRequest="45"
+                           Padding="0"
+                           AnchorX="0.5"
+                           AnchorY="0"
+                           AbsoluteLayout.LayoutBounds="0,0"
+                           BackgroundColor="Transparent">
+
+                        <Frame.Clip>
+                            <EllipseGeometry RadiusX="22.5"
+                                             RadiusY="22.5"
+                                             Center="22.5,22.5"/>
+                        </Frame.Clip>
+
+                        <ffimage:CachedImage Source="{Binding CurrentUser.uriImmagine}"
+                               Aspect="AspectFill"/>
+
+
+                    </Frame>
+
+
+
+                </AbsoluteLayout>
+
+                <Button x:Name="ToTheLeft" 
+                                Text="&#xf053;"
+                                FontFamily="{x:StaticResource IconSolid}"
+                                TextColor="{x:StaticResource Nero}"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="Start"
                                 Grid.Row="0"
-                                Margin="0">
+                                Grid.Column="0"
+                                Margin="0"
+                                TranslationX="-50"
+                                BindingContext="{Binding .}"
+                                Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
-                <Label x:Name="ProfileName"
-                       Text="{Binding CurrentUser, Source={x:StaticResource mainVM}}"
-                       AbsoluteLayout.LayoutBounds="45,0.5"
-                       AbsoluteLayout.LayoutFlags="YProportional"
-                       MaxLines="1"/>
+                <Button x:Name="ToTheRight" 
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Text="&#xf054;"
+                                TextColor="{x:StaticResource Nero}"
+                                FontFamily="{x:StaticResource IconSolid}"
+                                Clicked="OnProfileClicked"
+                                BackgroundColor="Transparent"
+                                Margin="0"
+                                BindingContext="{Binding .}"
+                                Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
-                <Label x:Name="BackgroundBoxView"
-                           AbsoluteLayout.LayoutBounds="0,0.5,1.5,1"
-                           AbsoluteLayout.LayoutFlags="YProportional,SizeProportional"
-                           AnchorX="0"
-                           ScaleX="0"
-                           BackgroundColor="{x:StaticResource BiancoLume}"/>
+                <Button x:Name="Settings" 
+                                Grid.Row="0"
+                                Grid.Column="3"
+                                Text="&#xf013;"
+                                TextColor="{x:StaticResource Nero}"
+                                FontFamily="{x:StaticResource IconSolid}"
+                                FontSize="18"
+                                TranslationX="45"
+                                TranslationY="45"
+                                BackgroundColor="Transparent"
+                                Margin="0"
+                                BindingContext="{Binding .}"
+                                Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
-                <!-- Immagine e info utente -->
-                <Frame x:Name="ProfileImage"
-                       IsClippedToBounds="True"
-                       WidthRequest="45"
-                       HeightRequest="45"
-                       Padding="0"
-                       AnchorX="0.5"
-                       AnchorY="0"
-                       AbsoluteLayout.LayoutBounds="0,0"
-                       BackgroundColor="Transparent">
+                <CollectionView x:Name="notificationsViewer"
+                                Grid.ColumnSpan="4"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Margin="0,10,0,0"
+                                VerticalScrollBarVisibility="Never"
+                                ItemsSource="{Binding Notifiche}"
+                                ItemTemplate="{x:StaticResource NotificaSimpleTemplate}">
+                    <CollectionView.BindingContext>
+                        <vm:NotificationViewModel/>
+                    </CollectionView.BindingContext>
+                
+                </CollectionView>
+            </Grid>
 
-                    <Frame.Clip>
-                        <EllipseGeometry RadiusX="22.5"
-                                         RadiusY="22.5"
-                                         Center="22.5,22.5"/>
-                    </Frame.Clip>
-
-                    <ffimage:CachedImage Source="{Binding CurrentUser.uriImmagine, Source={x:StaticResource mainVM}}"
-                           Aspect="AspectFill"
-                           BindingContext="{x:StaticResource mainVM}"/>
-
-
-                </Frame>
-
-
-
-            </AbsoluteLayout>
-
-            <Button x:Name="ToTheLeft" 
-                            Text="&#xf053;"
-                            FontFamily="{x:StaticResource IconSolid}"
-                            TextColor="{x:StaticResource Nero}"
-                            BackgroundColor="Transparent"
-                            HorizontalOptions="Start"
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="0"
-                            TranslationX="-50"
-                            BindingContext="{Binding .}"
-                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
-
-            <Button x:Name="ToTheRight" 
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Text="&#xf054;"
-                            TextColor="{x:StaticResource Nero}"
-                            FontFamily="{x:StaticResource IconSolid}"
-                            Clicked="OnProfileClicked"
-                            BackgroundColor="Transparent"
-                            Margin="0"
-                            BindingContext="{Binding .}"
-                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
-
-            <Button x:Name="Settings" 
-                            Grid.Row="0"
-                            Grid.Column="3"
-                            Text="&#xf013;"
-                            TextColor="{x:StaticResource Nero}"
-                            FontFamily="{x:StaticResource IconSolid}"
-                            FontSize="18"
-                            TranslationX="45"
-                            TranslationY="45"
-                            BackgroundColor="Transparent"
-                            Margin="0"
-                            BindingContext="{Binding .}"
-                            Style="{x:StaticResource ButtonPressedColorBlack}"/>
-
-            <CollectionView x:Name="notificationsViewer"
-                            Grid.ColumnSpan="4"
-                            Grid.Column="0"
-                            Grid.Row="1"
-                            Margin="0,10,0,0"
-                            VerticalScrollBarVisibility="Never"
-                            ItemsSource="{Binding Notifiche}"
-                            ItemTemplate="{x:StaticResource NotificaSimpleTemplate}">
-
-            </CollectionView>
-        </Grid>
-
-        <!--Area notifiche-->
-    </AbsoluteLayout>
+            <!--Area notifiche-->
+        </AbsoluteLayout>
         
     </templates:ContentTemplatedView.Content>
 </templates:ContentTemplatedView>

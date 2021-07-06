@@ -13,7 +13,6 @@ namespace lume.ViewModels
     {
         private List<Richiesta> _Posts;
 
-
         public List<Richiesta> Posts
         {
             get { return _Posts; }
@@ -30,13 +29,6 @@ namespace lume.ViewModels
         {
             Posts = DataAccess.GetAllRichieste();
         }
-
-        //public void IncrementPosts(long offset, long row_count)
-        //{
-        //    Posts.AddRange(DataAccess.GetRichiesteInRowRange(offset, row_count));
-
-        //    OnPropertyChanged();
-        //}
 
         public HomeViewModel()
         {

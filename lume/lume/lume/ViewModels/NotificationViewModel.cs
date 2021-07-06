@@ -21,13 +21,13 @@ namespace lume.ViewModels
             }
         }
 
-        public NotificationViewModel(long utente_id)
+        public NotificationViewModel()
         {
             Task.Run(() =>
             {
                 if (Notifiche == null || Notifiche.Count == 0)
                 {
-                    Notifiche = DataAccess.GetNotificheByUtente(utente_id);
+                    Notifiche = DataAccess.GetNotificheByUtente(App.mainVM.CurrentUser.id);
 
                 }
             });

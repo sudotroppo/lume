@@ -19,7 +19,7 @@ namespace lume.Pages
         public FillRequestPage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
-            BindingContext = Application.Current.Resources["mainVM"];
+            BindingContext = new MainViewModel();
             StepperLabel.BindingContext = this;
 
         }
@@ -88,7 +88,7 @@ namespace lume.Pages
         {
             Richiesta r = new Richiesta()
             {
-                creatore = (Application.Current.Resources["mainVM"] as MainViewModel).CurrentUser,
+                creatore = App.mainVM.CurrentUser,
                 titolo = Titolo.Text,
                 descrizione = Descrizione.Text,
                 numeroPartecipanti = int.Parse(StepperLabel.Text)
