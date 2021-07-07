@@ -28,9 +28,6 @@ namespace lume.Pages
         public ProfilePage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
-            var mainVM = new MainViewModel();
-            InfoStack.BindingContext = mainVM;
-            Content.BindingContext = mainVM;
             InfoList = InfoStack.Children;
             
         }
@@ -80,7 +77,10 @@ namespace lume.Pages
                 Settings.IsEnabled = true;
                 SwitchButtonState("default", button);
 
-                DataAccess.UpdateUtente(App.utente);
+                Task.Run(() =>
+                {
+                    DataAccess.UpdateUtente(App.utente);
+                });
             }
 
             foreach (var child in InfoList)

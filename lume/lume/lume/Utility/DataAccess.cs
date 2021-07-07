@@ -109,6 +109,12 @@ namespace lume.Utility
             request.AddQueryParameter("immagine", utente.immagine);
 
             IRestResponse response = client.Execute(request);
+
+            if (!App.utente.email.Equals(utente.email))
+            {
+                SecureStorage.SetAsync("email", utente.email);
+
+            }
         }
 
         public static Richiesta GetRichiestaById(long richiestaId)

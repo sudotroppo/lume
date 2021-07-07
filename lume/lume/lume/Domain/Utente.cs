@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using Xamarin.Forms;
 
 namespace lume.Domain
 {
@@ -42,9 +43,17 @@ namespace lume.Domain
             notifiche = new List<Notifica>();
         }
 
-        public Uri uriImmagine
+        public ImageSource sorgenteImmagine
         {
-            get { return new Uri(immagine); }
+            get
+            {
+                if(immagine == null || immagine.Equals(""))
+                {
+                    return ImageSource.FromFile("user.png");
+                }
+
+                return ImageSource.FromUri(new Uri(immagine));
+            }
         }
 
         public override string ToString()

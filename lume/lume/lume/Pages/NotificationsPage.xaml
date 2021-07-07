@@ -73,7 +73,7 @@
                                              Center="22.5,22.5"/>
                         </Frame.Clip>
 
-                        <ffimage:CachedImage Source="{Binding CurrentUser.uriImmagine}"
+                        <ffimage:CachedImage Source="{Binding CurrentUser.sorgenteImmagine}"
                                Aspect="AspectFill"/>
 
 
