@@ -6,6 +6,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +17,30 @@ namespace lume.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage, INotifyPropertyChanged
     {
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            if ("TemplateContent".Equals(propertyName))
+            {
+                Debug.WriteLine($"propertyName = {propertyName}, \n\"emplateContent\".Equals(propertyName) = {"TemplateContent".Equals(propertyName)}");
+                new PropertyChangedEventHandler(ChangeTab)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            else
+            {
+                Debug.WriteLine($"propertyName = {propertyName}\n");
+
+            }
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        private static readonly Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
+
+        private static readonly Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
+
+
         public static readonly BindableProperty TemplateContentProperty =
             BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPage));
 
@@ -22,68 +48,76 @@ namespace lume.Pages
            BindableProperty.Create(nameof(CurrentTab), typeof(ContentTemplatedView), typeof(MainPage));
 
 
+
+        public View TemplateContent
+        {
+            set
+            {
+                SetValue(TemplateContentProperty, value);
+                //OnPropertyChanged();
+
+            }
+            get => (View)GetValue(TemplateContentProperty);
+        }
+
+
+
         public ContentTemplatedView rootTab = new HomePage();
 
-        private static readonly Color SelectedTabColor = (Color)Application.Current.Resources["SelectedTabColor"];
+        private readonly Dictionary<Type, KeyValuePair<int, Button>> TabDictionary;
 
-        private static readonly Color UnselectedTabColor = (Color)Application.Current.Resources["UnselectedTabsColor"];
 
-        private readonly Dictionary<Type, View> TabDictionary;
 
         public Navigator navigator;
 
-        private static readonly ArrayList Tab = new ArrayList { typeof(HomePage), typeof(FillRequestPage), typeof(NotificationsPage) };
 
-        public new event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChanged?.Invoke(this, e);
-        }
-
-        protected new void OnPropertyChanged(string propertyName)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
 
 
         private async void ChangeTab(object sender, EventArgs e)
         {
-            Type currentTabType = CurrentTab.GetType();
-
-            TabDictionary.TryGetValue(currentTabType, out View selectedTab);
-
-            if (selectedTab != null)
+            try
             {
-                (selectedTab as Button).TextColor = SelectedTabColor;
+                Type currentTabType = CurrentTab.GetType();
 
-                foreach (View v in TabDictionary.Values)
+                KeyValuePair<int, Button> keyValuePair = TabDictionary[currentTabType];
+
+                Button selectedTabButton = keyValuePair.Value;
+
+                selectedTabButton.TextColor = SelectedTabColor;
+
+                foreach (KeyValuePair<int, Button> v in TabDictionary.Values)
                 {
-                    if (!v.Equals(selectedTab))
+                    if (!v.Value.Equals(selectedTabButton))
                     {
-                        (v as Button).TextColor = UnselectedTabColor;
+                        v.Value.TextColor = UnselectedTabColor;
                     }
                 }
 
-                await Task.Run(() =>
-                {
-                    double columnWidth = Width / 3;
-                    double swithTranslation = SelectedLine.TranslationX;
-                    double initialScaleX = SelectedLine.ScaleX;
+                await Task.Run(() => SlideSelectorTo(keyValuePair.Key));
 
-                    int index = Tab.IndexOf(currentTabType);
-
-                    double dx = columnWidth * index - swithTranslation;
-
-                    new Animation()
-                    {
-                        { 0, 1, Animations.SlideOfX(SelectedLine, dx, Easing.CubicInOut) },
-                    }.Commit(this, "SwithTab", 1, 300, Easing.Linear);
-                });
-
-
+                Debug.WriteLine($"tab to index: {keyValuePair.Key}");
             }
+            catch { }
 
+
+        }
+
+        private void SlideSelectorTo(int index)
+        {
+            double columnWidth = Width / TabDictionary.Count;
+
+            double swithTranslation = SelectedLine.TranslationX;
+
+            double initialScaleX = SelectedLine.ScaleX;
+
+
+            double dx = columnWidth * index - swithTranslation;
+
+            new Animation()
+            {
+                { 0, 1, Animations.SlideOfX(SelectedLine, dx, Easing.CubicInOut) }
+
+            }.Commit(this, "SwithTab", 1, 300, Easing.Linear);
         }
 
         public ContentTemplatedView CurrentTab
@@ -92,11 +126,10 @@ namespace lume.Pages
             {
                 if (value != CurrentTab)
                 {
-
                     SetValue(CurrentTabProperty, value);
                     TemplateContent = value.Content;
-                    PropertyChanged += ChangeTab;
-                    OnPropertyChanged("TemplateContent");
+                    OnPropertyChanged();
+
                 }
             }
 
@@ -104,28 +137,23 @@ namespace lume.Pages
             get => (ContentTemplatedView)GetValue(CurrentTabProperty);
         }
 
-        public View TemplateContent
-        {
-            set => SetValue(TemplateContentProperty, value);
-            get => (View)GetValue(TemplateContentProperty);
-        }
 
         public MainPage()
         {
             InitializeComponent();
 
-            TabDictionary = new Dictionary<Type, View>
+            TabDictionary = new Dictionary<Type, KeyValuePair<int, Button>>
             {
-                { typeof(HomePage), homeButton },
-                { typeof(NotificationsPage), notificationButton },
-                { typeof(FillRequestPage), fillrequestButton }
+                { typeof(HomePage), new KeyValuePair<int, Button>(0, HomePage_Button ) },
+                { typeof(FillRequestPage), new KeyValuePair<int, Button>(1, FillRequestPage_Button) },
+                { typeof(NotificationsPage), new KeyValuePair<int, Button>(2, NotificationsPage_Button) },
             };
 
             navigator = new Navigator(this);
 
             CurrentTab = rootTab;
 
-            BindingContext = this;
+            absolute.BindingContext = this;
         }
 
         protected override bool OnBackButtonPressed()
@@ -147,6 +175,7 @@ namespace lume.Pages
             (sender as Button).IsEnabled = true;
 
         }
+
         public void OnHomeClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;

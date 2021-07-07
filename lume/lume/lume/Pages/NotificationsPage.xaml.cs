@@ -25,6 +25,7 @@ namespace lume.Pages
 
             double ProfileImageEndX = Application.Current.MainPage.Width / 2;
             double ProfileImageStartX = ProfileImage.WidthRequest / 2 + 10;
+
             double dx = ProfileImageEndX - ProfileImageStartX;
 
             Animation ToProfilepage = new Animation  // animazione di cambio pagina
@@ -40,7 +41,7 @@ namespace lume.Pages
                 {0,1, Animations.SlideOf(Settings, -45,-45, Easing.CubicInOut) }
             };
 
-            await Task.Run(() => ToProfilepage.Commit(this, "Prova", 1, 500, Easing.Linear, (c, v) =>
+            await Task.Run(() => ToProfilepage.Commit(this, "ToProfilepage", 1, 500, Easing.Linear, (c, v) =>
             {
                 navigator.PushAsync(new ProfilePage(navigator));
                 b.IsEnabled = true;

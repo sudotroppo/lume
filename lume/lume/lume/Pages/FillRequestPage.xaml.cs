@@ -88,7 +88,7 @@ namespace lume.Pages
         {
             Richiesta r = new Richiesta()
             {
-                creatore = App.mainVM.CurrentUser,
+                creatore = App.utente,
                 titolo = Titolo.Text,
                 descrizione = Descrizione.Text,
                 numeroPartecipanti = int.Parse(StepperLabel.Text)

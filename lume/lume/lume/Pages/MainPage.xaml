@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      x:Class="lume.Pages.MainPage"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="lume.Pages.MainPage"
              xmlns:templates="clr-namespace:lume.Templates"
              xmlns:pages="clr-namespace:lume.Pages"
              x:DataType="{x:Type pages:MainPage}">
 
-    <AbsoluteLayout>
+    <AbsoluteLayout x:Name="absolute">
         <Grid  AbsoluteLayout.LayoutBounds="0,0,1,1"
                AbsoluteLayout.LayoutFlags="All"
                ColumnDefinitions="*,*,*"
@@ -29,28 +29,29 @@
             </Grid.RowDefinitions>
 
             <ContentView x:Name="TabViewer"
-                             Grid.Column="0"
-                             Grid.ColumnSpan="3"
-                             Grid.Row="1"
-                             Content="{Binding TemplateContent, Mode=TwoWay}"
-                             BackgroundColor="{x:StaticResource BiancoLume}"/>
+                         Grid.Column="0"
+                         Grid.ColumnSpan="3"
+                         Grid.Row="1"
+                         Content="{Binding TemplateContent, Mode=OneWay}"
+                         BackgroundColor="{x:StaticResource BiancoLume}"/>
 
 
             <Grid x:Name="Buttons_grid"
-              Grid.Column="0"
-              Grid.Row="2"
-              Grid.ColumnSpan="3"
-              ColumnSpacing="0"
-              RowSpacing="0">
+                  Grid.Column="0"
+                  Grid.Row="2"
+                  Grid.ColumnSpan="3"
+                  ColumnSpacing="0"
+                  RowSpacing="0">
 
-                <Button x:Name="notificationButton"
-                        Text="&#xf007;"
+                <Button x:Name="HomePage_Button"
+                        Text="&#xf015;"
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="{x:StaticResource ButtonMediumFontSize}"
-                    Grid.Column="2"
-                    Clicked="OnNotificationClicked"
+                    Grid.Column="0"
+                    Clicked="OnHomeClicked"
                     BackgroundColor="Transparent"/>
-                <Button x:Name="fillrequestButton"
+
+                <Button x:Name="FillRequestPage_Button"
                         Text="&#xf055;"
                         TextColor="{x:StaticResource UnselectedTabsColor}"
                     FontFamily="{x:StaticResource IconSolid}"
@@ -58,12 +59,13 @@
                     Grid.Column="1"
                     Clicked="OnNewRequestClicked"
                     BackgroundColor="Transparent"/>
-                <Button x:Name="homeButton"
-                        Text="&#xf015;"
+
+                <Button x:Name="NotificationsPage_Button"
+                        Text="&#xf007;"
                     FontFamily="{x:StaticResource IconSolid}"
                     FontSize="{x:StaticResource ButtonMediumFontSize}"
-                    Grid.Column="0"
-                    Clicked="OnHomeClicked"
+                    Grid.Column="2"
+                    Clicked="OnNotificationClicked"
                     BackgroundColor="Transparent"/>
 
                 

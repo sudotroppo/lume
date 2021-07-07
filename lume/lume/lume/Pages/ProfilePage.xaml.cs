@@ -19,6 +19,7 @@ namespace lume.Pages
 	{
 
         private bool ReadOnly = true;
+
         private readonly IList<View> InfoList;
 
         public ICommand ChangeFoto => new Command(async () => await DisplayAlert("Da implementare!", "si dovrebbe aprire la galleria", "Ok"));
@@ -27,8 +28,11 @@ namespace lume.Pages
         public ProfilePage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
+            var mainVM = new MainViewModel();
+            InfoStack.BindingContext = mainVM;
+            Content.BindingContext = mainVM;
             InfoList = InfoStack.Children;
-
+            
         }
 
         private void SwitchButtonState(string status, Button button)
@@ -76,7 +80,7 @@ namespace lume.Pages
                 Settings.IsEnabled = true;
                 SwitchButtonState("default", button);
 
-                DataAccess.UpdateUtente(App.mainVM.CurrentUser);
+                DataAccess.UpdateUtente(App.utente);
             }
 
             foreach (var child in InfoList)
@@ -122,6 +126,7 @@ namespace lume.Pages
         public async void OnSettingsClicked(object sender, EventArgs e)
         {
             Button b = sender as Button;
+
             b.IsEnabled = false;
 
             await Task.Run(() =>

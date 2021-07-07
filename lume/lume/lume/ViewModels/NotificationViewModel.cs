@@ -27,7 +27,7 @@ namespace lume.ViewModels
             {
                 if (Notifiche == null || Notifiche.Count == 0)
                 {
-                    Notifiche = DataAccess.GetNotificheByUtente(App.mainVM.CurrentUser.id);
+                    Notifiche = DataAccess.GetNotificheByUtente(App.utente.id);
 
                 }
             });

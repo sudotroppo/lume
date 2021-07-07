@@ -17,7 +17,7 @@ namespace lume
 
         public Navigator(MainPage mainPage)
         {
-            this.mainPageTemplate = mainPage;
+            mainPageTemplate = mainPage;
             stackList = new LinkedList<ContentTemplatedView>();
         }
 

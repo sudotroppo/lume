@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using lume.Domain;
@@ -11,9 +13,32 @@ namespace lume.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        private List<Richiesta> _Posts;
+        private bool _IsRefreshing;
+        public bool IsRefreshing
+        {
+            get { return _IsRefreshing; }
 
-        public List<Richiesta> Posts
+            set
+            {
+                _IsRefreshing = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public ICommand RefreshPage => new Command(async () =>
+        {
+            Debug.WriteLine($"{IsRefreshing}");
+
+            await Task.Run(() => Posts = new ObservableCollection<Richiesta>(DataAccess.GetAllRichieste()));
+
+            IsRefreshing = false;
+            Debug.WriteLine($"{IsRefreshing}");
+        });
+
+        private ObservableCollection<Richiesta> _Posts;
+
+        public ObservableCollection<Richiesta> Posts
         {
             get { return _Posts; }
 
@@ -25,19 +50,11 @@ namespace lume.ViewModels
         }
 
 
-        public void Refresh()
-        {
-            Posts = DataAccess.GetAllRichieste();
-        }
-
         public HomeViewModel()
         {
             Task.Run(() =>
             {
-                if (Posts == null || Posts.Count == 0)
-                {
-                    Posts = DataAccess.GetAllRichieste();
-                }
+                Posts = new ObservableCollection<Richiesta> (DataAccess.GetAllRichieste());
             });
         }
     }

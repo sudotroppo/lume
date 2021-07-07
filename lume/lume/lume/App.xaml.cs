@@ -19,7 +19,7 @@ namespace lume
 
         public static string email;
 
-        public static MainViewModel mainVM;
+        public static Utente utente;
 
 
         public App()
@@ -28,21 +28,23 @@ namespace lume
 
             InitializeComponent();
 
-            Page initalPage;
+            Page initalPage = new CustomNavigationPage(new LoginPage(email));
 
-            mainVM = new MainViewModel();
+
             _ = GetUtente();
 
             try
             {
                 DataAccess.RefreshToken();
                 initalPage = new CustomNavigationPage(new MainPage());
+
             }
             catch (UnauthorizedAccessException)
             {
                 initalPage = new CustomNavigationPage(new LoginPage(email));
                 
             }
+
 
             MainPage = initalPage;
 
@@ -67,7 +69,7 @@ namespace lume
                 email = await SecureStorage.GetAsync("email");
                 token = await SecureStorage.GetAsync("token");
 
-                mainVM.PullUtente(email);
+                utente = DataAccess.GetUtenteByEmail(email);
             }
             catch (Exception e)
             {
@@ -84,10 +86,11 @@ namespace lume
                 await SecureStorage.SetAsync("email", tokenResp.email);
                 await SecureStorage.SetAsync("token", tokenResp.token);
 
+                utente = DataAccess.GetUtenteByEmail(email);
             }
             catch (Exception e)
             {
-                Debug.WriteLine(e);
+                Debug.WriteLine($"msg = {e}");
             }
         }
     }

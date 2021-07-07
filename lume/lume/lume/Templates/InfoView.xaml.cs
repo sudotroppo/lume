@@ -37,7 +37,7 @@ namespace lume.Templates
         public InfoView()
         {
             InitializeComponent();
-            BindingContext = this;
+            stack.BindingContext = this;
             this.IsReadOnly = true;
         }
     }

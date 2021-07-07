@@ -31,6 +31,9 @@ namespace lume.Utility
                 throw new UnauthorizedAccessException("request unuthorized");
             }
 
+            TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
+
+            SecureStorage.SetAsync("token", token.token);
         }
 
         public static TokenResponse GetToken(string email, string password)

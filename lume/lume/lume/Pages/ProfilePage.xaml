@@ -7,11 +7,6 @@
     xmlns:vm="clr-namespace:lume.ViewModels"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
 
-    
-    <templates:ContentTemplatedView.BindingContext>
-        <vm:MainViewModel x:Name="mainVM"/>
-    </templates:ContentTemplatedView.BindingContext>
-
     <AbsoluteLayout Margin="0"
                     Padding="0">
 
@@ -32,16 +27,16 @@
                             AbsoluteLayout.LayoutFlags="SizeProportional">
 
                 <Label x:Name="ProfileName"
-                       Text="{Binding CurrentUser}"
+                       Text="{Binding CurrentUser, Source}"
                        AbsoluteLayout.LayoutBounds="45,0.5"
                        AbsoluteLayout.LayoutFlags="YProportional"
                        MaxLines="1">
 
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{x:Binding FieldValue,Source={x:Reference infoNome}}"/>
+                            <Span Text="{x:Binding FieldValue, Source={x:Reference infoNome}}"/>
                             <Span Text=" "/>
-                            <Span Text="{x:Binding FieldValue,Source={x:Reference infoCognome}}"/>
+                            <Span Text="{x:Binding FieldValue, Source={x:Reference infoCognome}}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -172,17 +167,17 @@
 
                         <templates:InfoView x:Name="infoNome"
                                             FieldName = "Nome"
-                                            FieldValue = "{Binding CurrentUser.nome, Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                            FieldValue = "{Binding CurrentUser.nome, Mode=TwoWay}"/>
                         <templates:InfoView x:Name="infoCognome"
                                            FieldName = "Congome"
-                                           FieldValue ="{Binding CurrentUser.cognome,  Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                           FieldValue ="{Binding CurrentUser.cognome, Mode=TwoWay}"/>
                         <templates:InfoView x:Name="infoEmail"
                                            FieldName = "Email"
-                                           FieldValue ="{Binding CurrentUser.email,  Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                           FieldValue ="{Binding CurrentUser.email, Mode=TwoWay}"/>
                         
                         <templates:InfoView x:Name="infoTelefono"
                                            FieldName = "Telefono"
-                                           FieldValue ="{Binding CurrentUser.telefono,  Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                           FieldValue ="{Binding CurrentUser.telefono, Mode=TwoWay}"/>
 
                     </StackLayout>
 

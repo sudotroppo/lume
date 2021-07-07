@@ -16,12 +16,12 @@
                             Padding="0">
 
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                      AbsoluteLayout.LayoutFlags="All"
-                      RowDefinitions="45, *"
-			          ColumnDefinitions="45, auto,*, 45"
-                      Margin="10,10,10,0"
-                      ColumnSpacing="0"
-                      RowSpacing="0">
+                  AbsoluteLayout.LayoutFlags="All"
+                  RowDefinitions="45, *"
+			      ColumnDefinitions="45, auto,*, 45"
+                  Margin="10,10,10,0"
+                  ColumnSpacing="0"
+                  RowSpacing="0">
 
                 <!--Sfondo-->
                 <BoxView x:Name="BackgroundLine" 
@@ -37,10 +37,12 @@
                          VerticalOptions="EndAndExpand"/>
 
                 <AbsoluteLayout Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    Grid.Row="0"
-                                    Margin="0">
-
+                                Grid.ColumnSpan="2"
+                                Grid.Row="0"
+                                Margin="0">
+                    <AbsoluteLayout.BindingContext>
+                        <vm:MainViewModel />
+                    </AbsoluteLayout.BindingContext>
                     <Label x:Name="ProfileName"
                            Text="{Binding CurrentUser}"
                            AbsoluteLayout.LayoutBounds="45,0.5"
@@ -128,8 +130,9 @@
                                 VerticalScrollBarVisibility="Never"
                                 ItemsSource="{Binding Notifiche}"
                                 ItemTemplate="{x:StaticResource NotificaSimpleTemplate}">
+
                     <CollectionView.BindingContext>
-                        <vm:NotificationViewModel/>
+                        <vm:NotificationViewModel />
                     </CollectionView.BindingContext>
                 
                 </CollectionView>

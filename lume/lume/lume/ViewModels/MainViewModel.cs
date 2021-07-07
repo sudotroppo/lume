@@ -7,18 +7,15 @@ using Xamarin.Forms;
 using lume.Utility;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using lume.Templates;
 
 namespace lume.ViewModels
 {
     
     public class MainViewModel : BaseViewModel
     {
-        Utente _CurrentUser;
 
-        public void PullUtente(string email)
-        {
-            CurrentUser = DataAccess.GetUtenteByEmail(email);
-        }
+        private Utente _CurrentUser = App.utente;
 
         public ICommand SendRequest => new Command<string>((url) => Console.WriteLine(url));
 
