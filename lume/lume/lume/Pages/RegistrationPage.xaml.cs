@@ -23,13 +23,15 @@ namespace lume.Pages
         {
             Utente u = new Utente()
             {
-                nome = Nome_reg.Text,
-                cognome = Cognome_reg.Text,
-                password = Password_reg.Text,
-                email = Email_reg.Text,
+                nome = Nome_reg.Text?.Trim(),
+                cognome = Cognome_reg.Text?.Trim(),
+                password = Password_reg.Text?.Trim(),
+                email = Email_reg.Text?.Trim(),
+                telefono = Telefono_reg.Text?.Trim()
             };
 
             await Task.Run(() => DataAccess.NewUtente(u));
+
             await Navigation.PopAsync(false);
         }
 

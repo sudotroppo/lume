@@ -26,7 +26,7 @@ namespace lume.CustomObj
         {
             GestureRecognizers.Add(new TapGestureRecognizer
             {
-                Command = new Command(async () => await Navigation.PushModalAsync(PageFactory.IstanceNewPage(PageName))),
+                Command = new Command(async () => await Navigation.PushAsync(PageFactory.IstanceNewPage(PageName), false)),
             });
         }
     }

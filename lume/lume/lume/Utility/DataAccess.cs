@@ -3,10 +3,6 @@ using System.Text.Json;
 using RestSharp;
 using lume.Domain;
 using System.Collections.Generic;
-using Xamarin.Forms;
-using System.Reflection;
-using System.Linq;
-using RestSharp.Authenticators;
 using System.Diagnostics;
 using Xamarin.Essentials;
 
@@ -88,6 +84,9 @@ namespace lume.Utility
             request.AddQueryParameter("email", utente.email);
             request.AddQueryParameter("telefono", utente.telefono);
             request.AddQueryParameter("immagine", utente.immagine);
+            request.AddQueryParameter("password", utente.password);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
             IRestResponse response = client.Execute(request);
         }
@@ -108,6 +107,8 @@ namespace lume.Utility
             request.AddQueryParameter("telefono", utente.telefono);
             request.AddQueryParameter("immagine", utente.immagine);
 
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
             IRestResponse response = client.Execute(request);
 
             if (!App.utente.email.Equals(utente.email))
@@ -122,6 +123,8 @@ namespace lume.Utility
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest($"/public/richiesta/{richiestaId}", Method.GET);
 
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
             IRestResponse response = client.Execute(request);
 
             Richiesta richiesta = JsonSerializer.Deserialize<Richiesta>(response.Content);
@@ -133,6 +136,8 @@ namespace lume.Utility
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/public/richiesta", Method.GET);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
             IRestResponse response = client.Execute(request);
 
@@ -170,6 +175,8 @@ namespace lume.Utility
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
             IRestResponse response = client.Execute(request);
 
             List<Notifica> notifiche = JsonSerializer.Deserialize<List<Notifica>>(response.Content);
@@ -186,6 +193,7 @@ namespace lume.Utility
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
             IRestResponse response = client.Execute(request);
 

@@ -37,12 +37,8 @@ namespace lume.Pages
             string email = Email.Text?.Trim();
             string password = Password.Text;
 
-
             bool condUName = "".Equals(Email.Text) || Email.Text == null;
             bool condPwd = "".Equals(Password.Text) || Password.Text == null;
-
-            Email.IsEnabled = false;
-            Password.IsEnabled = false;
 
             if (condUName || condPwd)
             {
@@ -51,22 +47,25 @@ namespace lume.Pages
             }
             else
             {
+                bool result = true;
                 try
                 {
                     await Task.Run(async () =>
                     {
-                        Device.BeginInvokeOnMainThread(() =>
-                        {
-                            activity.IsRunning = true;
-                        });
+                        Device.BeginInvokeOnMainThread(() => activity.IsRunning = true);
 
-                        await App.SetToken(email, password);
-
+                        result = await App.SetUtente(email, password);
+                        
                     });
 
-                    activity.IsRunning = false;
+                    if (result)
+                    {
+                        await App.GetUtente();
 
-                    await Navigation.PushAsync(new MainPage(), false);
+                        await Navigation.PushAsync(new MainPage(), false);
+                    }
+
+                    activity.IsRunning = false;
                 }
                 catch (Exception ex)
                 {
@@ -79,8 +78,6 @@ namespace lume.Pages
                 }
 
             }
-            Email.IsEnabled = true;
-            Password.IsEnabled = true;
 
         }
     }

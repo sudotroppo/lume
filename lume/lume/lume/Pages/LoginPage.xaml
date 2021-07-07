@@ -123,7 +123,8 @@
                        Margin="22, 0, 0, 0">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="sei nuovo? registrati premendo "/> 
+                            <Span Text="sei nuovo? registrati premendo "/>
+
                             <custom:PageHyperlinkSpan Text="qui"
                                                       TextColor="{x:StaticResource VerdeLume}"
                                                       PageName="RegistrationPage"

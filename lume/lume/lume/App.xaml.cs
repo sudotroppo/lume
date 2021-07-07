@@ -1,5 +1,4 @@
-﻿
-using lume.CustomObj;
+﻿using lume.CustomObj;
 using lume.Domain;
 using lume.Pages;
 using lume.Utility;
@@ -28,25 +27,30 @@ namespace lume
 
             InitializeComponent();
 
-            Page initalPage = new CustomNavigationPage(new LoginPage(email));
-
-
             _ = GetUtente();
 
-            try
-            {
-                DataAccess.RefreshToken();
-                initalPage = new CustomNavigationPage(new MainPage());
 
-            }
-            catch (UnauthorizedAccessException)
-            {
-                initalPage = new CustomNavigationPage(new LoginPage(email));
-                
-            }
-
-
+            Page initalPage = new CustomNavigationPage(new LoginPage(email));
             MainPage = initalPage;
+
+            Task.Run(() =>
+            {
+                try
+                {
+                    DataAccess.RefreshToken();
+                    initalPage = new MainPage();
+
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    initalPage = new LoginPage(email);
+
+                }
+
+                MainPage.Navigation.PushAsync(initalPage, false);
+            });
+
+
 
         }
 
@@ -77,8 +81,10 @@ namespace lume
             }
         }
 
-        public static async Task SetToken(string email, string password)
+        public static async Task<bool> SetUtente(string email, string password)
         {
+            bool result = true;
+
             try
             {
                 TokenResponse tokenResp = DataAccess.GetToken(email, password);
@@ -86,12 +92,22 @@ namespace lume
                 await SecureStorage.SetAsync("email", tokenResp.email);
                 await SecureStorage.SetAsync("token", tokenResp.token);
 
+                token = tokenResp.token;
+
                 utente = DataAccess.GetUtenteByEmail(email);
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Debug.WriteLine($"msg = {e}");
+                result = false;
             }
             catch (Exception e)
             {
                 Debug.WriteLine($"msg = {e}");
+                result = false;
             }
+
+            return result;
         }
     }
 }

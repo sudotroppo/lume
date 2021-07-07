@@ -74,8 +74,8 @@
                             <custom:LumEntry x:Name="Email_reg"
 										Placeholder="Email"/>
 
-                            <custom:LumEntry x:Name="CodiceFiscale"
-										Placeholder="Codice Fiscale"/>
+                            <custom:LumEntry x:Name="Telefono_reg"
+										Placeholder="Numero Di Telefono"/>
 
                             <custom:LumEntry x:Name="Password_reg"
 										Placeholder="Password"
