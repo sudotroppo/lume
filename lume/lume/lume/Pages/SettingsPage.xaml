@@ -9,5 +9,16 @@
     <templates:ContentTemplatedView.BindingContext>
         <vm:MainViewModel/>
     </templates:ContentTemplatedView.BindingContext>
-    <StackLayout/>
+
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                     AbsoluteLayout.LayoutFlags="All">
+
+            <Button BackgroundColor="DarkRed"
+                    Text="Logout"
+                    VerticalOptions="EndAndExpand"
+                    Margin="10,0,10,30"/>
+
+        </StackLayout>
+    </AbsoluteLayout>
 </templates:ContentTemplatedView>

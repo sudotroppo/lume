@@ -14,6 +14,7 @@ namespace lume.ViewModels
     public class HomeViewModel : BaseViewModel
     {
         private bool _IsRefreshing;
+
         public bool IsRefreshing
         {
             get { return _IsRefreshing; }
@@ -25,6 +26,37 @@ namespace lume.ViewModels
             }
         }
 
+        
+
+        public ICommand SendPartecipation => new Command<long>(async (id) =>
+        {
+            bool check = true;
+
+            try
+            {
+
+                await Task.Run(() =>
+                {
+                    check = DataAccess.PartecipaAProposta(id);
+                });
+
+                if (check)
+                {
+                    await App.Current.MainPage.DisplayAlert("Congratulazioni", "hai partecipato con successo alla richiesta di aiuto", "continua");
+                    OnPropertyChanged();
+                }
+                else
+                {
+                    await App.Current.MainPage.DisplayAlert("Ops..", "controlla di non aver già partecipato o che la richiesta non sia al completo", "ok");
+                }
+            }
+            catch(Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Errore di connessione", "Controlla la connessione", "ok");
+
+            }
+
+        });
 
         public ICommand RefreshPage => new Command(async () =>
         {

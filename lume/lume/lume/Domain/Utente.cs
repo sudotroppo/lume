@@ -61,5 +61,17 @@ namespace lume.Domain
             return nome + " " + cognome;
         }
 
+        public override bool Equals(object obj)
+        {
+            if(obj == null || !typeof(Utente).Equals(obj))
+            {
+                return false;
+            }
+
+            Utente that = obj as Utente;
+
+            return this.id == that.id;
+        }
+
     }
 }

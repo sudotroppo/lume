@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
 			 xmlns:custom="clr-namespace:lume.CustomObj"
 			 xmlns:viewModels="clr-namespace:lume.ViewModels"
 			 x:Class="lume.App">
@@ -62,129 +61,14 @@
         <Color x:Key="UnselectedTabsColor">#ffffff</Color>
 
         <!--**********-->
-        
-        <!-- template per post -->
-
-        <DataTemplate x:Key="PostSimpleTemplate">
-            <Grid Padding="0,10,0,10">
-                <Frame HasShadow="False"
-                       CornerRadius="20"
-                       IsClippedToBounds="True"
-                       BackgroundColor="{x:StaticResource GrigioLume}">
-
-                    <StackLayout Spacing="10"
-						         Margin="0">
-                        <StackLayout Orientation="Horizontal"
-								     Margin="-10,-10,-10,0"
-							         Spacing="10">
-
-                            <Frame IsClippedToBounds="True"
-                                   Padding="0"
-                                   Margin="0"
-                                   VerticalOptions="Center"
-                                   HeightRequest="45"
-                                   WidthRequest="45">
-                                <Frame.Clip>
-                                    <EllipseGeometry RadiusX="22.5"
-                                                     RadiusY="22.5"
-                                                     Center="22.5,22.5"/>
-                                </Frame.Clip>
-
-                                <Image WidthRequest="45"
-                                       HeightRequest="45"
-                                       Aspect="AspectFill"
-                                       Source="{Binding creatore.sorgenteImmagine}"/>
-                            </Frame>
-
-                            <Label Margin="0"
-                                   VerticalOptions="Center"
-                                   Text="{Binding creatore}"/>
-
-
-                            <Label TextColor="{x:StaticResource Nero}"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="EndAndExpand">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="&#xf500;"
-                                              FontFamily="{x:StaticResource IconSolid}"/>
-                                        <Span Text="{Binding numeroPartecipanti, StringFormat=' {0,3}'}"/>
-
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-
-                        </StackLayout>
-
-
-                        <StackLayout Spacing="2">
-                            <Label Margin="0"
-                                   FontSize="18"
-                                   Text="{Binding titolo}"/>
-
-                            <Label VerticalOptions="Center"
-                                   Margin="0"
-                                   Text="{Binding descrizione}"/>
-
-                            <Label VerticalOptions="Center"
-                                   HorizontalOptions="End"
-                                   Margin="0,10,0,0"
-                                   FontSize="{x:StaticResource LabelSmallFontSize}"
-                                   Text="{Binding data}"/>
-
-                        </StackLayout>
-
-                    </StackLayout>
-                </Frame>
-            </Grid>
-        </DataTemplate>
-        
-        <!-- template per notifica -->
-
-        <DataTemplate x:Key="NotificaSimpleTemplate">
-            <Grid ColumnDefinitions="*"
-                  RowDefinitions="*"
-			      IsClippedToBounds="True">
-
-                    <StackLayout Spacing="10">
-                        <StackLayout Orientation="Horizontal"
-							         Spacing="10">
-
-
-                                <Frame IsClippedToBounds="True"
-                                       HasShadow="False"
-                                       HeightRequest="10"
-                                       WidthRequest="10">
-
-                                    <Frame.Clip>
-                                        <EllipseGeometry RadiusX="22.5"
-                                                         RadiusY="22.5"
-                                                         Center="22.5,22.5"/>
-                                    </Frame.Clip>
-                                    <Image Source="{Binding utente.sorgenteImmagine}"
-							               Margin="-20"
-                                           Aspect="AspectFill"/>
-                                </Frame>
-
-                            <StackLayout Spacing="10">
-                                <Label Text="{Binding descrizione}" />
-                            </StackLayout>
-
-                        </StackLayout>
-
-                        <BoxView HeightRequest="2"
-                                 BackgroundColor="{x:StaticResource Nero}"
-                                 VerticalOptions="End"
-                                 Margin="0,0,0,10"/>
-
-                    </StackLayout>
-            </Grid>
-		</DataTemplate>
-
-        <!--************-->
 
         <!--Convertitori-->
-        <custom:InverseBoolConverter x:Key="inverseBoolConverter"/>
+        <custom:InverseBoolConverter x:Key="inverseBoolConverter" />
+
+        <custom:SelectedColorConverter x:Key="selectedColorConverter"
+                                       Invert="False"
+                                       TrueColor="{x:StaticResource VerdeLume}"
+                                       FalseColor="{x:StaticResource NeroLume}" />
         <!--************-->
 
         <!--Stili Espliciti App-->

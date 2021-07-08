@@ -33,7 +33,6 @@
                          Margin="10,0,10,-10"
                          HeightRequest="2"
                          CornerRadius="3"
-                         ScaleX="0"
                          VerticalOptions="EndAndExpand"/>
 
                 <AbsoluteLayout Grid.Column="0"
@@ -43,6 +42,7 @@
                     <AbsoluteLayout.BindingContext>
                         <vm:MainViewModel />
                     </AbsoluteLayout.BindingContext>
+
                     <Label x:Name="ProfileName"
                            Text="{Binding CurrentUser}"
                            AbsoluteLayout.LayoutBounds="45,0.5"
@@ -128,12 +128,53 @@
                                 Grid.Row="1"
                                 Margin="0,10,0,0"
                                 VerticalScrollBarVisibility="Never"
-                                ItemsSource="{Binding Notifiche}"
-                                ItemTemplate="{x:StaticResource NotificaSimpleTemplate}">
+                                ItemsSource="{Binding Notifiche}">
 
                     <CollectionView.BindingContext>
                         <vm:NotificationViewModel />
                     </CollectionView.BindingContext>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="*"
+                                  RowDefinitions="*"
+			                      IsClippedToBounds="True">
+
+                                    <StackLayout Spacing="10">
+                                        <StackLayout Orientation="Horizontal"
+							                         Spacing="10">
+
+
+                                                <Frame IsClippedToBounds="True"
+                                                       HasShadow="False"
+                                                       HeightRequest="10"
+                                                       WidthRequest="10">
+
+                                                    <Frame.Clip>
+                                                        <EllipseGeometry RadiusX="22.5"
+                                                                         RadiusY="22.5"
+                                                                         Center="22.5,22.5"/>
+                                                    </Frame.Clip>
+                                                    <ffimage:CachedImage Source="{Binding soggetto.sorgenteImmagine}"
+							                                             Margin="-20"
+                                                                         Aspect="AspectFill"/>
+                                                </Frame>
+
+                                            <StackLayout Spacing="10">
+                                                <Label Text="{Binding descrizione}" />
+                                            </StackLayout>
+
+                                        </StackLayout>
+
+                                        <BoxView HeightRequest="2"
+                                                 BackgroundColor="{x:StaticResource Nero}"
+                                                 VerticalOptions="End"
+                                                 Margin="0,0,0,10"/>
+
+                                    </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
                 
                 </CollectionView>
             </Grid>

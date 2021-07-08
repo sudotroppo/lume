@@ -26,5 +26,7 @@ namespace lume.Domain
         [JsonPropertyName("utente")]
         public Utente utente { get; set; }
 
+        [JsonPropertyName("soggetto")]
+        public Utente soggetto { get; set; }
     }
 }

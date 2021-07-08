@@ -5,6 +5,7 @@ using lume.Utility;
 using lume.ViewModels;
 using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -20,6 +21,8 @@ namespace lume
 
         public static Utente utente;
 
+        //20000 = 20s
+        public static int requestTimeout = 5000; 
 
         public App()
         {
@@ -27,35 +30,99 @@ namespace lume
 
             InitializeComponent();
 
-            _ = GetUtente();
+            Debug.WriteLine($"{DateTime.Now}");
+            _ = GetStorageInfo();
+            Debug.WriteLine($"{DateTime.Now}");
 
+            Page initialPage = new LoginPage(email);
 
-            Page initalPage = new CustomNavigationPage(new LoginPage(email));
-            MainPage = initalPage;
+            MainPage = new CustomNavigationPage(initialPage);
 
             Task.Run(() =>
             {
                 try
                 {
                     DataAccess.RefreshToken();
-                    initalPage = new MainPage();
+                    utente = DataAccess.GetUtenteByEmail(email);
 
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    initalPage = new LoginPage(email);
+                    initialPage = new MainPage();
 
-                }
+                    Device.BeginInvokeOnMainThread(() =>
+                        (MainPage as CustomNavigationPage).CurrentPage.Navigation.PushAsync(initialPage, false));
 
-                MainPage.Navigation.PushAsync(initalPage, false);
+                }catch(Exception) { }
             });
-
-
 
         }
 
         protected override void OnStart()
         {
+
+
+            //var ts = new CancellationTokenSource();
+            //CancellationToken ct = ts.Token;
+
+            //bool authorized = true;
+
+            //Debug.WriteLine("Start a new Thread");
+            //Task.Factory.StartNew(() =>
+            //{
+            //    try
+            //    {
+            //        var t1 = Task.Factory.StartNew(() =>
+            //        {
+
+            //            Debug.WriteLine("send request");
+            //            DataAccess.RefreshToken();
+            //            utente = DataAccess.GetUtenteByEmail(email);
+            //            Debug.WriteLine("response handled");
+            //        });
+
+            //        while (!t1.IsCompleted)
+            //        {
+            //            Debug.WriteLine("waiting");
+
+            //            if (ct.IsCancellationRequested)
+            //            {
+            //                Debug.WriteLine("cancelled");
+            //                t1.Dispose();
+            //            }
+            //        }
+
+
+            //    }
+            //    catch (UnauthorizedAccessException)
+            //    {
+
+            //        authorized = false;
+            //    }
+            //    finally
+            //    {
+            //        Device.BeginInvokeOnMainThread(async () =>
+            //        {
+            //            Debug.WriteLine("set page");
+
+            //            MainPage
+            //                .Navigation.InsertPageBefore
+            //                    (ts.IsCancellationRequested || !authorized ?
+            //                    (Page)new LoginPage(email) :
+            //                    (Page)new HomePage(), (MainPage as CustomNavigationPage).CurrentPage);
+
+            //            await (MainPage as CustomNavigationPage).CurrentPage.Navigation.PopAsync();
+
+            //            await (MainPage as CustomNavigationPage).CurrentPage.DisplayAlert("", "", "ok");
+            //        });
+            //    }
+
+            //}, ct);
+
+            //Task.Factory.StartNew(() =>
+            //{
+            //    Debug.WriteLine("inizio timer");
+            //    ts.CancelAfter(timeout);
+            //    Debug.WriteLine("fine timer");
+
+            //});
         }
 
         protected override void OnSleep()
@@ -66,14 +133,12 @@ namespace lume
         {
         }
 
-        public static async Task GetUtente()
+        public static async Task GetStorageInfo()
         {
             try
             {
                 email = await SecureStorage.GetAsync("email");
                 token = await SecureStorage.GetAsync("token");
-
-                utente = DataAccess.GetUtenteByEmail(email);
             }
             catch (Exception e)
             {
@@ -87,7 +152,7 @@ namespace lume
 
             try
             {
-                TokenResponse tokenResp = DataAccess.GetToken(email, password);
+                Domain.TokenResponse tokenResp = DataAccess.GetToken(email, password);
 
                 await SecureStorage.SetAsync("email", tokenResp.email);
                 await SecureStorage.SetAsync("token", tokenResp.token);

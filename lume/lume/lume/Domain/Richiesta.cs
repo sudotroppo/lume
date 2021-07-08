@@ -29,11 +29,24 @@ namespace lume.Domain
         [JsonPropertyName("candidati")]
         public List<Utente> candidati { set; get; }
 
-        [JsonPropertyName("notifiche")]
-        public List<Notifica> notifiche { set; get; }
+        public bool alreadyPicked
+        {
+            get
+            {
+                return candidati.Contains(App.utente);
+            }
+        }
+
+        public int numeroCandidati
+        {
+            get
+            {
+                return candidati.Count;
+            }
+        }
 
 
-        public String data
+        public string data
         {
             get
             {
@@ -65,17 +78,11 @@ namespace lume.Domain
         public Richiesta()
         {
             candidati = new List<Utente>();
-            notifiche = new List<Notifica>();
         }
 
         public void addCandidato(Utente candidato)
         {
             candidati.Add(candidato);
-        }
-
-        public int getNumeroCandidati()
-        {
-            return candidati.ToArray().Length;
         }
     }
 }

@@ -60,7 +60,7 @@ namespace lume.Pages
 
                     if (result)
                     {
-                        await App.GetUtente();
+                        await App.GetStorageInfo();
 
                         await Navigation.PushAsync(new MainPage(), false);
                     }

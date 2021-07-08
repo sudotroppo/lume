@@ -14,7 +14,10 @@ namespace lume.Utility
         public static void RefreshToken()
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/protected/refresh-token", Method.GET);
+            var request = new RestRequest("/protected/refresh-token", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
@@ -27,15 +30,36 @@ namespace lume.Utility
                 throw new UnauthorizedAccessException("request unuthorized");
             }
 
-            TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
+            Domain.TokenResponse token = JsonSerializer.Deserialize<Domain.TokenResponse>(response.Content);
 
             SecureStorage.SetAsync("token", token.token);
         }
 
-        public static TokenResponse GetToken(string email, string password)
+        public static Boolean PartecipaAProposta(long id_richiesta)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/public/login", Method.POST);
+            var request = new RestRequest($"/protected/partecipa/richiesta/{id_richiesta}", Method.PUT)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+            Boolean result = JsonSerializer.Deserialize<Boolean>(response.Content);
+            return result;
+        }
+
+        public static Domain.TokenResponse GetToken(string email, string password)
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/public/login", Method.POST)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddJsonBody(
                 new {
@@ -47,7 +71,7 @@ namespace lume.Utility
             IRestResponse response = client.Execute(request);
             Debug.WriteLine($"--------{response.Content}--------");
 
-            TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
+            Domain.TokenResponse token = JsonSerializer.Deserialize<Domain.TokenResponse>(response.Content);
 
             return token;
         }
@@ -57,7 +81,10 @@ namespace lume.Utility
             DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/protected/utente",Method.GET);
+            var request = new RestRequest("/protected/utente", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
@@ -78,6 +105,7 @@ namespace lume.Utility
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/public/regist", Method.POST);
+            request.Timeout = App.requestTimeout;
 
             request.AddQueryParameter("nome", utente.nome);
             request.AddQueryParameter("cognome", utente.cognome);
@@ -96,7 +124,10 @@ namespace lume.Utility
             DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/protected/utente", Method.PUT);
+            var request = new RestRequest("/protected/utente", Method.PUT)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
@@ -121,7 +152,10 @@ namespace lume.Utility
         public static Richiesta GetRichiestaById(long richiestaId)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest($"/public/richiesta/{richiestaId}", Method.GET);
+            var request = new RestRequest($"/public/richiesta/{richiestaId}", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
 
             Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
@@ -135,7 +169,10 @@ namespace lume.Utility
         public static List<Richiesta> GetAllRichieste()
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/public/richiesta", Method.GET);
+            var request = new RestRequest("/public/richiesta", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
 
             Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
@@ -151,7 +188,10 @@ namespace lume.Utility
             DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/protected/richiesta", Method.POST);
+            var request = new RestRequest("/protected/richiesta", Method.POST)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
@@ -166,12 +206,15 @@ namespace lume.Utility
 
         }
 
-        internal static List<Notifica> GetNotificheByUtente(long utente_id)
+        internal static List<Notifica> GetNotificheByUtente()
         {
             DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest($"/protected/notifica/utente/{utente_id}", Method.GET);
+            var request = new RestRequest($"/protected/notifica/utente", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
@@ -189,7 +232,10 @@ namespace lume.Utility
             DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest($"/protected/richiesta/{offset}/{row_count}", Method.GET);
+            var request = new RestRequest($"/protected/richiesta/{offset}/{row_count}", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
