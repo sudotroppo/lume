@@ -1,11 +1,119 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="lume.CustomObj.CustomPopUp">
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:vm="clr-namespace:lume.ViewModels"
+             x:Class="lume.CustomObj.CustomPopUp"
+             x:DataType="{x:Type vm:HomeViewModel}">
     <ContentView.Content>
 
-        <Frame>
-            
+        <Frame BackgroundColor="Transparent">
+            <Grid Padding="0,0,0,0">
+
+                        <Frame HasShadow="False"
+                               CornerRadius="20"
+                               IsClippedToBounds="True"
+                               BackgroundColor="{x:StaticResource GrigioLume}"
+                               >
+
+                            <StackLayout Spacing="10"
+						                 Margin="0">
+                                <StackLayout Orientation="Horizontal"
+								             Margin="-10,-10,-10,0"
+							                 Spacing="10">
+
+                                    <Frame IsClippedToBounds="True"
+                                           Padding="0"
+                                           Margin="0"
+                                           VerticalOptions="Center"
+                                           HeightRequest="45"
+                                           WidthRequest="45">
+                                        <Frame.Clip>
+                                            <EllipseGeometry RadiusX="22.5"
+                                                             RadiusY="22.5"
+                                                             Center="22.5,22.5"/>
+                                        </Frame.Clip>
+
+                                        <ffimage:CachedImage WidthRequest="45"
+                                               HeightRequest="45"
+                                               Aspect="AspectFill"
+                                               Source="{Binding SelectedPost.creatore.sorgenteImmagine}"/>
+                                    </Frame>
+
+                                    <Label Margin="0"
+                                           VerticalOptions="Center"
+                                           Text="{Binding SelectedPost.creatore}"/>
+
+
+                                    <Label TextColor="{x:StaticResource Nero}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="EndAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="&#xf500;"
+                                                      FontFamily="{x:StaticResource IconSolid}"/>
+                                                <Span Text="{Binding SelectedPost.numeroCandidati, StringFormat='{0,3}/'}"/>
+                                                <Span Text="{Binding SelectedPost.numeroPartecipanti, StringFormat='{0}'}"/>
+
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                </StackLayout>
+
+
+                                <StackLayout Spacing="2">
+                                    <Label Margin="0"
+                                           FontSize="18"
+                                           Text="{Binding SelectedPost.titolo}"/>
+
+                                    <Label VerticalOptions="Center"
+                                           Margin="0"
+                                           Text="{Binding SelectedPost.descrizione}"/>
+
+                                    <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End">
+
+                                         <Frame WidthRequest="30"
+                                                HeightRequest="30"
+                                                Padding="0"
+                                                IsClippedToBounds="True"
+                                                HorizontalOptions="StartAndExpand"
+                                                VerticalOptions="EndAndExpand"
+                                                BackgroundColor="Transparent">
+
+                                            <Button Text="&#xf4c4;"
+                                                    Margin="0"
+                                                    Padding="0"
+                                                    FontFamily="{x:StaticResource IconSolid}"
+                                                    FontSize="{x:StaticResource LabelSmallFontSize}"
+                                                    TextColor="{Binding SelectedPost.alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
+                                                    Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
+                                                    CommandParameter="{x:Binding SelectedPost.id}"
+                                                    BackgroundColor="Transparent"/>
+
+                                            <Frame.Clip>
+                                                <EllipseGeometry
+                                                    RadiusX="15"
+                                                    RadiusY="15"
+                                                    Center="15,15"/>
+                                            </Frame.Clip>
+                                        </Frame>
+
+                                        <Label VerticalOptions="EndAndExpand"
+                                           HorizontalOptions="EndAndExpand"
+                                           Margin="0,0,0,0"
+                                           FontSize="{x:StaticResource LabelSmallFontSize}"
+                                           Text="{Binding SelectedPost.data}"/>
+
+                                    </StackLayout>
+                            
+
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
         </Frame>
         
     </ContentView.Content>

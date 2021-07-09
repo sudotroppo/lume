@@ -166,10 +166,11 @@
 
                                         </StackLayout>
 
-                                        <BoxView HeightRequest="2"
-                                                 BackgroundColor="{x:StaticResource Nero}"
+                                        <BoxView BackgroundColor="{x:StaticResource GrigioLume}"
                                                  VerticalOptions="End"
-                                                 Margin="0,0,0,10"/>
+                                                 Margin="10,0,10,-10"
+                                                 HeightRequest="2"
+                                                 CornerRadius="3"/>
 
                                     </StackLayout>
                             </Grid>

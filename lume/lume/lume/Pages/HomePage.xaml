@@ -2,136 +2,158 @@
 <templates:ContentTemplatedView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:pages="clr-namespace:lume.Pages"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:vm="clr-namespace:lume.ViewModels"
     x:Class="lume.Pages.HomePage"
-    xmlns:templates="clr-namespace:lume.Templates">
-
-    <RefreshView x:Name="refrehView"
-                    RefreshColor="{x:StaticResource VerdeLume}"
-                    IsRefreshing="{Binding IsRefreshing}"
-                    Command="{Binding RefreshPage}">
-
-        <RefreshView.BindingContext>
-            <vm:HomeViewModel x:Name="homeVM"/>
-        </RefreshView.BindingContext>
-
-
-        <CollectionView x:Name="homePostViewer"
-                        Margin="8,0,8,0"
-                        VerticalScrollBarVisibility="Never"
-                        ItemsSource="{Binding Posts}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="0,10,0,10">
-                <Frame HasShadow="False"
-                       CornerRadius="20"
-                       IsClippedToBounds="True"
-                       BackgroundColor="{x:StaticResource GrigioLume}">
-
-                    <StackLayout Spacing="10"
-						         Margin="0">
-                        <StackLayout Orientation="Horizontal"
-								     Margin="-10,-10,-10,0"
-							         Spacing="10">
-
-                            <Frame IsClippedToBounds="True"
-                                   Padding="0"
-                                   Margin="0"
-                                   VerticalOptions="Center"
-                                   HeightRequest="45"
-                                   WidthRequest="45">
-                                <Frame.Clip>
-                                    <EllipseGeometry RadiusX="22.5"
-                                                     RadiusY="22.5"
-                                                     Center="22.5,22.5"/>
-                                </Frame.Clip>
-
-                                <ffimage:CachedImage WidthRequest="45"
-                                       HeightRequest="45"
-                                       Aspect="AspectFill"
-                                       Source="{Binding creatore.sorgenteImmagine}"/>
-                            </Frame>
-
-                            <Label Margin="0"
-                                   VerticalOptions="Center"
-                                   Text="{Binding creatore}"/>
+    xmlns:templates="clr-namespace:lume.Templates"
+    xmlns:custom="clr-namespace:lume.CustomObj"
+    xmlns:st="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions">
+    <AbsoluteLayout>
+        
+            <AbsoluteLayout.BindingContext>
+                <vm:HomeViewModel />
+            </AbsoluteLayout.BindingContext>
+        <RefreshView x:Name="refrehView" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                        RefreshColor="{x:StaticResource VerdeLume}"
+                        IsRefreshing="{Binding IsRefreshing}"
+                        Command="{Binding RefreshPage}">
 
 
-                            <Label TextColor="{x:StaticResource Nero}"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="EndAndExpand">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="&#xf500;"
-                                              FontFamily="{x:StaticResource IconSolid}"/>
-                                        <Span Text="{Binding numeroCandidati, StringFormat='{0,3}/'}"/>
-                                        <Span Text="{Binding numeroPartecipanti, StringFormat='{0}'}"/>
 
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+            <CollectionView x:Name="homePostViewer"
+                            Margin="0,0,0,0"
+                            VerticalScrollBarVisibility="Never"
+                            ItemsSource="{Binding Posts}"
+                            SelectedItem="{Binding SelectedPost, Mode=TwoWay}"
+                            SelectionMode="{Binding SelectionMode}"
+                            >
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="8,10,8,10"
+                              xct:TouchEffect.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
+                              xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                              xct:TouchEffect.LongPressDuration="600"
+                              xct:TouchEffect.NormalBackgroundColor="{x:StaticResource BiancoLume}"
+                              xct:TouchEffect.PressedBackgroundColor="{x:StaticResource BiancoLume}"
+                              xct:TouchEffect.NativeAnimation="False"
+                              >
 
-                        </StackLayout>
+                            <Frame HasShadow="False"
+                                   CornerRadius="20"
+                                   IsClippedToBounds="True"
+                                   BackgroundColor="{x:StaticResource GrigioLume}"
+                                   >
+
+                                <StackLayout Spacing="10"
+						                     Margin="0">
+                                    <StackLayout Orientation="Horizontal"
+								                 Margin="-10,-10,-10,0"
+							                     Spacing="10">
+
+                                        <Frame IsClippedToBounds="True"
+                                               Padding="0"
+                                               Margin="0"
+                                               VerticalOptions="Center"
+                                               HeightRequest="45"
+                                               WidthRequest="45">
+                                            <Frame.Clip>
+                                                <EllipseGeometry RadiusX="22.5"
+                                                                 RadiusY="22.5"
+                                                                 Center="22.5,22.5"/>
+                                            </Frame.Clip>
+
+                                            <ffimage:CachedImage WidthRequest="45"
+                                                   HeightRequest="45"
+                                                   Aspect="AspectFill"
+                                                   Source="{Binding creatore.sorgenteImmagine}"/>
+                                        </Frame>
+
+                                        <Label Margin="0"
+                                               VerticalOptions="Center"
+                                               Text="{Binding creatore}"/>
 
 
-                        <StackLayout Spacing="2">
-                            <Label Margin="0"
-                                   FontSize="18"
-                                   Text="{Binding titolo}"/>
+                                        <Label TextColor="{x:StaticResource Nero}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="EndAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="&#xf500;"
+                                                          FontFamily="{x:StaticResource IconSolid}"/>
+                                                    <Span Text="{Binding numeroCandidati, StringFormat='{0,3}/'}"/>
+                                                    <Span Text="{Binding numeroPartecipanti, StringFormat='{0}'}"/>
 
-                            <Label VerticalOptions="Center"
-                                   Margin="0"
-                                   Text="{Binding descrizione}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
 
-                            <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End">
+                                    </StackLayout>
 
-                                 <Frame WidthRequest="30"
-                                        HeightRequest="30"
-                                        Padding="0"
-                                        IsClippedToBounds="True"
-                                        HorizontalOptions="StartAndExpand"
-                                        VerticalOptions="EndAndExpand"
-                                        BackgroundColor="Transparent">
 
-                                    <Button Text="&#xf4c4;"
-                                            Margin="0"
-                                            Padding="0"
-                                            FontFamily="{x:StaticResource IconSolid}"
-                                            FontSize="{x:StaticResource LabelSmallFontSize}"
-                                            TextColor="{Binding alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
-                                            Command="{Binding SendPartecipation, Source={x:Reference homeVM}}"
-                                            CommandParameter="{x:Binding id}"
-                                            BackgroundColor="Transparent"/>
+                                    <StackLayout Spacing="2">
+                                        <Label Margin="0"
+                                               FontSize="18"
+                                               Text="{Binding titolo}"/>
 
-                                    <Frame.Clip>
-                                        <EllipseGeometry
-                                            RadiusX="15"
-                                            RadiusY="15"
-                                            Center="15,15"/>
-                                    </Frame.Clip>
-                                </Frame>
+                                        <Label VerticalOptions="Center"
+                                               Margin="0"
+                                               Text="{Binding descrizione}"/>
 
-                                <Label VerticalOptions="EndAndExpand"
-                                   HorizontalOptions="EndAndExpand"
-                                   Margin="0,0,0,0"
-                                   FontSize="{x:StaticResource LabelSmallFontSize}"
-                                   Text="{Binding data}"/>
+                                        <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End">
 
-                            </StackLayout>
+                                             <Frame WidthRequest="30"
+                                                    HeightRequest="30"
+                                                    Padding="0"
+                                                    IsClippedToBounds="True"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="EndAndExpand"
+                                                    BackgroundColor="Transparent">
+
+                                                <Button Text="&#xf4c4;"
+                                                        Margin="0"
+                                                        Padding="0"
+                                                        FontFamily="{x:StaticResource IconSolid}"
+                                                        FontSize="{x:StaticResource LabelSmallFontSize}"
+                                                        TextColor="{Binding alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
+                                                        Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
+                                                        CommandParameter="{x:Binding id}"
+                                                        BackgroundColor="Transparent"/>
+
+                                                <Frame.Clip>
+                                                    <EllipseGeometry
+                                                        RadiusX="15"
+                                                        RadiusY="15"
+                                                        Center="15,15"/>
+                                                </Frame.Clip>
+                                            </Frame>
+
+                                            <Label VerticalOptions="EndAndExpand"
+                                               HorizontalOptions="EndAndExpand"
+                                               Margin="0,0,0,0"
+                                               FontSize="{x:StaticResource LabelSmallFontSize}"
+                                               Text="{Binding data}"/>
+
+                                        </StackLayout>
                             
 
-                        </StackLayout>
+                                    </StackLayout>
 
-                    </StackLayout>
-                </Frame>
-            </Grid>
-                </DataTemplate>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
 
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </RefreshView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+        <custom:CustomPopUp AbsoluteLayout.LayoutBounds="0,-1,1,1"
+                            AbsoluteLayout.LayoutFlags="All"
+                            BindingContext="{Binding SelectedPost}"
+                            TranslationY="{Binding Posizione, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"/>
+    </AbsoluteLayout>
 
     
 

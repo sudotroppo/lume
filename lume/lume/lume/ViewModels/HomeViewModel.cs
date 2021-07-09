@@ -26,7 +26,37 @@ namespace lume.ViewModels
             }
         }
 
-        
+        private Richiesta _SelectedPost = new Richiesta();
+
+        public Richiesta SelectedPost
+        {
+            get { return _SelectedPost; }
+
+            set
+            {
+                _SelectedPost = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private SelectionMode _selectionMode = SelectionMode.None;
+
+        public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
+
+        private static readonly double hiddenPosition = Application.Current.MainPage.Height;
+
+        private double _posizione = hiddenPosition;
+
+        public double Posizione { get => _posizione; set => SetProperty(ref _posizione, value); }
+
+
+        public Command ShareCommand { get; set; }
+
+        public Command<Richiesta> LongPressCommand { get; private set; }
+
+        public Command ClearCommand { get; private set; }
+
+        public Command<Richiesta> PressedCommand { get; private set; }
 
         public ICommand SendPartecipation => new Command<long>(async (id) =>
         {
@@ -84,10 +114,38 @@ namespace lume.ViewModels
 
         public HomeViewModel()
         {
+            LongPressCommand = new Command<Richiesta>(OnLongPress);
+            ClearCommand = new Command(OnClear);
+
             Task.Run(() =>
             {
                 Posts = new ObservableCollection<Richiesta> (DataAccess.GetAllRichieste());
             });
+        }
+
+        private void OnLongPress(Richiesta obj)
+        {
+            Debug.WriteLine("LongPressed");
+
+            if (_selectionMode == SelectionMode.None)
+            {
+                SelectionMode = SelectionMode.Single;
+                SelectedPost = obj;
+            }
+        }
+
+        private void OnClear()
+        {
+            SelectionMode = SelectionMode.None;
+        }
+
+        public static Animation SlideOfY(double posizione, double dy, Easing easing)
+        {
+            return new Animation(c =>
+            { 
+                posizione += c * dy;
+            },
+            0, 1, easing ?? Easing.Linear);
         }
     }
 }
