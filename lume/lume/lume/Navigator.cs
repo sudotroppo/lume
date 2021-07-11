@@ -2,6 +2,7 @@
 using lume.Templates;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -13,40 +14,26 @@ namespace lume
     {
 
         private MainPage mainPageTemplate;
-        public LinkedList<ContentTemplatedView> stackList { get; }
 
         public Navigator(MainPage mainPage)
         {
             mainPageTemplate = mainPage;
-            stackList = new LinkedList<ContentTemplatedView>();
         }
 
-        private void SetValues()
+        public void InsetPageIntoTabIndex(ContentTemplatedView cv, int index)
         {
-            mainPageTemplate.CurrentTab = stackList.First();
+            if(index >= mainPageTemplate.Tabs.Capacity) { throw new IndexOutOfRangeException("tab index non esistente"); }
+
+            mainPageTemplate.Tabs[index] = cv;
+            mainPageTemplate.TabChanged();
+
         }
 
-        public void PushAsync(ContentTemplatedView cv)
+        public void GoTo(int index)
         {
-            if (!cv.GetType().Equals(mainPageTemplate.CurrentTab.GetType()))
-            {
-                if(stackList.Count > 3) 
-                {
-                    stackList.RemoveLast();
-                }
-                stackList.AddFirst(cv);
-                SetValues();
-            }
+            mainPageTemplate.CurrentTab = index;
+            mainPageTemplate.TabChanged();
         }
 
-        public bool PopAsync()
-        {
-            if(stackList.Count > 1)
-            {
-                stackList.RemoveFirst();
-                SetValues();
-            }
-            return true;
-        }
     }
 }

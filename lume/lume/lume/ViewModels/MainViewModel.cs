@@ -8,6 +8,11 @@ using lume.Utility;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using lume.Templates;
+using System.IO;
+using lume.CustomObj;
+using FFImageLoading.Forms;
+using Xamarin.Essentials;
+using System.Diagnostics;
 
 namespace lume.ViewModels
 {
@@ -19,9 +24,12 @@ namespace lume.ViewModels
 
         public ICommand SendRequest => new Command<string>((url) => Console.WriteLine(url));
 
+
+
         public Utente CurrentUser
         {
             get { return _CurrentUser; }
+
             set
             {
                 _CurrentUser = value;
@@ -29,9 +37,14 @@ namespace lume.ViewModels
             }
         }
 
+
+
         public MainViewModel()
         {
-
+            
         }
+
+
+
     }
 }

@@ -24,7 +24,8 @@ namespace lume.Domain
         [JsonPropertyName("dataCreazione")]
         public DateTime dataCreazione { set; get; }
 
-        //private List<Uri> immagini { set; get; }
+        [JsonPropertyName("immagini")]
+        public List<string> immagini { set; get; }
 
         [JsonPropertyName("candidati")]
         public List<Utente> candidati { set; get; }

@@ -5,58 +5,52 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using lume.CustomObj;
 using lume.Domain;
 using lume.Utility;
+using Xamarin.Essentials;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace lume.ViewModels
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public class HomeViewModel : BaseViewModel
     {
         private bool _IsRefreshing;
-
-        public bool IsRefreshing
-        {
-            get { return _IsRefreshing; }
-
-            set
-            {
-                _IsRefreshing = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool IsRefreshing { get => _IsRefreshing; set => SetProperty(ref _IsRefreshing, value); }
 
         private Richiesta _SelectedPost = new Richiesta();
+        public Richiesta SelectedPost { get => _SelectedPost; set => SetProperty(ref _SelectedPost, value); }
 
-        public Richiesta SelectedPost
-        {
-            get { return _SelectedPost; }
+        private bool _popped = true;
+        public bool Popped { get => _popped; set => SetProperty(ref _popped, value); }
 
-            set
-            {
-                _SelectedPost = value;
-                OnPropertyChanged();
-            }
-        }
+        private bool _swiped = false;
+        public bool Swiped { get => _swiped; set => SetProperty(ref _swiped, value); }
 
         private SelectionMode _selectionMode = SelectionMode.None;
-
         public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
 
-        private static readonly double hiddenPosition = Application.Current.MainPage.Height;
+        private ObservableCollection<Richiesta> _Posts;
+        public ObservableCollection<Richiesta> Posts { get => _Posts; set => SetProperty(ref _Posts, value); }
 
-        private double _posizione = hiddenPosition;
+        private bool _visibile = false;
+        public bool Visibile { get => _visibile; set => SetProperty(ref _visibile, value); }
 
-        public double Posizione { get => _posizione; set => SetProperty(ref _posizione, value); }
 
-
-        public Command ShareCommand { get; set; }
 
         public Command<Richiesta> LongPressCommand { get; private set; }
 
+        //public Command<Richiesta> PressedCommand { get; private set; }
+
         public Command ClearCommand { get; private set; }
 
-        public Command<Richiesta> PressedCommand { get; private set; }
+        public Command<View> SwipeUpCommand { get; private set; }
+
+        public Command<View> SwipeDownCommand { get; private set; }
+
+
 
         public ICommand SendPartecipation => new Command<long>(async (id) =>
         {
@@ -73,7 +67,6 @@ namespace lume.ViewModels
                 if (check)
                 {
                     await App.Current.MainPage.DisplayAlert("Congratulazioni", "hai partecipato con successo alla richiesta di aiuto", "continua");
-                    OnPropertyChanged();
                 }
                 else
                 {
@@ -98,54 +91,85 @@ namespace lume.ViewModels
             Debug.WriteLine($"{IsRefreshing}");
         });
 
-        private ObservableCollection<Richiesta> _Posts;
-
-        public ObservableCollection<Richiesta> Posts
-        {
-            get { return _Posts; }
-
-            set
-            {
-                _Posts = value;
-                OnPropertyChanged();
-            }
-        }
 
 
         public HomeViewModel()
         {
             LongPressCommand = new Command<Richiesta>(OnLongPress);
             ClearCommand = new Command(OnClear);
+            SwipeUpCommand = new Command<View>(OnSwipeUp);
+            SwipeDownCommand = new Command<View>(OnSwipeDown);
 
             Task.Run(() =>
             {
-                Posts = new ObservableCollection<Richiesta> (DataAccess.GetAllRichieste());
+                Posts = new ObservableCollection<Richiesta>(DataAccess.GetAllRichieste());
+
+                Popped = false;
+                Visibile = true;
             });
+
+        }
+
+        private void OnSwipeUp(View obj)
+        {
+            if(Popped && !Swiped)
+            {
+                obj.TranslateTo(0, 0, 300, Easing.CubicInOut);
+                Swiped = true;
+            }
+
+        }
+
+        private void OnSwipeDown(View obj)
+        {
+            if (Popped && Swiped)
+            {
+                obj.TranslateTo(0, (0.35) * obj.Height, 300, Easing.CubicInOut);
+                Swiped = false;
+            }
+            else if (Popped && !Swiped)
+            {
+                Popped = false;
+            }
+
         }
 
         private void OnLongPress(Richiesta obj)
         {
             Debug.WriteLine("LongPressed");
+            Debug.WriteLine($"id = {obj.id}");
 
-            if (_selectionMode == SelectionMode.None)
+            if (obj.Equals(SelectedPost) && Popped) { return; }
+
+            if (!Popped)
             {
-                SelectionMode = SelectionMode.Single;
                 SelectedPost = obj;
+                Popped = true;
+
+            }
+            else
+            {
+                Popped = false;
+
+                Task.Run(async () =>
+                {
+                    await Task.Delay(500);
+                    SelectedPost = obj;
+                    Popped = true;
+                });
             }
         }
 
         private void OnClear()
         {
-            SelectionMode = SelectionMode.None;
-        }
+            if (Popped)
+            {
+                Debug.WriteLine("Clear");
+                Popped = false;
 
-        public static Animation SlideOfY(double posizione, double dy, Easing easing)
-        {
-            return new Animation(c =>
-            { 
-                posizione += c * dy;
-            },
-            0, 1, easing ?? Easing.Linear);
+            }
         }
+    
+
     }
 }

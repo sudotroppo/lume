@@ -33,7 +33,8 @@
                          Grid.ColumnSpan="3"
                          Grid.Row="1"
                          Content="{Binding TemplateContent, Mode=OneWay}"
-                         BackgroundColor="{x:StaticResource BiancoLume}"/>
+                         BackgroundColor="{x:StaticResource BiancoLume}"
+                         IsClippedToBounds="True"/>
 
 
             <Grid x:Name="Buttons_grid"
@@ -45,28 +46,28 @@
 
                 <Button x:Name="HomePage_Button"
                         Text="&#xf015;"
-                    FontFamily="{x:StaticResource IconSolid}"
-                    FontSize="{x:StaticResource ButtonMediumFontSize}"
-                    Grid.Column="0"
-                    Clicked="OnHomeClicked"
-                    BackgroundColor="Transparent"/>
+                        FontFamily="{x:StaticResource IconSolid}"
+                        FontSize="{x:StaticResource ButtonMediumFontSize}"
+                        Grid.Column="0"
+                        Clicked="OnHomeClicked"
+                        BackgroundColor="Transparent"/>
 
                 <Button x:Name="FillRequestPage_Button"
                         Text="&#xf055;"
                         TextColor="{x:StaticResource UnselectedTabsColor}"
-                    FontFamily="{x:StaticResource IconSolid}"
-                    FontSize="25"
-                    Grid.Column="1"
-                    Clicked="OnNewRequestClicked"
-                    BackgroundColor="Transparent"/>
+                        FontFamily="{x:StaticResource IconSolid}"
+                        FontSize="25"
+                        Grid.Column="1"
+                        Clicked="OnNewRequestClicked"
+                        BackgroundColor="Transparent"/>
 
                 <Button x:Name="NotificationsPage_Button"
                         Text="&#xf007;"
-                    FontFamily="{x:StaticResource IconSolid}"
-                    FontSize="{x:StaticResource ButtonMediumFontSize}"
-                    Grid.Column="2"
-                    Clicked="OnNotificationClicked"
-                    BackgroundColor="Transparent"/>
+                        FontFamily="{x:StaticResource IconSolid}"
+                        FontSize="{x:StaticResource ButtonMediumFontSize}"
+                        Grid.Column="2"
+                        Clicked="OnNotificationClicked"
+                        BackgroundColor="Transparent"/>
 
                 
                 <BoxView x:Name="SelectedLine"

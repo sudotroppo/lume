@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:vm="clr-namespace:lume.ViewModels"
+             x:Class="lume.CustomObj.PopUpRichiesta"
+             xmlns:domain="clr-namespace:lume.Domain" xmlns:custom="clr-namespace:lume.CustomObj"
+             x:DataType="{x:Type vm:HomeViewModel}">
+    <ContentView.Content>
+        <Grid Padding="0,0,0,0"
+              BindingContext="{Binding SelectedPost}"
+              x:Name="mainLayout">
+
+            <Frame HasShadow="False"
+                   CornerRadius="20"
+                   Padding="20,20,20,0"
+                   IsClippedToBounds="True"
+                   x:DataType="{x:Type domain:Richiesta}">
+
+                <Frame.Background>
+                    <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                        <GradientStop Color="#C3C3C3" Offset="0.9"/>
+                        <GradientStop Color="#DEC3C3C3" Offset="0.2"/>
+                    </LinearGradientBrush>
+                </Frame.Background>
+                <StackLayout Spacing="10"
+						     Margin="0"
+                             Padding="0">
+
+                    <Frame IsClippedToBounds="True"
+                           Padding="0"
+                           Margin="0"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Start"
+                           HeightRequest="90"
+                           WidthRequest="90"
+                           MinimumHeightRequest="90">
+                        <Frame.Clip>
+                            <EllipseGeometry RadiusX="45"
+                                                RadiusY="45"
+                                                Center="45,45"/>
+                        </Frame.Clip>
+
+                        <ffimage:CachedImage WidthRequest="45"
+                                HeightRequest="45"
+                                Aspect="AspectFill"
+                                Source="{Binding creatore.sorgenteImmagine}"/>
+                    </Frame>
+
+
+
+                    <Label TextColor="{x:StaticResource Nero}"
+                           HorizontalOptions="Center">
+
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="&#xf500;"
+                                        FontFamily="{x:StaticResource IconSolid}"/>
+                                <Span Text="{Binding numeroCandidati, StringFormat='{0,3}/'}"/>
+                                <Span Text="{Binding numeroPartecipanti, StringFormat='{0}'}"/>
+
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Margin="0"
+                            HorizontalOptions="Center"
+                            Text="{Binding creatore.fullName}"/>
+
+
+                    <StackLayout Spacing="12">
+                        <Label Margin="0"
+                               FontSize="22"
+                               Text="{Binding titolo}"/>
+
+                        <Label VerticalOptions="Center"
+                                Margin="0"
+                                Text="{Binding descrizione}"/>
+
+                            
+
+                    </StackLayout>
+                    
+                    <StackLayout Margin="0,10,0,0"
+                                 Orientation="Horizontal">
+
+                        <Frame WidthRequest="30"
+                            HeightRequest="30"
+                            Padding="0"
+                            IsClippedToBounds="True"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="EndAndExpand"
+                            BackgroundColor="Transparent">
+
+                        <Button Text="&#xf4c4;"
+                                Margin="0"
+                                Padding="0"
+                                FontFamily="{x:StaticResource IconSolid}"
+                                FontSize="{x:StaticResource LabelSmallFontSize}"
+                                TextColor="{Binding alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
+                                Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
+                                CommandParameter="{x:Binding id}"
+                                BackgroundColor="Transparent"/>
+
+                            <Frame.Clip>
+                                <EllipseGeometry
+                                    RadiusX="15"
+                                    RadiusY="15"
+                                    Center="15,15"/>
+                            </Frame.Clip>
+                        </Frame>
+
+                        <Label VerticalOptions="EndAndExpand"
+                               HorizontalOptions="EndAndExpand"
+                               Margin="0,0,0,0"
+                               FontSize="{x:StaticResource LabelSmallFontSize}"
+                               Text="{Binding data}"/>
+
+
+                    </StackLayout>
+                    <CarouselView ItemsSource="{Binding immagini}"
+                                  Margin="-20,0,-20,0"
+                                  VerticalOptions="End"
+                                  HorizontalOptions="CenterAndExpand"
+                                  Loop="False">
+                        <CarouselView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal"/>
+                        </CarouselView.ItemsLayout>
+
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <ffimage:CachedImage Source="{Binding .}" Aspect="AspectFit"/>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+
+                    </CarouselView>
+
+
+                </StackLayout>
+            </Frame>
+        </Grid>
+        
+    </ContentView.Content>
+</ContentView>

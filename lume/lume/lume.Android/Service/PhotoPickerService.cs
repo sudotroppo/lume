@@ -29,5 +29,6 @@ namespace DependencyServiceDemos.Droid
             // Return Task object
             return MainActivity.Instance.PickImageTaskCompletionSource.Task;
         }
+
     }
 }

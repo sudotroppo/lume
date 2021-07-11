@@ -117,7 +117,7 @@ namespace lume.Pages
 
             await Task.Run(() => ToNotificationPage.Commit(this, "Prova", 1, 500, Easing.Linear, (c, v) =>
             {
-                navigator.PushAsync(new NotificationsPage(navigator));
+                navigator.InsetPageIntoTabIndex(new NotificationsPage(navigator), 2);
                 b.IsEnabled = true;
             }));
 
@@ -139,7 +139,7 @@ namespace lume.Pages
                 };
                 ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
                 {
-                    navigator.PushAsync(new SettingsPage(navigator));
+                    navigator.InsetPageIntoTabIndex(new SettingsPage(navigator), 2);
                     b.IsEnabled = true;
                 });
             });

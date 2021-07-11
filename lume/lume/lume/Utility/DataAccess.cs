@@ -5,6 +5,7 @@ using lume.Domain;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Essentials;
+using System.IO;
 
 namespace lume.Utility
 {
@@ -30,7 +31,7 @@ namespace lume.Utility
                 throw new UnauthorizedAccessException("request unuthorized");
             }
 
-            Domain.TokenResponse token = JsonSerializer.Deserialize<Domain.TokenResponse>(response.Content);
+            TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
 
             SecureStorage.SetAsync("token", token.token);
         }
@@ -71,7 +72,7 @@ namespace lume.Utility
             IRestResponse response = client.Execute(request);
             Debug.WriteLine($"--------{response.Content}--------");
 
-            Domain.TokenResponse token = JsonSerializer.Deserialize<Domain.TokenResponse>(response.Content);
+            TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
 
             return token;
         }
@@ -247,5 +248,35 @@ namespace lume.Utility
 
             return richieste;
         }
+
+        public static void UploadUserImage(Stream stream, string fileName)
+        {
+            DataAccess.RefreshToken();
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/protected/file/upload/immagine/utente", Method.POST)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            request.AddFile("file", ReadFully(stream), fileName, "multipart/form-data");
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            client.Execute(request);
+
+        }
+
+        public static byte[] ReadFully(Stream input)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                input.CopyTo(ms);
+                return ms.ToArray();
+            }
+        }
+
     }
 }

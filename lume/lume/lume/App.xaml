@@ -69,6 +69,8 @@
                                        Invert="False"
                                        TrueColor="{x:StaticResource VerdeLume}"
                                        FalseColor="{x:StaticResource NeroLume}" />
+
+        <custom:AnimatePopUp x:Key="animatePopUp" />
         <!--************-->
 
         <!--Stili Espliciti App-->

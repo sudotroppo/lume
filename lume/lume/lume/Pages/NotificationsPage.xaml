@@ -14,6 +14,10 @@
         <AbsoluteLayout x:Name="NotifPage" 
                             Margin="0"
                             Padding="0">
+            
+                    <AbsoluteLayout.BindingContext>
+                        <vm:MainViewModel  x:Name="mainVM"/>
+                    </AbsoluteLayout.BindingContext>
 
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                   AbsoluteLayout.LayoutFlags="All"
@@ -38,13 +42,11 @@
                 <AbsoluteLayout Grid.Column="0"
                                 Grid.ColumnSpan="2"
                                 Grid.Row="0"
-                                Margin="0">
-                    <AbsoluteLayout.BindingContext>
-                        <vm:MainViewModel />
-                    </AbsoluteLayout.BindingContext>
+                                Margin="0"
+                                BindingContext="{Binding CurrentUser}">
 
                     <Label x:Name="ProfileName"
-                           Text="{Binding CurrentUser}"
+                           Text="{Binding fullName}"
                            AbsoluteLayout.LayoutBounds="45,0.5"
                            AbsoluteLayout.LayoutFlags="YProportional"
                            MaxLines="1"/>
@@ -73,7 +75,7 @@
                                              Center="22.5,22.5"/>
                         </Frame.Clip>
 
-                        <ffimage:CachedImage Source="{Binding CurrentUser.sorgenteImmagine}"
+                        <ffimage:CachedImage Source="{Binding sorgenteImmagine}"
                                Aspect="AspectFill"/>
 
 

@@ -36,6 +36,7 @@ namespace lume.Pages
                 {0,1, Animations.SlideOfY(notificationsViewer, 45, Easing.CubicInOut) },
                 {0,1, Animations.ScaleTo(ProfileImage, 2, 2, Easing.CubicInOut) },
                 {0,1, Animations.ScaleTo(BackgroundLine, 1, 0, Easing.CubicInOut) },
+                {0,1, Animations.SlideOfY(BackgroundLine, 45, Easing.CubicInOut) },
                 {0,1, Animations.ScaleTo(BackgroundBoxView, 1,1, Easing.CubicInOut) },
                 {0,1, Animations.FadeTo(notificationsViewer, 0, Easing.CubicInOut) },
                 {0,1, Animations.SlideOf(Settings, -45,-45, Easing.CubicInOut) }
@@ -43,7 +44,8 @@ namespace lume.Pages
 
             await Task.Run(() => ToProfilepage.Commit(this, "ToProfilepage", 1, 500, Easing.Linear, (c, v) =>
             {
-                navigator.PushAsync(new ProfilePage(navigator));
+                navigator.InsetPageIntoTabIndex(new ProfilePage(navigator), 2);
+
                 b.IsEnabled = true;
             }));
         }

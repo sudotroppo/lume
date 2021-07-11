@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using lume.Utility;
 using Xamarin.Forms;
 
 namespace lume.Domain
 {
     public class Utente
     {
+
         [JsonPropertyName("id")]
         public long id { get; set; }
 
@@ -43,6 +45,7 @@ namespace lume.Domain
             notifiche = new List<Notifica>();
         }
 
+        [JsonIgnore]
         public ImageSource sorgenteImmagine
         {
             get
@@ -53,6 +56,15 @@ namespace lume.Domain
                 }
 
                 return ImageSource.FromUri(new Uri(immagine));
+            }
+        }
+
+        [JsonIgnore]
+        public string fullName
+        {
+            get
+            {
+                return $"{nome} {cognome}";
             }
         }
 

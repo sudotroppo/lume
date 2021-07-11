@@ -57,72 +57,6 @@ namespace lume
 
         protected override void OnStart()
         {
-
-
-            //var ts = new CancellationTokenSource();
-            //CancellationToken ct = ts.Token;
-
-            //bool authorized = true;
-
-            //Debug.WriteLine("Start a new Thread");
-            //Task.Factory.StartNew(() =>
-            //{
-            //    try
-            //    {
-            //        var t1 = Task.Factory.StartNew(() =>
-            //        {
-
-            //            Debug.WriteLine("send request");
-            //            DataAccess.RefreshToken();
-            //            utente = DataAccess.GetUtenteByEmail(email);
-            //            Debug.WriteLine("response handled");
-            //        });
-
-            //        while (!t1.IsCompleted)
-            //        {
-            //            Debug.WriteLine("waiting");
-
-            //            if (ct.IsCancellationRequested)
-            //            {
-            //                Debug.WriteLine("cancelled");
-            //                t1.Dispose();
-            //            }
-            //        }
-
-
-            //    }
-            //    catch (UnauthorizedAccessException)
-            //    {
-
-            //        authorized = false;
-            //    }
-            //    finally
-            //    {
-            //        Device.BeginInvokeOnMainThread(async () =>
-            //        {
-            //            Debug.WriteLine("set page");
-
-            //            MainPage
-            //                .Navigation.InsertPageBefore
-            //                    (ts.IsCancellationRequested || !authorized ?
-            //                    (Page)new LoginPage(email) :
-            //                    (Page)new HomePage(), (MainPage as CustomNavigationPage).CurrentPage);
-
-            //            await (MainPage as CustomNavigationPage).CurrentPage.Navigation.PopAsync();
-
-            //            await (MainPage as CustomNavigationPage).CurrentPage.DisplayAlert("", "", "ok");
-            //        });
-            //    }
-
-            //}, ct);
-
-            //Task.Factory.StartNew(() =>
-            //{
-            //    Debug.WriteLine("inizio timer");
-            //    ts.CancelAfter(timeout);
-            //    Debug.WriteLine("fine timer");
-
-            //});
         }
 
         protected override void OnSleep()
@@ -133,7 +67,7 @@ namespace lume
         {
         }
 
-        public static async Task GetStorageInfo()
+        public static async Task<bool> GetStorageInfo()
         {
             try
             {
@@ -143,36 +77,51 @@ namespace lume
             catch (Exception e)
             {
                 Debug.WriteLine(e);
+                return false;
             }
+
+            return true;
         }
 
         public static async Task<bool> SetUtente(string email, string password)
         {
-            bool result = true;
-
             try
             {
-                Domain.TokenResponse tokenResp = DataAccess.GetToken(email, password);
-
-                await SecureStorage.SetAsync("email", tokenResp.email);
-                await SecureStorage.SetAsync("token", tokenResp.token);
-
+                TokenResponse tokenResp = DataAccess.GetToken(email, password);
                 token = tokenResp.token;
+                await SecureStorage.SetAsync("token", token);
 
+                utente = DataAccess.GetUtenteByEmail(email);
+                await SecureStorage.SetAsync("email", utente.email);
+
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                Debug.WriteLine($"msg = {e}");
+                return false;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"msg = {e}");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static Task<bool> UpdateUtente()
+        {
+            try
+            {
                 utente = DataAccess.GetUtenteByEmail(email);
             }
             catch (UnauthorizedAccessException e)
             {
                 Debug.WriteLine($"msg = {e}");
-                result = false;
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine($"msg = {e}");
-                result = false;
+                return Task.FromResult(false);
             }
 
-            return result;
+            return Task.FromResult(true);
         }
     }
 }

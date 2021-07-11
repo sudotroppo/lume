@@ -12,7 +12,8 @@
     </templates:ContentTemplatedView.BindingContext>
 
     <AbsoluteLayout Margin="0"
-                    Padding="0">
+                    Padding="0"
+                    BindingContext="{Binding CurrentUser, Source={x:Reference mainVM}}">
 
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                       AbsoluteLayout.LayoutFlags="All"
@@ -31,7 +32,7 @@
                             AbsoluteLayout.LayoutFlags="SizeProportional">
 
                 <Label x:Name="ProfileName"
-                       Text="{Binding CurrentUser, Source={x:Reference mainVM}}"
+                       Text="{Binding fullName}"
                        AbsoluteLayout.LayoutBounds="45,0.5"
                        AbsoluteLayout.LayoutFlags="YProportional"
                        MaxLines="1">
@@ -69,6 +70,7 @@
                        IsClippedToBounds="true"
                        HeightRequest="90"
                        BackgroundColor="Transparent">
+                    
 
                     <Frame.Clip>
                         <EllipseGeometry RadiusX="45"
@@ -76,38 +78,46 @@
                                          Center="45,45"/>
                     </Frame.Clip>
 
-                    <ffimage:CachedImage
-                           Source="{Binding CurrentUser.sorgenteImmagine, Source={x:Reference mainVM}}"
-                           Aspect="AspectFill"/>
+                    <ffimage:CachedImage x:Name="ImmagineUtente"
+                                         Source="{Binding sorgenteImmagine}"
+                                         Aspect="AspectFill"/>
 
 
                 </Frame>
 
-                <Frame x:Name="FotoEdit"
-                       AbsoluteLayout.LayoutBounds="60,65,30,30"
-                       Padding="0"
-                       Margin="0"
-                       HeightRequest="30"
-                       WidthRequest="30"
-                       IsClippedToBounds="True"
-                       BackgroundColor="{x:StaticResource NeroLume}">
+                <StackLayout Padding="0"
+                             Margin="0"
+                             AbsoluteLayout.LayoutBounds="60,65.722,30,30">
 
-                    <Frame.Clip>
-                        <EllipseGeometry RadiusX="15"
-                                            RadiusY="15"
-                                            Center="15,15"/>
-                    </Frame.Clip>
+                    <Frame x:Name="FotoEdit"
+                           Padding="0"
+                           Margin="0"
+                           HeightRequest="30"
+                           WidthRequest="30"
+                           IsClippedToBounds="True"
+                           BackgroundColor="{x:StaticResource NeroLume}">
 
-                    <Button Text="&#xf304;"
-                            FontSize="{x:StaticResource LabelSmallFontSize}"
-                            FontFamily="{x:StaticResource IconSolid}"
-                            BackgroundColor="LightGray"
-                            TextColor="{x:StaticResource Nero}"/>
+                        <Frame.Clip>
+                            <EllipseGeometry RadiusX="15"
+                                                RadiusY="15"
+                                                Center="15,15"/>
+                        </Frame.Clip>
+                        <Frame.BindingContext>
+                            <vm:ProfileViewModel />
+                        </Frame.BindingContext>
 
-                    
+                        <Button Text="&#xf304;"
+                                Margin="0"
+                                Padding="0"
+                                FontFamily="{x:StaticResource IconSolid}"
+                                FontSize="{x:StaticResource LabelSmallFontSize}"
+                                BackgroundColor="LightGray"
+                                TextColor="{x:StaticResource Nero}"
+                                Command="{Binding SelectUserImageCommand}"
+                                CommandParameter="{x:Reference ImmagineUtente}"/>
 
-
-                </Frame>
+                    </Frame>
+                </StackLayout>
             </AbsoluteLayout>
 
 
@@ -148,10 +158,10 @@
                             Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
             <ScrollView Grid.Row="2"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="5"
-                                Margin="-10,20,-10,0"
-                                VerticalScrollBarVisibility="Never">
+                        Grid.Column="0"
+                        Grid.ColumnSpan="5"
+                        Margin="-10,20,-10,0"
+                        VerticalScrollBarVisibility="Never">
 
 
                 <StackLayout x:Name="ProfileInfoList">
@@ -171,17 +181,17 @@
 
                         <templates:InfoView x:Name="infoNome"
                                             FieldName = "Nome"
-                                            FieldValue = "{Binding CurrentUser.nome, Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                            FieldValue = "{Binding nome, Mode=TwoWay}"/>
                         <templates:InfoView x:Name="infoCognome"
                                            FieldName = "Congome"
-                                           FieldValue ="{Binding CurrentUser.cognome, Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                           FieldValue ="{Binding cognome, Mode=TwoWay}"/>
                         <templates:InfoView x:Name="infoEmail"
                                            FieldName = "Email"
-                                           FieldValue ="{Binding CurrentUser.email, Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                           FieldValue ="{Binding email, Mode=TwoWay}"/>
                         
                         <templates:InfoView x:Name="infoTelefono"
                                            FieldName = "Telefono"
-                                           FieldValue ="{Binding CurrentUser.telefono, Source={x:Reference mainVM}, Mode=TwoWay}"/>
+                                           FieldValue ="{Binding telefono, Mode=TwoWay}"/>
 
                     </StackLayout>
 

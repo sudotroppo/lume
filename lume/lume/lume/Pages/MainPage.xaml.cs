@@ -44,10 +44,9 @@ namespace lume.Pages
         public static readonly BindableProperty TemplateContentProperty =
             BindableProperty.Create(nameof(TemplateContent), typeof(View), typeof(MainPage));
 
-        public static readonly BindableProperty CurrentTabProperty =
-           BindableProperty.Create(nameof(CurrentTab), typeof(ContentTemplatedView), typeof(MainPage));
+        public List<ContentTemplatedView> Tabs;
 
-
+        public List<Button> ButtonTabs;
 
         public View TemplateContent
         {
@@ -64,38 +63,33 @@ namespace lume.Pages
 
         public ContentTemplatedView rootTab = new HomePage();
 
-        private readonly Dictionary<Type, KeyValuePair<int, Button>> TabDictionary;
-
 
 
         public Navigator navigator;
 
 
-
+        public int CurrentTab;
 
         private async void ChangeTab(object sender, EventArgs e)
         {
             try
             {
-                Type currentTabType = CurrentTab.GetType();
 
-                KeyValuePair<int, Button> keyValuePair = TabDictionary[currentTabType];
-
-                Button selectedTabButton = keyValuePair.Value;
-
-                selectedTabButton.TextColor = SelectedTabColor;
-
-                foreach (KeyValuePair<int, Button> v in TabDictionary.Values)
+                for(int i = 0; i < Tabs.Capacity; i++)
                 {
-                    if (!v.Value.Equals(selectedTabButton))
+                    if(i != CurrentTab)
                     {
-                        v.Value.TextColor = UnselectedTabColor;
+                        ButtonTabs[i].TextColor = UnselectedTabColor;
+
+                    }
+                    else
+                    {
+                        ButtonTabs[i].TextColor = SelectedTabColor;
                     }
                 }
 
-                await Task.Run(() => SlideSelectorTo(keyValuePair.Key));
 
-                Debug.WriteLine($"tab to index: {keyValuePair.Key}");
+                await Task.Run(() => SlideSelectorTo(CurrentTab));
             }
             catch { }
 
@@ -104,7 +98,7 @@ namespace lume.Pages
 
         private void SlideSelectorTo(int index)
         {
-            double columnWidth = Width / TabDictionary.Count;
+            double columnWidth = Width / ButtonTabs.Count;
 
             double swithTranslation = SelectedLine.TranslationX;
 
@@ -120,38 +114,35 @@ namespace lume.Pages
             }.Commit(this, "SwithTab", 1, 300, Easing.Linear);
         }
 
-        public ContentTemplatedView CurrentTab
+
+        public void TabChanged()
         {
-            set
-            {
-                if (value != CurrentTab)
-                {
-                    SetValue(CurrentTabProperty, value);
-                    TemplateContent = value.Content;
-                    OnPropertyChanged();
+            TemplateContent = Tabs[CurrentTab].Content;
+            OnPropertyChanged();
 
-                }
-            }
-
-
-            get => (ContentTemplatedView)GetValue(CurrentTabProperty);
         }
-
 
         public MainPage()
         {
             InitializeComponent();
 
-            TabDictionary = new Dictionary<Type, KeyValuePair<int, Button>>
-            {
-                { typeof(HomePage), new KeyValuePair<int, Button>(0, HomePage_Button ) },
-                { typeof(FillRequestPage), new KeyValuePair<int, Button>(1, FillRequestPage_Button) },
-                { typeof(NotificationsPage), new KeyValuePair<int, Button>(2, NotificationsPage_Button) },
-            };
-
             navigator = new Navigator(this);
 
-            CurrentTab = rootTab;
+            Tabs = new List<ContentTemplatedView>(3)
+            {
+                new HomePage(),
+                new FillRequestPage(navigator),
+                new NotificationsPage(navigator)
+            };
+
+            ButtonTabs = new List<Button>(3)
+            {
+                HomePage_Button,
+                FillRequestPage_Button,
+                NotificationsPage_Button
+            };
+
+            navigator.GoTo(0);
 
             absolute.BindingContext = this;
         }
@@ -164,14 +155,14 @@ namespace lume.Pages
         public void OnNotificationClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            navigator.PushAsync(new NotificationsPage(navigator));
+            navigator.GoTo(2);
             (sender as Button).IsEnabled = true;
         }
 
         public void OnNewRequestClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            navigator.PushAsync(new FillRequestPage(navigator));
+            navigator.GoTo(1);
             (sender as Button).IsEnabled = true;
 
         }
@@ -179,7 +170,7 @@ namespace lume.Pages
         public void OnHomeClicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            navigator.PushAsync(rootTab);
+            navigator.GoTo(0);
             (sender as Button).IsEnabled = true;
         }
     }

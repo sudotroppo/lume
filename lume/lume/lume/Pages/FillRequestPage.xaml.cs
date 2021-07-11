@@ -96,7 +96,7 @@ namespace lume.Pages
 
             DataAccess.NewRichiesta(r);
 
-            navigator.PushAsync(new HomePage());
+            navigator.GoTo(0);
         }
 
     }

@@ -9,5 +9,6 @@ namespace lume.CustomObj
     public interface IPhotoPickerService
     {
         Task<Stream> GetImageStreamAsync();
+
     }
 }
