@@ -28,6 +28,7 @@ namespace lume.ViewModels
 
             backingStore = value;
             onChanged?.Invoke();
+            Debug.WriteLine($"propertyName = {propertyName}");
             OnPropertyChanged(propertyName);
             return true;
         }

@@ -54,7 +54,7 @@ namespace lume.Utility
             return result;
         }
 
-        public static Domain.TokenResponse GetToken(string email, string password)
+        public static TokenResponse GetToken(string email, string password)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/public/login", Method.POST)
@@ -194,12 +194,17 @@ namespace lume.Utility
                 Timeout = App.requestTimeout
             };
 
+            request.AddJsonBody(
+                new
+                {
+                    titolo = richiesta.titolo,
+                    descrizione = richiesta.descrizione,
+                    numeroPartecipanti = richiesta.numeroPartecipanti
+                });
+
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
-            request.AddQueryParameter("titolo", richiesta.titolo);
-            request.AddQueryParameter("descrizione", richiesta.descrizione);
-            request.AddQueryParameter("numeroPartecipanti", richiesta.numeroPartecipanti.ToString());
-            request.AddQueryParameter("creatore.id", richiesta.creatore.id.ToString());
+
 
             Console.WriteLine($"--------{client.BuildUri(request)}--------");
 

@@ -1,89 +1,197 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <templates:ContentTemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-			 xmlns:custom="clr-namespace:lume.CustomObj"
-			 x:Class="lume.Pages.FillRequestPage"
-			 xmlns:templates="clr-namespace:lume.Templates"
-			 xmlns:pages="clr-namespace:lume.Pages"
-			 x:DataType="{x:Type pages:FillRequestPage}">
-
+								xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+						  	    xmlns:custom="clr-namespace:lume.CustomObj"
+							    x:Class="lume.Pages.FillRequestPage"
+								xmlns:templates="clr-namespace:lume.Templates"
+								xmlns:pages="clr-namespace:lume.Pages"
+								xmlns:vm="clr-namespace:lume.ViewModels"
+								xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+	
+	<templates:ContentTemplatedView.Resources>
+		<ResourceDictionary>
+			<custom:ButtonSwitch OnColor="#C45867"
+								 OffColor="{x:StaticResource NeroLume}"
+								 x:Key="switchTrashCan"/>
+		</ResourceDictionary>
+	</templates:ContentTemplatedView.Resources>
+	<templates:ContentTemplatedView.BindingContext>
+		<vm:FillRequestViewModel x:Name="fillVM"/>
+	</templates:ContentTemplatedView.BindingContext>
 	<AbsoluteLayout>
+
 		<ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
-							AbsoluteLayout.LayoutFlags="All"
+					AbsoluteLayout.LayoutFlags="All"
 					Padding="0, 0, 0, 20">
 
-			<StackLayout>
+			<StackLayout BindingContext="{Binding Richiesta, Source={x:Reference fillVM}}">
                 
                 <!-- sezione per selezione immagine -->
+				<CarouselView HorizontalOptions="FillAndExpand"
+							  VerticalOptions="Start"
+							  HeightRequest="240"
+							  Margin="0,0,0,5"
+							  BackgroundColor="{x:StaticResource GrigioLume}"
+							  Loop="False"
+							  ItemsSource="{Binding Images, Source={x:Reference fillVM}}">
 
-				<ImageButton x:Name="selectedImage"
-									 BackgroundColor="{x:StaticResource GrigioLume}"
-									 HeightRequest="240"
-									 HorizontalOptions="FillAndExpand"
-									 Source="uploadImage.png"
-									 Clicked="Handle_Clicked"
-									 Margin="0, 0, 0, 5"/>
+					<CarouselView.ItemsLayout>
+						<LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+					</CarouselView.ItemsLayout>
 
+					<CarouselView.ItemTemplate>
+						<DataTemplate>
+								<ffimage:CachedImage Source="{Binding .}"
+													 x:Name="img"
+													 Aspect="AspectFit">
+									<ffimage:CachedImage.GestureRecognizers>
+										<TapGestureRecognizer Command="{Binding SelectImageCommand, Source={x:Reference fillVM}}"
+															  CommandParameter="{x:Reference img}"/>
+									</ffimage:CachedImage.GestureRecognizers>
+								</ffimage:CachedImage>
+
+						</DataTemplate>
+					</CarouselView.ItemTemplate>
+
+				</CarouselView>
+
+				<StackLayout Orientation="Horizontal"
+							 HorizontalOptions="Center"
+							 Spacing="20"
+							 Margin="0,10,0,0">
+					<Frame WidthRequest="50"
+						   HeightRequest="50"
+						   Padding="0"
+						   HorizontalOptions="Center">
+
+						<Button Text="&#xf87c;"
+								FontFamily="{x:StaticResource IconSolid}"
+								Command="{Binding AddImageFromGalleryCommand, Source={x:Reference fillVM}}"
+								TextColor="{x:StaticResource BiancoLume}"
+								Padding="0"
+								Margin="0"
+								BackgroundColor="#9DC458"
+								/>
+
+						<Frame.Clip>
+							<EllipseGeometry
+								RadiusX="25"
+								RadiusY="25"
+								Center="25,25"/>
+						</Frame.Clip>
+					</Frame>
+
+					<Frame WidthRequest="50"
+						   HeightRequest="50"
+						   Padding="0"
+						   HorizontalOptions="Center">
+
+						<Button Text="&#xf030;"
+								FontFamily="{x:StaticResource IconSolid}"
+								TextColor="{x:StaticResource BiancoLume}"
+								Padding="0"
+								Margin="0"
+								Command="{Binding AddImageFromCameraCommand, Source={x:Reference fillVM}}"
+								BackgroundColor="#8058C4"
+								/>
+
+						<Frame.Clip>
+							<EllipseGeometry
+								RadiusX="25"
+								RadiusY="25"
+								Center="25,25"/>
+						</Frame.Clip>
+					</Frame>
+					<Frame WidthRequest="50"
+						   HeightRequest="50"
+						   Padding="0"
+						   HorizontalOptions="Center">
+
+						<Button Text="&#xf2ed;"
+								x:Name="TrashCan"
+								FontFamily="{x:StaticResource IconSolid}"
+								TextColor="{x:StaticResource BiancoLume}"
+								Padding="0"
+								Margin="0"
+								IsEnabled="{Binding SelectedImage,
+											Source={x:Reference fillVM},
+											Converter={StaticResource switchTrashCan},
+											ConverterParameter={x:Reference TrashCan}}"
+
+								Command="{Binding RemoveImageCommand, Source={x:Reference fillVM}}"
+								/>
+
+						<Frame.Clip>
+							<EllipseGeometry
+								RadiusX="25"
+								RadiusY="25"
+								Center="25,25"/>
+						</Frame.Clip>
+					</Frame>
+
+				</StackLayout>
 				<!-- entry di testo per titolo e descrizione-->
 									  
 				<custom:LumEntry x:Name="Titolo"
 								 Placeholder="Titolo"
+								 Text="{Binding titolo, Mode=TwoWay}"
 								 HorizontalOptions="FillAndExpand"
 								 HeightRequest="40"
 								 Margin="20, 20, 20, 10"
 								 />
 
 				<custom:LumEditor x:Name="Descrizione"
-										  Placeholder="Inserisci una descrizione.."
-										  VerticalOptions="StartAndExpand"
-										  AutoSize="TextChanges"
-										  HeightRequest="200"
-										  MaxLength="500"
-										  />
+								  Text="{Binding descrizione, Mode=TwoWay}"
+								  Placeholder="Inserisci una descrizione.."
+								  VerticalOptions="StartAndExpand"
+								  AutoSize="TextChanges"
+								  HeightRequest="180"
+								  MaxLength="255"
+								  />
 
 				<!-- stepper -->
 
 				<Label Text="Persone richieste"
-							   Margin="20, 20, 0, 10"
-							   FontAttributes="Bold"
-							   FontSize="14"/>
+					   Margin="20, 20, 0, 10"
+					   FontAttributes="Bold"
+					   FontSize="14"/>
 
 				<Frame BackgroundColor="LightBlue"
-							   Margin="20, 0, 20, 0"
-							   Padding="0"
-							   CornerRadius="10"
-							   IsClippedToBounds="True">
+					   Margin="20, 0, 20, 0"
+					   Padding="0"
+				       CornerRadius="10"
+					   IsClippedToBounds="True">
 
 					<!-- usare il margin dello StackLayout per spostare i bottoni -->
 					<StackLayout Orientation="Horizontal"
-								  BackgroundColor="#dddddd"
-								  Margin="-20, 0, -20, 0"
-								  HeightRequest="35">
+								 BackgroundColor="#dddddd"
+							   	 Margin="-20, 0, -20, 0"
+								 HeightRequest="35">
 
 						<!-- bottone per incrementare -->
 
 						<Button Text="&#xf068;"
-									   FontFamily="{x:StaticResource IconSolid}"
-									   BackgroundColor="Gray"
-									   CornerRadius="0"
-									   WidthRequest="40"
-									   Padding="10"
-									   Clicked="OnStepperDecrease"/>
+								FontFamily="{x:StaticResource IconSolid}"
+								BackgroundColor="Gray"
+								CornerRadius="0"
+								WidthRequest="40"
+								Padding="10"
+								Command="{Binding DecreaseCommand, Source={x:Reference fillVM}}"/>
 
 						<Label x:Name="StepperLabel"
-								   HorizontalOptions="CenterAndExpand"
-								   VerticalOptions="Center"
-								   Text="{Binding RequestedPeople}"/>
+							   HorizontalOptions="CenterAndExpand"
+							   VerticalOptions="Center"
+							   Text="{Binding NumeroPartecipanti, Source={x:Reference fillVM}}"/>
 
 						<!-- bottone per incrementare -->
 
 						<Button BackgroundColor="Gray"
-									   Text="&#xf067;"
-									   FontFamily="{x:StaticResource IconSolid}"
-									   Padding="10"
-									   CornerRadius="0"
-									   WidthRequest="42"
-									   Clicked="OnStepperIncrease"/>
+								Text="&#xf067;"
+								FontFamily="{x:StaticResource IconSolid}"
+								Padding="10"
+								CornerRadius="0"
+								WidthRequest="42"
+								Command="{Binding IncreaseCommand, Source={x:Reference fillVM}}"/>
 
 					</StackLayout>
 				</Frame>
@@ -98,9 +206,10 @@
                    Padding="0">
                 <Button Text="&#xf1d8;"
                         FontFamily="{x:StaticResource IconSolid}"
-						Clicked="submitRequest"
+						Command="{Binding SendRequestCommand, Source={x:Reference fillVM}}"
                         TextColor="black"
-                        BackgroundColor="White"/>
+                        BackgroundColor="White"
+						/>
 
                 <Frame.Clip>
                     <EllipseGeometry
