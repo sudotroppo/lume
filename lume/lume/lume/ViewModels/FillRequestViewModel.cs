@@ -64,7 +64,7 @@ namespace lume.ViewModels
                 SelectedImage.ScaleTo(1, 200, Easing.CubicInOut);
                 SelectedImage = null;
             }
-            else if(obj != null)
+            else if(SelectedImage != null)
             {
                 SelectedImage.ScaleTo(1, 200, Easing.CubicInOut);
                 SelectedImage = obj;
