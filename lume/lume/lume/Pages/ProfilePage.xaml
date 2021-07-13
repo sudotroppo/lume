@@ -5,15 +5,35 @@
     xmlns:templates="clr-namespace:lume.Templates"
     x:Class="lume.Pages.ProfilePage"
     xmlns:vm="clr-namespace:lume.ViewModels"
-    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:custom="clr-namespace:lume.CustomObj">
+
+    <templates:ContentTemplatedView.Resources>
+        <ResourceDictionary>
+            <custom:SelectedColorConverter x:Key="buttonColorSwitch"
+                                           TrueColor="{x:StaticResource GrigioLume}"
+                                           FalseColor="{x:StaticResource VerdeLume}"
+                                           Invert="False"/>
+
+            <custom:SelectedColorConverter x:Key="buttonTextSwitch"
+                                           TrueColor="{x:StaticResource Nero}"
+                                           FalseColor="{x:StaticResource BiancoLume}"
+                                           Invert="False"/>
+
+            <custom:InverseBoolConverter x:Key="invBool"/>
+        </ResourceDictionary>
+    </templates:ContentTemplatedView.Resources>
 
     <templates:ContentTemplatedView.BindingContext>
-        <vm:MainViewModel x:Name="mainVM"/>
+        <vm:ProfileViewModel x:Name="profileVM"/>
     </templates:ContentTemplatedView.BindingContext>
 
     <AbsoluteLayout Margin="0"
-                    Padding="0"
-                    BindingContext="{Binding CurrentUser, Source={x:Reference mainVM}}">
+                    Padding="0"> 
+        <AbsoluteLayout.BindingContext>
+            <vm:MainViewModel x:Name="mainVM"/>
+
+        </AbsoluteLayout.BindingContext>
 
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                       AbsoluteLayout.LayoutFlags="All"
@@ -22,7 +42,8 @@
                       Margin="10,10,10,0"
                       Padding="0"
                       ColumnSpacing="0"
-                      RowSpacing="0">
+                      RowSpacing="0"
+              BindingContext="{Binding CurrentUser}">
 
             <AbsoluteLayout Grid.Column="0"
                             Grid.ColumnSpan="3"
@@ -87,7 +108,7 @@
 
                 <StackLayout Padding="0"
                              Margin="0"
-                             AbsoluteLayout.LayoutBounds="60,65.722,30,30">
+                             AbsoluteLayout.LayoutBounds="60,65,30,30">
 
                     <Frame x:Name="FotoEdit"
                            Padding="0"
@@ -102,9 +123,6 @@
                                                 RadiusY="15"
                                                 Center="15,15"/>
                         </Frame.Clip>
-                        <Frame.BindingContext>
-                            <vm:ProfileViewModel />
-                        </Frame.BindingContext>
 
                         <Button Text="&#xf304;"
                                 Margin="0"
@@ -112,9 +130,11 @@
                                 FontFamily="{x:StaticResource IconSolid}"
                                 FontSize="{x:StaticResource LabelSmallFontSize}"
                                 BackgroundColor="LightGray"
+                                IsEnabled="{Binding IsReadOnly, Source={x:Reference profileVM}, Converter={x:StaticResource invBool}}"
                                 TextColor="{x:StaticResource Nero}"
-                                Command="{Binding SelectUserImageCommand}"
-                                CommandParameter="{x:Reference ImmagineUtente}"/>
+                                Command="{Binding SelectUserImageCommand, Source={Reference profileVM}}"
+                                CommandParameter="{x:Reference ImmagineUtente}"
+                                Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
                     </Frame>
                 </StackLayout>
@@ -126,6 +146,7 @@
                             Text="&#xf053;"
                             FontFamily="{x:StaticResource IconSolid}"
                             TextColor="{x:StaticResource Nero}"
+                            IsEnabled="{Binding IsReadOnly, Source={x:Reference profileVM}}"
                             BackgroundColor="Transparent"
                             HorizontalOptions="Start"
                             Clicked="OnBackButtonCliked"
@@ -146,11 +167,12 @@
                             Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
             <Button x:Name="Settings" 
-                            Grid.Row="0"
-                            Grid.Column="4"
                             Text="&#xf013;"
                             TextColor="{x:StaticResource Nero}"
                             FontFamily="{x:StaticResource IconSolid}"
+                            IsEnabled="{Binding IsReadOnly, Source={x:Reference profileVM}}"
+                            Grid.Row="0"
+                            Grid.Column="4"
                             FontSize="18"
                             Clicked="OnSettingsClicked"
                             BackgroundColor="Transparent"
@@ -164,34 +186,39 @@
                         VerticalScrollBarVisibility="Never">
 
 
-                <StackLayout x:Name="ProfileInfoList">
+                <StackLayout x:Name="ProfileInfoList" >
 
 
                     <!-- Bottone modifica profilo -->
                     <Button HorizontalOptions="FillAndExpand" x:Name="UpdateButton"
-                                    Text="Modifica profilo"
-                                    CornerRadius="5"
-                                    HeightRequest="40"
-                                    BackgroundColor = "{x:StaticResource GrigioLume}"
-                                    TextColor="Black"
-                                    FontAttributes="Bold"
-                                    Clicked="OnModifyProfileClicked"/>
+                            CornerRadius="5"
+                            HeightRequest="40"
+                            TextColor="{Binding IsReadOnly, Converter={StaticResource buttonTextSwitch}}"
+                            FontAttributes="Bold"
+                            BindingContext="{x:Reference profileVM}"
+                            Text="{Binding ButtonText}"
+                            BackgroundColor = "{Binding IsReadOnly, Converter={StaticResource buttonColorSwitch}}"
+                            Command="{Binding SwitchStateCommand}"/>
 
                     <StackLayout x:Name="InfoStack">
 
-                        <templates:InfoView x:Name="infoNome"
+                        <templates:InfoView x:Name="infoNome" 
                                             FieldName = "Nome"
-                                            FieldValue = "{Binding nome, Mode=TwoWay}"/>
+                                            FieldValue="{Binding nome}"
+                                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
                         <templates:InfoView x:Name="infoCognome"
-                                           FieldName = "Congome"
-                                           FieldValue ="{Binding cognome, Mode=TwoWay}"/>
+                                            FieldName = "Congome"
+                                            FieldValue ="{Binding cognome}"
+                                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
                         <templates:InfoView x:Name="infoEmail"
-                                           FieldName = "Email"
-                                           FieldValue ="{Binding email, Mode=TwoWay}"/>
+                                            FieldName = "Email"
+                                            FieldValue ="{Binding email}"
+                                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
                         
                         <templates:InfoView x:Name="infoTelefono"
-                                           FieldName = "Telefono"
-                                           FieldValue ="{Binding telefono, Mode=TwoWay}"/>
+                                            FieldName = "Telefono"
+                                            FieldValue ="{Binding telefono}" 
+                                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
 
                     </StackLayout>
 

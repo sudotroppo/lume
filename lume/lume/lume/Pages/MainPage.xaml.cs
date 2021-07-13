@@ -23,7 +23,7 @@ namespace lume.Pages
         {
             if ("TemplateContent".Equals(propertyName))
             {
-                Debug.WriteLine($"propertyName = {propertyName}, \n\"emplateContent\".Equals(propertyName) = {"TemplateContent".Equals(propertyName)}");
+                Debug.WriteLine($"propertyName = {propertyName}, \n\"TemplateContent\".Equals(propertyName) = {"TemplateContent".Equals(propertyName)}");
                 new PropertyChangedEventHandler(ChangeTab)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
             else

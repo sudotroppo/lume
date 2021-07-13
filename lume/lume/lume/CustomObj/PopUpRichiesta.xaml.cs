@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 namespace lume.CustomObj
 {
+    
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PopUpRichiesta : ContentView
     {

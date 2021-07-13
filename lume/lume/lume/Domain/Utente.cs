@@ -73,6 +73,11 @@ namespace lume.Domain
             return nome + " " + cognome;
         }
 
+        public Utente Copy()
+        {
+            return (Utente)MemberwiseClone();
+        }
+
         public override bool Equals(object obj)
         {
             if(obj == null || !typeof(Utente).Equals(obj))

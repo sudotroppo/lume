@@ -10,7 +10,7 @@
 	
 	<templates:ContentTemplatedView.Resources>
 		<ResourceDictionary>
-			<custom:ButtonSwitch OnColor="#C45867"
+			<custom:ButtonSwitch OnColor="{x:StaticResource RossoLume}"
 								 OffColor="{x:StaticResource NeroLume}"
 								 x:Key="switchTrashCan"/>
 		</ResourceDictionary>
@@ -41,14 +41,14 @@
 
 					<CarouselView.ItemTemplate>
 						<DataTemplate>
-								<ffimage:CachedImage Source="{Binding .}"
+								<Image Source="{Binding .}"
 													 x:Name="img"
 													 Aspect="AspectFit">
-									<ffimage:CachedImage.GestureRecognizers>
+									<Image.GestureRecognizers>
 										<TapGestureRecognizer Command="{Binding SelectImageCommand, Source={x:Reference fillVM}}"
 															  CommandParameter="{x:Reference img}"/>
-									</ffimage:CachedImage.GestureRecognizers>
-								</ffimage:CachedImage>
+									</Image.GestureRecognizers>
+								</Image>
 
 						</DataTemplate>
 					</CarouselView.ItemTemplate>

@@ -21,16 +21,15 @@ namespace lume.Pages
     {
         public string _Email { set;  get; }
 
-        public LoginPage() : this(null) { }
-
-        public LoginPage(string email)
+        public LoginPage()
         {
             InitializeComponent();
 
-            _Email = email;
+            _Email = SecureStorage.GetAsync("email").Result;
 
             BindingContext = this;
         }
+
 
         public async void OnClikedButton(object sender, EventArgs e)
         {

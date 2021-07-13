@@ -3,15 +3,15 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom="clr-namespace:lume.CustomObj"
 			 xmlns:templates="clr-namespace:lume.Templates"
-			 x:Class="lume.Templates.InfoView"
-			 x:DataType="{x:Type templates:InfoView}">
+			 x:Class="lume.Templates.InfoView">
+
     <ContentView.Content>
 		<StackLayout Margin="0, 5, 0,0" x:Name="stack">
 			<Label Text="{Binding FieldName}"
-				   FontAttributes="Bold"
                    TextColor="Black"
 				   Margin="38, 10, 20, 0"/>
-            <custom:LumEntry Text="{Binding FieldValue, Mode=TwoWay}"
+
+            <custom:LumEntry Text="{Binding FieldValue}"
 							 IsReadOnly="{Binding IsReadOnly}"
 							 FontSize="{x:StaticResource EntryStandardFontSize}"
 							 BackgroundColor="Transparent"

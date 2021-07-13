@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="lume.CustomObj.PopUpConferma">
+
+    <ContentView.Content>
+
+        <AbsoluteLayout BackgroundColor="#D5000000">
+
+            <Frame x:Name="frame"
+                   CornerRadius="20"
+                   Scale="1"
+                   AbsoluteLayout.LayoutBounds="0.5,0.5, 0.95, 0.35"
+                   AbsoluteLayout.LayoutFlags="All"
+                   Padding="0"
+                   Margin="0"
+                   BackgroundColor="{x:StaticResource NeroLume}"
+                   BorderColor="{Binding BorderColor}">
+
+                
+
+                <StackLayout Spacing="0"
+                             Margin="0"
+                             Padding="10,5,10,10">
+                    <Label Text="{Binding PopUpText}"
+                           TextColor="{x:StaticResource BiancoLume}"
+                           FontSize="{x:StaticResource LabelMediumFontSize}"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Center"/>
+
+                    <StackLayout Spacing="0"
+                                 Margin="0"
+                                 Padding="0"
+                                 Orientation="Horizontal"
+                                 VerticalOptions="EndAndExpand"
+                                 HorizontalOptions="CenterAndExpand">
+                        <Button Margin="0,0,20,0"
+                                Padding="10,0,10,0"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="StartAndExpand"
+                                Text="Conferma"
+                                Clicked="Conferma"
+                                FontSize="{x:StaticResource ButtonMediumFontSize}"
+                                TextColor="{Binding ConfermaColor}"/>
+
+
+                        <Button Margin="20,0,0,0"
+                                Padding="10,0,10,0"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="EndAndExpand"
+                                Text="Annulla"
+                                Clicked="Annulla"
+                                FontSize="{x:StaticResource ButtonMediumFontSize}"
+                                TextColor="{Binding AnnullaColor}"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+        </AbsoluteLayout>
+
+    </ContentView.Content>
+</ContentView>

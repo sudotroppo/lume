@@ -5,8 +5,8 @@
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:vm="clr-namespace:lume.ViewModels"
              x:Class="lume.CustomObj.PopUpRichiesta"
-             xmlns:domain="clr-namespace:lume.Domain" xmlns:custom="clr-namespace:lume.CustomObj"
-             x:DataType="{x:Type vm:HomeViewModel}">
+             xmlns:domain="clr-namespace:lume.Domain"
+             xmlns:custom="clr-namespace:lume.CustomObj">
     <ContentView.Content>
         <Grid Padding="0,0,0,0"
               BindingContext="{Binding SelectedPost}"
@@ -121,7 +121,7 @@
                     </StackLayout>
                     <CarouselView ItemsSource="{Binding immagini}"
                                   Margin="-20,0,-20,0"
-                                  VerticalOptions="End"
+                                  VerticalOptions="EndAndExpand"
                                   HorizontalOptions="CenterAndExpand"
                                   Loop="False">
                         <CarouselView.ItemsLayout>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
 namespace lume.Domain
@@ -25,7 +26,7 @@ namespace lume.Domain
         public DateTime dataCreazione { set; get; }
 
         [JsonPropertyName("immagini")]
-        public List<string> immagini { set; get; }
+        public ObservableCollection<string> immagini { set; get; }
 
         [JsonPropertyName("candidati")]
         public List<Utente> candidati { set; get; }

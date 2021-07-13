@@ -8,13 +8,13 @@
         <OnPlatform x:Key="LumeRadius"
 					x:TypeArguments="x:Int32">
             <On Platform="iOS" Value="5"/>
-            <On Platform="Android" Value="20"/>
+            <On Platform="Android" Value="10"/>
         </OnPlatform>
 
         <OnPlatform x:Key="LumeCornerRadius"
 					x:TypeArguments="CornerRadius">
             <On Platform="iOS" Value="10"/>
-            <On Platform="Android" Value="20"/>
+            <On Platform="Android" Value="10"/>
         </OnPlatform>
 
         <OnPlatform x:Key="LumeStrokeWidth"
@@ -39,6 +39,7 @@
         <x:String x:Key="EntryStandardFont">OpenSans-R</x:String>
         <x:String x:Key="ButtonStandardFont">OpenSans-R</x:String>
         <x:String x:Key="LumeFont">Montserrat-SB</x:String>
+        <x:String x:Key="OpenSansBold">OpenSans-B</x:String>
         <x:String x:Key="IconSolid">FotAwsome-S</x:String>
         <x:String x:Key="IconRegular">FotAwsome-R</x:String>
         <x:String x:Key="Brands">FotAwsomeBrands-R</x:String>
@@ -52,6 +53,8 @@
 
         <!--Colori App-->
         <Color x:Key="VerdeLume">#40a491</Color>
+        <Color x:Key="GialloLume">#F1C00A</Color>
+        <Color x:Key="RossoLume">#C45867</Color>
         <Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
         <Color x:Key="BiancoLume">#ffffff</Color>
         <Color x:Key="GrigioLume">#E4E4E4</Color>

@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<template:ContentTemplatedView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    xmlns:template="clr-namespace:lume.Templates"
+    xmlns:custom="clr-namespace:lume.CustomObj"
+    xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:vm="clr-namespace:lume.ViewModels"
+    x:Class="lume.Pages.MyRequestsPage">
+
+    
+    <AbsoluteLayout x:Name="mainLayout">
+        
+        <AbsoluteLayout.BindingContext>
+            <vm:RequestsViewModel RequestType="richieste"/>
+        </AbsoluteLayout.BindingContext>
+
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="45, *"
+              ColumnDefinitions="45, *"
+              Margin="0,10,0,0"
+              Padding="0"
+              ColumnSpacing="0"
+              RowSpacing="0">
+
+            <CollectionView x:Name="homePostViewer"
+                            Margin="0,0,0,0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Grid.Row="1"
+                            VerticalScrollBarVisibility="Never"
+                            ItemsSource="{Binding Posts}"
+                            SelectionMode="None"
+                            >
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="8,10,8,10">
+                            <AbsoluteLayout xct:TouchEffect.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"
+                                            xct:TouchEffect.LongPressCommandParameter="{Binding .}"
+                                            xct:TouchEffect.LongPressDuration="600"
+                                            xct:TouchEffect.Command="{Binding ClearCommand, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"
+                                            xct:TouchEffect.NormalBackgroundColor="{x:StaticResource BiancoLume}"
+                                            xct:TouchEffect.PressedBackgroundColor="{x:StaticResource BiancoLume}"
+                                            xct:TouchEffect.NativeAnimation="False">
+
+                                
+                                
+                                
+
+                                <Frame HasShadow="False"
+                                        AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                        AbsoluteLayout.LayoutFlags="All"
+                                        CornerRadius="20"
+                                        IsClippedToBounds="True"
+                                        BackgroundColor="{x:StaticResource GrigioLume}"
+                                        >
+
+                                    <StackLayout Spacing="10"
+						                            Margin="0">
+                                        <StackLayout Orientation="Horizontal"
+								                        Margin="-10,-10,-10,0"
+							                            Spacing="10">
+
+                                            <Frame IsClippedToBounds="True"
+                                                   Padding="0"
+                                                   Margin="0"
+                                                   VerticalOptions="Center"
+                                                   HeightRequest="45"
+                                                   WidthRequest="45"
+                                                   MinimumHeightRequest="45"
+                                                   MinimumWidthRequest="45">
+                                                <Frame.Clip>
+                                                    <EllipseGeometry RadiusX="22.5"
+                                                                        RadiusY="22.5"
+                                                                        Center="22.5,22.5"/>
+                                                </Frame.Clip>
+
+                                                <ffimage:CachedImage WidthRequest="45"
+                                                                        HeightRequest="45"
+                                                                        Aspect="AspectFill"
+                                                                        Source="{Binding creatore.sorgenteImmagine}"/>
+                                            </Frame>
+
+                                            <Label Margin="0"
+                                                    VerticalOptions="Center"
+                                                    Text="{Binding creatore.fullName}"/>
+
+
+                                            <Label TextColor="{x:StaticResource Nero}"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="EndAndExpand">
+
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="&#xf500;"
+                                                                FontFamily="{x:StaticResource IconSolid}"/>
+                                                        <Span Text="{Binding numeroCandidati, StringFormat='{0,3}/'}"/>
+                                                        <Span Text="{Binding numeroPartecipanti, StringFormat='{0}'}"/>
+
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                        </StackLayout>
+
+
+                                        <StackLayout Spacing="2">
+                                            <Label Margin="0"
+                                                    FontSize="18"
+                                                    Text="{Binding titolo}"/>
+
+                                            <Label VerticalOptions="Center"
+                                                    Margin="0"
+                                                    Text="{Binding descrizione}"/>
+
+                                            <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End">
+
+                                                <Label VerticalOptions="EndAndExpand"
+                                                        HorizontalOptions="EndAndExpand"
+                                                        Margin="0,0,0,0"
+                                                        FontSize="{x:StaticResource LabelSmallFontSize}"
+                                                        Text="{Binding data}"/>
+
+                                            </StackLayout>
+                            
+
+                                        </StackLayout>
+
+                                    </StackLayout>
+                                </Frame>
+                                <Frame AbsoluteLayout.LayoutBounds="1,-10,30,30"
+                                       AbsoluteLayout.LayoutFlags="XProportional"
+                                       Padding="0"
+                                       TranslationX="5"
+                                       IsClippedToBounds="False">
+
+                                    <Button Text="&#xf00d;"
+                                            TextColor="{x:StaticResource BiancoLume}"
+                                            BackgroundColor="{x:StaticResource NeroLume}"
+                                            FontFamily="{x:StaticResource IconSolid}"
+                                            Margin="0"
+                                            Padding="0"
+                                            HeightRequest="30"
+                                            WidthRequest="30"
+                                            Command="{Binding RichiediRimozioneCommand, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"
+                                            CommandParameter="{Binding id}"
+                                            />
+                                    <Frame.Clip>
+                                        <EllipseGeometry RadiusX="15"
+                                                         RadiusY="15"
+                                                         Center="15,15"/>
+
+                                    </Frame.Clip>
+                                </Frame>
+                            </AbsoluteLayout>
+                        </Grid>
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+        <custom:PopUpRichiesta x:Name="popUp"
+                               AbsoluteLayout.LayoutBounds="0,1,1,1"
+                               AbsoluteLayout.LayoutFlags="All"
+                               IsVisible="{Binding Visibile}"
+                               IsPopped="{Binding Popped, Converter={x:StaticResource animatePopUp}, ConverterParameter={x:Reference popUp}}" >
+            <custom:PopUpRichiesta.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Command="{Binding SwipeUpCommand}"
+                                        CommandParameter="{x:Reference popUp}"/>
+                
+                <SwipeGestureRecognizer Direction="Down"
+                                        Command="{Binding SwipeDownCommand}"
+                                        CommandParameter="{x:Reference popUp}"/>
+            </custom:PopUpRichiesta.GestureRecognizers>
+        </custom:PopUpRichiesta>
+
+        <custom:PopUpConferma AbsoluteLayout.LayoutBounds="0,0,1,1"
+                              AbsoluteLayout.LayoutFlags="All"
+                              PopUpText="Sicuro di voler eliminare la richiesta?"
+                              AnnullaColor="{x:StaticResource GialloLume}"
+                              ConfermaColor="{x:StaticResource BiancoLume}"
+                              BorderColor="{x:StaticResource VerdeLume}"
+                              IsPopped="{Binding IsRichiestaPopped, Mode=TwoWay, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"
+                              ConfermaCommand="{Binding RemoveRichiestaCommand, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"/>
+    </AbsoluteLayout>
+
+
+</template:ContentTemplatedView>

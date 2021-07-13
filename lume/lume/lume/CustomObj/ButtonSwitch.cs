@@ -13,7 +13,8 @@ namespace lume.CustomObj
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Button button = (parameter as Button);
+            if (parameter == null) { return false; }
+            Button button = parameter as Button;
 
             if(value != null)
             {

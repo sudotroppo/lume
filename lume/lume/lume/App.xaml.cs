@@ -34,7 +34,7 @@ namespace lume
             _ = GetStorageInfo();
             Debug.WriteLine($"{DateTime.Now}");
 
-            Page initialPage = new LoginPage(email);
+            Page initialPage = new LoginPage();
 
             MainPage = new CustomNavigationPage(initialPage);
 

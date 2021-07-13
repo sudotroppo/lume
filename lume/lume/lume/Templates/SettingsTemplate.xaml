@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="lume.Templates.SettingsTemplate">
+    <ContentView.Content>
+        <StackLayout Spacing="0"
+                     Margin="0,5,0,5"
+                     Padding="0">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OnSettingCommand}"
+                                      CommandParameter="{Binding OnSettingCommandParameter}"/>
+            </StackLayout.GestureRecognizers>
+
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="Center">
+                    
+                <Label Text="{Binding SettingText}"
+                       FontSize="{x:StaticResource LabelMediumFontSize}"
+                       Margin="10,0,10,0"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="StartAndExpand"
+                       VerticalTextAlignment="Center"
+				       HeightRequest="50"/>
+
+			    <Button Text="&#xf105;"
+                       WidthRequest="50"
+					   HeightRequest="50"
+			           Padding="0"
+				       Margin="0"
+					   VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="EndAndExpand"
+                       IsVisible="{Binding IsButtonVisibile}"
+					   FontFamily="{x:StaticResource IconSolid}"
+                       TextColor="{x:StaticResource Nero}"
+                       BackgroundColor="Transparent"
+					   />
+            </StackLayout>
+            <BoxView HeightRequest="2"
+                     BackgroundColor="{x:StaticResource GrigioLume}"
+                     Margin="5,0,5,0"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

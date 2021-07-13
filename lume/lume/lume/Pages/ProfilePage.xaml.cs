@@ -18,79 +18,12 @@ namespace lume.Pages
 	public partial class ProfilePage : ContentTemplatedView
 	{
 
-        private bool ReadOnly = true;
-
-        private readonly IList<View> InfoList;
-
-        public ICommand ChangeFoto => new Command(async () => await DisplayAlert("Da implementare!", "si dovrebbe aprire la galleria", "Ok"));
-
-
         public ProfilePage(Navigator navigator) : base(navigator)
         {
             InitializeComponent();
-            InfoList = InfoStack.Children;
             
         }
 
-        private void SwitchButtonState(string status, Button button)
-        {
-
-            var verdeLume = (Color)Application.Current.Resources["VerdeLume"];
-            var nero = (Color)Application.Current.Resources["Nero"];
-            var grigioChiaro = (Color)Application.Current.Resources["GrigioLume"];
-            var bianco = (Color)Application.Current.Resources["BiancoLume"];
-
-            // Quando l'utente si trova in stato di modifica
-            if (status == "edit")
-            {
-                button.Text = "Fatto";
-                button.TextColor = bianco;
-                button.BackgroundColor = verdeLume;
-            }
-
-            // Stato di default
-            else
-            {
-                button.Text = "Modifica profilo";
-                button.TextColor = nero;
-                button.BackgroundColor = grigioChiaro;
-            }
-
-        }
-
-        public void OnModifyProfileClicked(object sender, EventArgs e)
-        {
-            Button button = (Button)sender;
-
-            ReadOnly = !ReadOnly;
-
-            if (!ReadOnly)
-            {
-                ToTheLeft.IsEnabled = false;
-                Settings.IsEnabled = false;
-                SwitchButtonState("edit", button);
-
-            }
-            else
-            {
-                ToTheLeft.IsEnabled = true;
-                Settings.IsEnabled = true;
-                SwitchButtonState("default", button);
-
-                Task.Run(() =>
-                {
-                    DataAccess.UpdateUtente(App.utente);
-                });
-            }
-
-            foreach (var child in InfoList)
-            {
-                if (child is InfoView info)
-                {
-                    info.IsReadOnly = ReadOnly;
-                }
-            }
-        }
 
         public async void OnBackButtonCliked(object sender, EventArgs e)
         {

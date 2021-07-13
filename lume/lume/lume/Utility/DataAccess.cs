@@ -167,6 +167,24 @@ namespace lume.Utility
             return richiesta;
         }
 
+        public static void DeleteRichiesta(long id_richiesta)
+        {
+            DataAccess.RefreshToken();
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/protected/richiesta/{id_richiesta}", Method.DELETE)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            Console.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+        }
+
         public static List<Richiesta> GetAllRichieste()
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
@@ -184,7 +202,7 @@ namespace lume.Utility
             return richiesta;
         }
 
-        public static void NewRichiesta(Richiesta richiesta)
+        public static long NewRichiesta(Richiesta richiesta)
         {
             DataAccess.RefreshToken();
 
@@ -210,6 +228,10 @@ namespace lume.Utility
 
             IRestResponse response = client.Execute(request);
 
+
+            long id_richiesta = JsonSerializer.Deserialize<long>(response.Content);
+
+            return id_richiesta;
         }
 
         internal static List<Notifica> GetNotificheByUtente()
@@ -254,12 +276,74 @@ namespace lume.Utility
             return richieste;
         }
 
+        public static List<Richiesta> GetRichiesteUtente()
+        {
+            DataAccess.RefreshToken();
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/protected/richiesta/utente", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+            List<Richiesta> richieste = JsonSerializer.Deserialize<List<Richiesta>>(response.Content);
+
+            return richieste;
+        }
+
+        public static List<Richiesta> GetPartecipazioniUtente()
+        {
+            DataAccess.RefreshToken();
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/protected/richiesta/utente/partecipazioni", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+            List<Richiesta> richieste = JsonSerializer.Deserialize<List<Richiesta>>(response.Content);
+
+            return richieste;
+        }
+
         public static void UploadUserImage(Stream stream, string fileName)
         {
             DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/protected/file/upload/immagine/utente", Method.POST)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            request.AddFile("file", ReadFully(stream), fileName, "multipart/form-data");
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            client.Execute(request);
+
+        }
+
+        public static void UploadRequestImage(Stream stream, string fileName, long id_richiesta)
+        {
+            DataAccess.RefreshToken();
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest($"/protected/file/upload/immagine/richiesta/{id_richiesta}", Method.POST)
             {
                 Timeout = App.requestTimeout
             };
