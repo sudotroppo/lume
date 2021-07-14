@@ -53,7 +53,7 @@
                             AbsoluteLayout.LayoutFlags="SizeProportional">
 
                 <Label x:Name="ProfileName"
-                       Text="{Binding fullName}"
+                       Text="{Binding shortName}"
                        AbsoluteLayout.LayoutBounds="45,0.5"
                        AbsoluteLayout.LayoutFlags="YProportional"
                        MaxLines="1">

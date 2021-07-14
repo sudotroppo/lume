@@ -79,12 +79,13 @@
 
                     <StackLayout Spacing="14" x:Name="Entrys">
                         <custom:LumEntry x:Name="Email"
-										Placeholder="Email"
+										 Placeholder="Email"
+                                         Keyboard="Email"
                                          Text="{Binding _Email}"/>
 
                         <custom:LumEntry x:Name="Password"
-										Placeholder="Password"
-										IsPassword="True"/>
+										 Placeholder="Password"
+										 IsPassword="True"/>
 
                     </StackLayout>
 

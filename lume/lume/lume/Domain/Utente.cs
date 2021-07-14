@@ -15,6 +15,9 @@ namespace lume.Domain
         [JsonPropertyName("nome")]
         public string nome { get; set; }
 
+        [JsonPropertyName("citta")]
+        public string citta { get; set; }
+
         [JsonPropertyName("cognome")]
         public string cognome { get; set; }
 
@@ -64,7 +67,25 @@ namespace lume.Domain
         {
             get
             {
+                
                 return $"{nome} {cognome}";
+            }
+        }
+
+
+        [JsonIgnore]
+        public string shortName
+        {
+            get
+            {
+                var full = $"{nome} {cognome}";
+
+                if (full.Length >= 20)
+                {
+                    return $"{nome} {cognome[0]}";
+                }
+
+                return full;
             }
         }
 
@@ -77,18 +98,5 @@ namespace lume.Domain
         {
             return (Utente)MemberwiseClone();
         }
-
-        public override bool Equals(object obj)
-        {
-            if(obj == null || !typeof(Utente).Equals(obj))
-            {
-                return false;
-            }
-
-            Utente that = obj as Utente;
-
-            return this.id == that.id;
-        }
-
     }
 }

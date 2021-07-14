@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace lume.CustomObj
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopUpConferma : ContentView
+    public partial class PopUpPassword : ContentView
     {
 
         private static ICommand defaultCommand = new Command((obj) => { });
@@ -17,7 +17,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(ConfermaCommand),
                 returnType: typeof(ICommand),
-                declaringType: typeof(PopUpConferma),
+                declaringType: typeof(PopUpPassword),
                 defaultValue: defaultCommand,
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -25,7 +25,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(ConfermaCommandParameter),
                 returnType: typeof(object),
-                declaringType: typeof(PopUpConferma),
+                declaringType: typeof(PopUpPassword),
                 defaultValue: null,
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -33,7 +33,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(AnnullaCommand),
                 returnType: typeof(ICommand),
-                declaringType: typeof(PopUpConferma),
+                declaringType: typeof(PopUpPassword),
                 defaultValue: defaultCommand,
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -41,7 +41,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(AnnullaCommandParameter),
                 returnType: typeof(object),
-                declaringType: typeof(PopUpConferma),
+                declaringType: typeof(PopUpPassword),
                 defaultValue: null,
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -49,7 +49,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(PopUpText),
                returnType: typeof(string),
-               declaringType: typeof(PopUpConferma),
+               declaringType: typeof(PopUpPassword),
                defaultValue: "",
                defaultBindingMode: BindingMode.TwoWay,
                propertyChanged: PopUpTextPropertyChanged);
@@ -58,7 +58,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(IsPopped),
                returnType: typeof(bool),
-               declaringType: typeof(PopUpConferma),
+               declaringType: typeof(PopUpPassword),
                defaultValue: false,
                defaultBindingMode: BindingMode.TwoWay,
                propertyChanged: IsPoppedPropertyChanged);
@@ -67,7 +67,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(ConfermaColor),
                returnType: typeof(Color),
-               declaringType: typeof(PopUpConferma),
+               declaringType: typeof(PopUpPassword),
                defaultValue: default(Color));
 
 
@@ -75,7 +75,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(AnnullaColor),
                returnType: typeof(Color),
-               declaringType: typeof(PopUpConferma),
+               declaringType: typeof(PopUpPassword),
                defaultValue: default(Color));
 
 
@@ -83,7 +83,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(BorderColor),
                returnType: typeof(Color),
-               declaringType: typeof(PopUpConferma),
+               declaringType: typeof(PopUpPassword),
                defaultValue: default(Color));
 
 
@@ -91,7 +91,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(ConfermaText),
                 returnType: typeof(string),
-                declaringType: typeof(PopUpConferma),
+                declaringType: typeof(PopUpPassword),
                 defaultValue: "Conferma",
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -100,7 +100,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(AnnullaText),
                 returnType: typeof(string),
-                declaringType: typeof(PopUpConferma),
+                declaringType: typeof(PopUpPassword),
                 defaultValue: "Annulla",
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -126,7 +126,7 @@ namespace lume.CustomObj
         public bool IsConfermaVisibile { get => !"".Equals(ConfermaText); }
         public bool IsAnnullaVisibile { get => !"".Equals(AnnullaText); }
 
-        public PopUpConferma()
+        public PopUpPassword()
         {
             InitializeComponent();
             IsVisible = IsPopped;
@@ -145,7 +145,7 @@ namespace lume.CustomObj
 
         public static void IsPoppedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (PopUpConferma)bindable;
+            var control = (PopUpPassword)bindable;
 
             Debug.WriteLine("IsPopped Changed");
 
@@ -165,7 +165,7 @@ namespace lume.CustomObj
 
         public static void PopUpTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (PopUpConferma)bindable;
+            var control = (PopUpPassword)bindable;
             control.PopUpText = (string)newValue;
         }
 

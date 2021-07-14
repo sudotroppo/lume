@@ -8,23 +8,56 @@
     xmlns:custom="clr-namespace:lume.CustomObj"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:vm="clr-namespace:lume.ViewModels">
-    <AbsoluteLayout x:Name="mainLayout">
+    <AbsoluteLayout>
         <AbsoluteLayout.BindingContext>
-            <vm:RequestsViewModel RequestType="partecipazioni"/>
+            <vm:PartecipationViewModel />
         </AbsoluteLayout.BindingContext>
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="All"
               RowDefinitions="45, *"
-              ColumnDefinitions="45, *"
+              ColumnDefinitions="45, *, 45"
               Margin="10,10,10,0"
               Padding="0"
               ColumnSpacing="0"
               RowSpacing="0">
 
-            <CollectionView x:Name="homePostViewer"
-                            Margin="0,0,0,0"
+            <BoxView Grid.Column="0"
+                     Grid.ColumnSpan="3"
+                     Grid.Row="0"
+                     Grid.RowSpan="1"
+                     Margin="-10"
+                     BackgroundColor="{x:StaticResource GrigioLume}"
+                     HeightRequest="2"
+                     x:Name="BackgroundBox"/>
+
+            
+            <Button x:Name="Settings" 
+                    Text="&#xf013;"
+                    TextColor="{x:StaticResource Nero}"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    FontSize="18"
+                    TranslationY="-25"
+                    TranslationX="35"
+                    Scale="5"
+                    BackgroundColor="Transparent"
+                    Margin="0"
+                    Style="{x:StaticResource ButtonPressedColorBlack}"/>
+
+            <StackLayout Grid.Column="1"
+                         Grid.Row="0"
+                         x:Name="TitleLayout">
+                <Label HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Text="Le mie partecipazioni"/>
+            </StackLayout>
+
+
+            <CollectionView x:Name="mainLayout"
+                            Margin="-10,10,-10,0"
                             Grid.Column="0"
-                            Grid.ColumnSpan="2"
+                            Grid.ColumnSpan="3"
                             Grid.Row="1"
                             VerticalScrollBarVisibility="Never"
                             ItemsSource="{Binding Posts}"
@@ -34,10 +67,10 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="8,10,8,10">
-                            <AbsoluteLayout xct:TouchEffect.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"
+                            <AbsoluteLayout xct:TouchEffect.LongPressCommand="{Binding LongPressCommand, Source={RelativeSource AncestorType={x:Type vm:PartecipationViewModel}}}"
                                             xct:TouchEffect.LongPressCommandParameter="{Binding .}"
                                             xct:TouchEffect.LongPressDuration="600"
-                                            xct:TouchEffect.Command="{Binding ClearCommand, Source={RelativeSource AncestorType={x:Type vm:RequestsViewModel}}}"
+                                            xct:TouchEffect.Command="{Binding ClearCommand, Source={RelativeSource AncestorType={x:Type vm:PartecipationViewModel}}}"
                                             xct:TouchEffect.NormalBackgroundColor="{x:StaticResource BiancoLume}"
                                             xct:TouchEffect.PressedBackgroundColor="{x:StaticResource BiancoLume}"
                                             xct:TouchEffect.NativeAnimation="False">
@@ -83,7 +116,7 @@
 
                                             <Label Margin="0"
                                                     VerticalOptions="Center"
-                                                    Text="{Binding creatore.fullName}"/>
+                                                    Text="{Binding creatore.shortName}"/>
 
 
                                             <Label TextColor="{x:StaticResource Nero}"
@@ -129,7 +162,7 @@
                                                             FontFamily="{x:StaticResource IconSolid}"
                                                             FontSize="{x:StaticResource LabelSmallFontSize}"
                                                             TextColor="{Binding alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
-                                                            Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
+                                                            Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:PartecipationViewModel}}}"
                                                             CommandParameter="{x:Binding id}"
                                                             BackgroundColor="Transparent"/>
 
@@ -155,18 +188,31 @@
                                     </StackLayout>
                                 </Frame>
                             </AbsoluteLayout>
+
                         </Grid>
                     </DataTemplate>
 
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            
+            <Button x:Name="ToTheLeft"
+                    Text="&#xf053;"
+                    FontFamily="{x:StaticResource IconSolid}"
+                    TextColor="{x:StaticResource Nero}"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="Start"
+                    Clicked="OnBackButtonCliked"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0"
+                    Style="{x:StaticResource ButtonPressedColorBlack}"/>
+
         </Grid>
         <custom:PopUpRichiesta x:Name="popUp"
                                AbsoluteLayout.LayoutBounds="0,1,1,1"
                                AbsoluteLayout.LayoutFlags="All"
-                               IsVisible="{Binding Visibile}"
-                               IsPopped="{Binding Popped, Converter={x:StaticResource animatePopUp}, ConverterParameter={x:Reference popUp}}" >
+                               IsPopped="{Binding Popped, Mode=TwoWay}" >
             <custom:PopUpRichiesta.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Up"
                                         Command="{Binding SwipeUpCommand}"

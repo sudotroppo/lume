@@ -7,6 +7,7 @@ using Amazon.CognitoIdentityProvider;
 using Amazon;
 using lume.Domain;
 using System.Threading.Tasks;
+using lume.Assets;
 
 namespace lume.Pages
 {
@@ -21,6 +22,24 @@ namespace lume.Pages
 
         public async void SignUp(object sender, EventArgs e)
         {
+
+            bool condNome = "".Equals(Nome_reg.Text) || Nome_reg.Text == null;
+            bool condCognome = "".Equals(Cognome_reg.Text) || Cognome_reg.Text == null;
+            bool condPassword = "".Equals(Password_reg.Text) || Password_reg.Text == null;
+            bool condEmail = "".Equals(Email_reg.Text) || Email_reg.Text == null;
+            bool condCitta = "".Equals(Citta_reg.Text) || Citta_reg.Text == null;
+
+            if (condNome || condCognome || condEmail || condPassword || condCitta)
+            {
+                _ = condNome ? Animations.ShakeAnimate(Nome_reg) : null;
+                _ = condCognome ? Animations.ShakeAnimate(Cognome_reg) : null;
+                _ = condPassword ? Animations.ShakeAnimate(Email_reg) : null;
+                _ = condEmail ? Animations.ShakeAnimate(Cognome_reg) : null;
+                _ = condCitta ? Animations.ShakeAnimate(Citta_reg) : null;
+
+                return;
+            }
+
             Utente u = new Utente()
             {
                 nome = Nome_reg.Text?.Trim(),

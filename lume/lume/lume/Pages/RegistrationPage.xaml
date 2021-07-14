@@ -66,20 +66,26 @@
                         <StackLayout Spacing="10">
 
                             <custom:LumEntry x:Name="Nome_reg"
-										Placeholder="Nome"/>
+										     Placeholder="Nome"/>
 
                             <custom:LumEntry x:Name="Cognome_reg"
-										Placeholder="Cognome"/>
+										     Placeholder="Cognome"/>
 
                             <custom:LumEntry x:Name="Email_reg"
-										Placeholder="Email"/>
+										     Placeholder="Email"
+                                             Keyboard="Email"/>
+
+                            <custom:LumEntry x:Name="Citta_reg"
+										     Placeholder="Città"/>
 
                             <custom:LumEntry x:Name="Telefono_reg"
-										Placeholder="Numero Di Telefono"/>
+										     Placeholder="Numero Di Telefono"
+                                             Keyboard="Numeric"/>
 
                             <custom:LumEntry x:Name="Password_reg"
-										Placeholder="Password"
-										IsPassword="True"/>
+										    Placeholder="Password"
+										    IsPassword="True"/>
+                            
 
 
                         </StackLayout>

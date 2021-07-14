@@ -99,10 +99,20 @@ namespace lume.ViewModels
 
         public void OnSendRequest()
         {
+
+            if(Richiesta.descrizione == null || Richiesta.titolo == null
+                || Richiesta.titolo.Trim().Equals("") || Richiesta.titolo.Trim().Equals(""))
+            {
+
+                return;
+            }
+
             IsLoading = true;
+
             Task.Run(async () =>
             {
                 long id_richiesta = DataAccess.NewRichiesta(Richiesta);
+
                 Richiesta = new Richiesta { numeroPartecipanti = 1 };
                 NumeroPartecipanti = 1;
                 List<Task> tasks = new List<Task>(Images.Count);

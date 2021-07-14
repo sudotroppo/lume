@@ -23,7 +23,8 @@
               ColumnSpacing="0"
               RowSpacing="0">
 
-            <BoxView Grid.Column="0"
+            <BoxView x:Name="BackGroundBox"
+                     Grid.Column="0"
                      Grid.ColumnSpan="5"
                      Grid.Row="0"
                      Grid.RowSpan="1"
@@ -31,12 +32,22 @@
                      BackgroundColor="{x:StaticResource GrigioLume}"
                      HeightRequest="2"/>
 
+             <StackLayout Grid.Column="1"
+                          Grid.ColumnSpan="3"
+                         Grid.Row="0"
+                         x:Name="TitleLayout">
+                <Label HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       Text="Impostazioni"/>
+            </StackLayout>
+
 
             <Button x:Name="ToTheLeft"
                     Text="&#xf053;"
                     FontFamily="{x:StaticResource IconSolid}"
                     TextColor="{x:StaticResource Nero}"
                     BackgroundColor="Transparent"
+                    Clicked="OnBackButtonCliked"
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="0"
@@ -61,33 +72,41 @@
                         Grid.ColumnSpan="5"
                         Grid.Row="2"
                         Grid.RowSpan="2"
-                        Margin="0,10,0,0">
+                        Margin="0,10,0,0"
+                        VerticalScrollBarVisibility="Never">
 
                 <StackLayout x:Name="settingsList"
                              VerticalOptions="FillAndExpand">
-                    <templates:SettingsTemplate SettingText="le mie richieste"
+                    <templates:SettingsTemplate SettingText="Le mie richieste"
                                                 xct:TouchEffect.Command="{Binding RichiesteCommand, Source={x:Reference settingsVM}}"
                                                 xct:TouchEffect.CommandParameter="{Binding .}"
                                                 />
                 
-                    <templates:SettingsTemplate SettingText="le mie partecipazioni"
+                    <templates:SettingsTemplate SettingText="Le mie partecipazioni"
                                                 xct:TouchEffect.Command="{Binding PartecipazioniCommand, Source={x:Reference settingsVM}}"
                                                 xct:TouchEffect.CommandParameter="{Binding .}"
                                                 />
                 
-                    <templates:SettingsTemplate SettingText="cambia password"
+                    <templates:SettingsTemplate SettingText="Cambia password"
                                                 xct:TouchEffect.Command="{Binding CambiaPasswordCommand, Source={x:Reference settingsVM}}"
-                                                xct:TouchEffect.CommandParameter="{Binding .}"
                                                 IsButtonVisibile="False"
                                                 />
+
+                    <templates:SettingsTemplate SettingText="Elimina account"
+                                                xct:TouchEffect.Command="{Binding EliminaAccountCommand, Source={x:Reference settingsVM}}"
+                                                IsButtonVisibile="False"/>
+
                 
-                    <Button BackgroundColor="#C45867"
-                            TextColor="{x:StaticResource Nero}"
+                    <Button BackgroundColor="{x:StaticResource NeroLume}"
+                            TextColor="{x:StaticResource VerdeLume}"
+                            FontFamily="{x:StaticResource OpenSansBold}"
                             Command="{Binding LogoutCommand}"
                             Margin="0,0,0,10"
-                            Text="Logout"
                             VerticalOptions="EndAndExpand"
+                            Text="Logout"
                             />
+
+                    
 
                 </StackLayout>
             

@@ -116,7 +116,8 @@
                                                         IsClippedToBounds="True"
                                                         HorizontalOptions="StartAndExpand"
                                                         VerticalOptions="EndAndExpand"
-                                                        BackgroundColor="Transparent">
+                                                        BackgroundColor="Transparent"
+                                                        IsVisible="{Binding isTheOwner, Converter={x:StaticResource inverseBoolConverter}}">
 
                                                     <Button Text="&#xf4c4;"
                                                             Margin="0"
@@ -160,8 +161,7 @@
         <custom:PopUpRichiesta x:Name="popUp"
                                AbsoluteLayout.LayoutBounds="0,1,1,1"
                                AbsoluteLayout.LayoutFlags="All"
-                               IsVisible="{Binding Visibile}"
-                               IsPopped="{Binding Popped, Converter={x:StaticResource animatePopUp}, ConverterParameter={x:Reference popUp}}" >
+                               IsPopped="{Binding Popped, Mode=TwoWay}" >
             <custom:PopUpRichiesta.GestureRecognizers>
                 <SwipeGestureRecognizer Direction="Up"
                                         Command="{Binding SwipeUpCommand}"

@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="lume.Pages.MainPage"
-             xmlns:templates="clr-namespace:lume.Templates"
              xmlns:pages="clr-namespace:lume.Pages"
-             x:DataType="{x:Type pages:MainPage}">
+             xmlns:templates="clr-namespace:lume.Templates"
+             xmlns:custom="clr-namespace:lume.CustomObj"
+             x:Class="lume.Pages.MainPage"
+             BindingContext="{Binding ., Source={x:RelativeSource Mode=Self}}">
 
     <AbsoluteLayout x:Name="absolute">
         <Grid  AbsoluteLayout.LayoutBounds="0,0,1,1"
@@ -80,6 +81,20 @@
 
             </Grid>
         </Grid>
-
+        <custom:PopUpConferma AbsoluteLayout.LayoutBounds="0,0,1,1"
+                              AbsoluteLayout.LayoutFlags="All"
+                              x:Name="popUp"
+                              AnnullaColor="{x:StaticResource GialloLume}"
+                              ConfermaColor="{x:StaticResource BiancoLume}"
+                              BorderColor="{x:StaticResource VerdeLume}"
+                              PopUpText="{Binding PopUpText, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              ConfermaText="{Binding PopUpConfermaNome, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              ConfermaCommand="{Binding PopUpConferma, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              ConfermaCommandParameter="{Binding PopUpConfermaParameter, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              AnnullaText="{Binding PopUpAnnullaNome, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              AnnullaCommand="{Binding PopUpAnnulla, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              AnnullaCommandParameter="{Binding PopUpAnnullaParameter, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              IsPopped="{Binding IsPopped, Source={RelativeSource AncestorType={x:Type pages:MainPage}}}"
+                              />
     </AbsoluteLayout>
 </ContentPage>

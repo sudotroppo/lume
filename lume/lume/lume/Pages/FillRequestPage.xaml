@@ -68,6 +68,7 @@
 								FontFamily="{x:StaticResource IconSolid}"
 								Command="{Binding AddImageFromGalleryCommand, Source={x:Reference fillVM}}"
 								TextColor="{x:StaticResource BiancoLume}"
+								IsEnabled="{Binding IsLoading, Source={x:Reference fillVM}, Converter={x:StaticResource inverseBoolConverter}}"
 								Padding="0"
 								Margin="0"
 								BackgroundColor="#9DC458"
@@ -92,6 +93,7 @@
 								Padding="0"
 								Margin="0"
 								Command="{Binding AddImageFromCameraCommand, Source={x:Reference fillVM}}"
+								IsEnabled="{Binding IsLoading, Source={x:Reference fillVM}, Converter={x:StaticResource inverseBoolConverter}}"
 								BackgroundColor="#8058C4"
 								/>
 
@@ -135,6 +137,7 @@
 				<custom:LumEntry x:Name="Titolo"
 								 Placeholder="Titolo"
 								 Text="{Binding titolo, Mode=TwoWay}"
+								 IsReadOnly="{Binding IsLoading, Source={x:Reference fillVM}}"
 								 HorizontalOptions="FillAndExpand"
 								 HeightRequest="40"
 								 Margin="20, 20, 20, 10"
@@ -142,6 +145,7 @@
 
 				<custom:LumEditor x:Name="Descrizione"
 								  Text="{Binding descrizione, Mode=TwoWay}"
+								  IsReadOnly="{Binding IsLoading, Source={x:Reference fillVM}}"
 								  Placeholder="Inserisci una descrizione.."
 								  VerticalOptions="StartAndExpand"
 								  AutoSize="TextChanges"
@@ -207,6 +211,7 @@
                 <Button Text="&#xf1d8;"
                         FontFamily="{x:StaticResource IconSolid}"
 						Command="{Binding SendRequestCommand, Source={x:Reference fillVM}}"
+						IsEnabled="{Binding IsLoading, Source={x:Reference fillVM}, Converter={x:StaticResource inverseBoolConverter}}"		
                         TextColor="black"
                         BackgroundColor="White"
 						/>
@@ -219,6 +224,8 @@
                 </Frame.Clip>
             </Frame>
         </StackLayout>
-        
+        <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference fillVM}}"
+						   AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+						   AbsoluteLayout.LayoutFlags="All"/>
 	</AbsoluteLayout>
 </templates:ContentTemplatedView>

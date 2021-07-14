@@ -6,16 +6,18 @@ using lume.Pages;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using lume.Templates;
+using System.Windows.Input;
 
 namespace lume.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
 
-        public Command CambiaPasswordCommand { get; private set; }
-        public Command<View> RichiesteCommand { get; private set; }
-        public Command<View> PartecipazioniCommand { get; private set; }
-        public Command LogoutCommand { get; private set; }
+        public ICommand CambiaPasswordCommand { get; private set; }
+        public ICommand RichiesteCommand { get; private set; }
+        public ICommand PartecipazioniCommand { get; private set; }
+        public ICommand LogoutCommand { get; private set; }
+        public ICommand EliminaAccountCommand { get; private set; }
 
         public SettingsViewModel()
         {
@@ -27,7 +29,10 @@ namespace lume.ViewModels
 
         }
 
-        //TODO: implementare i metodi qua sotto
+        public void EliminaAccount()
+        {
+
+        }
 
         public void OnLogout()
         {
@@ -63,8 +68,12 @@ namespace lume.ViewModels
         private async void SlideToRight(View v, ContentTemplatedView cv)
         {
             await v.TranslateTo(v.Width, 0, 300, Easing.CubicInOut);
+
             var navPage = Application.Current.MainPage as CustomNavigationPage;
-            (navPage.CurrentPage as MainPage).navigator.InsetPageIntoTabIndex(cv,2);
+            var navigator = (navPage.CurrentPage as MainPage).navigator;
+
+            cv.navigator = navigator;
+            navigator.InsetPageIntoTabIndex(cv,2);
         }
     }
 }

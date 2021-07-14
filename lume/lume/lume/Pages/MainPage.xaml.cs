@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -60,17 +61,145 @@ namespace lume.Pages
         }
 
 
+        private string _popUpText = "Benvenuto!";
+        public string PopUpText
+        {
+            set
+            {
+                _popUpText = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpText;
+            }
+        }
+
+        private ICommand _popUpConferma;
+        public ICommand PopUpConferma
+        {
+            set
+            {
+                _popUpConferma = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpConferma;
+            }
+        }
+
+        private ICommand _popUpAnnulla;
+        public ICommand PopUpAnnulla
+        {
+            set
+            {
+                _popUpAnnulla = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpAnnulla;
+            }
+        }
+
+        private string _popUpConfermaNome;
+        public string PopUpConfermaNome
+        {
+            set
+            {
+                _popUpConfermaNome = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpConfermaNome;
+            }
+        }
+
+        private string _popUpAnnullaNome;
+        public string PopUpAnnullaNome
+        {
+            set
+            {
+                _popUpAnnullaNome = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpAnnullaNome;
+            }
+        }
+
+        private object _popUpConfermaParameter;
+        public object PopUpConfermaParameter
+        {
+            set
+            {
+                _popUpConfermaParameter = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpConfermaParameter;
+            }
+        }
+
+        private object _popUpAnnullaParameter;
+        public object PopUpAnnullaParameter
+        {
+            set
+            {
+                _popUpAnnullaParameter = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _popUpAnnullaParameter;
+            }
+        }
+
+        private bool _isPopped;
+        public bool IsPopped
+        {
+            set
+            {
+                _isPopped = value;
+                OnPropertyChanged();
+            }
+            get
+            {
+                return _isPopped;
+            }
+        }
 
         public ContentTemplatedView rootTab = new HomePage();
 
+        public void Alert(string msg,
+            string confermaNome, ICommand confermaCommand, object confermaParameter,
+            string annullaNome, ICommand annullaCommand, object annullaParameter)
+        {
+            PopUpText = msg;
+
+            PopUpConferma = confermaCommand;
+            PopUpConfermaNome = confermaNome;
+            PopUpConfermaParameter = confermaParameter;
+
+            PopUpAnnulla = annullaCommand;
+            PopUpAnnullaNome = annullaNome;
+            PopUpAnnullaParameter = annullaParameter;
+
+            IsPopped = true;
+
+        }
 
 
-        public Navigator navigator;
+        public Navigator navigator { get; set; }
 
 
-        public int CurrentTab;
+        public int CurrentTab { get; set; }
 
-        private async void ChangeTab(object sender, EventArgs e)
+        private void ChangeTab(object sender, EventArgs e)
         {
             try
             {
@@ -89,9 +218,9 @@ namespace lume.Pages
                 }
 
 
-                await Task.Run(() => SlideSelectorTo(CurrentTab));
+                Task.Run(() => SlideSelectorTo(CurrentTab));
             }
-            catch { }
+            catch(Exception) { }
 
 
         }
@@ -144,7 +273,6 @@ namespace lume.Pages
 
             navigator.GoTo(0);
 
-            absolute.BindingContext = this;
         }
 
         protected override bool OnBackButtonPressed()

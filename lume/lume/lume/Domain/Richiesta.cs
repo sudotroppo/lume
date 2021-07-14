@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 namespace lume.Domain
@@ -31,11 +32,27 @@ namespace lume.Domain
         [JsonPropertyName("candidati")]
         public List<Utente> candidati { set; get; }
 
+
+        [JsonIgnore]
+        public bool isTheOwner
+        {
+            get
+            {
+                var result = creatore.id == App.utente.id;
+                Debug.WriteLine($"isTheOwner? {result}");
+                return result;
+            }
+        }
+
+
+        [JsonIgnore]
         public bool alreadyPicked
         {
             get
             {
-                return candidati.Contains(App.utente);
+                var result = candidati.Find((u) => u.id == App.utente.id) != null;
+                Debug.WriteLine($"alreadyPicked? {result}");
+                return result;
             }
         }
 
@@ -47,7 +64,7 @@ namespace lume.Domain
             }
         }
 
-
+        [JsonIgnore]
         public string data
         {
             get

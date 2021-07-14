@@ -6,7 +6,8 @@
              xmlns:vm="clr-namespace:lume.ViewModels"
              x:Class="lume.CustomObj.PopUpRichiesta"
              xmlns:domain="clr-namespace:lume.Domain"
-             xmlns:custom="clr-namespace:lume.CustomObj">
+             xmlns:custom="clr-namespace:lume.CustomObj"
+             TranslationY="{x:Binding Height, Source={RelativeSource Mode=Self}}">
     <ContentView.Content>
         <Grid Padding="0,0,0,0"
               BindingContext="{Binding SelectedPost}"
@@ -91,7 +92,8 @@
                             IsClippedToBounds="True"
                             HorizontalOptions="StartAndExpand"
                             VerticalOptions="EndAndExpand"
-                            BackgroundColor="Transparent">
+                            BackgroundColor="Transparent"
+                            IsVisible="{Binding isTheOwner, Converter={x:StaticResource inverseBoolConverter}}">
 
                         <Button Text="&#xf4c4;"
                                 Margin="0"

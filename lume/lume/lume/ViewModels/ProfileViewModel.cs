@@ -40,6 +40,8 @@ namespace lume.ViewModels
 
         public void  OnStateSwitch(Button b)
         {
+            IsReadOnly = !IsReadOnly;
+
             if (IsReadOnly)
             {
                 ButtonText = "Modifica profilo";
@@ -71,8 +73,6 @@ namespace lume.ViewModels
 
             }
             
-
-            IsReadOnly = !IsReadOnly;
         }
 
 

@@ -132,12 +132,11 @@ namespace lume.Utility
 
             request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
 
-            request.AddQueryParameter("id", utente.id.ToString());
             request.AddQueryParameter("nome", utente.nome);
             request.AddQueryParameter("cognome", utente.cognome);
             request.AddQueryParameter("email", utente.email);
+            request.AddQueryParameter("citta", utente.citta);
             request.AddQueryParameter("telefono", utente.telefono);
-            request.AddQueryParameter("immagine", utente.immagine);
 
             Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 

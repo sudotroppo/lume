@@ -62,13 +62,18 @@ namespace lume.Pages
 
             b.IsEnabled = false;
 
+            ProfileImage.AnchorY = 0.5;
+
             await Task.Run(() =>
             {
                 Animation ToProfileSettings = new Animation
                 {
-                    {0,1, Animations.RelativeRotation(b, 360, Easing.SpringOut) },
-                    {0,0.5, Animations.ScaleTo(b,1.4,1.4, Easing.Linear) },
-                    {0.5,1, Animations.ScaleTo(b, 1, 1, Easing.Linear) }
+                    {0,1, Animations.RelativeRotation(Settings, 360, Easing.SpringOut) },
+                    {0,0.5, Animations.ScaleTo(Settings,1.4,1.4, Easing.Linear) },
+                    {0.5,1, Animations.ScaleTo(Settings, 1, 1, Easing.Linear) },
+                    {0,1, Animations.SlideOf(Settings, 35, -25,Easing.CubicInOut) },
+                    {0,1, Animations.ScaleTo(Settings, 5, 5,Easing.CubicInOut) },
+                    {0, 1, Animations.ScaleTo(ProfileImage, 0, 0, Easing.CubicInOut) },
                 };
                 ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
                 {

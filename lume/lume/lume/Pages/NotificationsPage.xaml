@@ -8,7 +8,6 @@
     xmlns:templates="clr-namespace:lume.Templates"
     xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:vm="clr-namespace:lume.ViewModels">
-
     <!-- Sezione per passare alla pagina profilo -->
     <templates:ContentTemplatedView.Content>
         <AbsoluteLayout x:Name="NotifPage" 
@@ -46,7 +45,7 @@
                                 BindingContext="{Binding CurrentUser}">
 
                     <Label x:Name="ProfileName"
-                           Text="{Binding fullName}"
+                           Text="{Binding shortName}"
                            AbsoluteLayout.LayoutBounds="45,0.5"
                            AbsoluteLayout.LayoutFlags="YProportional"
                            MaxLines="1"/>
@@ -124,62 +123,93 @@
                                 BindingContext="{Binding .}"
                                 Style="{x:StaticResource ButtonPressedColorBlack}"/>
 
-                <CollectionView x:Name="notificationsViewer"
-                                Grid.ColumnSpan="4"
-                                Grid.Column="0"
-                                Grid.Row="1"
-                                Margin="0,10,0,0"
-                                VerticalScrollBarVisibility="Never"
-                                ItemsSource="{Binding Notifiche}">
+                <RefreshView Command="{Binding RefreshCommand}"
+                             Grid.ColumnSpan="4"
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Padding="0"
+                             Margin="-10,10,-10,0"
+                             RefreshColor="{x:StaticResource VerdeLume}"
+                             IsRefreshing="{Binding IsRefreshing}">
+                    
+    
+                    <RefreshView.BindingContext>
+                        <vm:NotificationViewModel/>
+                    </RefreshView.BindingContext>
 
-                    <CollectionView.BindingContext>
-                        <vm:NotificationViewModel />
-                    </CollectionView.BindingContext>
+                    <CollectionView x:Name="notificationsViewer"
+                                    Margin="0"
+                                    VerticalScrollBarVisibility="Never"
+                                    ItemsSource="{Binding Notifiche}">
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid ColumnDefinitions="*"
-                                  RowDefinitions="*"
-			                      IsClippedToBounds="True">
 
-                                    <StackLayout Spacing="10">
-                                        <StackLayout Orientation="Horizontal"
-							                         Spacing="10">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <AbsoluteLayout>
+
+                                    <Grid ColumnDefinitions="*"
+                                          RowDefinitions="*"
+                                          AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                          AbsoluteLayout.LayoutFlags="All"
+			                              IsClippedToBounds="True"
+                                          Margin="10,10,10,0">
+
+                                        <StackLayout Spacing="10"
+                                                        Grid.Column="0"
+                                                        Grid.Row="0"
+                                                        Margin="0"
+                                                        Padding="0">
+
+                                            <StackLayout Orientation="Horizontal"
+							                                Spacing="0"
+                                                            Margin="0"
+                                                            Padding="0">
 
 
                                                 <Frame IsClippedToBounds="True"
-                                                       HasShadow="False"
-                                                       HeightRequest="10"
-                                                       WidthRequest="10">
+                                                        HasShadow="False"
+                                                        Padding="0"
+                                                        Margin="0"
+                                                        HeightRequest="45"
+                                                        WidthRequest="45"
+                                                        MinimumHeightRequest="45"
+                                                        MinimumWidthRequest="45"
+                                                        HorizontalOptions="Start"
+                                                        VerticalOptions="CenterAndExpand">
 
                                                     <Frame.Clip>
                                                         <EllipseGeometry RadiusX="22.5"
-                                                                         RadiusY="22.5"
-                                                                         Center="22.5,22.5"/>
+                                                                            RadiusY="22.5"
+                                                                            Center="22.5,22.5"/>
                                                     </Frame.Clip>
                                                     <ffimage:CachedImage Source="{Binding soggetto.sorgenteImmagine}"
-							                                             Margin="-20"
-                                                                         Aspect="AspectFill"/>
+                                                                            Aspect="AspectFill"/>
                                                 </Frame>
 
-                                            <StackLayout Spacing="10">
-                                                <Label Text="{Binding descrizione}" />
+                                                <Label Text="{Binding descrizione}"
+                                                        FontSize="{x:StaticResource LabelSmallFontSize}"
+                                                        VerticalOptions="FillAndExpand"
+                                                        HorizontalOptions="FillAndExpand"/>
+
                                             </StackLayout>
 
+                                            
+                                            <BoxView BackgroundColor="{x:StaticResource GrigioLume}"
+                                                        VerticalOptions="EndAndExpand"
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Margin="10,0,10,0"
+                                                        HeightRequest="2"
+                                                        CornerRadius="3"/>
+
                                         </StackLayout>
-
-                                        <BoxView BackgroundColor="{x:StaticResource GrigioLume}"
-                                                 VerticalOptions="End"
-                                                 Margin="10,0,10,-10"
-                                                 HeightRequest="2"
-                                                 CornerRadius="3"/>
-
-                                    </StackLayout>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
+                                    </Grid>
+                                </AbsoluteLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
                 
-                </CollectionView>
+                    </CollectionView>
+
+                </RefreshView>
             </Grid>
 
             <!--Area notifiche-->
