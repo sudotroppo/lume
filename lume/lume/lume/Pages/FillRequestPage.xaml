@@ -224,8 +224,11 @@
                 </Frame.Clip>
             </Frame>
         </StackLayout>
+
+        
         <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference fillVM}}"
 						   AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
-						   AbsoluteLayout.LayoutFlags="All"/>
+						   AbsoluteLayout.LayoutFlags="All"
+						   />
 	</AbsoluteLayout>
 </templates:ContentTemplatedView>

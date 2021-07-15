@@ -35,7 +35,7 @@ namespace lume.ViewModels
         public ObservableCollection<Richiesta> Posts { get => _Posts; set => SetProperty(ref _Posts, value); }
 
 
-        private ObservableCollection<string> _immagini;
+        private ObservableCollection<string> _immagini = new ObservableCollection<string>();
         public ObservableCollection<string> Immagini { get => _immagini; set => SetProperty(ref _immagini, value); }
 
         public ICommand SendPartecipation { set; get; }
@@ -73,8 +73,8 @@ namespace lume.ViewModels
 
                 if (check)
                 {
-                    Posts.First((r) => r.id.Equals(id)).addCandidato(App.utente);
-                    OnPropertyChanged(nameof(Posts));
+                    Richiesta richiesta = Posts.First((r) => r.id.Equals(id));
+                    richiesta.addCandidato(App.utente);
 
                     mainPage.navigator.Alert("Hai partecipato con successo alla richiesta di aiuto", "", "ok");
 
@@ -82,8 +82,8 @@ namespace lume.ViewModels
                 else
                 {
 
-                    Posts.First((r) => r.id.Equals(id)).addCandidato(App.utente);
-                    OnPropertyChanged(nameof(Posts));
+                    Posts.First((r) => r.id.Equals(id)).removeCandidato(App.utente);
+
                     mainPage.navigator.Alert("Ti sei ritirato dalla richiesta di aiuto", "", "ok");
                 }
             }
@@ -131,7 +131,13 @@ namespace lume.ViewModels
             {
                 SelectedPost = obj;
                 Debug.WriteLine($"immagini = {obj?.immagini}");
-                Immagini = new ObservableCollection<string>(SelectedPost.immagini);
+
+                Immagini.Clear();
+                foreach(string immagine in obj.immagini)
+                {
+                    Immagini.Add(immagine);
+                }
+
                 Popped = true;
 
             }

@@ -31,10 +31,10 @@ namespace lume.Domain
         public DateTime dataCreazione { set; get; }
 
         [JsonPropertyName("immagini")]
-        public List<string> immagini { set; get; }
+        public ObservableCollection<string> immagini { set; get; }
 
         [JsonPropertyName("candidati")]
-        public List<Utente> candidati { set; get; }
+        public ObservableCollection<Utente> candidati { set; get; }
 
 
         [JsonIgnore]
@@ -64,7 +64,7 @@ namespace lume.Domain
         {
             get
             {
-                var result = candidati.Find((u) => u.id == App.utente.id) != null;
+                var result = candidati.ToArray().ToList().Find((u) => u.id == App.utente.id) != null;
                 Debug.WriteLine($"alreadyPicked? {result}");
                 return result;
             }
@@ -126,7 +126,13 @@ namespace lume.Domain
 
         public Richiesta()
         {
-            candidati = new List<Utente>();
+            candidati = new ObservableCollection<Utente>();
+            immagini = new ObservableCollection<string>();
+        }
+
+        public void removeCandidato(Utente utente)
+        {
+            candidati.Remove(utente);
         }
 
         public void addCandidato(Utente candidato)

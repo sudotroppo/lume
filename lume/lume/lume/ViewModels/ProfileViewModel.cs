@@ -12,7 +12,6 @@ namespace lume.ViewModels
 {
     public class ProfileViewModel : BaseViewModel
     {
-
         private bool _isReadOnly;
         public bool IsReadOnly { get => _isReadOnly; set => SetProperty(ref _isReadOnly, value); }
 
@@ -42,13 +41,13 @@ namespace lume.ViewModels
         {
             IsReadOnly = !IsReadOnly;
 
-            if (IsReadOnly)
+            if (!IsReadOnly)
             {
-                ButtonText = "Modifica profilo";
+                ButtonText = "Salva modifiche";
             }
             else
             {
-                ButtonText = "Salva modifiche";
+                ButtonText = "Modifica profilo";
 
                 IsLoading = true;
                 Task.Run(() =>
@@ -62,12 +61,15 @@ namespace lume.ViewModels
                             DataAccess.UploadUserImage(SelectedImage, fileName);
                             App.UpdateUtente();
 
-                            Device.BeginInvokeOnMainThread(() => IsLoading = false);
                             SelectedImage = null;
                             fileName = null;
                         }
+                        Device.BeginInvokeOnMainThread(() => IsLoading = false);
 
-                    }catch(Exception) { }
+                    }catch(Exception)
+                    {
+                        Device.BeginInvokeOnMainThread(() => IsLoading = false);
+                    }
 
                 });
 

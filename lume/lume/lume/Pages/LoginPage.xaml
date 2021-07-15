@@ -91,21 +91,6 @@
 
                 </StackLayout>
 
-                <Label FontSize="{x:StaticResource LabelSmallFontSize}"
-                       Margin="22, 5, 0, 0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="password dimenticata?"
-                                  TextColor="{x:StaticResource VerdeLume}">
-                                <Span.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SendRequest}"
-                                                          CommandParameter="url"/>
-                                </Span.GestureRecognizers>
-                            </Span>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
 
             </StackLayout>
 

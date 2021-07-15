@@ -45,7 +45,8 @@
                                 BindingContext="{Binding CurrentUser}">
 
                     <Label x:Name="ProfileName"
-                           Text="{Binding shortName}"
+                           Margin="8,0,0,0"
+                           Text="Profilo Utente"
                            AbsoluteLayout.LayoutBounds="45,0.5"
                            AbsoluteLayout.LayoutFlags="YProportional"
                            MaxLines="1"/>

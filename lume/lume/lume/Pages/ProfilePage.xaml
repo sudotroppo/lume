@@ -53,18 +53,11 @@
                             AbsoluteLayout.LayoutFlags="SizeProportional">
 
                 <Label x:Name="ProfileName"
-                       Text="{Binding shortName}"
+                       Margin="8,0,0,0"
                        AbsoluteLayout.LayoutBounds="45,0.5"
                        AbsoluteLayout.LayoutFlags="YProportional"
-                       MaxLines="1">
-
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{x:Binding FieldValue, Source={x:Reference infoNome}}"/>
-                            <Span Text=" "/>
-                            <Span Text="{x:Binding FieldValue, Source={x:Reference infoCognome}}"/>
-                        </FormattedString>
-                    </Label.FormattedText>
+                       MaxLines="1"
+                       Text="Profilo Utente">
                 </Label>
 
                 <Label x:Name="BackgroundBoxView"
@@ -116,7 +109,8 @@
                            HeightRequest="30"
                            WidthRequest="30"
                            IsClippedToBounds="True"
-                           BackgroundColor="{x:StaticResource NeroLume}">
+                           BackgroundColor="{x:StaticResource NeroLume}"
+                           IsVisible="{Binding IsReadOnly, Source={Reference infoNome}, Converter={x:StaticResource invBool}}">
 
                         <Frame.Clip>
                             <EllipseGeometry RadiusX="15"
@@ -130,7 +124,6 @@
                                 FontFamily="{x:StaticResource IconSolid}"
                                 FontSize="{x:StaticResource LabelSmallFontSize}"
                                 BackgroundColor="LightGray"
-                                IsEnabled="{Binding IsReadOnly, Source={x:Reference profileVM}, Converter={x:StaticResource invBool}}"
                                 TextColor="{x:StaticResource Nero}"
                                 Command="{Binding SelectUserImageCommand, Source={Reference profileVM}}"
                                 CommandParameter="{x:Reference ImmagineUtente}"
@@ -196,6 +189,7 @@
                             TextColor="{Binding IsReadOnly, Converter={StaticResource buttonTextSwitch}}"
                             FontAttributes="Bold"
                             BindingContext="{x:Reference profileVM}"
+                            IsEnabled="{Binding IsLoading, Converter={x:StaticResource invBool}}"
                             Text="{Binding ButtonText}"
                             BackgroundColor = "{Binding IsReadOnly, Converter={StaticResource buttonColorSwitch}}"
                             Command="{Binding SwitchStateCommand}"/>
@@ -233,6 +227,10 @@
 
         </Grid>
 
+        <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference profileVM}}"
+                           AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+                           AbsoluteLayout.LayoutFlags="All"
+                           Color="{x:StaticResource VerdeLume}"/>
 
     </AbsoluteLayout>
 
