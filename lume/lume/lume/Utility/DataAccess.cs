@@ -81,7 +81,6 @@ namespace lume.Utility
 
         public static bool ExistsUtente(string email)
         {
-            DataAccess.RefreshToken();
 
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
             var request = new RestRequest("/public/utente/exists", Method.GET)

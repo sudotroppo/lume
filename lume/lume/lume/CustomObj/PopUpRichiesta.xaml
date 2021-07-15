@@ -92,8 +92,7 @@
                             IsClippedToBounds="True"
                             HorizontalOptions="StartAndExpand"
                             VerticalOptions="EndAndExpand"
-                            BackgroundColor="Transparent"
-                            IsVisible="{Binding isTheOwner, Converter={x:StaticResource inverseBoolConverter}}">
+                            BackgroundColor="Transparent">
 
                         <Button Text="&#xf4c4;"
                                 Margin="0"
@@ -133,7 +132,8 @@
                             <DataTemplate> 
                                 <Grid Margin="0"
                                       Padding="0"
-                                      WidthRequest="{Binding Width, Source={x:Reference collection}}">
+                                      WidthRequest="{Binding Width, Source={x:Reference collection}}"
+                                      HeightRequest="{Binding Height, Source={x:Reference collection}}">
                                     <Image Source="{Binding .}"
                                            Aspect="AspectFill"/>
 

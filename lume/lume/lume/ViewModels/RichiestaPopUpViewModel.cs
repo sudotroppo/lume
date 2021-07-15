@@ -75,14 +75,14 @@ namespace lume.ViewModels
                 {
                     Richiesta richiesta = Posts.First((r) => r.id.Equals(id));
                     richiesta.addCandidato(App.utente);
-
                     mainPage.navigator.Alert("Hai partecipato con successo alla richiesta di aiuto", "", "ok");
 
                 }
                 else
                 {
 
-                    Posts.First((r) => r.id.Equals(id)).removeCandidato(App.utente);
+                    Richiesta richiesta = Posts.First((r) => r.id.Equals(id));
+                    richiesta.removeCandidato(App.utente);
 
                     mainPage.navigator.Alert("Ti sei ritirato dalla richiesta di aiuto", "", "ok");
                 }
@@ -129,7 +129,6 @@ namespace lume.ViewModels
 
             if (!Popped)
             {
-                SelectedPost = obj;
                 Debug.WriteLine($"immagini = {obj?.immagini}");
 
                 Immagini.Clear();
@@ -138,6 +137,12 @@ namespace lume.ViewModels
                     Immagini.Add(immagine);
                 }
 
+                if(Immagini.Count == 0)
+                {
+                    Immagini.Add("uploadImage.png");
+                }
+                OnPropertyChanged(nameof(Immagini));
+                SelectedPost = obj;
                 Popped = true;
 
             }

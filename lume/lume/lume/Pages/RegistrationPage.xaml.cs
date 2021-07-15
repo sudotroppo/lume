@@ -64,7 +64,9 @@ namespace lume.Pages
 
 
                 await Task.Run(() => DataAccess.NewUtente(u));
+
                 await nav.DisplayAlert("Congratulazioni", "registrazione avvenuta con successo", "ok");
+                await Navigation.PopAsync(false);
             }
             catch(Exception)
             {
@@ -73,7 +75,6 @@ namespace lume.Pages
 
             }
 
-            await Navigation.PopAsync(false);
         }
 
         public async void GoBack(object sender, EventArgs e)

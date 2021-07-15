@@ -7,10 +7,12 @@ using lume.Utility;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using System.Linq;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace lume.Domain
 {
-    public class Richiesta
+    public class Richiesta : INotifyPropertyChanged
     {
         [JsonPropertyName("id")]
         public long id { set; get; }
@@ -35,6 +37,16 @@ namespace lume.Domain
 
         [JsonPropertyName("candidati")]
         public ObservableCollection<Utente> candidati { set; get; }
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
 
 
         [JsonIgnore]

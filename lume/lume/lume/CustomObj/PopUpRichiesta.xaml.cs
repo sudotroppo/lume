@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -8,8 +10,9 @@ namespace lume.CustomObj
 {
     
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopUpRichiesta : ContentView
+    public partial class PopUpRichiesta : ContentView, INotifyPropertyChanged
     {
+
         public static readonly BindableProperty IsPoppedProperty =
             BindableProperty.Create(
                 propertyName: nameof(IsPopped),
@@ -18,6 +21,7 @@ namespace lume.CustomObj
                 defaultValue: false,
                 defaultBindingMode: BindingMode.OneWay,
                 propertyChanged: IsPoppedPropertyChanged);
+
 
         private static void IsPoppedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
