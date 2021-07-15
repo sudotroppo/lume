@@ -146,19 +146,10 @@ namespace lume.CustomObj
             }
             catch (Exception)
             {
-                ((Application.Current.MainPage as CustomNavigationPage).CurrentPage as MainPage).navigator
-                    .Alert("si è verificato un probleme, riprovare più tardi", "", "ok");
+                nav.Alert("si è verificato un probleme, riprovare più tardi", "", "ok");
                 return false;
             }
         }
-
-        private Command ToTheLoginPage = new Command(async () =>
-        {
-            await SecureStorage.SetAsync("token", " ");
-            await SecureStorage.SetAsync("email", " ");
-
-            await (Application.Current.MainPage as CustomNavigationPage).Navigation.PopAsync();
-        });
 
         private Navigator nav = ((Application.Current.MainPage as CustomNavigationPage).CurrentPage as MainPage).navigator;
 
@@ -173,12 +164,17 @@ namespace lume.CustomObj
                     DataAccess.DeleteUtente();
 
 
-                    nav.Alert("il tuo account è stato eliminato con successo", "", ToTheLoginPage, "ok", null);
 
-                    Device.BeginInvokeOnMainThread(() =>
+                    Device.BeginInvokeOnMainThread( async () =>
                     {
                         IsLoading = false;
                         IsPopped = false;
+
+                        await SecureStorage.SetAsync("token", " ");
+                        await SecureStorage.SetAsync("email", " ");
+                        await Application.Current.MainPage.DisplayAlert("il tuo account è stato eliminato con successo", "", "ok");
+
+                        await (Application.Current.MainPage as CustomNavigationPage).Navigation.PopAsync();
 
                     });
 
