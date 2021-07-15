@@ -32,8 +32,8 @@ namespace lume.Domain
         [JsonPropertyName("dataCreazione")]
         public DateTime dataCreazione { set; get; }
 
-        [JsonPropertyName("immagini")]
-        public ObservableCollection<string> immagini { set; get; }
+        [JsonPropertyName("immagine")]
+        public string immagine { set; get; }
 
         [JsonPropertyName("candidati")]
         public ObservableCollection<Utente> candidati { set; get; }
@@ -48,15 +48,6 @@ namespace lume.Domain
         }
 
 
-
-        [JsonIgnore]
-        public bool isNonVuoto
-        {
-            get
-            {
-                return immagini.Count > 0;
-            }
-        }
 
 
         [JsonIgnore]
@@ -135,11 +126,24 @@ namespace lume.Domain
             }
         }
 
+        [JsonIgnore]
+        public ImageSource sorgenteImmagine
+        {
+            get
+            {
+                if (immagine == null || "".Equals(immagine))
+                {
+                    return ImageSource.FromFile("uploadImage.png");
+
+                }
+
+                return ImageSource.FromUri(new Uri(immagine));
+            }
+        }
 
         public Richiesta()
         {
             candidati = new ObservableCollection<Utente>();
-            immagini = new ObservableCollection<string>();
         }
 
         public void removeCandidato(Utente utente)

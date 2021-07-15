@@ -155,13 +155,14 @@ namespace lume.CustomObj
         {
             IsLoading = true;
 
-            if(Password == null)
-            {
-                nav.Alert("Immetti la password", "", "ok");
-            }
-
             Task.Run(() =>
             {
+
+                if (Password == null)
+                {
+                    nav.Alert("Immetti la password", "", "ok");
+                }
+
                 if (!"".Equals(Password) && CheckUserPassword())
                 {
                     DataAccess.DeleteUtente();
@@ -173,8 +174,8 @@ namespace lume.CustomObj
                         IsLoading = false;
                         IsPopped = false;
 
-                        await SecureStorage.SetAsync("token", " ");
-                        await SecureStorage.SetAsync("email", " ");
+                        await SecureStorage.SetAsync("token", "");
+                        await SecureStorage.SetAsync("email", "");
                         await Application.Current.MainPage.DisplayAlert("Il tuo account è stato eliminato con successo", "", "ok");
 
                         await (Application.Current.MainPage as CustomNavigationPage).Navigation.PopAsync();

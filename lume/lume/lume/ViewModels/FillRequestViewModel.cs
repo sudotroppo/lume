@@ -11,6 +11,7 @@ using lume.Utility;
 using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using System.Windows.Input;
 
 namespace lume.ViewModels
 {
@@ -18,7 +19,6 @@ namespace lume.ViewModels
     {
 
         private readonly int MAX_REQUESTED_PEOPLE = 10;
-        private readonly int MAX_IMAGES = 10;
 
         private readonly ImageSource DefaultImageSource = ImageSource.FromFile("uploadImage.png");
 
@@ -28,12 +28,12 @@ namespace lume.ViewModels
         private Richiesta _richiesta = new Richiesta() { numeroPartecipanti = 1};
         public Richiesta Richiesta { get => _richiesta; set => SetProperty(ref _richiesta, value); }
 
-        private Dictionary<string, Stream> _imagesStream = new Dictionary<string, Stream>();
+        private KeyValuePair<string, Stream> _imageStream = new KeyValuePair<string, Stream>();
 
-        private ObservableRangeCollection<ImageSource> _images;
-        public ObservableRangeCollection<ImageSource> Images { get => _images; set => SetProperty(ref _images, value); }
+        private ImageSource _immagine = ImageSource.FromFile("uploadImage.png");
+        public ImageSource Immagine { get => _immagine; set => SetProperty(ref _immagine, value); }
 
-        private Image _selectedImage = null;
+        private Image _selectedImage = new Image();
         public Image SelectedImage { get => _selectedImage; set => SetProperty(ref _selectedImage, value); }
 
 
@@ -44,20 +44,17 @@ namespace lume.ViewModels
             set => SetProperty(ref _numeroPartecipanti, value, "NumeroPartecipanti", () => _richiesta.numeroPartecipanti = value);
         }
 
-        private int ImagesCount = 0;
 
-        public Command SendRequestCommand { get; private set; }
-        public Command IncreaseCommand { get; private set; }
-        public Command DecreaseCommand { get; private set; }
-        public Command AddImageFromCameraCommand { get; private set; }
-        public Command AddImageFromGalleryCommand { get; private set; }
-        public Command RemoveImageCommand { get; private set; }
-        public Command<Image> SelectImageCommand { get; private set; }
+        public ICommand SendRequestCommand { get; private set; }
+        public ICommand IncreaseCommand { get; private set; }
+        public ICommand DecreaseCommand { get; private set; }
+        public ICommand AddImageFromCameraCommand { get; private set; }
+        public ICommand AddImageFromGalleryCommand { get; private set; }
+        public ICommand RemoveImageCommand { get; private set; }
+        public ICommand SelectImageCommand { get; private set; }
 
         public FillRequestViewModel()
         {
-            Images = new ObservableRangeCollection<ImageSource>();
-            Images.Add(DefaultImageSource);
             SendRequestCommand = new Command(OnSendRequest);
             IncreaseCommand = new Command(OnIncreas);
             DecreaseCommand = new Command(OnDecrease);
@@ -70,7 +67,7 @@ namespace lume.ViewModels
 
         private void OnSelectedImage(Image obj)
         {
-            if (obj.Source.Equals(DefaultImageSource))
+            if (obj == null || DefaultImageSource.Equals(obj.Source) )
             {
                 return;
             }
@@ -103,7 +100,7 @@ namespace lume.ViewModels
             if(Richiesta.descrizione == null || Richiesta.titolo == null
                 || Richiesta.titolo.Trim().Equals("") || Richiesta.titolo.Trim().Equals(""))
             {
-
+                navigator.Alert("Devi riempire i campi prima di inviare una richiesta di aiuto", "", "ok");
                 return;
             }
 
@@ -115,25 +112,17 @@ namespace lume.ViewModels
 
                 Richiesta = new Richiesta { numeroPartecipanti = 1 };
                 NumeroPartecipanti = 1;
-                List<Task> tasks = new List<Task>(Images.Count);
-                int i = 0;
-                foreach (KeyValuePair<string, Stream> keyValuePair in _imagesStream)
+
+                if (!DefaultImageSource.Equals(Immagine))
                 {
-                    
-                    var t = Task.Run(() =>
+                    await Task.Run(() =>
                     {
-                        Debug.Write($"i = {i}");
-                        DataAccess.UploadRequestImage(keyValuePair.Value, keyValuePair.Key, id_richiesta);
+                        DataAccess.UploadRequestImage(_imageStream.Value, _imageStream.Key, id_richiesta);
                     });
 
-                    tasks.Add(t);
-                    i++;
+                    Immagine = DefaultImageSource;
+
                 }
-
-                Task.WaitAll(tasks.ToArray());
-
-                Images.Clear();
-                Images.Add(DefaultImageSource);
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -162,45 +151,42 @@ namespace lume.ViewModels
 
         public async void AddImageFromCamera()
         {
-            if (ImagesCount <= MAX_IMAGES)
+            try
             {
-                try
+
+                Debug.WriteLine("Apro la fotocamera");
+                if (MediaPicker.IsCaptureSupported)
                 {
-
-                    Debug.WriteLine("Apro la fotocamera");
-                    if (MediaPicker.IsCaptureSupported)
+                    var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions
                     {
-                        var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions
-                        {
-                            Title = "Scatta una foto"
-                        });
+                        Title = "Scatta una foto"
+                    });
 
-                        if (result != null)
-                        {
-                            Stream stream = await result.OpenReadAsync();
+                    if (result != null)
+                    {
+                        Stream stream = await result.OpenReadAsync();
 
-                            string fileName = $"{DateTime.Now.GetHashCode()}.jpg";
-                            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                            Debug.WriteLine($"fileName = {fileName}, filePath = {filePath}");
+                        string fileName = $"{DateTime.Now.GetHashCode()}.jpg";
+                        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                        Debug.WriteLine($"fileName = {fileName}, filePath = {filePath}");
 
-                            Debug.WriteLine("Aggiungo l'immagine");
-                            FileUtility.SaveStreamAsFile(filePath, stream, fileName);
+                        Debug.WriteLine("Aggiungo l'immagine");
+                        FileUtility.SaveStreamAsFile(filePath, stream, fileName);
 
-                            AddImage(filePath + "/" + fileName);
-                            _imagesStream.Add(fileName, stream);
+                        SetImage(filePath + "/" + fileName);
+                        _imageStream = new KeyValuePair<string, Stream>(fileName, stream);
 
-                        }
                     }
-
                 }
-                catch (Exception) { }
+
             }
+            catch (Exception) { }
         }
 
 
         public async void AddImageFromGallery()
         {
-            if(Images.Count <= MAX_IMAGES)
+            if(Immagine != null)
             {
                 try
                 {
@@ -215,8 +201,8 @@ namespace lume.ViewModels
                         string fileFullPath = result.FullPath;
 
                         Debug.WriteLine("aggiungo l'immagine");
-                        AddImage(fileFullPath);
-                        _imagesStream.Add(result.FileName, await result.OpenReadAsync());
+                        SetImage(fileFullPath);
+                        _imageStream = new KeyValuePair<string, Stream>(result.FileName, await result.OpenReadAsync());
 
                     }
 
@@ -228,31 +214,21 @@ namespace lume.ViewModels
         }
 
 
-        private void AddImage(string fileName)
+        private void SetImage(string fileName)
         {
-
-            if (Images.Contains(DefaultImageSource))
-            {
-                Images.Remove(DefaultImageSource);
-            }
-
-            Images.Add(ImageSource.FromFile(fileName));
+            Immagine = ImageSource.FromFile(fileName);
 
         }
 
         public void RemoveImage()
         {
-            if(SelectedImage != null && Images.Count > 0)
+            if(SelectedImage != null && Immagine != null)
             {
                 Debug.WriteLine("rimuovo l'immagine");
-                Images.Remove(SelectedImage.Source);
+                Immagine = null;
                 SelectedImage.ScaleTo(1, 200, Easing.CubicInOut);
                 SelectedImage = null;
-
-                if(Images.Count == 0)
-                {
-                    Images.Add(DefaultImageSource);
-                }
+                Immagine = DefaultImageSource;
 
             }
         }

@@ -27,33 +27,20 @@
 			<StackLayout BindingContext="{Binding Richiesta, Source={x:Reference fillVM}}">
                 
                 <!-- sezione per selezione immagine -->
-				<CarouselView HorizontalOptions="FillAndExpand"
-							  VerticalOptions="Start"
-							  HeightRequest="240"
-							  Margin="0,0,0,5"
-							  BackgroundColor="{x:StaticResource GrigioLume}"
-							  Loop="False"
-							  ItemsSource="{Binding Images, Source={x:Reference fillVM}}">
+				<Image HorizontalOptions="FillAndExpand"
+						x:Name="img"
+						VerticalOptions="Start"
+						HeightRequest="240"
+						Margin="0,0,0,5"
+						BackgroundColor="{x:StaticResource GrigioLume}"
+						Source="{Binding Immagine, Source={x:Reference fillVM}}">
 
-					<CarouselView.ItemsLayout>
-						<LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
-					</CarouselView.ItemsLayout>
+					<Image.GestureRecognizers>
+						<TapGestureRecognizer Command="{Binding SelectImageCommand, Source={x:Reference fillVM}}"
+										      CommandParameter="{x:Reference img}"/>
+					</Image.GestureRecognizers>
 
-					<CarouselView.ItemTemplate>
-						<DataTemplate>
-								<Image Source="{Binding .}"
-													 x:Name="img"
-													 Aspect="AspectFit">
-									<Image.GestureRecognizers>
-										<TapGestureRecognizer Command="{Binding SelectImageCommand, Source={x:Reference fillVM}}"
-															  CommandParameter="{x:Reference img}"/>
-									</Image.GestureRecognizers>
-								</Image>
-
-						</DataTemplate>
-					</CarouselView.ItemTemplate>
-
-				</CarouselView>
+				</Image>
 
 				<StackLayout Orientation="Horizontal"
 							 HorizontalOptions="Center"

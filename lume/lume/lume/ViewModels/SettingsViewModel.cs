@@ -51,6 +51,7 @@ namespace lume.ViewModels
         {
             Debug.WriteLine("OnLogout");
             SecureStorage.SetAsync("token", "");
+            SecureStorage.SetAsync("email", "");
 
             App.utente = null;
 

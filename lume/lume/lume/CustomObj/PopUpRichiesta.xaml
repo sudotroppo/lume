@@ -87,12 +87,13 @@
                                  Orientation="Horizontal">
 
                         <Frame WidthRequest="30"
-                            HeightRequest="30"
-                            Padding="0"
-                            IsClippedToBounds="True"
-                            HorizontalOptions="StartAndExpand"
-                            VerticalOptions="EndAndExpand"
-                            BackgroundColor="Transparent">
+                               HeightRequest="30"
+                               Padding="0"
+                               IsClippedToBounds="True"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="EndAndExpand"
+                               BackgroundColor="Transparent"
+                               IsVisible="{Binding isTheOwner, Converter={x:StaticResource inverseBoolConverter}}">
 
                         <Button Text="&#xf4c4;"
                                 Margin="0"
@@ -118,30 +119,14 @@
                                FontSize="{x:StaticResource LabelSmallFontSize}"
                                Text="{Binding data}"/>
 
-
                     </StackLayout>
-                    <CollectionView ItemsSource="{Binding Immagini, Source={RelativeSource AncestorType={x:Type vm:RichiestaPopUpViewModel}}}"
-                                    Margin="-20,0,-20,0"
-                                    x:Name="collection"
-                                    IsVisible="{Binding isNonVuoto}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal"/>
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate> 
-                                <Grid Margin="0"
-                                      Padding="0"
-                                      WidthRequest="{Binding Width, Source={x:Reference collection}}"
-                                      HeightRequest="{Binding Height, Source={x:Reference collection}}">
-                                    <Image Source="{Binding .}"
-                                           Aspect="AspectFill"/>
-
-                                </Grid>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-                    </CollectionView>
+                    
+                    <ffimage:CachedImage Source="{Binding sorgenteImmagine}"
+                                        Margin="-20,0,-20,0"
+                                        Aspect="AspectFill"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"/>
+                   
 
 
                 </StackLayout>

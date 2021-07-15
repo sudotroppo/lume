@@ -16,10 +16,10 @@ namespace lume.ViewModels
     {
 
 
-        private Richiesta _SelectedPost = new Richiesta() { creatore = new Utente()};
+        private Richiesta _SelectedPost = new Richiesta() { creatore = new Utente() };
         public Richiesta SelectedPost { get => _SelectedPost; set => SetProperty(ref _SelectedPost, value); }
 
-        private bool _IsRefreshing;
+        private bool _IsRefreshing = false;
         public bool IsRefreshing { get => _IsRefreshing; set => SetProperty(ref _IsRefreshing, value); }
 
         private bool _popped = false;
@@ -31,12 +31,8 @@ namespace lume.ViewModels
         private SelectionMode _selectionMode = SelectionMode.None;
         public SelectionMode SelectionMode { get => _selectionMode; set => SetProperty(ref _selectionMode, value); }
 
-        private ObservableCollection<Richiesta> _Posts;
+        private ObservableCollection<Richiesta> _Posts = new ObservableCollection<Richiesta>();
         public ObservableCollection<Richiesta> Posts { get => _Posts; set => SetProperty(ref _Posts, value); }
-
-
-        private ObservableCollection<string> _immagini = new ObservableCollection<string>();
-        public ObservableCollection<string> Immagini { get => _immagini; set => SetProperty(ref _immagini, value); }
 
         public ICommand SendPartecipation { set; get; }
 
@@ -129,19 +125,7 @@ namespace lume.ViewModels
 
             if (!Popped)
             {
-                Debug.WriteLine($"immagini = {obj?.immagini}");
 
-                Immagini.Clear();
-                foreach(string immagine in obj.immagini)
-                {
-                    Immagini.Add(immagine);
-                }
-
-                if(Immagini.Count == 0)
-                {
-                    Immagini.Add("uploadImage.png");
-                }
-                OnPropertyChanged(nameof(Immagini));
                 SelectedPost = obj;
                 Popped = true;
 
