@@ -18,6 +18,7 @@ namespace lume.ViewModels
 
         public ICommand RichiediRimozioneCommand { get; private set; }
         public ICommand RemoveRichiestaCommand { get; private set; }
+        public ICommand RefreshPage { get; private set; }
 
         public long IdRichiesta { private set; get; }
 
@@ -25,6 +26,7 @@ namespace lume.ViewModels
         {
             RichiediRimozioneCommand = new Command<long>(RichiediRimozione);
             RemoveRichiestaCommand = new Command(OnRemoveRichiesta);
+            RefreshPage = new Command(OnRefresh);
 
             Task.Run(() =>
             {
@@ -33,6 +35,16 @@ namespace lume.ViewModels
                 
             });
 
+        }
+
+        public void OnRefresh()
+        {
+            IsRefreshing = true;
+            Task.Run(() =>
+            {
+                Posts = new ObservableCollection<Richiesta>(DataAccess.GetRichiesteUtente());
+                Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+            });
         }
 
 

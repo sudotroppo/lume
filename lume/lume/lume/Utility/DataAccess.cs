@@ -33,7 +33,7 @@ namespace lume.Utility
 
             TokenResponse token = JsonSerializer.Deserialize<TokenResponse>(response.Content);
 
-            SecureStorage.SetAsync("token", token.token);
+            //SecureStorage.SetAsync("token", token.token);
         }
 
         public static Boolean PartecipaAProposta(long id_richiesta)
@@ -77,6 +77,29 @@ namespace lume.Utility
             return token;
         }
 
+        
+
+        public static bool ExistsUtente(string email)
+        {
+            DataAccess.RefreshToken();
+
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/public/utente/exists", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddParameter("email", email);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+            bool result = JsonSerializer.Deserialize<bool>(response.Content);
+
+            return result;
+        }
+
         public static Utente GetUtenteByEmail(string email)
         {
             DataAccess.RefreshToken();
@@ -105,11 +128,14 @@ namespace lume.Utility
         public static void NewUtente(Utente utente)
         {
             var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
-            var request = new RestRequest("/public/regist", Method.POST);
-            request.Timeout = App.requestTimeout;
+            var request = new RestRequest("/public/regist", Method.POST)
+            {
+                Timeout = App.requestTimeout
+            };
 
             request.AddQueryParameter("nome", utente.nome);
             request.AddQueryParameter("cognome", utente.cognome);
+            request.AddQueryParameter("citta", utente.citta);
             request.AddQueryParameter("email", utente.email);
             request.AddQueryParameter("telefono", utente.telefono);
             request.AddQueryParameter("immagine", utente.immagine);
@@ -118,6 +144,62 @@ namespace lume.Utility
             Debug.WriteLine($"--------{client.BuildUri(request)}--------");
 
             IRestResponse response = client.Execute(request);
+        }
+
+        public static bool CheckPassword(string pwd)
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/protected/utente/check", Method.GET)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            request.AddQueryParameter("password", pwd);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+
+            bool result = JsonSerializer.Deserialize<bool>(response.Content);
+
+            return result;
+        }
+
+        public static void NewPassword(string newPassword)
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/protected/utente/change/password", Method.PUT)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            request.AddQueryParameter("password", newPassword);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
+        }
+
+        public static void DeleteUtente()
+        {
+            var client = new RestSharp.RestClient(Constants.API_ENDPOINT);
+            var request = new RestRequest("/protected/utente", Method.DELETE)
+            {
+                Timeout = App.requestTimeout
+            };
+
+            request.AddHeader(Constants.AUTHENTICATION_HEADER, App.token);
+
+            Debug.WriteLine($"--------{client.BuildUri(request)}--------");
+
+            IRestResponse response = client.Execute(request);
+
         }
 
         public static void UpdateUtente(Utente utente)

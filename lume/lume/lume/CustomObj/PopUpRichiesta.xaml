@@ -10,7 +10,7 @@
              TranslationY="{x:Binding Height, Source={RelativeSource Mode=Self}}">
     <ContentView.Content>
         <Grid Padding="0,0,0,0"
-              BindingContext="{Binding SelectedPost}"
+              BindingContext="{Binding SelectedPost, Source={RelativeSource AncestorType={x:Type vm:RichiestaPopUpViewModel}}}"
               x:Name="mainLayout">
 
             <Frame HasShadow="False"
@@ -44,9 +44,9 @@
                         </Frame.Clip>
 
                         <ffimage:CachedImage WidthRequest="45"
-                                HeightRequest="45"
-                                Aspect="AspectFill"
-                                Source="{Binding creatore.sorgenteImmagine}"/>
+                                             HeightRequest="45"
+                                             Aspect="AspectFill"
+                                             Source="{Binding creatore.sorgenteImmagine}"/>
                     </Frame>
 
 
@@ -101,7 +101,7 @@
                                 FontFamily="{x:StaticResource IconSolid}"
                                 FontSize="{x:StaticResource LabelSmallFontSize}"
                                 TextColor="{Binding alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
-                                Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
+                                Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:RichiestaPopUpViewModel}}}"
                                 CommandParameter="{x:Binding id}"
                                 BackgroundColor="Transparent"/>
 
@@ -122,17 +122,20 @@
 
                     </StackLayout>
                     <CarouselView ItemsSource="{Binding immagini}"
+                                  Loop="False"
                                   Margin="-20,0,-20,0"
-                                  VerticalOptions="EndAndExpand"
-                                  HorizontalOptions="CenterAndExpand"
-                                  Loop="False">
+                                  IsVisible="{Binding isNonVuoto}">
                         <CarouselView.ItemsLayout>
                             <LinearItemsLayout Orientation="Horizontal"/>
                         </CarouselView.ItemsLayout>
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
-                                <ffimage:CachedImage Source="{Binding .}" Aspect="AspectFit"/>
+                                <Grid Margin="0" Padding="0">
+                                    <Image Source="{Binding .}"
+                                           Aspect="AspectFill"/>
+
+                                </Grid>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
 

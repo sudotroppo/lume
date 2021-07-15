@@ -5,6 +5,8 @@ using Xamarin.Forms.Platform.Android;
 using lume;
 using Android.Content;
 using Android.Graphics.Drawables;
+using Android.Util;
+using System;
 
 [assembly: ExportRenderer(typeof(LumEditor), typeof(CustomEditorRenderer))]
 namespace lume.Droid.Renderers
@@ -24,7 +26,6 @@ namespace lume.Droid.Renderers
 
         private void BorderSet(LumEditor customEditor)
         {
-
             var gradientDrawable = new GradientDrawable();
 
             gradientDrawable.SetCornerRadius(customEditor.CornerRadius * 2);
@@ -33,6 +34,7 @@ namespace lume.Droid.Renderers
 
             Control.Background = this.Resources.GetDrawable(Resource.Drawable.customEntry);
             Control.SetPadding(50, Control.PaddingTop, 35, Control.PaddingBottom);
+
         }
     }
 }

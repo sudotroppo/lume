@@ -78,14 +78,12 @@ namespace lume.Domain
         {
             get
             {
-                var full = $"{nome} {cognome}";
-
-                if (full.Length >= 20)
+                if(nome.Length > 25)
                 {
-                    return $"{nome} {cognome[0]}";
-                }
+                    return StringExt.Truncate($"{nome} {cognome}", 25) + "...";
 
-                return full;
+                }
+                return nome;
             }
         }
 

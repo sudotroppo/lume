@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
+using lume.Utility;
+using Xamarin.Forms;
+using Xamarin.Forms.Internals;
+using System.Linq;
 
 namespace lume.Domain
 {
@@ -27,10 +31,20 @@ namespace lume.Domain
         public DateTime dataCreazione { set; get; }
 
         [JsonPropertyName("immagini")]
-        public ObservableCollection<string> immagini { set; get; }
+        public List<string> immagini { set; get; }
 
         [JsonPropertyName("candidati")]
         public List<Utente> candidati { set; get; }
+
+
+        [JsonIgnore]
+        public bool isNonVuoto
+        {
+            get
+            {
+                return immagini.Count > 0;
+            }
+        }
 
 
         [JsonIgnore]
@@ -90,6 +104,22 @@ namespace lume.Domain
                 }
 
                 return dataCreazione.ToString("dd/MM/yyyy");
+            }
+        }
+
+
+        [JsonIgnore]
+        public string shortDescrizione
+        {
+            get
+            {
+                if(descrizione.Length > 37)
+                {
+                    return StringExt.Truncate(descrizione, 37) + "...";
+
+                }
+
+                return descrizione;
             }
         }
 

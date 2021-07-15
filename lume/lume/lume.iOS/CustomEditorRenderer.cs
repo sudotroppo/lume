@@ -1,4 +1,5 @@
-﻿using CoreGraphics;
+﻿using System;
+using CoreGraphics;
 using lume.CustomObj;
 using lume.iOS.Renderers;
 using UIKit;
@@ -18,8 +19,17 @@ namespace lume.iOS.Renderers
             LumEditor customEditor = (LumEditor)e.NewElement;
             if (customEditor != null)
             {
-                //TintCustomization(Control);
-                BorderSet(Control, customEditor);
+                var view = customEditor;
+
+                Control.KeyboardAppearance = UIKeyboardAppearance.Dark;
+                Control.ReturnKeyType = UIReturnKeyType.Done;
+                // Radius for the curves  
+                Control.Layer.CornerRadius = Convert.ToSingle(view.CornerRadius);
+                // Thickness of the Border Color  
+                Control.Layer.BorderColor = view.BorderColor.ToCGColor();
+                // Thickness of the Border Width  
+                Control.Layer.BorderWidth = view.BorderWidth;
+                Control.ClipsToBounds = true;
             }
         }
 

@@ -8,6 +8,7 @@ using Amazon;
 using lume.Domain;
 using System.Threading.Tasks;
 using lume.Assets;
+using lume.CustomObj;
 
 namespace lume.Pages
 {
@@ -22,6 +23,13 @@ namespace lume.Pages
 
         public async void SignUp(object sender, EventArgs e)
         {
+            var nav = (Application.Current.MainPage as CustomNavigationPage);
+
+            if (DataAccess.ExistsUtente(Email_reg.Text.Trim()))
+            {
+                await nav.CurrentPage.DisplayAlert("Email!", "errore, questa mail è già in uso", "ok");
+                return;
+            }
 
             bool condNome = "".Equals(Nome_reg.Text) || Nome_reg.Text == null;
             bool condCognome = "".Equals(Cognome_reg.Text) || Cognome_reg.Text == null;
@@ -33,12 +41,14 @@ namespace lume.Pages
             {
                 _ = condNome ? Animations.ShakeAnimate(Nome_reg) : null;
                 _ = condCognome ? Animations.ShakeAnimate(Cognome_reg) : null;
-                _ = condPassword ? Animations.ShakeAnimate(Email_reg) : null;
-                _ = condEmail ? Animations.ShakeAnimate(Cognome_reg) : null;
+                _ = condEmail ? Animations.ShakeAnimate(Email_reg) : null;
                 _ = condCitta ? Animations.ShakeAnimate(Citta_reg) : null;
+                _ = condPassword ? Animations.ShakeAnimate(Password_reg) : null;
 
                 return;
             }
+
+
 
             Utente u = new Utente()
             {
@@ -48,8 +58,18 @@ namespace lume.Pages
                 email = Email_reg.Text?.Trim(),
                 telefono = Telefono_reg.Text?.Trim()
             };
+            try
+            {
+                await Task.Run(() => DataAccess.NewUtente(u));
+                await nav.DisplayAlert("Congratulazioni", "registrazione avvenuta con successo", "ok");
 
-            await Task.Run(() => DataAccess.NewUtente(u));
+            }
+            catch(Exception)
+            {
+
+                await nav.DisplayAlert("Errore", "C'è stato un errore di connessione, si prega di riprovare più tardi", "ok");
+
+            }
 
             await Navigation.PopAsync(false);
         }

@@ -14,13 +14,28 @@ namespace lume.ViewModels
     public class PartecipationViewModel : RichiestaPopUpViewModel
     {
 
+        public ICommand RefreshPage { get; private set; }
+
         public PartecipationViewModel()
         {
+            RefreshPage = new Command(OnRefresh);
             Task.Run(() =>
             {
                 Debug.WriteLine("Le mie richieste");
                 Posts = new ObservableCollection<Richiesta>(DataAccess.GetPartecipazioniUtente());
                 
+            });
+
+        }
+
+        
+        public void OnRefresh()
+        {
+            IsRefreshing = true;
+            Task.Run(() =>
+            {
+                Posts = new ObservableCollection<Richiesta>(DataAccess.GetPartecipazioniUtente());
+                Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
             });
 
         }

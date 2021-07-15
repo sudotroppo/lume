@@ -57,20 +57,30 @@ namespace lume.Pages
                         
                     });
 
+
+                    activity.IsRunning = false;
+
                     if (result)
                     {
                         await App.GetStorageInfo();
 
                         await Navigation.PushAsync(new MainPage(), false);
                     }
+                    else
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Errore di autenticazione", "Password o email errate", "ok");
 
-                    activity.IsRunning = false;
+                        _ = Animations.ShakeAnimate(Email);
+                        _ = Animations.ShakeAnimate(Password);
+                    }
+
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
 
                     activity.IsRunning = false;
+                    await Application.Current.MainPage.DisplayAlert("Errore di autenticazione", "Password o email errate", "ok");
 
                     _ = Animations.ShakeAnimate(Email);
                     _ = Animations.ShakeAnimate(Password);

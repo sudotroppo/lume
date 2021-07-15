@@ -63,7 +63,9 @@
                                                    Margin="0"
                                                    VerticalOptions="Center"
                                                    HeightRequest="45"
-                                                   WidthRequest="45">
+                                                   WidthRequest="45"
+                                                   MinimumHeightRequest="45"
+                                                   MinimumWidthRequest="45">
                                                 <Frame.Clip>
                                                     <EllipseGeometry RadiusX="22.5"
                                                                      RadiusY="22.5"
@@ -106,7 +108,7 @@
 
                                             <Label VerticalOptions="Center"
                                                    Margin="0"
-                                                   Text="{Binding descrizione}"/>
+                                                   Text="{Binding shortDescrizione}"/>
 
                                             <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End">
 

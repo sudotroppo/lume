@@ -68,12 +68,13 @@ namespace lume.Pages
             {
                 Animation ToProfileSettings = new Animation
                 {
-                    {0,1, Animations.RelativeRotation(Settings, 360, Easing.SpringOut) },
-                    {0,0.5, Animations.ScaleTo(Settings,1.4,1.4, Easing.Linear) },
-                    {0.5,1, Animations.ScaleTo(Settings, 1, 1, Easing.Linear) },
-                    {0,1, Animations.SlideOf(Settings, 35, -25,Easing.CubicInOut) },
-                    {0,1, Animations.ScaleTo(Settings, 5, 5,Easing.CubicInOut) },
-                    {0, 1, Animations.ScaleTo(ProfileImage, 0, 0, Easing.CubicInOut) },
+                    {0, 1, Animations.RelativeRotation(Settings, 360, Easing.SpringOut) },
+                    {0, 0.5, Animations.ScaleTo(Settings,1.4,1.4, Easing.Linear) },
+                    {0.5, 1, Animations.ScaleTo(Settings, 1, 1, Easing.Linear) },
+                    {0, 1, Animations.SlideOf(Settings, 35, -25,Easing.CubicInOut) },
+                    {0, 1, Animations.ScaleTo(Settings, 5, 5,Easing.CubicInOut) },
+                    {0, 1,Animations.FadeTo(ProfileInfoList,0,Easing.CubicInOut)},
+                    {0, 1,Animations.FadeTo(ProfileImage,0,Easing.CubicInOut)}
                 };
                 ToProfileSettings.Commit(this, "ToTheSettings", 1, 750, Easing.Linear, (c, v) =>
                 {

@@ -2,7 +2,8 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="lume.CustomObj.PopUpConferma"
+    xmlns:custom="clr-namespace:lume.CustomObj"
+    x:Class="lume.CustomObj.PopUpEliminaAccount"
     BindingContext="{Binding .,Source={x:RelativeSource Mode=Self}}">
 
     <ContentView.Content>
@@ -12,7 +13,7 @@
             <Frame x:Name="frame"
                    CornerRadius="20"
                    Scale="1"
-                   AbsoluteLayout.LayoutBounds="0.5,0.5, 0.95, 0.35"
+                   AbsoluteLayout.LayoutBounds="0.5,0.5, 0.95, 0.5"
                    AbsoluteLayout.LayoutFlags="All"
                    Padding="0"
                    Margin="0"
@@ -23,12 +24,13 @@
 
                 <StackLayout Spacing="0"
                              Margin="0"
-                             Padding="10,5,10,10">
-                    <Label Text="{Binding PopUpText}"
-                           TextColor="{x:StaticResource BiancoLume}"
-                           FontSize="{x:StaticResource LabelMediumFontSize}"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="Center"/>
+                             Padding="10,20,10,10">
+                    
+
+                    <custom:LumEntry Placeholder="Immatti la tua password"
+                                     VerticalOptions="CenterAndExpand"
+                                     Text="{Binding Password}"
+                                     IsPassword="True"/>
 
                     <StackLayout Spacing="0"
                                  Margin="0"
@@ -62,6 +64,12 @@
                 </StackLayout>
 
             </Frame>
+            
+            <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+                               AbsoluteLayout.LayoutFlags="All"
+                               IsRunning="{Binding IsLoading}"
+                               Color="{x:StaticResource VerdeLume}"/>
+
         </AbsoluteLayout>
 
     </ContentView.Content>

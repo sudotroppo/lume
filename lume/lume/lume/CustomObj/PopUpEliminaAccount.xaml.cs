@@ -5,20 +5,24 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using lume.Pages;
 using lume.Utility;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace lume.CustomObj
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopUpPassword : ContentView
+    public partial class PopUpEliminaAccount : ContentView
     {
+
+        private static ICommand defaultCommand = new Command((obj) => { });
+
 
         public static readonly BindableProperty PopUpTextProperty =
            BindableProperty.Create(
                propertyName: nameof(PopUpText),
                returnType: typeof(string),
-               declaringType: typeof(PopUpPassword),
+               declaringType: typeof(PopUpEliminaAccount),
                defaultValue: "",
                defaultBindingMode: BindingMode.TwoWay,
                propertyChanged: PopUpTextPropertyChanged);
@@ -27,7 +31,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(IsPopped),
                returnType: typeof(bool),
-               declaringType: typeof(PopUpPassword),
+               declaringType: typeof(PopUpEliminaAccount),
                defaultValue: false,
                defaultBindingMode: BindingMode.TwoWay,
                propertyChanged: IsPoppedPropertyChanged);
@@ -36,7 +40,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(ConfermaColor),
                returnType: typeof(Color),
-               declaringType: typeof(PopUpPassword),
+               declaringType: typeof(PopUpEliminaAccount),
                defaultValue: default(Color));
 
 
@@ -44,7 +48,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(AnnullaColor),
                returnType: typeof(Color),
-               declaringType: typeof(PopUpPassword),
+               declaringType: typeof(PopUpEliminaAccount),
                defaultValue: default(Color));
 
 
@@ -52,7 +56,7 @@ namespace lume.CustomObj
            BindableProperty.Create(
                propertyName: nameof(BorderColor),
                returnType: typeof(Color),
-               declaringType: typeof(PopUpPassword),
+               declaringType: typeof(PopUpEliminaAccount),
                defaultValue: default(Color));
 
 
@@ -60,7 +64,7 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(ConfermaText),
                 returnType: typeof(string),
-                declaringType: typeof(PopUpPassword),
+                declaringType: typeof(PopUpEliminaAccount),
                 defaultValue: "Conferma",
                 defaultBindingMode: BindingMode.TwoWay);
 
@@ -69,32 +73,23 @@ namespace lume.CustomObj
             BindableProperty.Create(
                 propertyName: nameof(AnnullaText),
                 returnType: typeof(string),
-                declaringType: typeof(PopUpPassword),
+                declaringType: typeof(PopUpEliminaAccount),
                 defaultValue: "Annulla",
                 defaultBindingMode: BindingMode.TwoWay);
 
-        public static readonly BindableProperty NewPasswordProperty =
+        public static readonly BindableProperty PasswordProperty =
             BindableProperty.Create(
-                propertyName: nameof(NewPassword),
+                propertyName: nameof(Password),
                 returnType: typeof(string),
-                declaringType: typeof(PopUpPassword),
-                defaultValue: null,
-                defaultBindingMode: BindingMode.TwoWay);
-
-        public static readonly BindableProperty OldPasswordProperty =
-            BindableProperty.Create(
-                propertyName: nameof(OldPassword),
-                returnType: typeof(string),
-                declaringType: typeof(PopUpPassword),
+                declaringType: typeof(PopUpEliminaAccount),
                 defaultValue: null,
                 defaultBindingMode: BindingMode.TwoWay);
 
         public bool IsPopped { set => SetValue(IsPoppedProperty, value); get => (bool)GetValue(IsPoppedProperty); }
 
         public string PopUpText { set => SetValue(PopUpTextProperty, value); get => (string)GetValue(PopUpTextProperty); }
-        public string NewPassword { get => (string)GetValue(NewPasswordProperty); set => SetValue(NewPasswordProperty, value); }
-        public string OldPassword { get => (string)GetValue(OldPasswordProperty); set => SetValue(OldPasswordProperty, value); }
-
+        public string Password { get => (string)GetValue(PasswordProperty); set => SetValue(PasswordProperty, value); }
+        
         public string ConfermaText { get => (string)GetValue(ConfermaTextProperty); set => SetValue(ConfermaTextProperty, value); }
         public string AnnullaText { get => (string)GetValue(AnnullaTextProperty); set => SetValue(AnnullaTextProperty, value); }
 
@@ -106,10 +101,10 @@ namespace lume.CustomObj
         public bool IsAnnullaVisibile { get => !"".Equals(AnnullaText); }
 
         public bool _isLoading = false;
-        public bool IsLoading { get => _isLoading; set { _isLoading = value; OnPropertyChanged(); } }
+        public bool IsLoading { get => _isLoading; set{ _isLoading = value; OnPropertyChanged(); } }
 
 
-        public PopUpPassword()
+        public PopUpEliminaAccount()
         {
             InitializeComponent();
             IsVisible = IsPopped;
@@ -118,7 +113,7 @@ namespace lume.CustomObj
 
         public static void IsPoppedPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (PopUpPassword)bindable;
+            var control = (PopUpEliminaAccount)bindable;
 
             Debug.WriteLine("IsPopped Changed");
 
@@ -146,7 +141,7 @@ namespace lume.CustomObj
         {
             try
             {
-                return DataAccess.CheckPassword(OldPassword);
+                return DataAccess.CheckPassword(Password);
 
             }
             catch (Exception)
@@ -157,7 +152,15 @@ namespace lume.CustomObj
             }
         }
 
-        private Navigator navigator = ((Application.Current.MainPage as CustomNavigationPage).CurrentPage as MainPage).navigator;
+        private Command ToTheLoginPage = new Command(async () =>
+        {
+            await SecureStorage.SetAsync("token", " ");
+            await SecureStorage.SetAsync("email", " ");
+
+            await (Application.Current.MainPage as CustomNavigationPage).Navigation.PopAsync();
+        });
+
+        private Navigator nav = ((Application.Current.MainPage as CustomNavigationPage).CurrentPage as MainPage).navigator;
 
         public void Conferma(object sender, EventArgs e)
         {
@@ -165,29 +168,29 @@ namespace lume.CustomObj
 
             Task.Run(() =>
             {
-                if (!"".Equals(NewPassword) && NewPassword != null && CheckUserPassword()
-                && confirmPasswordBehavior.IsValid)
+                if (!"".Equals(Password) && CheckUserPassword())
                 {
-                    DataAccess.NewPassword(NewPassword);
-                    Device.BeginInvokeOnMainThread(() => { IsPopped = false; IsLoading = false; });
+                    DataAccess.DeleteUtente();
 
-                    navigator.Alert("La tua password è stata cambiata con successo", "", "ok");
 
-                }
-                else if ("".Equals(NewPassword) || NewPassword == null)
-                {
-                    Device.BeginInvokeOnMainThread(() => IsLoading = false);
-                    navigator.Alert("Controlla meglio i dati inseriti", "", "ok");
+                    nav.Alert("il tuo account è stato eliminato con successo", "", ToTheLoginPage, "ok", null);
+
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        IsLoading = false;
+                        IsPopped = false;
+
+                    });
+
 
                 }
                 else
                 {
                     Device.BeginInvokeOnMainThread(() => IsLoading = false);
-                    navigator.Alert("Password corrente sbagliata, riprova..", "", "ok");
+                    nav.Alert("Password errata", "", "ok");
+
                 }
-
             });
-
         }
 
         public void Annulla(object sender, EventArgs e)

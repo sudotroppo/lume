@@ -13,26 +13,39 @@ namespace lume.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
 
-        public ICommand CambiaPasswordCommand { get; private set; }
+        private bool _isCambiaPasswordPopped = false;
+        public bool IsCambiaPasswordPopped { get => _isCambiaPasswordPopped; set => SetProperty(ref _isCambiaPasswordPopped, value); }
+
+        private bool _isEliminaUtentePopped = false;
+        public bool IsEliminaUtentePopped { get => _isEliminaUtentePopped; set => SetProperty(ref _isEliminaUtentePopped, value); }
+
         public ICommand RichiesteCommand { get; private set; }
         public ICommand PartecipazioniCommand { get; private set; }
         public ICommand LogoutCommand { get; private set; }
+        public ICommand RichiestaEliminazioneUtenteCommand { get; private set; }
         public ICommand EliminaAccountCommand { get; private set; }
+        public ICommand RichiediCambioPasswordCommand { get; private set; }
 
         public SettingsViewModel()
         {
-            CambiaPasswordCommand = new Command(OnCambiaPassword);
             RichiesteCommand = new Command<View>(OnRichieste);
             PartecipazioniCommand = new Command<View>(OnPartecipazioni);
             LogoutCommand = new Command(OnLogout);
-
-
+            RichiestaEliminazioneUtenteCommand = new Command(RichiediEliminazione);
+            RichiediCambioPasswordCommand = new Command(RichiediCambioPassword);
         }
 
-        public void EliminaAccount()
+        public void RichiediEliminazione()
         {
-
+            IsEliminaUtentePopped = true;
         }
+
+
+        public void RichiediCambioPassword()
+        {
+            IsCambiaPasswordPopped = true;
+        }
+
 
         public void OnLogout()
         {
@@ -47,10 +60,6 @@ namespace lume.ViewModels
             navPage.CurrentPage.Navigation.PopAsync();
         }
 
-        public void OnCambiaPassword()
-        {
-            Debug.WriteLine("OnCambiaPassword");
-        }
 
         public void OnRichieste(View v)
         {

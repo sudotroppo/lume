@@ -20,10 +20,8 @@ namespace lume.CustomObj
         public static readonly BindableProperty CurveIsEnabledProperty = BindableProperty.Create(nameof(CurveIsEnabled), typeof(bool), typeof(LumEditor));
         #endregion
 
-        //codice che converte da xaml in c# i valori delle proprietà (?)
         #region Properties
 
-        //colore della line esterna
         public Color BorderColor
         {
             get => (Color)GetValue(BorderColorProperty);
@@ -37,14 +35,12 @@ namespace lume.CustomObj
             set => SetValue(CornerRadiusProperty, value);
         }
 
-        //raggio di approccio degli spigoli
         public int BorderWidth
         {
             get => (int)GetValue(BorderWidthProperty);
             set => SetValue(BorderWidthProperty, value);
         }
 
-        //raggio di approccio degli spigoli
         public bool CurveIsEnabled
         {
             get => (bool)GetValue(CurveIsEnabledProperty);

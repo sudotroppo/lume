@@ -15,8 +15,7 @@
 							 IsReadOnly="{Binding IsReadOnly}"
 							 FontSize="{x:StaticResource EntryStandardFontSize}"
 							 BackgroundColor="Transparent"
-							 CurveIsEnabled="False"
-							 BorderColor="Transparent"
+							 CurveIsEnabled="True"
 							 Margin="20,5,20,0"/>
 		</StackLayout>
   </ContentView.Content>

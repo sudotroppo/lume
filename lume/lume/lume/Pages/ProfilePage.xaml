@@ -214,6 +214,11 @@
                                             FieldName = "Email"
                                             FieldValue ="{Binding email}"
                                             IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
+
+                        <templates:InfoView x:Name="infoCitta"
+                                            FieldName = "Città"
+                                            FieldValue ="{Binding citta}" 
+                                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
                         
                         <templates:InfoView x:Name="infoTelefono"
                                             FieldName = "Telefono"

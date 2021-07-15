@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using lume.CustomObj;
 using lume.Domain;
+using lume.Pages;
+using lume.Utility;
 using Xamarin.Forms;
 
 namespace lume.ViewModels
@@ -12,8 +16,11 @@ namespace lume.ViewModels
     {
 
 
-        private Richiesta _SelectedPost = new Richiesta();
+        private Richiesta _SelectedPost = new Richiesta() { creatore = new Utente()};
         public Richiesta SelectedPost { get => _SelectedPost; set => SetProperty(ref _SelectedPost, value); }
+
+        private bool _IsRefreshing;
+        public bool IsRefreshing { get => _IsRefreshing; set => SetProperty(ref _IsRefreshing, value); }
 
         private bool _popped = false;
         public bool Popped { get => _popped; set => SetProperty(ref _popped, value); }
@@ -28,6 +35,13 @@ namespace lume.ViewModels
         public ObservableCollection<Richiesta> Posts { get => _Posts; set => SetProperty(ref _Posts, value); }
 
 
+        private ObservableCollection<string> _immagini;
+        public ObservableCollection<string> Immagini { get => _immagini; set => SetProperty(ref _immagini, value); }
+
+        public ICommand SendPartecipation { set; get; }
+
+
+
         public ICommand LongPressCommand { get; private set; }
         //public ICommand<Richiesta> PressedCommand { get; private set; }
         public ICommand ClearCommand { get; private set; }
@@ -40,8 +54,47 @@ namespace lume.ViewModels
             ClearCommand = new Command(OnClear);
             SwipeUpCommand = new Command<View>(OnSwipeUp);
             SwipeDownCommand = new Command<View>(OnSwipeDown);
+            SendPartecipation = new Command<long>(OnSendRequest);
         }
 
+        public async void OnSendRequest(long id)
+        {
+            bool check = true;
+            var mainPage = (Application.Current.MainPage as CustomNavigationPage).CurrentPage as MainPage;
+
+            try
+            {
+
+                await Task.Run(() =>
+                {
+                    check = DataAccess.PartecipaAProposta(id);
+                });
+
+
+                if (check)
+                {
+                    Posts.First((r) => r.id.Equals(id)).addCandidato(App.utente);
+                    OnPropertyChanged(nameof(Posts));
+
+                    mainPage.navigator.Alert("Hai partecipato con successo alla richiesta di aiuto", "", "ok");
+
+                }
+                else
+                {
+
+                    Posts.First((r) => r.id.Equals(id)).addCandidato(App.utente);
+                    OnPropertyChanged(nameof(Posts));
+                    mainPage.navigator.Alert("Ti sei ritirato dalla richiesta di aiuto", "", "ok");
+                }
+            }
+            catch (Exception e)
+            {
+                mainPage.navigator.Alert("Errore di connessione, controlla la connessione", "", "ok");
+                Debug.WriteLine($"{e.Message}");
+
+            }
+
+        }
 
         private void OnSwipeUp(View obj)
         {
@@ -77,6 +130,8 @@ namespace lume.ViewModels
             if (!Popped)
             {
                 SelectedPost = obj;
+                Debug.WriteLine($"immagini = {obj?.immagini}");
+                Immagini = new ObservableCollection<string>(SelectedPost.immagini);
                 Popped = true;
 
             }

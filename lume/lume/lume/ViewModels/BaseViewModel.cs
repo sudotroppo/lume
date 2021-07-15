@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using System.Collections.Generic;
+using lume.CustomObj;
+using lume.Pages;
 
 namespace lume.ViewModels
 {
@@ -33,6 +35,7 @@ namespace lume.ViewModels
             return true;
         }
 
+        public Navigator navigator { get => ((Application.Current.MainPage as CustomNavigationPage).CurrentPage as MainPage).navigator; }
 
 
     }

@@ -56,6 +56,8 @@
         <Color x:Key="GialloLume">#F1C00A</Color>
         <Color x:Key="RossoLume">#C45867</Color>
         <Color x:Key="VerdeChiaroLume">#7ed5c5</Color>
+        
+        <Color x:Key="Grigio">#dddddd</Color>
         <Color x:Key="BiancoLume">#ffffff</Color>
         <Color x:Key="GrigioLume">#E4E4E4</Color>
         <Color x:Key="NeroLume">#4b4b4b</Color>
@@ -180,6 +182,9 @@
 
             <Setter Property="CurveIsEnabled"
 					Value="True"/>
+            
+            <Setter Property="BackgroundColor"
+					Value="Transparent"/>
 
             <Setter Property="CornerRadius"
 					Value="{x:StaticResource LumeRadius}"/>
@@ -208,12 +213,13 @@
 
             <Setter Property="FontFamily"
 					Value="{x:StaticResource EntryStandardFont}"/>
-
-
+            
+            <Setter Property="BackgroundColor"
+					Value="Transparent"/>
 
             <Setter Property="Margin"
 					Value="{x:StaticResource TextMargin}"/>
-
+            
             <Setter Property="CurveIsEnabled"
 					Value="True"/>
 

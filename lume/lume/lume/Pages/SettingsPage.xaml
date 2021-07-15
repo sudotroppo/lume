@@ -88,17 +88,17 @@
                                                 />
                 
                     <templates:SettingsTemplate SettingText="Cambia password"
-                                                xct:TouchEffect.Command="{Binding CambiaPasswordCommand, Source={x:Reference settingsVM}}"
+                                                xct:TouchEffect.Command="{Binding RichiediCambioPasswordCommand, Source={x:Reference settingsVM}}"
                                                 IsButtonVisibile="False"
                                                 />
 
                     <templates:SettingsTemplate SettingText="Elimina account"
-                                                xct:TouchEffect.Command="{Binding EliminaAccountCommand, Source={x:Reference settingsVM}}"
+                                                xct:TouchEffect.Command="{Binding RichiestaEliminazioneUtenteCommand, Source={x:Reference settingsVM}}"
                                                 IsButtonVisibile="False"/>
 
                 
-                    <Button BackgroundColor="{x:StaticResource NeroLume}"
-                            TextColor="{x:StaticResource VerdeLume}"
+                    <Button BackgroundColor="{x:StaticResource GrigioLume}"
+                            TextColor="{x:StaticResource Nero}"
                             FontFamily="{x:StaticResource OpenSansBold}"
                             Command="{Binding LogoutCommand}"
                             Margin="0,0,0,10"
@@ -114,6 +114,20 @@
             </ScrollView>
 
         </Grid>
+
+        <custom:PopUpPassword AbsoluteLayout.LayoutBounds="0,0,1,1"
+                              AbsoluteLayout.LayoutFlags="All"
+                              IsPopped="{Binding IsCambiaPasswordPopped, Mode=TwoWay, Source={x:Reference settingsVM}}"
+                              ConfermaColor="{x:StaticResource BiancoLume}"
+                              AnnullaColor="{x:StaticResource GialloLume}"
+                                    BorderColor="{x:StaticResource VerdeLume}"/>
+
+        <custom:PopUpEliminaAccount AbsoluteLayout.LayoutBounds="0,0,1,1"
+                              AbsoluteLayout.LayoutFlags="All"
+                              IsPopped="{Binding IsEliminaUtentePopped, Mode=TwoWay, Source={x:Reference settingsVM}}"
+                              ConfermaColor="{x:StaticResource BiancoLume}"
+                              AnnullaColor="{x:StaticResource GialloLume}"
+                                    BorderColor="{x:StaticResource VerdeLume}"/>
         
     </AbsoluteLayout>
 </templates:ContentTemplatedView>

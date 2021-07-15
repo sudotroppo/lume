@@ -17,7 +17,7 @@ namespace lume.CustomObj
         public static readonly BindableProperty CurveIsEnabledProperty = BindableProperty.Create(nameof(CurveIsEnabled), typeof(bool), typeof(LumEntry));
         #endregion
 
-        //codice che converte da xaml in c# i valori delle proprietà (?)
+
         #region Properties
 
         //colore della line esterna
