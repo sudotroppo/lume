@@ -166,11 +166,13 @@ namespace lume.CustomObj
             Task.Run(() =>
             {
                 if (!"".Equals(NewPassword) && NewPassword != null && CheckUserPassword()
-                && confirmPasswordBehavior.IsValid)
+                && confirm.Text != null && confirm.Text.Equals(NewPassword))
                 {
                     DataAccess.NewPassword(NewPassword);
                     Device.BeginInvokeOnMainThread(() => { IsPopped = false; IsLoading = false; });
-
+                    NewPassword = null;
+                    confirm.Text = null;
+                    OldPassword = null;
                     navigator.Alert("La tua password è stata cambiata con successo", "", "ok");
 
                 }

@@ -15,8 +15,6 @@ namespace lume.CustomObj
     public partial class PopUpEliminaAccount : ContentView
     {
 
-        private static ICommand defaultCommand = new Command((obj) => { });
-
 
         public static readonly BindableProperty PopUpTextProperty =
            BindableProperty.Create(
@@ -157,12 +155,17 @@ namespace lume.CustomObj
         {
             IsLoading = true;
 
+            if(Password == null)
+            {
+                nav.Alert("Immetti la password", "", "ok");
+            }
+
             Task.Run(() =>
             {
                 if (!"".Equals(Password) && CheckUserPassword())
                 {
                     DataAccess.DeleteUtente();
-
+                    Password = null;
 
 
                     Device.BeginInvokeOnMainThread( async () =>
@@ -172,7 +175,7 @@ namespace lume.CustomObj
 
                         await SecureStorage.SetAsync("token", " ");
                         await SecureStorage.SetAsync("email", " ");
-                        await Application.Current.MainPage.DisplayAlert("il tuo account è stato eliminato con successo", "", "ok");
+                        await Application.Current.MainPage.DisplayAlert("Il tuo account è stato eliminato con successo", "", "ok");
 
                         await (Application.Current.MainPage as CustomNavigationPage).Navigation.PopAsync();
 
