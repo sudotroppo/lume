@@ -46,7 +46,7 @@
 
                     <Label x:Name="ProfileName"
                            Margin="8,0,0,0"
-                           Text="Profilo Utente"
+                           Text="Notifiche"
                            AbsoluteLayout.LayoutBounds="45,0.5"
                            AbsoluteLayout.LayoutFlags="YProportional"
                            MaxLines="1"/>

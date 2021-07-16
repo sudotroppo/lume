@@ -59,10 +59,10 @@
 						 RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
 						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.3}">
 
-                <StackLayout Spacing="20">
+                <StackLayout Spacing="20" VerticalOptions="FillAndExpand">
 
-                    <ScrollView RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToView, Property=Height, Factor=0.1}">
-                        <StackLayout Spacing="10">
+                    <ScrollView VerticalOptions="FillAndExpand">
+                        <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
 
                             <custom:LumEntry x:Name="Nome_reg"
 										     Placeholder="Nome *"/>
@@ -83,18 +83,22 @@
 
                             <custom:LumEntry x:Name="Password_reg"
 										    Placeholder="Password *"
-										    IsPassword="True"/>
+										    IsPassword="True"
+                                             VerticalOptions="CenterAndExpand"/>
 
                              <Button x:Name="RegistrationButton"
 						            Text="Registrami"
                                      VerticalOptions="EndAndExpand"
 						            FontSize="16"
+                                     Margin="20,20,20,10"
 						            BackgroundColor="{x:StaticResource VerdeLume}"
 						            Clicked="SignUp"/>
 
                             <Button x:Name="Back"
                                     Clicked="GoBack"
-                                    Text="Torna Indietro" />
+                                    Text="Torna Indietro"
+                                    VerticalOptions="EndAndExpand"
+                                    BackgroundColor="{x:StaticResource NeroLume}"/>
                             
 
 

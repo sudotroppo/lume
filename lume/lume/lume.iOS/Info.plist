@@ -10,6 +10,8 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>8.0</string>
@@ -22,12 +24,14 @@
 	<key>CFBundleName</key>
 	<string>lume</string>
 	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<string>Assets.xcassets/AppIcon-2.appiconset</string>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>questa app vorrebbe utilizzare la tua libreria foto</string>
 	<key>NSCameraUsageDescription</key>
 	<string>questa app vorrebbe accedere alla tua fotocamera</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

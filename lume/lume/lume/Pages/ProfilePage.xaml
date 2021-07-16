@@ -57,7 +57,7 @@
                        AbsoluteLayout.LayoutBounds="45,0.5"
                        AbsoluteLayout.LayoutFlags="YProportional"
                        MaxLines="1"
-                       Text="Profilo Utente">
+                       Text="Notifiche">
                 </Label>
 
                 <Label x:Name="BackgroundBoxView"

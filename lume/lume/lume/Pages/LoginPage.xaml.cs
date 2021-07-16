@@ -67,7 +67,12 @@ namespace lume.Pages
                         await App.GetStorageInfo();
 
                         activity.IsRunning = false;
+
                         await Navigation.PushAsync(new MainPage(), false);
+
+                        Email.Text = null;
+                        Password.Text = null;
+
                     }
                     else
                     {
