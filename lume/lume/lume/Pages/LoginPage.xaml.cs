@@ -33,6 +33,7 @@ namespace lume.Pages
 
         public async void OnClikedButton(object sender, EventArgs e)
         {
+            activity.IsRunning = true;
             string email = Email.Text?.Trim();
             string password = Password.Text;
 
@@ -43,6 +44,10 @@ namespace lume.Pages
             {
                 _ = condUName ? Animations.ShakeAnimate(Email) : null;
                 _ = condPwd   ? Animations.ShakeAnimate(Password) : null;
+
+                await Application.Current.MainPage.DisplayAlert("Password o Email mancanti", "inserire dei valori", "ok");
+                activity.IsRunning = false;
+
             }
             else
             {
@@ -51,27 +56,26 @@ namespace lume.Pages
                 {
                     await Task.Run(async () =>
                     {
-                        Device.BeginInvokeOnMainThread(() => activity.IsRunning = true);
-
                         result = await App.SetUtente(email, password);
                         
                     });
 
 
-                    activity.IsRunning = false;
 
                     if (result)
                     {
                         await App.GetStorageInfo();
 
+                        activity.IsRunning = false;
                         await Navigation.PushAsync(new MainPage(), false);
                     }
                     else
                     {
-                        await Application.Current.MainPage.DisplayAlert("Errore di autenticazione", "Password o email errate", "ok");
-
+                        activity.IsRunning = false;
                         _ = Animations.ShakeAnimate(Email);
                         _ = Animations.ShakeAnimate(Password);
+
+                        await Application.Current.MainPage.DisplayAlert("Errore di autenticazione", "Password o email errate", "ok");
                     }
 
                 }

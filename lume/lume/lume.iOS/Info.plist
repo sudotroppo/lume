@@ -19,8 +19,6 @@
 	<string>com.companyname.lume</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>lume</string>
 	<key>XSAppIconAssets</key>
@@ -29,5 +27,7 @@
 	<string>questa app vorrebbe utilizzare la tua libreria foto</string>
 	<key>NSCameraUsageDescription</key>
 	<string>questa app vorrebbe accedere alla tua fotocamera</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0</string>
 </dict>
 </plist>

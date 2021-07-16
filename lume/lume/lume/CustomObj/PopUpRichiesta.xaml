@@ -124,7 +124,7 @@
                     <ffimage:CachedImage Source="{Binding sorgenteImmagine}"
                                         Margin="-20,0,-20,0"
                                         Aspect="AspectFill"
-                                        HorizontalOptions="FillAndExpand"
+                                        HorizontalOptions="Center"
                                         VerticalOptions="FillAndExpand"/>
                    
 

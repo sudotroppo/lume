@@ -19,15 +19,16 @@ namespace lume.Pages
         public RegistrationPage()
         {
             InitializeComponent();
+            BindingContext = this;
         }
 
         public async void SignUp(object sender, EventArgs e)
         {
+            IsLoading.IsRunning = true;
             var nav = (Application.Current.MainPage as CustomNavigationPage);
 
             try
             {
-
                 bool condNome = "".Equals(Nome_reg.Text) || Nome_reg.Text == null;
                 bool condCognome = "".Equals(Cognome_reg.Text) || Cognome_reg.Text == null;
                 bool condPassword = "".Equals(Password_reg.Text) || Password_reg.Text == null;
@@ -36,6 +37,7 @@ namespace lume.Pages
 
                 if (condNome || condCognome || condEmail || condPassword || condCitta)
                 {
+                    IsLoading.IsRunning = false;
                     _ = condNome ? Animations.ShakeAnimate(Nome_reg) : null;
                     _ = condCognome ? Animations.ShakeAnimate(Cognome_reg) : null;
                     _ = condEmail ? Animations.ShakeAnimate(Email_reg) : null;
@@ -45,25 +47,32 @@ namespace lume.Pages
                     return;
                 }
 
-                if (DataAccess.ExistsUtente(Email_reg.Text.Trim()))
-                {
-                    await nav.CurrentPage.DisplayAlert("Email!", "errore, questa mail è già in uso", "ok");
-                    return;
-                }
+                await Task.Run(async() =>
+                { 
+                    if (DataAccess.ExistsUtente(Email_reg.Text.Trim()))
+                    {
+                        Device.BeginInvokeOnMainThread(() => IsLoading.IsRunning = false);
+                        await nav.CurrentPage.DisplayAlert("Email!", "errore, questa mail è già in uso", "ok");
+
+                        return;
+                    }
 
 
-                Utente u = new Utente()
-                {
-                    nome = Nome_reg.Text.Trim(),
-                    cognome = Cognome_reg.Text.Trim(),
-                    password = Password_reg.Text.Trim(),
-                    email = Email_reg.Text.Trim(),
-                    telefono = Telefono_reg.Text?.Trim(),
-                    citta = Citta_reg.Text.Trim()
-                };
+                    Utente u = new Utente()
+                    {
+                        nome = Nome_reg.Text.Trim(),
+                        cognome = Cognome_reg.Text.Trim(),
+                        password = Password_reg.Text.Trim(),
+                        email = Email_reg.Text.Trim(),
+                        telefono = Telefono_reg.Text?.Trim(),
+                        citta = Citta_reg.Text.Trim()
+                    };
 
 
-                await Task.Run(() => DataAccess.NewUtente(u));
+                    DataAccess.NewUtente(u);
+
+                    Device.BeginInvokeOnMainThread(() => IsLoading.IsRunning = false);
+                });
 
                 await nav.DisplayAlert("Congratulazioni", "registrazione avvenuta con successo", "ok");
                 await Navigation.PopAsync(false);

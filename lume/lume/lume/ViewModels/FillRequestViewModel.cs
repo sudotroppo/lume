@@ -33,7 +33,7 @@ namespace lume.ViewModels
         private ImageSource _immagine = ImageSource.FromFile("uploadImage.png");
         public ImageSource Immagine { get => _immagine; set => SetProperty(ref _immagine, value); }
 
-        private Image _selectedImage = new Image();
+        private Image _selectedImage = null;
         public Image SelectedImage { get => _selectedImage; set => SetProperty(ref _selectedImage, value); }
 
 
@@ -106,7 +106,7 @@ namespace lume.ViewModels
 
             IsLoading = true;
 
-            Task.Run(async () =>
+            _ = Task.Run(() =>
             {
                 long id_richiesta = DataAccess.NewRichiesta(Richiesta);
 
@@ -115,11 +115,7 @@ namespace lume.ViewModels
 
                 if (!DefaultImageSource.Equals(Immagine))
                 {
-                    await Task.Run(() =>
-                    {
-                        DataAccess.UploadRequestImage(_imageStream.Value, _imageStream.Key, id_richiesta);
-                    });
-
+                    DataAccess.UploadRequestImage(_imageStream.Value, _imageStream.Key, id_richiesta);
                     Immagine = DefaultImageSource;
 
                 }

@@ -200,13 +200,10 @@
                                             FieldName = "Nome"
                                             FieldValue="{Binding nome}"
                                             IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
+
                         <templates:InfoView x:Name="infoCognome"
                                             FieldName = "Congome"
                                             FieldValue ="{Binding cognome}"
-                                            IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
-                        <templates:InfoView x:Name="infoEmail"
-                                            FieldName = "Email"
-                                            FieldValue ="{Binding email}"
                                             IsReadOnly="{Binding IsReadOnly, Source={x:Reference profileVM}}"/>
 
                         <templates:InfoView x:Name="infoCitta"

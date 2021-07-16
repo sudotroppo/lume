@@ -215,7 +215,6 @@ namespace lume.Utility
 
             request.AddQueryParameter("nome", utente.nome);
             request.AddQueryParameter("cognome", utente.cognome);
-            request.AddQueryParameter("email", utente.email);
             request.AddQueryParameter("citta", utente.citta);
             request.AddQueryParameter("telefono", utente.telefono);
 

@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:custom="clr-namespace:lume.CustomObj"
-             x:Class="lume.Pages.RegistrationPage"
-             x:DataType="{x:StaticResource mainVM}">
+             x:Class="lume.Pages.RegistrationPage">
 
     <AbsoluteLayout x:Name="Absolute">
 
@@ -85,6 +84,17 @@
                             <custom:LumEntry x:Name="Password_reg"
 										    Placeholder="Password *"
 										    IsPassword="True"/>
+
+                             <Button x:Name="RegistrationButton"
+						            Text="Registrami"
+                                     VerticalOptions="EndAndExpand"
+						            FontSize="16"
+						            BackgroundColor="{x:StaticResource VerdeLume}"
+						            Clicked="SignUp"/>
+
+                            <Button x:Name="Back"
+                                    Clicked="GoBack"
+                                    Text="Torna Indietro" />
                             
 
 
@@ -95,24 +105,12 @@
 
             </StackLayout>
 
-            <StackLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-						 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.83}"
-						 Spacing="10">
-                
-                
-                <Button x:Name="RegistrationButton"
-						Text="Registrami"
-						FontSize="16"
-						BackgroundColor="{x:StaticResource VerdeLume}"
-						Clicked="SignUp"/>
-
-                <Button x:Name="Back"
-                        Clicked="GoBack"
-                        Text="Torna Indietro" />
-                
-            </StackLayout>
-
         </RelativeLayout>
+
+        <ActivityIndicator AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5"
+                           AbsoluteLayout.LayoutFlags="All"
+                           x:Name="IsLoading"
+                           Color="{x:StaticResource VerdeLume}"/>
 
     </AbsoluteLayout>
 
