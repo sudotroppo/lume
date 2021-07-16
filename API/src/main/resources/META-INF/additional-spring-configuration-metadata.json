@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.header",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.header'"
+  },
+  {
+    "name": "jwt.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expiration'"
+  },
+  {
+    "name": "spring.mobile.devicedelegatingviewresolver.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.mobile.devicedelegatingviewresolver.enabled'"
+  },
+  {
+    "name": "spring.mobile.sitepreference.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.mobile.sitepreference.enabled'"
+  },
+  {
+    "name": "aws.s3.bucket",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.s3.bucket'"
+  },
+  {
+    "name": "aws.access_key_id",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.access_key_id'"
+  },
+  {
+    "name": "aws.s3.region",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.s3.region'"
+  },
+  {
+    "name": "aws.secret_access_key",
+    "type": "java.lang.String",
+    "description": "A description for 'aws.secret_access_key'"
+  }
+]}
