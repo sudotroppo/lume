@@ -116,9 +116,9 @@ namespace lume.Domain
         {
             get
             {
-                if(descrizione.Length > 37)
+                if(descrizione.Length > 27)
                 {
-                    return StringExt.Truncate(descrizione, 37) + "...";
+                    return StringExt.Truncate(descrizione, 27) + "...";
 
                 }
 

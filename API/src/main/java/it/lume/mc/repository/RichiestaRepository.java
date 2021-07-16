@@ -25,6 +25,15 @@ public interface RichiestaRepository extends CrudRepository<Richiesta, Long> {
 					+ "ORDER BY data_creazione DESC "
 					+ "LIMIT ?2 OFFSET ?1 ;")
 	public List<Richiesta> findAllInRowRange(Long offset, Long row_count);
+	
+	
+
+	@Query(nativeQuery = true,
+			value =   "SELECT richiesta.* "
+					+ "FROM richiesta LEFT JOIN utente_richieste_partecipate ON richiesta.id = utente_richieste_partecipate.richieste_partecipate_id "
+					+ "GROUP BY utente_richieste_partecipate.richieste_partecipate_id, richiesta.id "
+					+ "HAVING COUNT(utente_richieste_partecipate.candidati_id) < richiesta.numero_partecipanti ;")
+	public List<Richiesta> findAll();
 
 
 	@Query(nativeQuery = true,

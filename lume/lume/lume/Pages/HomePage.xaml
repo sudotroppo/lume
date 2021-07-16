@@ -112,32 +112,7 @@
 
                                             <StackLayout Margin="0,10,0,0" Orientation="Horizontal" VerticalOptions="End">
 
-                                                 <Frame WidthRequest="30"
-                                                        HeightRequest="30"
-                                                        Padding="0"
-                                                        IsClippedToBounds="True"
-                                                        HorizontalOptions="StartAndExpand"
-                                                        VerticalOptions="EndAndExpand"
-                                                        BackgroundColor="Transparent"
-                                                        IsVisible="{Binding isTheOwner, Converter={x:StaticResource inverseBoolConverter}}">
-
-                                                    <Button Text="&#xf4c4;"
-                                                            Margin="0"
-                                                            Padding="0"
-                                                            FontFamily="{x:StaticResource IconSolid}"
-                                                            FontSize="{x:StaticResource LabelSmallFontSize}"
-                                                            TextColor="{Binding alreadyPicked, Converter={x:StaticResource selectedColorConverter}}"
-                                                            Command="{Binding SendPartecipation, Source={RelativeSource AncestorType={x:Type vm:HomeViewModel}}}"
-                                                            CommandParameter="{x:Binding id}"
-                                                            BackgroundColor="Transparent"/>
-
-                                                    <Frame.Clip>
-                                                        <EllipseGeometry
-                                                            RadiusX="15"
-                                                            RadiusY="15"
-                                                            Center="15,15"/>
-                                                    </Frame.Clip>
-                                                </Frame>
+                                                
 
                                                 <Label VerticalOptions="EndAndExpand"
                                                        HorizontalOptions="EndAndExpand"
