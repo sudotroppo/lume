@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace lume.Droid
 {
-    [Activity(Label = "lume", Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+    [Activity(Label = "lume", Icon = "@mipmap/icon", Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
         static readonly string TAG = "x:" + typeof(SplashActivity).Name;
